@@ -1,0 +1,20 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Gold accent -->
+  <rect x="0" y="0" width="1200" height="8" fill="#c69214"/>
+  <rect x="0" y="622" width="1200" height="8" fill="#c69214"/>
+  
+  <!-- Text content -->
+  <text x="600" y="250" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="64" font-weight="bold">CHASERS</text>
+  <text x="600" y="320" text-anchor="middle" fill="#c69214" font-family="Arial, sans-serif" font-size="48" font-weight="600">DESIGNATED DRIVERS</text>
+  <text x="600" y="420" text-anchor="middle" fill="#d1d1d1" font-family="Arial, sans-serif" font-size="32">Luxury Transportation Service</text>
+  <text x="600" y="480" text-anchor="middle" fill="#a1a1a1" font-family="Arial, sans-serif" font-size="24">Professional • Reliable • Luxurious</text>
+</svg>
