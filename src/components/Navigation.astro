@@ -1,0 +1,187 @@
+---
+// Navigation component with dual header structure
+---
+
+<!-- Contact Info Bar -->
+<div class="nav-contact">
+  <div class="container-center">
+    <div class="flex justify-between items-center text-sm text-dark-400">
+      <!-- Contact Information -->
+      <div class="flex items-center space-x-6">
+        <a href="tel:+1-555-CHASERS" class="flex items-center space-x-2 hover:text-gold-primary transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+          </svg>
+          <span>(555) CHASERS</span>
+        </a>
+        
+        <a href="mailto:info@chasersdd.com" class="flex items-center space-x-2 hover:text-gold-primary transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+          </svg>
+          <span>info@chasersdd.com</span>
+        </a>
+      </div>
+      
+      <!-- Social Links -->
+      <div class="flex items-center space-x-4">
+        <span class="text-dark-500">Follow Us:</span>
+        
+        <a href="#" class="hover:text-gold-primary transition-colors" aria-label="Facebook">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+        
+        <a href="#" class="hover:text-gold-primary transition-colors" aria-label="Instagram">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.621 5.367 11.988 11.988 11.988s11.987-5.367 11.987-11.988C24.014 5.367 18.647.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.326-1.297-.878-.808-1.297-1.958-1.297-3.326 0-1.297.49-2.448 1.297-3.326.808-.878 1.958-1.297 3.326-1.297s2.448.49 3.326 1.297c.878.808 1.297 1.958 1.297 3.326 0 1.297-.49 2.448-1.297 3.326-.808.878-1.958 1.297-3.326 1.297z"/>
+          </svg>
+        </a>
+        
+        <a href="#" class="hover:text-gold-primary transition-colors" aria-label="LinkedIn">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navigation -->
+<nav class="nav-main">
+  <div class="container-center">
+    <div class="flex items-center justify-between py-4">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center space-x-3">
+          <div class="w-12 h-12 bg-gold-gradient rounded-lg flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-xl font-primary font-bold text-white">Chasers DD</div>
+            <div class="text-xs text-gold-primary font-medium">Luxury Transportation</div>
+          </div>
+        </a>
+      </div>
+      
+      <!-- Desktop Navigation Links -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/membership" class="nav-link">Membership Plans</a>
+        <a href="/how-it-works" class="nav-link">How It Works</a>
+        <a href="/about" class="nav-link">About Us</a>
+        <a href="/faq" class="nav-link">FAQ</a>
+        <a href="/contact" class="nav-link">Contact</a>
+      </div>
+      
+      <!-- CTA Button -->
+      <div class="hidden lg:flex items-center space-x-4">
+        <a href="/membership" class="btn-primary">
+          Join Now
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <div class="lg:hidden">
+        <button 
+          type="button" 
+          class="text-white hover:text-gold-primary transition-colors p-2"
+          aria-label="Open mobile menu"
+          id="mobile-menu-button"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Navigation Menu -->
+  <div class="lg:hidden hidden bg-dark-900 border-t border-dark-700" id="mobile-menu">
+    <div class="container-center py-4">
+      <div class="flex flex-col space-y-4">
+        <a href="/" class="nav-link text-center py-2">Home</a>
+        <a href="/membership" class="nav-link text-center py-2">Membership Plans</a>
+        <a href="/how-it-works" class="nav-link text-center py-2">How It Works</a>
+        <a href="/about" class="nav-link text-center py-2">About Us</a>
+        <a href="/faq" class="nav-link text-center py-2">FAQ</a>
+        <a href="/contact" class="nav-link text-center py-2">Contact</a>
+        
+        <div class="pt-4 border-t border-dark-700">
+          <a href="/membership" class="btn-primary w-full text-center block">
+            Join Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'true');
+          
+          // Update button icon to X
+          mobileMenuButton.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          `;
+        } else {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          
+          // Update button icon to hamburger
+          mobileMenuButton.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          `;
+        }
+      });
+      
+      // Close mobile menu when clicking on a link
+      const mobileLinks = mobileMenu.querySelectorAll('a');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenuButton.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          `;
+        });
+      });
+      
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenuButton.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          `;
+        }
+      });
+    }
+  });
+</script>
