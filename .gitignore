@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Large video files (exceeds GitHub 100MB limit)
+public/videos/*.mp4
+public/videos/optimized/*.mp4
+dev-server.log
+
+# Keep poster images and documentation
+!public/images/
