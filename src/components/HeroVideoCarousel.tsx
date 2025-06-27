@@ -72,6 +72,19 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
     };
   }, [isPlaying, slides.length, autoplayInterval]);
 
+  // Cleanup video memory on unmount
+  useEffect(() => {
+    return () => {
+      videoRefs.current.forEach(video => {
+        if (video) {
+          video.pause();
+          video.removeAttribute('src');
+          video.load();
+        }
+      });
+    };
+  }, []);
+
   // Handle video loading and playback
   useEffect(() => {
     const currentVideo = videoRefs.current[currentSlide];
@@ -166,13 +179,13 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
             <video
               ref={(el) => (videoRefs.current[index] = el)}
               className="hero-video"
-              src={isMobile && slide.srcMobile ? slide.srcMobile : slide.src}
+              src={slide.srcMobile || slide.src}
               poster={slide.poster}
               muted
               autoPlay
               loop
               playsInline
-              preload="metadata"
+              preload={index === currentSlide ? "auto" : "none"}
               controls={false}
               disablePictureInPicture
               webkit-playsinline="true"
