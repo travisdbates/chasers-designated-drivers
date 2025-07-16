@@ -193,7 +193,14 @@ const serviceAddOns = [
                     : 'bg-gradient-to-r from-gray-700 to-gray-800 text-white hover:from-[#c69214] hover:to-[#b8841c] hover:text-black'
                 }`}
               >
-                {plan.ctaText}
+                {plan.ctaText.includes('Plan') ? (
+                  <>
+                    <span class="block">{plan.ctaText.replace(' Plan', '')}</span>
+                    <span class="block">Plan</span>
+                  </>
+                ) : (
+                  <span class="block">{plan.ctaText}</span>
+                )}
               </a>
             </div>
           ))}
