@@ -13,7 +13,7 @@
   }
   
   body {
-    @apply bg-dark-primary text-white font-secondary antialiased;
+    @apply bg-white text-gray-900 font-secondary antialiased;
     overflow-x: hidden;
   }
 
@@ -36,11 +36,11 @@
 
   /* Body text styles */
   .text-body {
-    @apply font-secondary text-lg leading-relaxed text-dark-300;
+    @apply font-secondary text-lg leading-relaxed text-gray-600;
   }
   
   .text-body-small {
-    @apply font-secondary text-base leading-relaxed text-dark-400;
+    @apply font-secondary text-base leading-relaxed text-gray-500;
   }
 
   /* Gold accent text */
@@ -68,12 +68,12 @@
   }
   
   .btn-ghost {
-    @apply bg-transparent hover:bg-white/10 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 ease-in-out;
+    @apply bg-transparent hover:bg-gray-100 text-gray-700 font-medium py-3 px-6 rounded-lg transition-all duration-300 ease-in-out;
   }
 
   /* Card styles */
   .card-luxury {
-    @apply bg-dark-800 border border-dark-600 rounded-xl p-8 shadow-luxury hover:shadow-luxury-hover transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gold-primary/50;
+    @apply bg-white border border-gray-200 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gold-primary/50;
   }
   
   .card-pricing {
@@ -81,7 +81,7 @@
   }
   
   .card-pricing.featured {
-    @apply border-gold-primary bg-gradient-to-br from-dark-800 to-dark-700;
+    @apply border-gold-primary bg-gradient-to-br from-white to-gray-50;
   }
   
   .card-pricing.featured::before {
@@ -91,15 +91,15 @@
 
   /* Navigation styles */
   .nav-contact {
-    @apply bg-dark-900 border-b border-dark-700 py-2;
+    @apply bg-gray-50 border-b border-gray-200 py-2;
   }
   
   .nav-main {
-    @apply bg-black/95 backdrop-blur-luxury sticky top-0 z-50 border-b border-dark-800;
+    @apply bg-white/95 backdrop-blur-luxury sticky top-0 z-50 border-b border-gray-200 shadow-sm;
   }
   
   .nav-link {
-    @apply text-dark-300 hover:text-gold-primary font-medium transition-colors duration-200 relative;
+    @apply text-gray-600 hover:text-gold-primary font-medium transition-colors duration-200 relative;
   }
   
   .nav-link::after {
@@ -130,7 +130,7 @@
 
   /* Form styles */
   .form-input {
-    @apply bg-dark-800 border border-dark-600 rounded-lg px-4 py-3 text-white placeholder-dark-400 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/20 focus:outline-none transition-all duration-200;
+    @apply bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/20 focus:outline-none transition-all duration-200;
   }
   
   .form-textarea {
@@ -138,7 +138,7 @@
   }
   
   .form-label {
-    @apply block text-sm font-medium text-dark-300 mb-2;
+    @apply block text-sm font-medium text-gray-700 mb-2;
   }
 
   /* Section styles */
@@ -177,18 +177,26 @@
     @apply transition-transform duration-300 ease-in-out hover:-translate-y-2;
   }
   
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    visibility: hidden;
+  }
+  
   .animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out;
+    animation: fadeInUp 0.8s ease-out forwards;
   }
   
   @keyframes fadeInUp {
     0% {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(50px);
+      visibility: visible;
     }
     100% {
       opacity: 1;
       transform: translateY(0);
+      visibility: visible;
     }
   }
 }
@@ -204,11 +212,11 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-dark-900;
+  @apply bg-gray-100;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-600 rounded-full;
+  @apply bg-gray-300 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -217,5 +225,5 @@ html {
 
 /* Focus styles for accessibility */
 .focus-visible {
-  @apply outline-none ring-2 ring-gold-primary ring-offset-2 ring-offset-dark-800;
+  @apply outline-none ring-2 ring-gold-primary ring-offset-2 ring-offset-white;
 }

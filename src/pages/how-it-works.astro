@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Choose Your Membership',
+    description: 'Select from our premium membership tiers designed to meet your luxury transportation needs.',
+    icon: '👑',
+    details: [
+      'Individual, Joint, Family, or Corporate plans',
+      'Flexible service options',
+      'Premium vehicle selection',
+      'Professional driver assignment'
+    ]
+  },
+  {
+    number: '02', 
+    title: 'Schedule Your Service',
+    description: 'Book your professional driver through our concierge service or preferred booking method.',
+    icon: '📱',
+    details: [
+      '24/7 booking availability',
+      'Advance reservations welcome',
+      'Last-minute requests accommodated',
+      'Event coordination services'
+    ]
+  },
+  {
+    number: '03',
+    title: 'Experience Excellence',
+    description: 'Our professional driver arrives and drives you home in your own vehicle - no car retrieval needed.',
+    icon: '✨',
+    details: [
+      'Professional, licensed chauffeurs',
+      'Drive you in your own car',
+      'Complete insurance coverage',
+      'Discreet, unmarked service'
+    ]
+  }
+];
+---
+
+<BaseLayout 
+  title="How It Works - Chasers DD Premium Service"
+  description="Discover our simple 3-step process for luxury designated driver service. Choose membership, schedule service, and experience professional transportation excellence."
+  keywords="how it works, luxury transportation process, designated driver service, professional chauffeur, premium service"
+>
+  <Navigation />
+  
+  <main class="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+          <span class="font-serif">How It</span>
+          <span class="text-[#c69214] ml-3">Works</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Experience luxury transportation in three simple steps. Professional service, 
+          premium vehicles, and complete peace of mind.
+        </p>
+      </div>
+    </section>
+
+    <!-- Process Steps -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
+          {steps.map((step, index) => (
+            <div class="relative">
+              {/* Connector Line */}
+              {index < steps.length - 1 && (
+                <div class="hidden lg:block absolute top-24 left-full w-full h-0.5 bg-gradient-to-r from-[#c69214] to-transparent transform translate-x-4"></div>
+              )}
+              
+              <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 hover:scale-105 relative overflow-hidden">
+                {/* Background Pattern */}
+                <div class="absolute inset-0 opacity-5">
+                  <div class="text-[200px] font-bold text-[#c69214] absolute -top-16 -right-8 select-none">
+                    {step.number}
+                  </div>
+                </div>
+                
+                <div class="relative z-10">
+                  {/* Step Number */}
+                  <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black font-bold text-xl rounded-full mb-6">
+                    {step.number}
+                  </div>
+                  
+                  {/* Icon */}
+                  <div class="text-4xl mb-4">{step.icon}</div>
+                  
+                  {/* Content */}
+                  <h3 class="text-2xl font-bold text-white mb-4 font-serif">{step.title}</h3>
+                  <p class="text-gray-300 mb-6 leading-relaxed">{step.description}</p>
+                  
+                  {/* Details */}
+                  <ul class="space-y-3">
+                    {step.details.map((detail) => (
+                      <li class="flex items-start text-gray-400">
+                        <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-sm">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Features -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">
+            Why Choose <span class="text-[#c69214]">Chasers DD?</span>
+          </h2>
+          <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+            We set the standard for luxury designated driver services
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Licensed & Insured</h3>
+            <p class="text-gray-400 text-sm">All drivers are professionally licensed and fully insured for your safety</p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">24/7 Availability</h3>
+            <p class="text-gray-400 text-sm">Round-the-clock service for your transportation needs</p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Premium Vehicles</h3>
+            <p class="text-gray-400 text-sm">Luxury vehicle fleet maintained to the highest standards</p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">White-Glove Service</h3>
+            <p class="text-gray-400 text-sm">Exceptional attention to detail and personalized care</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-serif">
+          Ready to Get <span class="text-[#c69214]">Started?</span>
+        </h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          Join our exclusive membership and experience the difference professional luxury transportation makes.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/membership" 
+            class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-8 py-4 rounded-xl font-bold hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 transform hover:scale-105"
+          >
+            View Memberships
+          </a>
+          <a 
+            href="/contact" 
+            class="bg-gradient-to-r from-gray-700 to-gray-800 text-white px-8 py-4 rounded-xl font-bold hover:from-[#c69214] hover:to-[#b8841c] hover:text-black transition-all duration-300"
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

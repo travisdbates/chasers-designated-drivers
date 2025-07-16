@@ -15,7 +15,7 @@ interface VideoSlide {
 
 interface HeroVideoCarouselProps {
   slides: VideoSlide[];
-  autoplayInterval?: number;
+  autoplayInterval?: number; // Fallback if video duration cannot be determined
 }
 
 const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({ 
@@ -28,6 +28,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
   const [loadingTimeout, setLoadingTimeout] = useState(false);
   const [videoErrors, setVideoErrors] = useState<boolean[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [videoDurations, setVideoDurations] = useState<number[]>([]);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -57,12 +58,18 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
   }, []);
 
 
-  // Auto-advance slides
+  // Auto-advance slides based on actual video duration
   useEffect(() => {
     if (isPlaying && slides.length > 1) {
+      // Use actual video duration if available, otherwise fallback to autoplayInterval
+      const currentVideoDuration = videoDurations[currentSlide];
+      const interval = currentVideoDuration ? currentVideoDuration * 1000 : autoplayInterval;
+      
+      console.log(`Setting interval for slide ${currentSlide}: ${interval}ms (${currentVideoDuration ? currentVideoDuration + 's actual duration' : autoplayInterval/1000 + 's fallback'})`);
+      
       intervalRef.current = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
-      }, autoplayInterval);
+      }, interval);
     }
 
     return () => {
@@ -70,7 +77,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
         clearInterval(intervalRef.current);
       }
     };
-  }, [isPlaying, slides.length, autoplayInterval]);
+  }, [isPlaying, slides.length, autoplayInterval, currentSlide, videoDurations]);
 
   // Cleanup video memory on unmount
   useEffect(() => {
@@ -118,6 +125,18 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
   const handleVideoLoad = () => {
     if (!isLoaded) {
       setIsLoaded(true);
+    }
+  };
+
+  const handleVideoLoadedMetadata = (index: number) => {
+    const video = videoRefs.current[index];
+    if (video && video.duration && isFinite(video.duration)) {
+      console.log(`Video ${index} duration:`, video.duration, 'seconds');
+      setVideoDurations(prev => {
+        const newDurations = [...prev];
+        newDurations[index] = video.duration;
+        return newDurations;
+      });
     }
   };
 
@@ -190,6 +209,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
               disablePictureInPicture
               webkit-playsinline="true"
               onLoadedData={handleVideoLoad}
+              onLoadedMetadata={() => handleVideoLoadedMetadata(index)}
               onError={() => handleVideoError(index)}
               onCanPlay={() => {
                 const video = videoRefs.current[index];

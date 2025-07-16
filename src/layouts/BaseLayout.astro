@@ -145,14 +145,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
       
       // Add scroll-based animations
       const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0,
+        rootMargin: '0px 0px 100px 0px'
       };
       
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !entry.target.classList.contains('animate-fade-in-up')) {
             entry.target.classList.add('animate-fade-in-up');
+            observer.unobserve(entry.target);
           }
         });
       }, observerOptions);
@@ -174,6 +175,53 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
       gtag('config', 'GA_TRACKING_ID');
     </script>
     -->
+    
+    <!-- Tidio Chat Widget -->
+    <script src="//code.tidio.co/YOUR_PUBLIC_KEY.js" async></script>
+    
+    <!-- Custom Chat Widget Styling -->
+    <style>
+      /* Custom Tidio chat button styling to match brand */
+      #tidio-chat {
+        --tidio-chat-button-background: linear-gradient(135deg, #c69214 0%, #b8841c 100%) !important;
+        --tidio-chat-button-color: #000000 !important;
+      }
+      
+      /* Hide default Tidio branding if needed */
+      .tidio-chat-button-frame {
+        border-radius: 50% !important;
+        box-shadow: 0 4px 20px rgba(198, 146, 20, 0.3) !important;
+      }
+      
+      /* Custom positioning for luxury aesthetic */
+      .tidio-chat-button {
+        bottom: 20px !important;
+        right: 20px !important;
+      }
+      
+      /* Ensure chat window matches dark theme */
+      .tidio-chat-window {
+        background: #1a1a1a !important;
+        border: 1px solid #c69214 !important;
+        border-radius: 12px !important;
+      }
+    </style>
+    
+    <!-- Initialize chat with custom settings -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Custom Tidio initialization (if needed)
+        if (typeof tidioChatApi !== 'undefined') {
+          tidioChatApi.on('ready', function() {
+            // Customize welcome message
+            tidioChatApi.setVisitorData({
+              'source': 'Website - Chasers DD',
+              'page': window.location.pathname
+            });
+          });
+        }
+      });
+    </script>
   </body>
 </html>
 
