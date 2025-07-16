@@ -148,9 +148,9 @@ const serviceAddOns = [
     <!-- Membership Plans Grid -->
     <section class="py-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
-        <div class="flex flex-wrap justify-center gap-6 lg:gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center">
           {membershipPlans.map((plan) => (
-            <div class={`relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 lg:p-8 border transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col w-full sm:w-80 md:w-72 lg:w-80 ${
+            <div class={`relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 lg:p-8 border transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col ${
               plan.popular 
                 ? 'border-[#c69214] shadow-lg shadow-[#c69214]/20' 
                 : 'border-gray-700 hover:border-[#c69214]/50'
