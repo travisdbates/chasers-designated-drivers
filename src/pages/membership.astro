@@ -148,23 +148,23 @@ const serviceAddOns = [
     <!-- Membership Plans Grid -->
     <section class="py-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
           {membershipPlans.map((plan) => (
-            <div class={`relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 border transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
+            <div class={`relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 lg:p-8 border transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
               plan.popular 
                 ? 'border-[#c69214] shadow-lg shadow-[#c69214]/20' 
                 : 'border-gray-700 hover:border-[#c69214]/50'
             }`}>
               {plan.popular && (
                 <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-4 py-2 rounded-full text-sm font-bold">
+                  <span class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap">
                     MOST POPULAR
                   </span>
                 </div>
               )}
               
-              <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold text-white mb-2 font-serif">{plan.name}</h3>
+              <div class="text-center mb-6 lg:mb-8">
+                <h3 class="text-xl lg:text-2xl font-bold text-white mb-2 font-serif">{plan.name}</h3>
                 <p class="text-gray-400 text-sm mb-4">{plan.description}</p>
                 <div class="text-2xl font-bold text-[#c69214] mb-2">{plan.price}</div>
                 {plan.priceSubtext && (
@@ -172,13 +172,13 @@ const serviceAddOns = [
                 )}
               </div>
 
-              <ul class="space-y-4 mb-8">
+              <ul class="space-y-3 lg:space-y-4 mb-6 lg:mb-8">
                 {plan.features.map((feature) => (
                   <li class="flex items-start text-gray-300">
                     <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                     </svg>
-                    <span class="text-sm">{feature}</span>
+                    <span class="text-sm leading-relaxed">{feature}</span>
                   </li>
                 ))}
               </ul>
