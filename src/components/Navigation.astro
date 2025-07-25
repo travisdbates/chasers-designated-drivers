@@ -171,6 +171,83 @@
       </div>
     </div>
   </div>
+  
+  <!-- Dropdown Menus (inside nav for proper positioning) -->
+  <!-- OUR PLANS Dropdown -->
+  <div id="dropdown-plans" class="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-200 opacity-0 invisible transition-all duration-300 z-40">
+    <div class="container-center py-8 px-4 md:px-8">
+      <div class="flex justify-center space-x-4 md:space-x-8">
+        <!-- Individual Plan -->
+        <a href="/membership#individual" class="group/item block rounded-lg transition-all duration-300 w-56 h-56 relative overflow-hidden">
+          <div class="w-full h-full bg-cover bg-center relative" style="background-image: url('/images/individual.jpg');">
+            <div class="absolute inset-0 bg-black/50 group-hover/item:bg-black/20 transition-all duration-300"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <h3 class="font-black text-white text-xl uppercase tracking-wide">Individual</h3>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Joint Plan -->
+        <a href="/membership#joint" class="group/item block rounded-lg transition-all duration-300 w-56 h-56 relative overflow-hidden">
+          <div class="w-full h-full bg-cover bg-center relative" style="background-image: url('/images/joint.jpg');">
+            <div class="absolute inset-0 bg-black/50 group-hover/item:bg-black/20 transition-all duration-300"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <h3 class="font-black text-white text-xl uppercase tracking-wide">Joint</h3>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Family Plan -->
+        <a href="/membership#family" class="group/item block rounded-lg transition-all duration-300 w-56 h-56 relative overflow-hidden">
+          <div class="w-full h-full bg-cover bg-center relative" style="background-image: url('/images/family-and-friends.jpg');">
+            <div class="absolute inset-0 bg-black/50 group-hover/item:bg-black/20 transition-all duration-300"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <h3 class="font-black text-white text-xl uppercase tracking-wide">Family</h3>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Corporate Plan -->
+        <a href="/membership#corporate" class="group/item block rounded-lg transition-all duration-300 w-56 h-56 relative overflow-hidden">
+          <div class="w-full h-full bg-cover bg-center relative" style="background-image: url('/images/corporate.jpg');">
+            <div class="absolute inset-0 bg-black/50 group-hover/item:bg-black/20 transition-all duration-300"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <h3 class="font-black text-white text-xl uppercase tracking-wide">Corporate</h3>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUR STORY Dropdown -->
+  <div id="dropdown-story" class="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-200 opacity-0 invisible transition-all duration-300 z-40">
+    <div class="container-center py-8 px-4 md:px-8">
+      <div class="flex justify-center space-x-4 md:space-x-8">
+        <!-- About Us -->
+        <a href="/about#company" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
+          <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">Company</h3>
+          <p class="text-sm text-gray-600 mt-2 text-center">Our mission & values</p>
+        </a>
+        
+        <!-- History -->
+        <a href="/about#history" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
+          <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">History</h3>
+          <p class="text-sm text-gray-600 mt-2 text-center">Our journey</p>
+        </a>
+      </div>
+    </div>
+  </div>
 </nav>
 
 <script>
@@ -236,86 +313,6 @@
   });
 </script>
 
-<!-- Dropdown Menus (positioned outside nav-main) -->
-<!-- OUR PLANS Dropdown -->
-<div id="dropdown-plans" class="fixed top-0 left-0 w-full bg-white shadow-2xl border-t border-gray-200 opacity-0 invisible transition-all duration-300 z-40" style="top: 100px;">
-  <div class="container-center py-8 px-4 md:px-8">
-    <div class="flex justify-center space-x-4 md:space-x-8">
-      <!-- Individual Plan -->
-      <a href="/membership#individual" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
-        <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
-          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-          </svg>
-        </div>
-        <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">Individual</h3>
-        <p class="text-sm text-gray-600 mt-2 text-center">Personal luxury service</p>
-      </a>
-      
-      <!-- Joint Plan -->
-      <a href="/membership#joint" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
-        <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
-          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v-3c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v3h3v4H4z"/>
-          </svg>
-        </div>
-        <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">Joint</h3>
-        <p class="text-sm text-gray-600 mt-2 text-center">Couples service</p>
-      </a>
-      
-      <!-- Family Plan -->
-      <a href="/membership#family" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
-        <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
-          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm2.5 6h-3c-.83 0-1.5.67-1.5 1.5v6h2v7h3v-7h2v-6c0-.83-.67-1.5-1.5-1.5z"/>
-          </svg>
-        </div>
-        <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">Family</h3>
-        <p class="text-sm text-gray-600 mt-2 text-center">Friends & family</p>
-      </a>
-      
-      <!-- Corporate Plan -->
-      <a href="/membership#corporate" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
-        <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
-          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/>
-          </svg>
-        </div>
-        <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">Corporate</h3>
-        <p class="text-sm text-gray-600 mt-2 text-center">Business accounts</p>
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- OUR STORY Dropdown -->
-<div id="dropdown-story" class="fixed top-0 left-0 w-full bg-white shadow-2xl border-t border-gray-200 opacity-0 invisible transition-all duration-300 z-40" style="top: 100px;">
-  <div class="container-center py-8 px-4 md:px-8">
-    <div class="flex justify-center space-x-4 md:space-x-8">
-      <!-- About Us -->
-      <a href="/about#company" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
-        <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
-          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-        </div>
-        <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">Company</h3>
-        <p class="text-sm text-gray-600 mt-2 text-center">Our mission & values</p>
-      </a>
-      
-      <!-- History -->
-      <a href="/about#history" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
-        <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
-          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/>
-          </svg>
-        </div>
-        <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">History</h3>
-        <p class="text-sm text-gray-600 mt-2 text-center">Our journey</p>
-      </a>
-    </div>
-  </div>
-</div>
 
 <script>
   // Dropdown functionality
