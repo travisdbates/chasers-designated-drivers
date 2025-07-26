@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import MembershipCheckout from '../../components/MembershipCheckout.astro';
+
+const selectedPlan = {
+  id: 'joint',
+  name: 'Joint Premiere',
+  description: 'Shared premium service for couples',
+  price: '$149',
+  priceSubtext: '/month - Best value for two people',
+  features: [
+    'Service for two individuals',
+    'Both get home in own vehicles',
+    'Shared membership benefits',
+    'Priority scheduling',
+    'Owner-operated service',
+    'Phoenix local expertise'
+  ],
+  popular: true
+};
+---
+
+<BaseLayout 
+  title={`Checkout - ${selectedPlan.name} | Chasers DD`}
+  description={`Complete your ${selectedPlan.name} membership signup with secure payment processing.`}
+  keywords="checkout, payment, membership signup, secure payment"
+>
+  <Navigation />
+  
+  <main class="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Page Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <span class="font-serif">Secure</span>
+          <span class="text-gold-primary ml-3">Checkout</span>
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Complete your membership signup with our secure payment system
+        </p>
+      </div>
+
+      <!-- Checkout Component -->
+      <MembershipCheckout 
+        plan={selectedPlan} 
+        onBack="goBackToMembership"
+      />
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  // Custom back handler for this page
+  window.goBackToMembership = () => {
+    window.location.href = '/membership';
+  };
+</script>

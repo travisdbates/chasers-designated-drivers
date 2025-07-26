@@ -1,0 +1,449 @@
+---
+export interface Props {
+  planId: string;
+  onSubmit?: string;
+}
+
+const { planId, onSubmit = 'handlePayment' } = Astro.props;
+---
+
+<div class="payment-form bg-white border border-gray-200 rounded-xl p-6 shadow-lg">
+  <form id="payment-form" class="space-y-6">
+    <!-- Customer Information -->
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold text-gray-900">Customer Information</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="firstName" class="form-label">First Name</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            name="firstName" 
+            required 
+            class="form-input w-full"
+            placeholder="John"
+          />
+        </div>
+        <div>
+          <label for="lastName" class="form-label">Last Name</label>
+          <input 
+            type="text" 
+            id="lastName" 
+            name="lastName" 
+            required 
+            class="form-input w-full"
+            placeholder="Doe"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="email" class="form-label">Email Address</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required 
+          class="form-input w-full"
+          placeholder="john@example.com"
+        />
+      </div>
+
+      <div>
+        <label for="phone" class="form-label">Phone Number</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          name="phone" 
+          required 
+          class="form-input w-full"
+          placeholder="(480) 555-0123"
+        />
+      </div>
+
+      <div>
+        <label for="address" class="form-label">Address</label>
+        <input 
+          type="text" 
+          id="address" 
+          name="address" 
+          required 
+          class="form-input w-full"
+          placeholder="123 Main St"
+        />
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label for="city" class="form-label">City</label>
+          <input 
+            type="text" 
+            id="city" 
+            name="city" 
+            required 
+            class="form-input w-full"
+            placeholder="Phoenix"
+          />
+        </div>
+        <div>
+          <label for="state" class="form-label">State</label>
+          <select id="state" name="state" required class="form-input w-full">
+            <option value="">Select State</option>
+            <option value="AZ" selected>Arizona</option>
+            <option value="CA">California</option>
+            <option value="NV">Nevada</option>
+          </select>
+        </div>
+        <div>
+          <label for="zipCode" class="form-label">ZIP Code</label>
+          <input 
+            type="text" 
+            id="zipCode" 
+            name="zipCode" 
+            required 
+            class="form-input w-full"
+            placeholder="85001"
+            pattern="[0-9]{5}(-[0-9]{4})?"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Information -->
+    <div class="space-y-4 border-t border-gray-200 pt-6">
+      <h3 class="text-lg font-semibold text-gray-900">Payment Information</h3>
+      
+      <!-- AcceptBlue Hosted Payment Fields -->
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <p class="text-sm text-gray-600 mb-4">Secure payment processing powered by AcceptBlue</p>
+        
+        <!-- AcceptBlue Hosted Payment Fields Container -->
+        <div id="acceptblue-payment-fields" class="space-y-4">
+          <!-- Card Number -->
+          <div>
+            <label class="form-label">Card Number</label>
+            <div id="card-number-container" class="form-input bg-white min-h-[42px] border-2 transition-colors focus-within:border-gold-primary">
+              <!-- AcceptBlue card number iframe will be mounted here -->
+            </div>
+            <div id="card-number-error" class="text-red-500 text-sm mt-1 hidden"></div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Expiry Date -->
+            <div>
+              <label class="form-label">Expiry Date</label>
+              <div id="card-expiry-container" class="form-input bg-white min-h-[42px] border-2 transition-colors focus-within:border-gold-primary">
+                <!-- AcceptBlue expiry iframe will be mounted here -->
+              </div>
+              <div id="card-expiry-error" class="text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+
+            <!-- CVV -->
+            <div>
+              <label class="form-label">CVV</label>
+              <div id="card-cvv-container" class="form-input bg-white min-h-[42px] border-2 transition-colors focus-within:border-gold-primary">
+                <!-- AcceptBlue CVV iframe will be mounted here -->
+              </div>
+              <div id="card-cvv-error" class="text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Card Type Display -->
+        <div id="card-type-display" class="mt-3 flex items-center space-x-2 text-sm text-gray-600">
+          <span>Accepted cards:</span>
+          <div class="flex space-x-1">
+            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Visa</span>
+            <span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs">Mastercard</span>
+            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">American Express</span>
+            <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded text-xs">Discover</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Billing Address Same as Customer -->
+      <div class="flex items-center">
+        <input 
+          type="checkbox" 
+          id="sameBillingAddress" 
+          name="sameBillingAddress" 
+          checked 
+          class="h-4 w-4 text-gold-primary focus:ring-gold-primary border-gray-300 rounded"
+        />
+        <label for="sameBillingAddress" class="ml-2 text-sm text-gray-700">
+          Billing address is the same as customer address
+        </label>
+      </div>
+    </div>
+
+    <!-- Terms and Conditions -->
+    <div class="border-t border-gray-200 pt-6">
+      <div class="flex items-start">
+        <input 
+          type="checkbox" 
+          id="acceptTerms" 
+          name="acceptTerms" 
+          required 
+          class="h-4 w-4 text-gold-primary focus:ring-gold-primary border-gray-300 rounded mt-1"
+        />
+        <label for="acceptTerms" class="ml-2 text-sm text-gray-700">
+          I agree to the <a href="/terms" class="text-gold-primary hover:underline">Terms of Service</a> 
+          and <a href="/privacy" class="text-gold-primary hover:underline">Privacy Policy</a>. 
+          I authorize monthly recurring charges for this membership.
+        </label>
+      </div>
+    </div>
+
+    <!-- Hidden field for plan ID -->
+    <input type="hidden" name="planId" value={planId} />
+
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      class="w-full bg-gradient-to-r from-gold-primary to-gold-light text-white font-bold py-4 px-8 rounded-xl hover:from-gold-light hover:to-gold-primary transition-all duration-300 transform hover:scale-105 shadow-lg"
+      disabled
+      id="submit-payment"
+    >
+      <span id="submit-text">Complete Membership Signup</span>
+      <span id="loading-text" class="hidden">Processing...</span>
+    </button>
+  </form>
+</div>
+
+<!-- AcceptBlue SDK -->
+<script src="https://js.accept.blue/v2/accept.js"></script>
+
+<script define:vars={{ onSubmit }}>
+  // AcceptBlue configuration
+  let acceptBlueFields = null;
+  let paymentToken = null;
+  
+  // Initialize AcceptBlue hosted payment fields
+  function initializeAcceptBlueFields() {
+    // TODO: Replace with actual tokenization key from Micamp Solutions
+    const TOKENIZATION_KEY = 'your_tokenization_key_here';
+    
+    // Check if AcceptBlue SDK is loaded
+    if (typeof Accept === 'undefined') {
+      console.warn('AcceptBlue SDK not loaded, using fallback fields');
+      showPlaceholderFields();
+      return;
+    }
+    
+    try {
+      // Initialize AcceptBlue with tokenization key
+      acceptBlueFields = Accept.hostedFields({
+        environment: 'sandbox', // Change to 'production' for live environment
+        tokenizationKey: TOKENIZATION_KEY,
+        fields: {
+          cardNumber: {
+            selector: '#card-number-container',
+            type: 'text',
+            placeholder: '1234 5678 9012 3456'
+          },
+          expirationDate: {
+            selector: '#card-expiry-container',
+            type: 'text',
+            placeholder: 'MM/YY'
+          },
+          cvv: {
+            selector: '#card-cvv-container',
+            type: 'text',
+            placeholder: '123'
+          }
+        },
+        styles: {
+          input: {
+            'font-size': '16px',
+            'color': '#374151',
+            'padding': '10px 12px'
+          },
+          ':focus': {
+            'outline': 'none'
+          },
+          '.valid': {
+            'color': '#10b981'
+          },
+          '.invalid': {
+            'color': '#ef4444'
+          }
+        }
+      });
+
+      // Handle field events
+      acceptBlueFields.on('focus', (event) => {
+        const container = document.querySelector(event.emittedBy === 'cardNumber' ? '#card-number-container' : 
+                                               event.emittedBy === 'expirationDate' ? '#card-expiry-container' : 
+                                               '#card-cvv-container');
+        container.classList.add('border-gold-primary');
+      });
+
+      acceptBlueFields.on('blur', (event) => {
+        const container = document.querySelector(event.emittedBy === 'cardNumber' ? '#card-number-container' : 
+                                               event.emittedBy === 'expirationDate' ? '#card-expiry-container' : 
+                                               '#card-cvv-container');
+        container.classList.remove('border-gold-primary');
+      });
+
+      acceptBlueFields.on('validitychange', (event) => {
+        const errorElement = document.querySelector(
+          event.emittedBy === 'cardNumber' ? '#card-number-error' : 
+          event.emittedBy === 'expirationDate' ? '#card-expiry-error' : 
+          '#card-cvv-error'
+        );
+        
+        if (event.isValid) {
+          errorElement.classList.add('hidden');
+        } else if (event.isEmpty === false) {
+          errorElement.textContent = getFieldErrorMessage(event.emittedBy);
+          errorElement.classList.remove('hidden');
+        }
+        
+        // Update form validation
+        checkFormValidity();
+      });
+
+      acceptBlueFields.on('cardTypeChange', (event) => {
+        // Update card type display if needed
+        console.log('Card type detected:', event.cardType);
+      });
+
+    } catch (error) {
+      console.error('AcceptBlue initialization failed:', error);
+      // Fallback to placeholder fields for development
+      showPlaceholderFields();
+    }
+  }
+  
+  // Tokenize payment method
+  async function tokenizePayment() {
+    if (!acceptBlueFields) {
+      throw new Error('AcceptBlue fields not initialized');
+    }
+    
+    return new Promise((resolve, reject) => {
+      acceptBlueFields.tokenize((err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          paymentToken = result.nonce;
+          resolve(result);
+        }
+      });
+    });
+  }
+  
+  // Get error message for field validation
+  function getFieldErrorMessage(fieldType) {
+    switch(fieldType) {
+      case 'cardNumber':
+        return 'Please enter a valid card number';
+      case 'expirationDate':
+        return 'Please enter a valid expiration date';
+      case 'cvv':
+        return 'Please enter a valid CVV';
+      default:
+        return 'Please enter valid payment information';
+    }
+  }
+  
+  // Fallback for development without SDK
+  function showPlaceholderFields() {
+    document.getElementById('card-number-container').innerHTML = 
+      '<input type="text" placeholder="1234 5678 9012 3456" class="w-full border-none outline-none p-3">';
+    document.getElementById('card-expiry-container').innerHTML = 
+      '<input type="text" placeholder="MM/YY" class="w-full border-none outline-none p-3">';
+    document.getElementById('card-cvv-container').innerHTML = 
+      '<input type="text" placeholder="123" class="w-full border-none outline-none p-3">';
+  }
+
+  // Payment form handling
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('payment-form');
+    const submitButton = document.getElementById('submit-payment');
+    const submitText = document.getElementById('submit-text');
+    const loadingText = document.getElementById('loading-text');
+    
+    // Enable submit button when all required fields are filled
+    const requiredFields = form.querySelectorAll('input[required], select[required]');
+    const acceptTerms = document.getElementById('acceptTerms');
+    
+    function checkFormValidity() {
+      const allFilled = Array.from(requiredFields).every(field => field.value.trim() !== '');
+      const termsAccepted = acceptTerms.checked;
+      
+      submitButton.disabled = !(allFilled && termsAccepted);
+    }
+    
+    // Add event listeners to all required fields
+    requiredFields.forEach(field => {
+      field.addEventListener('input', checkFormValidity);
+      field.addEventListener('change', checkFormValidity);
+    });
+    
+    acceptTerms.addEventListener('change', checkFormValidity);
+    
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      submitButton.disabled = true;
+      submitText.classList.add('hidden');
+      loadingText.classList.remove('hidden');
+      
+      try {
+        // Tokenize payment information first
+        let tokenResult = null;
+        if (acceptBlueFields) {
+          try {
+            tokenResult = await tokenizePayment();
+            console.log('Payment tokenized successfully:', tokenResult);
+          } catch (tokenError) {
+            console.error('Tokenization failed:', tokenError);
+            throw new Error('Payment information validation failed. Please check your card details.');
+          }
+        }
+        
+        // Prepare form data with payment token
+        const formData = new FormData(form);
+        if (tokenResult) {
+          formData.append('paymentToken', paymentToken);
+          formData.append('cardType', tokenResult.cardType || '');
+          formData.append('lastFour', tokenResult.lastFour || '');
+        }
+        
+        // Call the provided onSubmit function
+        if (typeof window[onSubmit] === 'function') {
+          await window[onSubmit](formData);
+        } else {
+          console.error(`Payment handler function '${onSubmit}' not found`);
+        }
+      } catch (error) {
+        console.error('Payment processing error:', error);
+        
+        // Show user-friendly error message
+        const errorMessage = error.message || 'Payment processing failed. Please try again.';
+        
+        // Create error display
+        let errorDiv = document.getElementById('payment-error');
+        if (!errorDiv) {
+          errorDiv = document.createElement('div');
+          errorDiv.id = 'payment-error';
+          errorDiv.className = 'bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4';
+          form.insertBefore(errorDiv, form.firstChild);
+        }
+        errorDiv.textContent = errorMessage;
+        errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+      } finally {
+        submitButton.disabled = false;
+        submitText.classList.remove('hidden');
+        loadingText.classList.add('hidden');
+      }
+    });
+    
+    // Initialize AcceptBlue hosted payment fields
+    initializeAcceptBlueFields();
+  });
+</script>

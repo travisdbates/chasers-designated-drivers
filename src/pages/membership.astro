@@ -19,7 +19,7 @@ const membershipPlans = [
     ],
     popular: false,
     ctaText: 'Join Individual Plan',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
+    ctaUrl: '/checkout/individual'
   },
   {
     id: 'joint',
@@ -37,7 +37,7 @@ const membershipPlans = [
     ],
     popular: true,
     ctaText: 'Join Joint Plan',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
+    ctaUrl: '/checkout/joint'
   },
   {
     id: 'family',
@@ -55,7 +55,7 @@ const membershipPlans = [
     ],
     popular: false,
     ctaText: 'Join Family Plan',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
+    ctaUrl: '/checkout/family'
   },
   {
     id: 'corporate',
@@ -73,7 +73,7 @@ const membershipPlans = [
     ],
     popular: false,
     ctaText: 'Join Corporate Plan',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
+    ctaUrl: '/checkout/corporate'
   },
   {
     id: 'business',
@@ -91,7 +91,7 @@ const membershipPlans = [
     ],
     popular: false,
     ctaText: 'Partner With Us',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
+    ctaUrl: '/checkout/business'
   }
 ];
 
@@ -185,8 +185,6 @@ const serviceAddOns = [
 
               <a 
                 href={plan.ctaUrl}
-                target="_blank"
-                rel="noopener noreferrer" 
                 class={`block w-full text-center py-4 px-6 rounded-xl font-bold transition-all duration-300 ${
                   plan.popular
                     ? 'bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black hover:from-[#b8841c] hover:to-[#a67619] transform hover:scale-105'
