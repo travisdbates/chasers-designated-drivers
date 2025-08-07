@@ -184,7 +184,7 @@ const total = numericPrice + setupFee;
       // Show processing modal
       processingModal.classList.remove('hidden');
       
-      // Collect form data
+      // Collect form data including marketing consent
       const paymentData = {
         planId: formData.get('planId'),
         customer: {
@@ -200,10 +200,14 @@ const total = numericPrice + setupFee;
         billing: {
           sameBillingAddress: formData.get('sameBillingAddress') === 'on'
         },
-        payment: {
-          token: formData.get('paymentToken'),
-          cardType: formData.get('cardType'),
-          lastFour: formData.get('lastFour')
+        // Include direct card data for processing
+        cardNumber: formData.get('cardNumber'),
+        expiryMonth: formData.get('expiryMonth'),
+        expiryYear: formData.get('expiryYear'),
+        cvv: formData.get('cvv'),
+        marketing: {
+          emailConsent: formData.get('emailMarketingConsent') === 'on',
+          smsConsent: formData.get('smsMarketingConsent') === 'on'
         },
         plan: plan
       };
