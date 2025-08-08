@@ -29,11 +29,13 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Calculate amount based on plan
     const planPricing = {
-      'individual': 89.00,
-      'joint': 149.00,
-      'family': 249.00,
-      'corporate': 399.00,
-      'business': 0 // Custom pricing
+      'standard-individual': 59.99,
+      'individual': 89.99,
+      'joint': 89.99,
+      'joint-premier': 149.99,
+      'family': 249.99,
+      'business': 599.99,
+      'business-premier': 699.99
     };
 
     const amount = planPricing[paymentData.planId as keyof typeof planPricing] || 0;

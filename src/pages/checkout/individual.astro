@@ -5,19 +5,20 @@ import MembershipCheckout from '../../components/MembershipCheckout.astro';
 
 const selectedPlan = {
   id: 'individual',
-  name: 'Individual Premiere',
-  description: 'We drive you home in your own vehicle',
-  price: '$89',
-  priceSubtext: '/month - Often cheaper than taxi',
+  name: 'Individual Premier',
+  description: 'Added flexibility and perks for frequent riders',
+  price: '$89.99',
+  priceSubtext: '/month + $40 trip fee per ride',
   features: [
-    'We drive your own car home',
-    'Unmarked vehicles (discrete service)',
-    '3PM - 3AM availability', 
-    'Professional, licensed drivers',
-    'Greater Phoenix Area coverage',
-    'No embarrassing pickup'
+    'Everything in Standard Plan, plus:',
+    'Ability to request driver for friend/client (must be present)',
+    'Unlimited ride requests',
+    'Covers you alone',
+    '3PM - 3AM availability, 7 days a week',
+    'Service available outside normal hours (by appointment)',
+    'Pay by cash or charge to account'
   ],
-  popular: false
+  popular: true
 };
 ---
 

@@ -16,12 +16,12 @@
           <span>(480) 695-3659</span>
         </a>
         
-        <a href="mailto:info@chasersdd.com" class="flex items-center space-x-2 hover:text-gold-primary transition-colors">
+        <a href="mailto:memberships@chasersdd.com" class="flex items-center space-x-2 hover:text-gold-primary transition-colors">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
           </svg>
-          <span>info@chasersdd.com</span>
+          <span>memberships@chasersdd.com</span>
         </a>
         
         <div class="flex items-center space-x-2 text-gray-600">
@@ -125,6 +125,16 @@
           </a>
         </div>
         
+        <!-- SERVICES with dropdown -->
+        <div class="group">
+          <a href="/chauffeur" class="nav-link flex items-center" data-dropdown="services">
+            SERVICES
+            <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+        
         <a href="/how-it-works" class="nav-link">HOW WE WORK</a>
         <a href="/contact" class="nav-link">OUR TEAM</a>
         <a href="/faq" class="nav-link">FAQ</a>
@@ -159,6 +169,7 @@
       <div class="flex flex-col space-y-4">
         <a href="/membership" class="nav-link text-center py-2">OUR PLANS</a>
         <a href="/about" class="nav-link text-center py-2">OUR STORY</a>
+        <a href="/chauffeur" class="nav-link text-center py-2">SERVICES</a>
         <a href="/how-it-works" class="nav-link text-center py-2">HOW WE WORK</a>
         <a href="/contact" class="nav-link text-center py-2">OUR TEAM</a>
         <a href="/faq" class="nav-link text-center py-2">FAQ</a>
@@ -207,14 +218,66 @@
           </div>
         </a>
         
-        <!-- Corporate Plan -->
-        <a href="/checkout/corporate" class="group/item block rounded-lg transition-all duration-300 w-56 h-56 relative overflow-hidden">
+        <!-- Business Plan -->
+        <a href="/checkout/business" class="group/item block rounded-lg transition-all duration-300 w-56 h-56 relative overflow-hidden">
           <div class="w-full h-full bg-cover bg-center relative" style="background-image: url('/images/corporate.jpg');">
             <div class="absolute inset-0 bg-black/50 group-hover/item:bg-black/20 transition-all duration-300"></div>
             <div class="absolute inset-0 flex items-center justify-center">
-              <h3 class="font-black text-white text-xl uppercase tracking-wide">Corporate</h3>
+              <h3 class="font-black text-white text-xl uppercase tracking-wide">Business</h3>
             </div>
           </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES Dropdown -->
+  <div id="dropdown-services" class="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-200 opacity-0 invisible transition-all duration-300 z-40">
+    <div class="container-center py-8 px-4 md:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <!-- Chauffeur Services -->
+        <a href="/chauffeur" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary">
+          <div class="w-full h-20 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center text-sm">Chauffeur Services</h3>
+          <p class="text-xs text-gray-600 mt-2 text-center">Professional drivers in your car</p>
+        </a>
+        
+        <!-- Luxury Transportation -->
+        <a href="/luxury-transportation" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary">
+          <div class="w-full h-20 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.5 7c.276 0 .5.224.5.5v.511c0 .793-.926.989-1.616.989l-1.086-2h2.202zm-1.441 3.506c.639 1.186.946 2.252.946 3.666 0 1.37-.397 2.533-1.005 3.981v1.847c0 .552-.448 1-1 1h-1.5c-.552 0-1-.448-1-1v-1h-13v1c0 .552-.448 1-1 1h-1.5c-.552 0-1-.448-1-1v-1.847c-.608-1.448-1.005-2.611-1.005-3.981 0-1.414.307-2.48.946-3.666.829-1.537 1.851-3.453 2.93-5.252.297-.496.763-.748 1.279-.748h16.912c.516 0 .982.252 1.279.748 1.079 1.799 2.101 3.715 2.93 5.252z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center text-sm">Luxury Transportation</h3>
+          <p class="text-xs text-gray-600 mt-2 text-center">SUV & Sprinter van services</p>
+        </a>
+        
+        <!-- Car Concierge -->
+        <a href="/car-concierge" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary">
+          <div class="w-full h-20 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12 0 6.628 5.373 12 12 12s12-5.372 12-12c0-6.627-5.373-12-12-12zm-1.31 7.526c-.099-.807.528-1.526 1.348-1.526.771 0 1.377.676 1.28 1.451l-.757 6.053c-.035.283-.276.496-.561.496s-.526-.213-.561-.496l-.749-6.053-.001.075zm1.31 10.724c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center text-sm">Car Concierge</h3>
+          <p class="text-xs text-gray-600 mt-2 text-center">Vehicle care & errands</p>
+        </a>
+        
+        <!-- Gift Membership -->
+        <a href="/gift-membership" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary">
+          <div class="w-full h-20 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l.324 1.002 3.676 11.344L12 18L8 14.346l3.676-11.344L12 2z"/>
+              <path d="M20.31 10.31l-1.17.88L12 6L4.86 11.19l-1.17-.88 8.31-6.31 8.31 6.31z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center text-sm">Gift Membership</h3>
+          <p class="text-xs text-gray-600 mt-2 text-center">Gift the safety you care about</p>
         </a>
       </div>
     </div>
