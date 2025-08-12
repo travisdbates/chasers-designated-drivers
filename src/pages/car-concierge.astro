@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+
+const conciergeServices = [
+  {
+    title: 'Car Retrieval',
+    description: 'We\'ll pick up your vehicle and return it to your home, office, or another approved location.',
+    icon: '🚗'
+  },
+  {
+    title: 'Fuel Fill-Ups',
+    description: 'We\'ll fill up your tank, so your car is ready to go.',
+    icon: '⛽'
+  },
+  {
+    title: 'Car Washes',
+    description: 'We can take your vehicle in for a wash, whether hand wash or drive-thru.',
+    icon: '🧽'
+  },
+  {
+    title: 'Maintenance Appointments',
+    description: 'Oil changes, tire rotations, inspections — we\'ll take your car in and bring it back.',
+    icon: '🔧'
+  },
+  {
+    title: 'Dealership Drop-Off & Pick-Up',
+    description: 'Whether your car is being serviced or ready for pickup, we\'ll handle the transport.',
+    icon: '🏢'
+  },
+  {
+    title: 'Secure Parking',
+    description: 'Your vehicle is returned and parked as instructed — driveway, garage, or office.',
+    icon: '🅿️'
+  }
+];
+
+const idealFor = [
+  'Busy professionals',
+  'Corporate clients', 
+  'Families with multiple vehicles',
+  'Elderly Drivers',
+  'Anyone looking for convenience and peace of mind'
+];
+---
+
+<BaseLayout 
+  title="Car Concierge Services - Chasers DD"
+  description="More than just a ride — we help manage your vehicle, so you don't have to. Car retrieval, maintenance, fuel, and more."
+  keywords="car concierge, vehicle management, car retrieval, maintenance service, fuel service"
+>
+  <Navigation />
+  
+  <main class="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+          <span class="font-serif">Car</span>
+          <span class="text-[#c69214] ml-3">Concierge</span>
+          <span class="font-serif ml-3">Services</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+          More than just a ride — we help manage your vehicle, so you don't have to.
+        </p>
+        <div class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-6 max-w-2xl mx-auto">
+          <p class="text-lg text-[#c69214] font-semibold mb-2">Included with All Membership Packages</p>
+          <p class="text-gray-300">Standard $40 trip fee per service (plus gratuity)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">
+            What's <span class="text-[#c69214]">Included</span>
+          </h2>
+          <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+            Every membership includes access to our Car Care & Retrieval Services, designed to save you time, reduce stress, and keep your vehicle ready when you need it.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {conciergeServices.map((service) => (
+            <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 hover:scale-105">
+              <div class="text-4xl mb-4">{service.icon}</div>
+              <h3 class="text-xl font-bold text-white mb-3 font-serif">{service.title}</h3>
+              <p class="text-gray-300 leading-relaxed">{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">
+            How It <span class="text-[#c69214]">Works</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-[#c69214] to-[#b8841c] rounded-full flex items-center justify-center text-black font-bold text-xl mx-auto mb-4">1</div>
+            <h3 class="text-xl font-bold text-white mb-3">Schedule by Call or Text</h3>
+            <p class="text-gray-300">Provide the location, service needed, and return instructions.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-[#c69214] to-[#b8841c] rounded-full flex items-center justify-center text-black font-bold text-xl mx-auto mb-4">2</div>
+            <h3 class="text-xl font-bold text-white mb-3">Driver Dispatched</h3>
+            <p class="text-gray-300">A trained and insured ChasersDD driver is assigned to your vehicle.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-[#c69214] to-[#b8841c] rounded-full flex items-center justify-center text-black font-bold text-xl mx-auto mb-4">3</div>
+            <h3 class="text-xl font-bold text-white mb-3">Service Completed</h3>
+            <p class="text-gray-300">Your vehicle is returned, ready and waiting for your next drive.</p>
+          </div>
+        </div>
+
+        <div class="mt-12 text-center">
+          <div class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-6 max-w-2xl mx-auto">
+            <p class="text-[#c69214] font-semibold">Please give us as much notice as possible when using this service to help us accommodate your request efficiently.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ideal For Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">
+            Ideal <span class="text-[#c69214]">For</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {idealFor.map((item) => (
+            <div class="bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg p-4 text-center">
+              <p class="text-white font-medium">{item}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 font-serif">
+          Pricing & <span class="text-[#c69214]">Gratuity</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+            <h3 class="text-xl font-bold text-[#c69214] mb-2">Service Pricing</h3>
+            <p class="text-white mb-2">• Included with all ChasersDD membership packages</p>
+            <p class="text-white mb-2">• Standard $40 trip fee per service (plus gratuity)</p>
+            <p class="text-gray-300 text-sm">Additional charges may apply for extended services or long-distance pickups</p>
+          </div>
+          <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+            <h3 class="text-xl font-bold text-[#c69214] mb-2">Gratuity Guidelines</h3>
+            <p class="text-white mb-2">Please tip accordingly based on:</p>
+            <p class="text-gray-300 text-sm">• Distance traveled</p>
+            <p class="text-gray-300 text-sm">• Wait time required</p>
+            <p class="text-gray-300 text-sm">• Level of service provided</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-serif">
+          Ready to Schedule <span class="text-[#c69214]">Service?</span>
+        </h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          Let us handle your vehicle needs so you can focus on what matters most.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <a 
+            href="tel:+14806953659" 
+            class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-8 py-4 rounded-xl font-bold hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 transform hover:scale-105"
+          >
+            Call (480) 695-3659
+          </a>
+          <a 
+            href="mailto:carconcierge@chasersdd.com" 
+            class="bg-gradient-to-r from-gray-700 to-gray-800 text-white px-8 py-4 rounded-xl font-bold hover:from-[#c69214] hover:to-[#b8841c] hover:text-black transition-all duration-300"
+          >
+            Email Car Concierge
+          </a>
+        </div>
+        <div class="text-center">
+          <p class="text-gray-400">
+            Email: <a href="mailto:carconcierge@chasersdd.com" class="text-[#c69214] hover:underline">carconcierge@chasersdd.com</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

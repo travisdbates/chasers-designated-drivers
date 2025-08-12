@@ -1,0 +1,262 @@
+---
+import PaymentForm from './PaymentForm.astro';
+
+export interface MembershipPlan {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  priceSubtext: string;
+  features: string[];
+  popular?: boolean;
+}
+
+export interface Props {
+  plan: MembershipPlan;
+  onBack?: string;
+}
+
+const { plan, onBack = 'goBack' } = Astro.props;
+
+// Extract numeric price for calculations
+const numericPrice = parseFloat(plan.price.replace(/[^0-9.]/g, ''));
+const setupFee = 0; // No setup fee for now
+const total = numericPrice + setupFee;
+---
+
+<div class="membership-checkout max-w-6xl mx-auto p-6">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <!-- Back Button -->
+      <button 
+        onclick={`${onBack}()`}
+        class="flex items-center text-gold-primary hover:text-gold-light transition-colors mb-6 group"
+      >
+        <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+        </svg>
+        Back to Plans
+      </button>
+
+      <!-- Selected Plan Card -->
+      <div class="bg-gradient-to-br from-gray-50 to-white border-2 border-gold-primary/20 rounded-2xl p-6 mb-6 relative overflow-hidden">
+        {plan.popular && (
+          <div class="absolute top-0 right-0 bg-gold-primary text-white px-3 py-1 text-xs font-bold rounded-bl-lg">
+            MOST POPULAR
+          </div>
+        )}
+        
+        <div class="mb-4">
+          <h2 class="text-2xl font-bold text-gray-900 font-serif">{plan.name}</h2>
+          <p class="text-gray-600 mt-1">{plan.description}</p>
+        </div>
+
+        <div class="mb-6">
+          <div class="text-3xl font-bold text-gold-primary">{plan.price}</div>
+          <p class="text-sm text-gray-500">{plan.priceSubtext}</p>
+        </div>
+
+        <!-- Features List -->
+        <div class="mb-6">
+          <h4 class="font-semibold text-gray-900 mb-3">What's Included:</h4>
+          <ul class="space-y-2">
+            {plan.features.map((feature) => (
+              <li class="flex items-start text-sm text-gray-700">
+                <svg class="w-4 h-4 text-gold-primary mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Order Summary Details -->
+      <div class="bg-white border border-gray-200 rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
+        
+        <div class="space-y-3">
+          <div class="flex justify-between">
+            <span class="text-gray-600">{plan.name} (Monthly)</span>
+            <span class="font-medium">{plan.price}</span>
+          </div>
+          
+          {setupFee > 0 && (
+            <div class="flex justify-between">
+              <span class="text-gray-600">Setup Fee</span>
+              <span class="font-medium">${setupFee.toFixed(2)}</span>
+            </div>
+          )}
+          
+          <div class="border-t border-gray-200 pt-3">
+            <div class="flex justify-between text-lg font-bold">
+              <span>Total (Monthly)</span>
+              <span class="text-gold-primary">${total.toFixed(2)}</span>
+            </div>
+            <p class="text-xs text-gray-500 mt-1">
+              Recurring monthly charge. Cancel anytime.
+            </p>
+          </div>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <div class="flex items-center justify-center space-x-4 text-xs text-gray-500">
+            <div class="flex items-center">
+              <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+              </svg>
+              SSL Secured
+            </div>
+            <div class="flex items-center">
+              <svg class="w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              PCI Compliant
+            </div>
+            <div class="flex items-center">
+              <svg class="w-4 h-4 mr-1 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+              </svg>
+              24/7 Support
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Form -->
+    <div class="payment-section">
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Complete Your Membership</h2>
+        <p class="text-gray-600">Secure checkout powered by AcceptBlue</p>
+      </div>
+      
+      <PaymentForm 
+        planId={plan.id} 
+        onSubmit="handleMembershipPayment"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- Processing Modal -->
+<div id="processing-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+  <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+    <div class="text-center">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gold-primary mx-auto mb-4"></div>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">Processing Your Payment</h3>
+      <p class="text-gray-600">Please wait while we set up your membership...</p>
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+  <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+    <div class="text-center">
+      <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">Welcome to Chasers DD!</h3>
+      <p class="text-gray-600 mb-4">Your membership has been activated successfully.</p>
+      <button 
+        onclick="window.location.href = '/dashboard'"
+        class="bg-gold-primary text-white px-6 py-2 rounded-lg hover:bg-gold-light transition-colors"
+      >
+        Go to Dashboard
+      </button>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ plan, onBack }}>
+  // Global payment handler
+  window.handleMembershipPayment = async (formData) => {
+    const processingModal = document.getElementById('processing-modal');
+    const successModal = document.getElementById('success-modal');
+    
+    try {
+      // Show processing modal
+      processingModal.classList.remove('hidden');
+      
+      // Collect form data including marketing consent
+      const paymentData = {
+        planId: formData.get('planId'),
+        customer: {
+          firstName: formData.get('firstName'),
+          lastName: formData.get('lastName'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          address: formData.get('address'),
+          city: formData.get('city'),
+          state: formData.get('state'),
+          zipCode: formData.get('zipCode')
+        },
+        billing: {
+          sameBillingAddress: formData.get('sameBillingAddress') === 'on'
+        },
+        // Include direct card data for processing
+        cardNumber: formData.get('cardNumber'),
+        expiryMonth: formData.get('expiryMonth'),
+        expiryYear: formData.get('expiryYear'),
+        cvv: formData.get('cvv'),
+        marketing: {
+          emailConsent: formData.get('emailMarketingConsent') === 'on',
+          smsConsent: formData.get('smsMarketingConsent') === 'on'
+        },
+        plan: plan
+      };
+      
+      // Process payment via AcceptBlue API
+      console.log('Processing payment for:', paymentData);
+      
+      const response = await fetch('/api/process-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(paymentData)
+      });
+      
+      const result = await response.json();
+      
+      if (!result.success) {
+        throw new Error(result.error || 'Payment processing failed');
+      }
+      
+      console.log('Payment successful:', result);
+      
+      // Hide processing modal and show success
+      processingModal.classList.add('hidden');
+      successModal.classList.remove('hidden');
+      
+    } catch (error) {
+      processingModal.classList.add('hidden');
+      throw error;
+    }
+  };
+  
+  // Global back handler
+  window[onBack] = () => {
+    window.history.back();
+  };
+</script>
+
+<style>
+  .order-summary {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+  }
+  
+  @media (max-width: 1024px) {
+    .order-summary {
+      position: static;
+    }
+  }
+</style>

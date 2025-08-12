@@ -1,0 +1,574 @@
+---
+export interface Props {
+  planId: string;
+  onSubmit?: string;
+}
+
+const { planId, onSubmit = "handlePayment" } = Astro.props;
+
+// Get AcceptBlue configuration from environment
+const ACCEPTBLUE_TOKENIZATION_KEY = import.meta.env
+  .PUBLIC_ACCEPTBLUE_TOKENIZATION_KEY;
+const ACCEPTBLUE_ENVIRONMENT =
+  import.meta.env.PUBLIC_ACCEPTBLUE_ENVIRONMENT || "sandbox";
+---
+
+<div
+  class="payment-form bg-white border border-gray-200 rounded-xl p-6 shadow-lg"
+>
+  <form id="payment-form" class="space-y-6">
+    <!-- Customer Information -->
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold text-gray-900">Customer Information</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="firstName" class="form-label">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            required
+            class="form-input w-full"
+            placeholder="John"
+          />
+        </div>
+        <div>
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            required
+            class="form-input w-full"
+            placeholder="Doe"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="email" class="form-label">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="form-input w-full"
+          placeholder="john@example.com"
+        />
+      </div>
+
+      <div>
+        <label for="phone" class="form-label">Phone Number</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          required
+          class="form-input w-full"
+          placeholder="(480) 555-0123"
+        />
+      </div>
+
+      <div>
+        <label for="address" class="form-label">Address</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          required
+          class="form-input w-full"
+          placeholder="123 Main St"
+        />
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label for="city" class="form-label">City</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            required
+            class="form-input w-full"
+            placeholder="Phoenix"
+          />
+        </div>
+        <div>
+          <label for="state" class="form-label">State</label>
+          <select id="state" name="state" required class="form-input w-full">
+            <option value="">Select State</option>
+            <option value="AZ" selected>Arizona</option>
+            <option value="CA">California</option>
+            <option value="NV">Nevada</option>
+          </select>
+        </div>
+        <div>
+          <label for="zipCode" class="form-label">ZIP Code</label>
+          <input
+            type="text"
+            id="zipCode"
+            name="zipCode"
+            required
+            class="form-input w-full"
+            placeholder="85001"
+            pattern="[0-9]{5}(-[0-9]{4})?"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Information -->
+    <div class="space-y-4 border-t border-gray-200 pt-6">
+      <h3 class="text-lg font-semibold text-gray-900">Payment Information</h3>
+
+      <!-- AcceptBlue Hosted Payment Fields -->
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <p class="text-sm text-gray-600 mb-4">
+          Secure payment processing powered by AcceptBlue
+        </p>
+
+        <!-- Direct Payment Fields (CORS workaround) -->
+        <div id="acceptblue-payment-fields" class="space-y-4">
+          <!-- Card Number -->
+          <div>
+            <label class="form-label">Card Number</label>
+            <input
+              type="text"
+              id="fallback-card-number"
+              name="cardNumber"
+              placeholder="4111111111111111"
+              maxlength="19"
+              class="form-input w-full"
+              autocomplete="cc-number"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Expiry -->
+            <div>
+              <label class="form-label">Expiry (MM/YY)</label>
+              <input
+                type="text"
+                id="fallback-expiry"
+                name="expiry"
+                placeholder="12/25"
+                maxlength="5"
+                class="form-input w-full"
+                autocomplete="cc-exp"
+              />
+            </div>
+
+            <!-- CVV -->
+            <div>
+              <label class="form-label">CVV</label>
+              <input
+                type="text"
+                id="fallback-cvv"
+                name="cvv"
+                placeholder="123"
+                maxlength="4"
+                class="form-input w-full"
+                autocomplete="cc-csc"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Type Display -->
+        <div
+          id="card-type-display"
+          class="mt-3 flex items-center space-x-2 text-sm text-gray-600"
+        >
+          <span>Accepted cards:</span>
+          <div class="flex space-x-1">
+            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs"
+              >Visa</span
+            >
+            <span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs"
+              >Mastercard</span
+            >
+            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs"
+              >American Express</span
+            >
+            <span
+              class="px-2 py-1 bg-orange-100 text-orange-800 rounded text-xs"
+              >Discover</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Billing Address Same as Customer -->
+      <div class="flex items-center">
+        <input
+          type="checkbox"
+          id="sameBillingAddress"
+          name="sameBillingAddress"
+          checked
+          class="h-4 w-4 text-gold-primary focus:ring-gold-primary border-gray-300 rounded"
+        />
+        <label for="sameBillingAddress" class="ml-2 text-sm text-gray-700">
+          Billing address is the same as customer address
+        </label>
+      </div>
+    </div>
+
+    <!-- Marketing Consent (Regulatory Compliance) -->
+    <div class="border-t border-gray-200 pt-6">
+      <h4 class="text-lg font-semibold text-gray-900 mb-4">
+        Communication Preferences
+      </h4>
+
+      <!-- Email Marketing Consent -->
+      <div class="flex items-start mb-4">
+        <input
+          type="checkbox"
+          id="emailMarketingConsent"
+          name="emailMarketingConsent"
+          class="h-4 w-4 text-gold-primary focus:ring-gold-primary border-gray-300 rounded mt-1"
+        />
+        <label for="emailMarketingConsent" class="ml-2 text-sm text-gray-700">
+          <strong>Email Marketing:</strong> I consent to receive promotional emails,
+          membership updates, special offers, and service notifications from Chasers
+          DD at the email address provided. I understand I can unsubscribe at any
+          time by clicking the unsubscribe link in any email or contacting us at
+          rocky@chasersdd.com.
+        </label>
+      </div>
+
+      <!-- SMS Marketing Consent -->
+      <div class="flex items-start mb-4">
+        <input
+          type="checkbox"
+          id="smsMarketingConsent"
+          name="smsMarketingConsent"
+          class="h-4 w-4 text-gold-primary focus:ring-gold-primary border-gray-300 rounded mt-1"
+        />
+        <label for="smsMarketingConsent" class="ml-2 text-sm text-gray-700">
+          <strong>SMS Marketing:</strong> I consent to receive promotional text messages,
+          ride reminders, special offers, and service notifications from Chasers
+          DD at the phone number provided. I understand that message and data rates
+          may apply and I can opt out at any time by replying STOP.
+          <a href="/sms-terms" class="text-gold-primary hover:underline"
+            >SMS Terms & Conditions</a
+          >
+        </label>
+      </div>
+
+      <p class="text-xs text-gray-500 mb-4">
+        <strong>Note:</strong> These marketing preferences are optional. You will
+        still receive transactional emails and SMS messages (like payment confirmations
+        and service updates) regardless of these settings, as they are necessary
+        for our service.
+      </p>
+    </div>
+
+    <!-- Terms and Conditions -->
+    <div class="border-t border-gray-200 pt-6">
+      <div class="flex items-start">
+        <input
+          type="checkbox"
+          id="acceptTerms"
+          name="acceptTerms"
+          required
+          class="h-4 w-4 text-gold-primary focus:ring-gold-primary border-gray-300 rounded mt-1"
+        />
+        <label for="acceptTerms" class="ml-2 text-sm text-gray-700">
+          I agree to the <a
+            href="/terms"
+            class="text-gold-primary hover:underline">Terms of Service</a
+          >
+          and <a href="/privacy" class="text-gold-primary hover:underline"
+            >Privacy Policy</a
+          >. I authorize monthly recurring charges for this membership.
+        </label>
+      </div>
+    </div>
+
+    <!-- Hidden field for plan ID -->
+    <input type="hidden" name="planId" value={planId} />
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="w-full bg-gradient-to-r from-gold-primary to-gold-light text-white font-bold py-4 px-8 rounded-xl hover:from-gold-light hover:to-gold-primary transition-all duration-300 transform hover:scale-105 shadow-lg"
+      disabled
+      id="submit-payment"
+    >
+      <span id="submit-text">Complete Membership Signup</span>
+      <span id="loading-text" class="hidden">Processing...</span>
+    </button>
+  </form>
+</div>
+
+<!-- MiCamp Solutions Hosted Tokenization Library v0.3 -->
+
+<script
+  define:vars={{
+    onSubmit,
+    ACCEPTBLUE_TOKENIZATION_KEY,
+    ACCEPTBLUE_ENVIRONMENT,
+  }}
+>
+  // MiCamp Solutions Hosted Tokenization configuration
+  let hostedTokenization = null;
+  let paymentToken = null;
+
+  // Initialize MiCamp Hosted Tokenization
+  function initializeMiCampTokenization() {
+    console.log("Initializing MiCamp Hosted Tokenization with:", {
+      hasKey: !!ACCEPTBLUE_TOKENIZATION_KEY,
+      environment: ACCEPTBLUE_ENVIRONMENT,
+      keyPreview: ACCEPTBLUE_TOKENIZATION_KEY
+        ? `${ACCEPTBLUE_TOKENIZATION_KEY.substring(0, 8)}...`
+        : "undefined",
+    });
+
+    // Check if tokenization key is available
+    if (
+      !ACCEPTBLUE_TOKENIZATION_KEY ||
+      ACCEPTBLUE_TOKENIZATION_KEY === "your_tokenization_key_here"
+    ) {
+      console.error("MiCamp tokenization key not configured");
+      showPlaceholderFields();
+      return;
+    }
+
+    // Check if MiCamp HostedTokenization is loaded
+    if (typeof window.HostedTokenization === "undefined") {
+      console.warn(
+        "MiCamp HostedTokenization library not loaded, using fallback fields"
+      );
+      showPlaceholderFields();
+      return;
+    }
+
+    try {
+      // Initialize MiCamp HostedTokenization
+      const options = {
+        target: "#acceptblue-payment-fields",
+        showZip: true,
+        requireCvv2: true,
+        styles: {
+          container: "display: flex; flex-direction: column; gap: 16px;",
+          card: "padding: 12px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 16px; transition: border-color 0.2s;",
+          expiryContainer: "display: flex; gap: 8px;",
+          expiryMonth:
+            "padding: 12px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 16px; flex: 1;",
+          expiryYear:
+            "padding: 12px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 16px; flex: 1;",
+          cvv2: "padding: 12px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 16px;",
+          avsZip:
+            "padding: 12px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 16px;",
+          labels: "font-weight: 600; color: #374151; margin-bottom: 4px;",
+          labelType: "static-top",
+        },
+      };
+
+      hostedTokenization = new window.HostedTokenization(
+        ACCEPTBLUE_TOKENIZATION_KEY,
+        options
+      );
+
+      // Set up event listeners
+      hostedTokenization.on("ready", () => {
+        console.log("MiCamp HostedTokenization is ready");
+        // Enable form submission once tokenization is ready
+        document.getElementById("submit-payment").disabled = false;
+      });
+
+      hostedTokenization.on("input", ({ error, result }) => {
+        console.log("Card input event:", { error, result });
+        if (result) {
+          // Update form validation based on card data
+          checkFormValidity();
+        }
+      });
+
+      hostedTokenization.on("change", ({ error, result }) => {
+        console.log("Card change event:", { error, result });
+      });
+
+      console.log("MiCamp HostedTokenization initialized successfully");
+    } catch (error) {
+      console.error("MiCamp HostedTokenization initialization failed:", error);
+      // Fallback to placeholder fields for development
+      showPlaceholderFields();
+    }
+  }
+
+  // Tokenize payment method using MiCamp HostedTokenization
+  async function tokenizePayment() {
+    console.log("Starting tokenization...", {
+      hasHostedTokenization: !!hostedTokenization,
+      fieldsInitialized: hostedTokenization !== null,
+    });
+
+    if (!hostedTokenization) {
+      console.error("MiCamp HostedTokenization not initialized");
+      throw new Error("MiCamp HostedTokenization not initialized");
+    }
+
+    try {
+      console.log("Calling MiCamp getNonceToken...");
+      const result = await hostedTokenization.getNonceToken();
+
+      console.log("Tokenization successful:", {
+        hasNonce: !!result.nonce,
+        cardType: result.cardType,
+        last4: result.last4,
+        maskedCard: result.maskedCard,
+      });
+
+      paymentToken = result.nonce;
+      return result;
+    } catch (error) {
+      console.error("Tokenization failed:", error);
+      throw error;
+    }
+  }
+
+  // Get error message for field validation
+  function getFieldErrorMessage(fieldType) {
+    switch (fieldType) {
+      case "cardNumber":
+        return "Please enter a valid card number";
+      case "expirationDate":
+        return "Please enter a valid expiration date";
+      case "cvv":
+        return "Please enter a valid CVV";
+      default:
+        return "Please enter valid payment information";
+    }
+  }
+
+  // Fallback for development without SDK
+  function showPlaceholderFields() {
+    console.log("Using placeholder fields - AcceptBlue SDK not available");
+    document.getElementById("card-number-container").innerHTML =
+      '<input type="text" placeholder="4111111111111111" class="w-full border-none outline-none p-3" id="fallback-card-number">';
+    document.getElementById("card-expiry-container").innerHTML =
+      '<input type="text" placeholder="12/25" class="w-full border-none outline-none p-3" id="fallback-expiry">';
+    document.getElementById("card-cvv-container").innerHTML =
+      '<input type="text" placeholder="123" class="w-full border-none outline-none p-3" id="fallback-cvv">';
+  }
+
+  // Fallback tokenization for testing without AcceptBlue SDK
+  function createFallbackToken() {
+    const cardNumber =
+      document.getElementById("fallback-card-number")?.value || "";
+    const expiry = document.getElementById("fallback-expiry")?.value || "";
+    const cvv = document.getElementById("fallback-cvv")?.value || "";
+
+    if (!cardNumber || !expiry || !cvv) {
+      throw new Error("Please fill in all card fields");
+    }
+
+    // Create a fake token for testing (in production, this would come from AcceptBlue)
+    return {
+      nonce: `test_token_${Date.now()}`,
+      cardType: cardNumber.startsWith("4") ? "Visa" : "Unknown",
+      lastFour: cardNumber.slice(-4),
+    };
+  }
+
+  // Payment form handling
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("payment-form");
+    const submitButton = document.getElementById("submit-payment");
+    const submitText = document.getElementById("submit-text");
+    const loadingText = document.getElementById("loading-text");
+
+    // Enable submit button when all required fields are filled
+    const requiredFields = form.querySelectorAll(
+      "input[required], select[required]"
+    );
+    const acceptTerms = document.getElementById("acceptTerms");
+
+    function checkFormValidity() {
+      const allFilled = Array.from(requiredFields).every(
+        (field) => field.value.trim() !== ""
+      );
+      const termsAccepted = acceptTerms.checked;
+
+      submitButton.disabled = !(allFilled && termsAccepted);
+    }
+
+    // Add event listeners to all required fields
+    requiredFields.forEach((field) => {
+      field.addEventListener("input", checkFormValidity);
+      field.addEventListener("change", checkFormValidity);
+    });
+
+    acceptTerms.addEventListener("change", checkFormValidity);
+
+    // Form submission
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      submitButton.disabled = true;
+      submitText.classList.add("hidden");
+      loadingText.classList.remove("hidden");
+
+      try {
+        // Get card data from form (direct processing, no tokenization needed)
+        const cardNumber = document.getElementById("fallback-card-number")?.value || "";
+        const expiryParts = document.getElementById("fallback-expiry")?.value?.split("/") || [];
+        const expiryMonth = expiryParts[0] || "";
+        const expiryYear = expiryParts[1] ? "20" + expiryParts[1] : "";
+        const cvv = document.getElementById("fallback-cvv")?.value || "";
+        const zipCode = document.getElementById("zipCode")?.value || "";
+        
+        if (!cardNumber || !expiryMonth || !expiryYear || !cvv) {
+          throw new Error("Please fill in all payment fields");
+        }
+
+        console.log("Processing payment with direct card data...");
+        
+        // Prepare form data with card information
+        const formData = new FormData(form);
+        formData.append("cardNumber", cardNumber.replace(/\s/g, ""));
+        formData.append("expiryMonth", expiryMonth);
+        formData.append("expiryYear", expiryYear);
+        formData.append("cvv", cvv);
+        
+        // Add marketing consent data
+        formData.append("emailMarketingConsent", document.getElementById("emailMarketingConsent")?.checked || false);
+        formData.append("smsMarketingConsent", document.getElementById("smsMarketingConsent")?.checked || false);
+
+        // Call the provided onSubmit function
+        if (typeof window[onSubmit] === "function") {
+          await window[onSubmit](formData);
+        } else {
+          console.error(`Payment handler function '${onSubmit}' not found`);
+        }
+      } catch (error) {
+        console.error("Payment processing error:", error);
+
+        // Show user-friendly error message
+        const errorMessage =
+          error.message || "Payment processing failed. Please try again.";
+
+        // Create error display
+        let errorDiv = document.getElementById("payment-error");
+        if (!errorDiv) {
+          errorDiv = document.createElement("div");
+          errorDiv.id = "payment-error";
+          errorDiv.className =
+            "bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4";
+          form.insertBefore(errorDiv, form.firstChild);
+        }
+        errorDiv.textContent = errorMessage;
+        errorDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } finally {
+        submitButton.disabled = false;
+        submitText.classList.remove("hidden");
+        loadingText.classList.add("hidden");
+      }
+    });
+
+    // Initialize MiCamp hosted tokenization
+    initializeMiCampTokenization();
+  });
+</script>

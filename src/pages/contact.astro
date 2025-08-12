@@ -25,48 +25,42 @@ import Navigation from '../components/Navigation.astro';
       </div>
     </section>
 
-    <!-- Team Members Section -->
+    <!-- Our Story Section -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        <!-- Team Member 1 -->
-        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 text-center animate-on-scroll">
-          <div class="w-24 h-24 bg-gradient-to-r from-[#c69214] to-[#b8841c] rounded-full mx-auto mb-6 flex items-center justify-center">
-            <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2 font-serif">Rocky</h3>
-          <p class="text-[#c69214] font-medium mb-4">Founder & Lead Driver</p>
-          <p class="text-gray-300 text-sm leading-relaxed">
-            With over a decade of experience in luxury transportation, Rocky founded Chasers DD to provide unmatched professional service and peace of mind for every client.
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">
+          At Chasers Designated Drivers, our team is the driving force behind everything we do.
+        </p>
+        
+        <div class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-8 mb-12">
+          <p class="text-lg text-gray-300 leading-relaxed mb-4">
+            Founded in 2010 by Vincent Rocky Medina, Chasers was built on one simple mission:
+          </p>
+          <blockquote class="text-2xl font-bold text-[#c69214] mb-4 font-serif">
+            "We just need to be successful one call at a time."
+          </blockquote>
+          <p class="text-gray-300 leading-relaxed">
+            That mindset continues to guide us today—ride after ride, night after night.
           </p>
         </div>
         
-        <!-- Team Member 2 -->
-        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 text-center animate-on-scroll">
-          <div class="w-24 h-24 bg-gradient-to-r from-[#c69214] to-[#b8841c] rounded-full mx-auto mb-6 flex items-center justify-center">
-            <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2 font-serif">Professional Drivers</h3>
-          <p class="text-[#c69214] font-medium mb-4">Licensed & Insured Team</p>
-          <p class="text-gray-300 text-sm leading-relaxed">
-            Our carefully selected drivers undergo extensive background checks and training to ensure the highest standards of safety, professionalism, and discretion.
+        <div class="space-y-6 text-left max-w-3xl mx-auto">
+          <p class="text-lg text-gray-300 leading-relaxed">
+            What sets us apart isn't just our commitment to safety—it's the people behind the wheel and behind the scenes. Our drivers, dispatchers, and support staff are united by a shared purpose: to serve our community with integrity, professionalism, and care.
+          </p>
+          
+          <p class="text-lg text-gray-300 leading-relaxed">
+            We set our highest goal to hire only the safest and most trusted individuals, so that every ride home feels personal, secure, and reliable. With Chasers, you're not relying on a faceless app—you're trusting a real person, with a real commitment to getting you and your vehicle home safely.
+          </p>
+          
+          <p class="text-lg text-gray-300 leading-relaxed">
+            We believe that when one of us succeeds, we all succeed. That's why our culture is rooted in teamwork and service—both to our members and to one another. Together, we make sure every client gets home safely, and every experience reflects the standard of excellence Chasers is known for.
           </p>
         </div>
         
-        <!-- Team Member 3 -->
-        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 text-center animate-on-scroll">
-          <div class="w-24 h-24 bg-gradient-to-r from-[#c69214] to-[#b8841c] rounded-full mx-auto mb-6 flex items-center justify-center">
-            <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2 font-serif">Support Team</h3>
-          <p class="text-[#c69214] font-medium mb-4">24/7 Customer Service</p>
-          <p class="text-gray-300 text-sm leading-relaxed">
-            Our dedicated support team is available around the clock to handle bookings, special requests, and ensure every aspect of your experience exceeds expectations.
+        <div class="mt-12 text-center">
+          <p class="text-2xl font-bold text-[#c69214] font-serif">
+            One mission. One team. One call at a time.
           </p>
         </div>
       </div>
@@ -145,11 +139,17 @@ import Navigation from '../components/Navigation.astro';
                 class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-[#c69214] focus:ring-1 focus:ring-[#c69214] focus:outline-none transition-colors"
               >
                 <option value="">Select service type</option>
-                <option value="individual">Individual Premiere</option>
-                <option value="joint">Joint Premiere</option>
-                <option value="family">Friends & Family Premiere</option>
-                <option value="corporate">Corporate Premiere</option>
-                <option value="one-time">One-time Service</option>
+                <option value="standard-individual">Standard Individual ($59.99/month)</option>
+                <option value="individual">Individual Premier ($89.99/month)</option>
+                <option value="joint">Joint Plan ($89.99/month)</option>
+                <option value="joint-premier">Joint Premier ($149.99/month)</option>
+                <option value="family">Friends & Family ($249.99/month)</option>
+                <option value="business">Business Plan ($599.99/month)</option>
+                <option value="business-premier">Business Premier ($699.99/month)</option>
+                <option value="chauffeur">Chauffeur Services</option>
+                <option value="luxury-transport">Luxury Transportation</option>
+                <option value="car-concierge">Car Concierge Services</option>
+                <option value="gift-membership">Gift Membership</option>
                 <option value="other">Other Inquiry</option>
               </select>
             </div>
@@ -208,10 +208,12 @@ import Navigation from '../components/Navigation.astro';
                 </div>
                 <div>
                   <h3 class="text-lg font-semibold text-white mb-1">Email</h3>
-                  <p class="text-gray-300">Professional consultation available</p>
-                  <a href="mailto:rocky@chasersdd.com" class="text-[#c69214] hover:text-[#b8841c] font-medium">
-                    rocky@chasersdd.com
-                  </a>
+                  <p class="text-gray-300">Multiple departments for specialized service</p>
+                  <div class="space-y-1">
+                    <a href="mailto:memberships@chasersdd.com" class="text-[#c69214] hover:text-[#b8841c] font-medium block">memberships@chasersdd.com</a>
+                    <a href="mailto:drivers@chasersdd.com" class="text-[#c69214] hover:text-[#b8841c] font-medium block">drivers@chasersdd.com</a>
+                    <a href="mailto:carconcierge@chasersdd.com" class="text-[#c69214] hover:text-[#b8841c] font-medium block">carconcierge@chasersdd.com</a>
+                  </div>
                 </div>
               </div>
 

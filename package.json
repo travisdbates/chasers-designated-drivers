@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^9.3.3",
     "@astrojs/react": "^4.3.0",
     "@astrojs/sitemap": "^3.4.1",
     "@astrojs/tailwind": "^6.0.2",
@@ -17,6 +18,8 @@
     "astro": "^5.10.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwindcss": "^3.4.17"
+    "resend": "^4.7.0",
+    "tailwindcss": "^3.4.17",
+    "twilio": "^5.8.0"
   }
 }

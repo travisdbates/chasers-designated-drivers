@@ -4,117 +4,160 @@ import Navigation from '../components/Navigation.astro';
 
 const membershipPlans = [
   {
-    id: 'individual',
-    name: 'Individual Premiere',
-    description: 'We drive you home in your own vehicle',
-    price: '$89',
-    priceSubtext: '/month - Often cheaper than taxi',
+    id: 'standard-individual',
+    name: 'Standard Individual',
+    description: 'Safe, on-demand transportation home',
+    price: '$59.99',
+    priceSubtext: '/month + $40 trip fee per ride',
     features: [
-      'We drive your own car home',
-      'Unmarked vehicles (discrete service)',
-      '3PM - 3AM availability', 
-      'Professional, licensed drivers',
-      'Greater Phoenix Area coverage',
-      'No embarrassing pickup'
+      'Unlimited ride requests',
+      '$40 trip fee per ride (plus gratuity)',
+      'Covers the member only',
+      '3PM - 3AM availability, 7 days a week',
+      'Service available outside normal hours (by appointment)',
+      'Pay by cash or charge to account',
+      '3-month minimum commitment'
     ],
     popular: false,
-    ctaText: 'Join Individual Plan',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
+    ctaText: 'Join Standard Plan',
+    ctaUrl: '/checkout/individual'
+  },
+  {
+    id: 'individual',
+    name: 'Individual Premier',
+    description: 'Added flexibility and perks for frequent riders',
+    price: '$89.99',
+    priceSubtext: '/month + $40 trip fee per ride',
+    features: [
+      'Everything in Standard Plan, plus:',
+      'Ability to request driver for friend/client (must be present)',
+      'Unlimited ride requests',
+      'Covers you alone',
+      '3PM - 3AM availability, 7 days a week',
+      'Service available outside normal hours (by appointment)',
+      'Pay by cash or charge to account'
+    ],
+    popular: true,
+    ctaText: 'Join Premier Plan',
+    ctaUrl: '/checkout/individual'
   },
   {
     id: 'joint',
-    name: 'Joint Premiere',
-    description: 'Shared premium service for couples',
-    price: '$149',
-    priceSubtext: '/month - Best value for two people',
+    name: 'Joint Plan',
+    description: 'Reliable transportation for two people',
+    price: '$89.99',
+    priceSubtext: '/month + $40 trip fee per ride',
     features: [
-      'Service for two individuals',
-      'Both get home in own vehicles',
-      'Shared membership benefits',
-      'Priority scheduling',
-      'Owner-operated service',
-      'Phoenix local expertise'
+      'Unlimited ride requests',
+      '$40 trip fee per ride (plus gratuity)',
+      'Covers member and one additional person',
+      '3PM - 3AM availability, 7 days a week',
+      'Service available outside normal hours (by appointment)',
+      'Pay by cash or charge to account',
+      '3-month minimum commitment'
     ],
-    popular: true,
+    popular: false,
     ctaText: 'Join Joint Plan',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
+    ctaUrl: '/checkout/joint'
+  },
+  {
+    id: 'joint-premier',
+    name: 'Joint Premier',
+    description: 'Enhanced flexibility and premium access for couples',
+    price: '$149.99',
+    priceSubtext: '/month + $40 trip fee per ride',
+    features: [
+      'Everything in Joint Plan, plus:',
+      'Ability to request driver for friend/client (one registered member must be present)',
+      'Unlimited ride requests',
+      'Covers member and one additional person',
+      '3PM - 3AM availability, 7 days a week',
+      'Service available outside normal hours (by appointment)',
+      'Pay by cash or charge to account'
+    ],
+    popular: false,
+    ctaText: 'Join Joint Premier',
+    ctaUrl: '/checkout/joint'
   },
   {
     id: 'family',
-    name: 'Friends & Family Premiere',
-    description: 'Premium service for your inner circle',
-    price: '$249',
-    priceSubtext: '/month - Up to 6 members included',
+    name: 'Friends & Family',
+    description: 'Perfect for up to 4 individuals in households or groups',
+    price: '$249.99',
+    priceSubtext: '/month + $40 trip fee per ride',
     features: [
-      'Service for up to 6 members',
-      'Everyone gets home in own cars',
-      'Group event coordination',
-      'Shared membership value',
-      'Professional discrete service',
-      'Community safety focus'
+      'Unlimited ride requests',
+      '$40 trip fee per ride (plus gratuity)',
+      'Covers up to 4 approved adult drivers',
+      '3PM - 3AM availability, 7 days a week',
+      'Service available outside normal hours (by appointment)',
+      'Pay by cash or charge to account',
+      'Only approved drivers may use the plan'
     ],
     popular: false,
     ctaText: 'Join Family Plan',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
-  },
-  {
-    id: 'corporate',
-    name: 'Corporate Premiere',
-    description: 'Professional business transportation',
-    price: '$399',
-    priceSubtext: '/month - Multi-employee coverage',
-    features: [
-      'Multi-employee coverage',
-      'Executive-level discrete service',
-      'Business event coordination',
-      'Reduces company liability',
-      'Professional representation',
-      'Arizona local expertise'
-    ],
-    popular: false,
-    ctaText: 'Join Corporate Plan',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
+    ctaUrl: '/checkout/family'
   },
   {
     id: 'business',
-    name: 'Bar/Restaurant Partnership',
-    description: 'Partner with us to offer your customers safe rides',
-    price: 'Custom',
-    priceSubtext: 'Revenue share model available',
+    name: 'Business Plan',
+    description: 'Safe transportation for business staff and team members',
+    price: '$599.99',
+    priceSubtext: '/month + $40 trip fee per ride',
     features: [
-      'Customer service integration',
-      'Branded partnership opportunity',
-      'Liability reduction for business',
-      'Customer retention benefits',
-      'Professional service standards',
-      'Local Phoenix market focus'
+      'Covers up to 10 approved individuals',
+      'Unlimited ride requests',
+      '$40 trip fee per ride (plus gratuity)',
+      'Car Retrieval services (get vehicle from A to B)',
+      'Chauffeur in your vehicles service',
+      '3PM - 3AM availability, 7 days a week',
+      'Pay by cash, card, or charge to company account'
     ],
     popular: false,
-    ctaText: 'Partner With Us',
-    ctaUrl: '#' // To be replaced with AcceptBlue URL
+    ctaText: 'Join Business Plan',
+    ctaUrl: '/checkout/business'
+  },
+  {
+    id: 'business-premier',
+    name: 'Business Premier',
+    description: 'Flexibility to serve employees, clients and out-of-town guests',
+    price: '$699.99',
+    priceSubtext: '/month + $40 trip fee per ride',
+    features: [
+      'Everything in Business Plan, plus:',
+      'Covers up to 10 approved individuals + unlimited client requests',
+      'Ability to request rides for clients and guests',
+      'No need for clients to be on approved list',
+      '3PM - 3AM availability, 7 days a week',
+      'Service available outside normal hours (by appointment)',
+      'Pay by cash, card, or charge to company account'
+    ],
+    popular: false,
+    ctaText: 'Join Business Premier',
+    ctaUrl: '/checkout/business'
   }
 ];
 
 const serviceAddOns = [
   {
-    name: 'Airport Transportation',
-    description: 'Get to/from Sky Harbor in your own vehicle',
-    icon: '✈️'
-  },
-  {
-    name: 'Car Retrieval Service',
-    description: 'We\'ll get your car from where you left it',
+    name: 'Car Concierge Services',
+    description: 'Car retrieval, fuel fill-ups, washes, maintenance appointments',
     icon: '🚗'
   },
   {
-    name: 'Chauffeur Services',
-    description: 'Professional driver for special occasions',
+    name: 'Chauffeur in Your Car',
+    description: 'Professional driver in your own vehicle ($40/hr members, $60/hr non-members)',
     icon: '🤵'
   },
   {
-    name: 'Professional Coverage',
-    description: 'Phoenix, Scottsdale, Paradise Valley area',
-    icon: '📍'
+    name: 'Luxury Transportation',
+    description: 'SUV, Sprinter Van, airport transfers and concierge services',
+    icon: '✈️'
+  },
+  {
+    name: 'Gift Memberships',
+    description: 'Give the gift of safe transportation to someone you care about',
+    icon: '🎁'
   }
 ];
 ---
@@ -140,7 +183,7 @@ const serviceAddOns = [
         </p>
         <div class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-6 max-w-2xl mx-auto">
           <p class="text-lg text-[#c69214] font-semibold mb-2">Service Hours: 3PM - 3AM Daily</p>
-          <p class="text-gray-300">Greater Phoenix Area | Call (480) 695-3659</p>
+          <p class="text-gray-300">Greater Phoenix Area | Call (480) 695-3659 | memberships@chasersdd.com</p>
         </div>
       </div>
     </section>
@@ -185,8 +228,6 @@ const serviceAddOns = [
 
               <a 
                 href={plan.ctaUrl}
-                target="_blank"
-                rel="noopener noreferrer" 
                 class={`block w-full text-center py-4 px-6 rounded-xl font-bold transition-all duration-300 ${
                   plan.popular
                     ? 'bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black hover:from-[#b8841c] hover:to-[#a67619] transform hover:scale-105'
@@ -216,7 +257,7 @@ const serviceAddOns = [
             Premium <span class="text-[#c69214]">Add-ons</span>
           </h2>
           <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-            Enhance your membership with our exclusive service upgrades
+            Additional services available to all members
           </p>
         </div>
 
