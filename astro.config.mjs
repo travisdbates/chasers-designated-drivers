@@ -7,13 +7,13 @@ import node from '@astrojs/node';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://chasersdd.com',
-  output: 'server', // Enable server-side rendering for dynamic pages
-  adapter: node({
-    mode: 'standalone'
-  }),
+  output: 'static', // Static generation for hosting
+  // adapter: node({
+  //   mode: 'standalone'
+  // }),
   integrations: [react(), tailwind()],
   server: {
     host: true,
-    port: 4322
+    port: 4321
   }
 });
