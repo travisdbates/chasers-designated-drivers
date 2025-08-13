@@ -1,7 +1,5 @@
 import type { APIRoute } from 'astro';
 
-export const prerender = false;
-
 // MiCamp tokenization API configuration
 const TOKENIZATION_API_KEY = import.meta.env.PUBLIC_ACCEPTBLUE_TOKENIZATION_KEY || process.env.PUBLIC_ACCEPTBLUE_TOKENIZATION_KEY;
 const MICAMP_API_BASE = 'https://api.sandbox.micampblue.com/api/v2';

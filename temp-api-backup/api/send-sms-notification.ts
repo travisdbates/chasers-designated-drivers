@@ -2,8 +2,6 @@ import type { APIRoute } from 'astro';
 import { Twilio } from 'twilio';
 import { getCurrentNotificationSettings, isNotificationEnabled } from './manage-notification-settings.js';
 
-// Ensure this API route is server-rendered
-export const prerender = false;
 
 // Twilio configuration
 const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;

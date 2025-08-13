@@ -1,7 +1,5 @@
 import type { APIRoute } from 'astro';
 
-// Ensure this API route is server-rendered
-export const prerender = false;
 
 // Notification settings management
 // In production, these should be stored in a database

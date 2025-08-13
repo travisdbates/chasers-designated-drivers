@@ -2,8 +2,6 @@ import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 import { getCurrentNotificationSettings, isNotificationEnabled } from './manage-notification-settings.js';
 
-// Ensure this API route is server-rendered
-export const prerender = false;
 
 // Resend configuration
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
