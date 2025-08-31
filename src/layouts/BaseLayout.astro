@@ -43,9 +43,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImage} />
     
-    <!-- Preload critical fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Louize Display Fonts -->
+    <script src="https://c.webfontfree.com/c.js?f=LouizeDisplay" type="text/javascript"></script>
+    
+    <!-- Overpass for UI elements -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Title -->
     <title>{title}</title>
@@ -54,7 +58,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
     <style>
       /* Critical CSS for above-the-fold content */
       html {
-        font-family: 'Overpass', system-ui, sans-serif;
+        font-family: 'LouizeDisplay', 'Louize Display', 'Playfair Display', Georgia, serif;
       }
       
       body {
@@ -162,6 +166,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
       document.addEventListener('DOMContentLoaded', () => {
         const animatedElements = document.querySelectorAll('.animate-on-scroll');
         animatedElements.forEach(el => observer.observe(el));
+        
+        // Ensure Louize Display fonts are applied after loading
+        setTimeout(() => {
+          document.body.style.fontFamily = "'LouizeDisplay', 'Louize Display', 'Overpass', 'Inter', sans-serif";
+          document.body.style.fontWeight = "300";
+          
+          // Apply Overpass to headings
+          const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .heading-display, .heading-hero, .heading-section, .heading-sub');
+          headings.forEach(heading => {
+            heading.style.fontFamily = "'Overpass', 'Inter', 'Arial', sans-serif";
+          });
+          
+          // Apply Overpass to buttons and navigation
+          const uiElements = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-ghost, .nav-link, button, .btn');
+          uiElements.forEach(element => {
+            element.style.fontFamily = "'Overpass', 'Inter', 'Arial', sans-serif";
+          });
+        }, 1000); // Wait 1 second for fonts to load
       });
     </script>
     

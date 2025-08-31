@@ -1,5 +1,5 @@
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Overpass:wght@400;600;700;800;900&display=swap');
+/* Import Louize Display fonts */
+/* Fonts are loaded via JavaScript from webfontfree.com */
 
 /* Tailwind CSS imports */
 @tailwind base;
@@ -13,11 +13,18 @@
   }
   
   body {
-    @apply bg-white text-gray-900 font-secondary antialiased;
+    @apply bg-white font-secondary antialiased;
+    color: #2d2d2d; /* WorldClass dark text color */
     overflow-x: hidden;
+    /* Use thinner Louize Display for body */
+    font-family: 'LouizeDisplay', 'Louize Display', 'Overpass', 'Inter', sans-serif;
+    font-weight: 300; /* Thinner weight */
+    /* WorldClass font smoothing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Heading styles */
+  /* Heading styles - Overpass with appropriate weights */
   .heading-display {
     @apply font-primary font-bold text-display leading-tight tracking-tight;
   }
@@ -34,13 +41,22 @@
     @apply font-primary font-medium text-subheading leading-tight;
   }
 
-  /* Body text styles */
+  /* Body text styles - Updated for WorldClass consistency */
   .text-body {
-    @apply font-secondary text-lg leading-relaxed text-gray-600;
+    @apply font-secondary text-lg leading-relaxed;
+    color: #2d2d2d;
   }
   
   .text-body-small {
-    @apply font-secondary text-base leading-relaxed text-gray-500;
+    @apply font-secondary text-base leading-relaxed;
+    color: #2d2d2d;
+  }
+  
+  /* WorldClass text selection styling */
+  ::selection {
+    background: #d1c9b8;
+    color: #2d2d2d;
+    text-shadow: none;
   }
 
   /* Gold accent text */
@@ -58,17 +74,17 @@
 
 /* Custom component styles */
 @layer components {
-  /* Button styles */
+  /* Button styles - Using Overpass font */
   .btn-primary {
-    @apply bg-gold-primary hover:bg-gold-light text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-gold uppercase tracking-wide;
+    @apply bg-gold-primary hover:bg-gold-light text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-gold uppercase tracking-wide font-accent;
   }
   
   .btn-secondary {
-    @apply bg-transparent hover:bg-gold-primary text-gold-primary hover:text-white border-2 border-gold-primary font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out;
+    @apply bg-transparent hover:bg-gold-primary text-gold-primary hover:text-white border-2 border-gold-primary font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out font-accent;
   }
   
   .btn-ghost {
-    @apply bg-transparent hover:bg-gray-100 text-gray-700 font-medium py-3 px-6 rounded-lg transition-all duration-300 ease-in-out;
+    @apply bg-transparent hover:bg-cream-100 text-gray-700 font-medium py-3 px-6 rounded-lg transition-all duration-300 ease-in-out font-accent;
   }
 
   /* Card styles */
@@ -81,7 +97,7 @@
   }
   
   .card-pricing.featured {
-    @apply border-gold-primary bg-gradient-to-br from-white to-gray-50;
+    @apply border-gold-primary bg-gradient-to-br from-cream-50 to-cream-100;
   }
   
   .card-pricing.featured::before {
@@ -91,7 +107,7 @@
 
   /* Navigation styles */
   .nav-contact {
-    @apply bg-gray-50 border-b border-gray-200 py-2;
+    @apply border-b border-cream-200 py-2 px-4;
   }
   
   .nav-main {
@@ -99,7 +115,7 @@
   }
   
   .nav-link {
-    @apply text-gray-600 hover:text-gold-primary font-medium transition-colors duration-200 relative;
+    @apply text-gray-600 hover:text-gold-primary font-medium transition-colors duration-200 relative font-accent;
   }
   
   .nav-link::after {
@@ -143,11 +159,11 @@
 
   /* Section styles */
   .section-padding {
-    @apply py-section px-4 sm:px-6 lg:px-8;
+    @apply py-section px-2 sm:px-3 lg:px-4;
   }
   
   .container-center {
-    @apply max-w-7xl mx-auto;
+    @apply max-w-screen-2xl mx-auto px-2 sm:px-3 lg:px-4;
   }
   
   .section-header {
@@ -171,6 +187,10 @@
   
   .bg-hero-gradient {
     background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(198,146,20,0.1));
+  }
+  
+  .bg-cream-gradient {
+    background: linear-gradient(135deg, rgba(209,201,184,0.1), rgba(209,201,184,0.05));
   }
   
   .hover-lift {

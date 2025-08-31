@@ -3,8 +3,8 @@
 ---
 
 <!-- Contact Info Bar -->
-<div class="nav-contact">
-  <div class="container-center px-4 md:px-8">
+<div class="nav-contact bg-cream-50">
+  <div class="container-center !px-4">
     <!-- Desktop Layout -->
     <div class="hidden md:flex justify-between items-center text-sm text-gray-600">
       <!-- Contact Information -->
@@ -23,28 +23,6 @@
           </svg>
           <span>memberships@chasersdd.com</span>
         </a>
-        
-        <div class="flex items-center space-x-2 text-gray-600">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-          </svg>
-          <span>3PM - 3AM Daily</span>
-        </div>
-        
-        <div class="flex items-center space-x-2 text-gray-600">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-          </svg>
-          <span>Greater Phoenix</span>
-        </div>
-        
-        <div class="flex items-center space-x-2 text-gray-600">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
-            <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-.293-.707L15 4.586A1 1 0 0014.414 4H14v3z"/>
-          </svg>
-          <span>We Drive Your Car</span>
-        </div>
       </div>
       
       <!-- Social Links -->
@@ -64,7 +42,7 @@
     </div>
     
     <!-- Mobile Layout - Side by Side -->
-    <div class="md:hidden flex justify-between items-center py-2 px-4 text-xs text-gray-600">
+    <div class="md:hidden flex justify-between items-center py-2 text-xs text-gray-600">
       <!-- Phone Number -->
       <a href="tel:+14806953659" class="flex items-center space-x-2 hover:text-gold-primary transition-colors">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -89,16 +67,16 @@
 
 <!-- Main Navigation -->
 <nav class="nav-main">
-  <div class="container-center px-4 md:px-8">
+  <div class="container-center">
     <div class="flex items-center justify-between py-4">
       <!-- Logo -->
       <div class="flex items-center">
         <a href="/" class="flex items-center">
           <!-- Logo -->
           <img 
-            src="/images/Chasers Logo Black.png" 
+            src="/images/Chasers Logo DD Black.png" 
             alt="Chasers Designated Drivers" 
-            class="h-12 w-auto block hover:opacity-90 transition-opacity duration-300 ml-4"
+            class="h-12 w-auto block hover:opacity-90 transition-opacity duration-300 ml-4 mr-8"
           />
         </a>
       </div>
@@ -186,7 +164,7 @@
   <!-- Dropdown Menus (inside nav for proper positioning) -->
   <!-- OUR PLANS Dropdown -->
   <div id="dropdown-plans" class="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-200 opacity-0 invisible transition-all duration-300 z-40">
-    <div class="container-center py-8 px-4 md:px-8">
+    <div class="container-center py-8">
       <div class="flex justify-center space-x-4 md:space-x-8">
         <!-- Individual Plan -->
         <a href="/checkout/individual" class="group/item block rounded-lg transition-all duration-300 w-56 h-56 relative overflow-hidden">
@@ -285,10 +263,10 @@
 
   <!-- OUR STORY Dropdown -->
   <div id="dropdown-story" class="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-200 opacity-0 invisible transition-all duration-300 z-40">
-    <div class="container-center py-8 px-4 md:px-8">
+    <div class="container-center py-8">
       <div class="flex justify-center space-x-4 md:space-x-8">
         <!-- About Us -->
-        <a href="/about#company" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
+        <a href="/about#company" class="group/item block bg-cream-100 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border border-cream-200 hover:border-gold-primary flex-1 max-w-xs">
           <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -299,7 +277,7 @@
         </a>
         
         <!-- History -->
-        <a href="/about#history" class="group/item block bg-gray-50 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary flex-1 max-w-xs">
+        <a href="/about#history" class="group/item block bg-cream-100 hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border border-cream-200 hover:border-gold-primary flex-1 max-w-xs">
           <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/>
