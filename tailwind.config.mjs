@@ -4,7 +4,7 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				// Primary Gold Palette
+				// Primary Gold Palette - Updated to match WorldClass
 				gold: {
 					primary: '#c69214',
 					light: '#d4a629',
@@ -20,9 +20,26 @@ export default {
 					800: '#78350f',
 					900: '#451a03',
 				},
-				// Dark Luxury Theme
+				// WorldClass Cream/Off-White Palette
+				cream: {
+					primary: '#d1c9b8',
+					light: '#e0dac9',
+					dark: '#c2b8a7',
+					50: '#f7f5f1',
+					100: '#f0ece3',
+					200: '#e7e0d4',
+					300: '#ddd3c3',
+					400: '#d1c9b8',
+					500: '#c2b8a7',
+					600: '#a89e8d',
+					700: '#8e8373',
+					800: '#6d635a',
+					900: '#4a4340',
+				},
+				// Dark Luxury Theme - Updated with WorldClass dark text
 				dark: {
 					primary: '#000000',
+					text: '#2d2d2d', // WorldClass dark text color
 					900: '#0f0f0f',
 					800: '#1a1a1a',
 					700: '#2d2d2d',
@@ -35,12 +52,12 @@ export default {
 				}
 			},
 			fontFamily: {
-				// Primary: Elegant serif for headlines
-				primary: ['Playfair Display', 'Georgia', 'serif'],
-				// Secondary: Clean sans-serif for body text
-				secondary: ['Overpass', 'Inter', 'sans-serif'],
-				// Accent: Modern sans for UI elements
-				accent: ['Poppins', 'Arial', 'sans-serif'],
+				// Primary: Overpass for headers
+				primary: ['Overpass', 'Inter', 'Arial', 'sans-serif'],
+				// Secondary: Louize Display for body text
+				secondary: ['LouizeDisplay', 'Louize Display', 'Overpass', 'Inter', 'sans-serif'],
+				// Accent: Overpass for buttons, CTAs, navigation
+				accent: ['Overpass', 'Inter', 'Arial', 'sans-serif'],
 			},
 			fontSize: {
 				// Custom typography scale
