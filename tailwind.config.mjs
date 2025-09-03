@@ -49,7 +49,9 @@ export default {
 					300: '#d1d1d1',
 					200: '#e5e5e5',
 					100: '#f5f5f5',
-				}
+				},
+				// Custom off-white color
+				'off-white': '#fdfbf4',
 			},
 			fontFamily: {
 				// Primary: Overpass for headers

@@ -29,7 +29,7 @@ Luxury designated driver service inspired by WorldClass.com's sophisticated aest
 --gray-600: #404040       /* Border/subtle elements */
 --gray-400: #a1a1a1       /* Secondary text */
 --gray-300: #d1d1d1       /* Light text */
---white: #ffffff          /* Primary text/highlights */
+--white: #fdfbf4          /* Primary text/highlights - off-white */
 ```
 
 ### Accent Colors

@@ -13,7 +13,8 @@
   }
   
   body {
-    @apply bg-white font-secondary antialiased;
+    background-color: #fdfbf4; /* Custom off-white background */
+    @apply font-secondary antialiased;
     color: #2d2d2d; /* WorldClass dark text color */
     overflow-x: hidden;
     /* Use thinner Louize Display for body */
@@ -89,7 +90,7 @@
 
   /* Card styles */
   .card-luxury {
-    @apply bg-white border border-gray-200 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gold-primary/50;
+    @apply bg-off-white border border-off-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gold-primary/50;
   }
   
   .card-pricing {
@@ -107,11 +108,11 @@
 
   /* Navigation styles */
   .nav-contact {
-    @apply border-b border-cream-200 py-2 px-4;
+    @apply border-b border-off-white py-2 px-4;
   }
   
   .nav-main {
-    @apply bg-white/95 backdrop-blur-luxury sticky top-0 z-50 border-b border-gray-200 shadow-sm;
+    @apply bg-off-white/95 backdrop-blur-luxury sticky top-0 z-50 border-b border-off-white shadow-sm;
   }
   
   .nav-link {
@@ -146,7 +147,7 @@
 
   /* Form styles */
   .form-input {
-    @apply bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/20 focus:outline-none transition-all duration-200;
+    @apply bg-off-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/20 focus:outline-none transition-all duration-200;
   }
   
   .form-textarea {
@@ -245,5 +246,5 @@ html {
 
 /* Focus styles for accessibility */
 .focus-visible {
-  @apply outline-none ring-2 ring-gold-primary ring-offset-2 ring-offset-white;
+  @apply outline-none ring-2 ring-gold-primary ring-offset-2 ring-offset-off-white;
 }
