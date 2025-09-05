@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import MembershipCheckout from '../../components/MembershipCheckout.astro';
+import SecurePaymentForm from '../../components/SecurePaymentForm.astro';
 
 const selectedPlan = {
   id: 'individual',
@@ -42,11 +43,14 @@ const selectedPlan = {
         </p>
       </div>
 
-      <!-- Checkout Component -->
-      <MembershipCheckout 
-        plan={selectedPlan} 
-        onBack="goBackToMembership"
-      />
+      <!-- New Secure Checkout Component -->
+      <div class="max-w-4xl mx-auto">
+        <SecurePaymentForm 
+          planId={selectedPlan.id}
+          plan={selectedPlan} 
+          onBack="goBackToMembership"
+        />
+      </div>
     </div>
   </main>
 </BaseLayout>
