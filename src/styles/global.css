@@ -91,6 +91,18 @@
   .btn-outline {
     @apply bg-transparent hover:bg-gold-primary text-gold-primary hover:text-white border-2 border-gold-primary font-semibold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out font-accent text-center;
   }
+  
+  .btn-disabled {
+    @apply bg-gray-400 text-gray-600 border-2 border-gray-400 font-semibold py-4 px-8 rounded-lg cursor-not-allowed opacity-75 font-accent relative;
+  }
+  
+  .btn-disabled:hover .tooltip {
+    @apply visible opacity-100;
+  }
+  
+  .tooltip {
+    @apply invisible opacity-0 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 text-white text-sm rounded-lg whitespace-nowrap transition-all duration-200 z-10;
+  }
 
   /* Card styles */
   .card-luxury {
