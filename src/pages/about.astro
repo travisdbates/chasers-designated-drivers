@@ -281,11 +281,12 @@ const companyStats = [
           Join our exclusive membership today.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a 
-            href="/membership" 
-            class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-8 py-4 rounded-xl font-bold hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 transform hover:scale-105"
-          >
+          <div class="relative bg-gray-400 text-gray-600 px-8 py-4 rounded-xl font-bold cursor-not-allowed opacity-75 group">
             View Memberships
+            <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap z-10">
+              Please call (480) 695-3659 to sign up
+            </div>
+          </div>
           </a>
           <a 
             href="/contact" 

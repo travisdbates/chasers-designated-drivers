@@ -169,9 +169,12 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
           <p className="text-xl text-dark-300 mb-8">
             Professional designated driver service
           </p>
-          <a href="/membership" className="btn-primary">
+          <div className="relative btn-primary cursor-not-allowed opacity-75 bg-gray-400 text-gray-600 group">
             Join Now
-          </a>
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap z-10">
+              Please call (480) 695-3659 to sign up
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -252,12 +255,12 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
             
             {/* CTA Buttons - Always show the same buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-slide-up">
-              <a 
-                href="/membership" 
-                className="btn-primary text-lg px-8 py-4"
-              >
+              <div className="relative btn-primary text-lg px-8 py-4 cursor-not-allowed opacity-75 bg-gray-400 text-gray-600 group">
                 View Membership Plans
-              </a>
+                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap z-10">
+                  Please call (480) 695-3659 to sign up
+                </div>
+              </div>
               
               <a 
                 href="/how-it-works" 
