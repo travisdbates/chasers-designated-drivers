@@ -188,7 +188,7 @@ const serviceAddOns = [
       <div class="max-w-7xl mx-auto">
         <div class="flex flex-wrap justify-center gap-6 lg:gap-8">
           {membershipPlans.map((plan) => (
-            <div class={`relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 lg:p-8 border transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col w-full max-w-sm ${
+            <div id={plan.id} class={`relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 lg:p-8 border transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col w-full max-w-sm ${
               plan.popular 
                 ? 'border-[#c69214] shadow-lg shadow-[#c69214]/20' 
                 : 'border-gray-700 hover:border-[#c69214]/50'
