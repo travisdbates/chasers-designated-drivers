@@ -1,60 +1,66 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
-import HeroVideoCarousel from '../components/HeroVideoCarousel.tsx';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
+import HeroVideoCarousel from "../components/HeroVideoCarousel.tsx";
 
 // Hero video slides data
 const heroSlides = [
   {
-    id: 'luxury-interior',
-    src: '/videos/optimized/luxury-interior-hq.mp4',
-    srcMobile: '/videos/optimized/luxury-interior-lq.mp4',
-    poster: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDAwMDA7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMmQyZDJkO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZ3JhZCkiLz48L3N2Zz4=',
-    title: 'Luxury Designated Drivers',
-    subtitle: 'We drive you home in your own vehicle. Experience premium, discreet transportation with professional drivers.',
+    id: "luxury-interior",
+    src: "/videos/optimized/luxury-interior-hq.mp4",
+    srcMobile: "/videos/optimized/luxury-interior-lq.mp4",
+    poster:
+      "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDAwMDA7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMmQyZDJkO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZ3JhZCkiLz48L3N2Zz4=",
+    title: "Luxury Designated Drivers",
+    subtitle:
+      "We drive you home in your own vehicle. Experience premium, discreet transportation with professional drivers.",
     cta: {
-      text: 'View Membership Plans',
-      href: '/membership'
-    }
+      text: "View Membership Plans",
+      href: "/membership",
+    },
   },
   {
-    id: 'professional-driver',
-    src: '/videos/optimized/professional-driver-hq.mp4',
-    srcMobile: '/videos/optimized/professional-driver-lq.mp4',
-    poster: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTFhMWE7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNDA0MDQwO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZ3JhZCkiLz48L3N2Zz4=',
-    title: 'Professional Excellence',
-    subtitle: 'Our licensed, insured drivers provide unmatched service for your most important occasions.',
+    id: "professional-driver",
+    src: "/videos/optimized/professional-driver-hq.mp4",
+    srcMobile: "/videos/optimized/professional-driver-lq.mp4",
+    poster:
+      "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTFhMWE7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNDA0MDQwO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZ3JhZCkiLz48L3N2Zz4=",
+    title: "Professional Excellence",
+    subtitle:
+      "Our licensed, insured drivers provide unmatched service for your most important occasions.",
     cta: {
-      text: 'Learn More',
-      href: '/how-it-works'
-    }
+      text: "Learn More",
+      href: "/how-it-works",
+    },
   },
   {
-    id: 'nightlife-scene',
-    src: '/videos/optimized/nightlife-scene-hq.mp4',
-    srcMobile: '/videos/optimized/nightlife-scene-lq.mp4',
-    poster: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0MDQwNDA7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNjA2MDYwO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZ3JhZCkiLz48L3N2Zz4=', 
-    title: 'Elevate Your Night Out',
-    subtitle: 'From fine dining to exclusive venues, we ensure your evening is memorable for all the right reasons.',
+    id: "nightlife-scene",
+    src: "/videos/optimized/nightlife-scene-hq.mp4",
+    srcMobile: "/videos/optimized/nightlife-scene-lq.mp4",
+    poster:
+      "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0MDQwNDA7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNjA2MDYwO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZ3JhZCkiLz48L3N2Zz4=",
+    title: "Elevate Your Night Out",
+    subtitle:
+      "From fine dining to exclusive venues, we ensure your evening is memorable for all the right reasons.",
     cta: {
-      text: 'Join Today',
-      href: '/membership'
-    }
-  }
+      text: "Join Today",
+      href: "/membership",
+    },
+  },
 ];
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Chasers DD - Luxury Designated Driver Service"
   description="Premium designated driver service offering professional, reliable transportation. Licensed drivers, luxury vehicles, 24/7 availability in Arizona."
   keywords="designated driver, luxury transportation, professional chauffeur, Arizona, safe ride, premium service"
 >
   <!-- Navigation -->
   <Navigation />
-  
+
   <!-- Hero Video Carousel -->
   <HeroVideoCarousel slides={heroSlides} client:load />
-  
+
   <!-- Services Overview Section -->
   <section class="section-padding bg-dark-800">
     <div class="container-center">
@@ -63,54 +69,87 @@ const heroSlides = [
           Why Choose <span class="text-gold-gradient">Chasers DD</span>?
         </h2>
         <p class="text-body max-w-3xl mx-auto text-gray-300">
-          We provide more than just transportation – we deliver peace of mind, luxury, and professionalism 
-          that elevates every occasion.
+          We provide more than just transportation – we deliver peace of mind,
+          luxury, and professionalism that elevates every occasion.
         </p>
       </div>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Professional Drivers -->
         <div class="card-luxury animate-on-scroll">
-          <div class="w-16 h-16 bg-gold-gradient rounded-xl flex items-center justify-center mb-6">
-            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          <div
+            class="w-16 h-16 bg-gold-gradient rounded-xl flex items-center justify-center mb-6"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+              ></path>
             </svg>
           </div>
-          <h3 class="text-xl font-primary font-semibold text-white mb-4">Professional Drivers</h3>
+          <h3 class="text-xl font-primary font-semibold text-white mb-4">
+            Professional Drivers
+          </h3>
           <p class="text-body-small">
-            Licensed, insured, and extensively trained professionals who prioritize your safety and comfort above all else.
+            Licensed, insured, and extensively trained professionals who
+            prioritize your safety and comfort above all else.
           </p>
         </div>
-        
+
         <!-- Luxury Fleet -->
         <div class="card-luxury animate-on-scroll">
-          <div class="w-16 h-16 bg-gold-gradient rounded-xl flex items-center justify-center mb-6">
-            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+          <div
+            class="w-16 h-16 bg-gold-gradient rounded-xl flex items-center justify-center mb-6"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"
+              ></path>
             </svg>
           </div>
-          <h3 class="text-xl font-primary font-semibold text-white mb-4">Luxury Fleet</h3>
+          <h3 class="text-xl font-primary font-semibold text-white mb-4">
+            Luxury Fleet
+          </h3>
           <p class="text-body-small">
-            Premium vehicles maintained to the highest standards, ensuring comfort and style for every journey.
+            Premium vehicles maintained to the highest standards, ensuring
+            comfort and style for every journey.
           </p>
         </div>
-        
+
         <!-- 24/7 Availability -->
         <div class="card-luxury animate-on-scroll">
-          <div class="w-16 h-16 bg-gold-gradient rounded-xl flex items-center justify-center mb-6">
-            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/>
+          <div
+            class="w-16 h-16 bg-gold-gradient rounded-xl flex items-center justify-center mb-6"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"
+              ></path>
             </svg>
           </div>
-          <h3 class="text-xl font-primary font-semibold text-white mb-4">24/7 Availability</h3>
+          <h3 class="text-xl font-primary font-semibold text-white mb-4">
+            24/7 Availability
+          </h3>
           <p class="text-body-small">
-            Round-the-clock service for all your transportation needs, from business meetings to late-night events.
+            Round-the-clock service for all your transportation needs, from
+            business meetings to late-night events.
           </p>
         </div>
       </div>
     </div>
   </section>
-  
+
   <!-- Our Plans Section -->
   <section class="homepage-section bg-off-white">
     <div class="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[500px]">
@@ -119,52 +158,71 @@ const heroSlides = [
         <div class="max-w-xl mx-auto lg:mx-0 lg:pr-8">
           <div class="animate-on-scroll">
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Choose Your Perfect <span class="text-gold-primary">Membership Plan</span>
+              Choose Your Perfect <span class="text-gold-primary"
+                >Membership Plan</span
+              >
             </h2>
             <p class="text-lg text-gray-600 mb-8">
-              From individual coverage to family and business plans, we have flexible membership options 
-              designed to fit your lifestyle and transportation needs.
+              From individual coverage to family and business plans, we have
+              flexible membership options designed to fit your lifestyle and
+              transportation needs.
             </p>
-            
+
             <div class="space-y-4 mb-8">
               <div class="flex items-start space-x-3">
-                <div class="w-5 h-5 bg-gold-primary rounded-full flex-shrink-0 mt-1"></div>
+                <div
+                  class="w-5 h-5 bg-gold-primary rounded-full flex-shrink-0 mt-1"
+                >
+                </div>
                 <div>
-                  <h3 class="font-semibold text-gray-900">Individual & Joint Plans</h3>
+                  <h3 class="font-semibold text-gray-900">
+                    Individual & Joint Plans
+                  </h3>
                   <p class="text-gray-600">Perfect for singles and couples</p>
                 </div>
               </div>
               <div class="flex items-start space-x-3">
-                <div class="w-5 h-5 bg-gold-primary rounded-full flex-shrink-0 mt-1"></div>
+                <div
+                  class="w-5 h-5 bg-gold-primary rounded-full flex-shrink-0 mt-1"
+                >
+                </div>
                 <div>
                   <h3 class="font-semibold text-gray-900">Family Coverage</h3>
                   <p class="text-gray-600">Protect your entire family</p>
                 </div>
               </div>
               <div class="flex items-start space-x-3">
-                <div class="w-5 h-5 bg-gold-primary rounded-full flex-shrink-0 mt-1"></div>
+                <div
+                  class="w-5 h-5 bg-gold-primary rounded-full flex-shrink-0 mt-1"
+                >
+                </div>
                 <div>
-                  <h3 class="font-semibold text-gray-900">Business Solutions</h3>
+                  <h3 class="font-semibold text-gray-900">
+                    Business Solutions
+                  </h3>
                   <p class="text-gray-600">Corporate transportation programs</p>
                 </div>
               </div>
             </div>
-            
-            <a href="/membership" class="btn-primary">
-              View All Plans
-            </a>
+
+            <a href="/membership" class="btn-primary"> View All Plans </a>
           </div>
         </div>
       </div>
-      
+
       <!-- Image -->
-      <div class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative">
-        <img 
-          src="/images/plan.jpg" 
-          alt="Chasers DD Membership Plans" 
+      <div
+        class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative"
+      >
+        <img
+          src="/images/plan.jpg"
+          alt="Chasers DD Membership Plans"
           class="w-full h-full object-cover opacity-80"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+        >
+        </div>
       </div>
     </div>
   </section>
@@ -173,15 +231,20 @@ const heroSlides = [
   <section class="homepage-section bg-gray-50">
     <div class="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[500px]">
       <!-- Image -->
-      <div class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative">
-        <img 
-          src="/images/story.jpg" 
-          alt="Chasers DD Company Story" 
+      <div
+        class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative"
+      >
+        <img
+          src="/images/story.jpg"
+          alt="Chasers DD Company Story"
           class="w-full h-full object-cover opacity-80"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+        >
+        </div>
       </div>
-      
+
       <!-- Content -->
       <div class="py-section px-4 sm:px-6 lg:px-8">
         <div class="max-w-xl mx-auto lg:mx-0 lg:pl-8">
@@ -190,21 +253,24 @@ const heroSlides = [
               Our <span class="text-gold-primary">Story</span>
             </h2>
             <p class="text-lg text-gray-600 mb-6">
-              Founded on the principle that everyone deserves safe, reliable transportation, 
-              Chasers DD has grown from a small local service to Arizona's premier designated 
-              driver company.
+              Founded on the principle that everyone deserves safe, reliable
+              transportation, Chasers DD has grown from a small local service to
+              Arizona's premier designated driver company.
             </p>
             <p class="text-lg text-gray-600 mb-8">
-              We're not just about getting you from point A to point B – we're about creating 
-              experiences, building trust, and ensuring that your most important moments are 
-              handled with the care they deserve.
+              We're not just about getting you from point A to point B – we're
+              about creating experiences, building trust, and ensuring that your
+              most important moments are handled with the care they deserve.
             </p>
-            
-            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="/about" class="btn-primary">
-                Learn Our Story
-              </a>
-              <a href="/about#history" class="btn-outline flex items-center justify-center">
+
+            <div
+              class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+            >
+              <a href="/about" class="btn-primary"> Learn Our Story </a>
+              <a
+                href="/about#history"
+                class="btn-outline flex items-center justify-center"
+              >
                 Company History
               </a>
             </div>
@@ -222,47 +288,64 @@ const heroSlides = [
         <div class="max-w-xl mx-auto lg:mx-0 lg:pr-8">
           <div class="animate-on-scroll">
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Complete <span class="text-gold-primary">Transportation Services</span>
+              Complete <span class="text-gold-primary"
+                >Transportation Services</span
+              >
             </h2>
             <p class="text-lg text-gray-600 mb-8">
-              Beyond designated driving, we offer a full suite of luxury transportation 
-              services to meet all your needs.
+              Beyond designated driving, we offer a full suite of luxury
+              transportation services to meet all your needs.
             </p>
-            
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div class="bg-white p-4 rounded-lg border border-gray-200">
-                <h3 class="font-semibold text-gray-900 mb-2">Chauffeur Services</h3>
-                <p class="text-sm text-gray-600">Professional drivers in your car</p>
+                <h3 class="font-semibold text-gray-900 mb-2">
+                  Chauffeur Services
+                </h3>
+                <p class="text-sm text-gray-600">
+                  Professional drivers in your car
+                </p>
               </div>
               <div class="bg-white p-4 rounded-lg border border-gray-200">
-                <h3 class="font-semibold text-gray-900 mb-2">Luxury Transportation</h3>
+                <h3 class="font-semibold text-gray-900 mb-2">
+                  Luxury Transportation
+                </h3>
                 <p class="text-sm text-gray-600">Premium fleet vehicles</p>
               </div>
               <div class="bg-white p-4 rounded-lg border border-gray-200">
-                <h3 class="font-semibold text-gray-900 mb-2">Car Care Services</h3>
-                <p class="text-sm text-gray-600">Vehicle maintenance & errands</p>
+                <h3 class="font-semibold text-gray-900 mb-2">
+                  Car Care Services
+                </h3>
+                <p class="text-sm text-gray-600">
+                  Vehicle maintenance & errands
+                </p>
               </div>
               <div class="bg-white p-4 rounded-lg border border-gray-200">
-                <h3 class="font-semibold text-gray-900 mb-2">Gift Memberships</h3>
+                <h3 class="font-semibold text-gray-900 mb-2">
+                  Gift Memberships
+                </h3>
                 <p class="text-sm text-gray-600">Perfect for any occasion</p>
               </div>
             </div>
-            
-            <a href="/chauffeur" class="btn-primary">
-              Explore Services
-            </a>
+
+            <a href="/chauffeur" class="btn-primary"> Explore Services </a>
           </div>
         </div>
       </div>
-      
+
       <!-- Image -->
-      <div class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative">
-        <img 
-          src="/images/transport.jpg" 
-          alt="Chasers DD Services" 
+      <div
+        class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative"
+      >
+        <img
+          src="/images/transport.jpg"
+          alt="Chasers DD Services"
           class="w-full h-full object-cover opacity-80"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+        >
+        </div>
       </div>
     </div>
   </section>
@@ -271,15 +354,20 @@ const heroSlides = [
   <section class="homepage-section bg-gray-50">
     <div class="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[500px]">
       <!-- Image -->
-      <div class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative">
-        <img 
-          src="/images/work.jpg" 
-          alt="How Chasers DD Works" 
+      <div
+        class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative"
+      >
+        <img
+          src="/images/work.jpg"
+          alt="How Chasers DD Works"
           class="w-full h-full object-cover opacity-80"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+        >
+        </div>
       </div>
-      
+
       <!-- Content -->
       <div class="py-section px-4 sm:px-6 lg:px-8">
         <div class="max-w-xl mx-auto lg:mx-0 lg:pl-8">
@@ -288,43 +376,57 @@ const heroSlides = [
               How <span class="text-gold-primary">We Work</span>
             </h2>
             <p class="text-lg text-gray-600 mb-8">
-              Our streamlined process ensures you get professional, reliable service 
-              every time you need us.
+              Our streamlined process ensures you get professional, reliable
+              service every time you need us.
             </p>
-            
+
             <div class="space-y-6 mb-8">
               <div class="flex items-start space-x-4">
-                <div class="w-8 h-8 bg-gold-primary rounded-full flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-8 h-8 bg-gold-primary rounded-full flex items-center justify-center flex-shrink-0"
+                >
                   <span class="text-white font-bold text-sm">1</span>
                 </div>
                 <div>
-                  <h3 class="font-semibold text-gray-900 mb-1">Book Your Ride</h3>
-                  <p class="text-gray-600">Call or text us when you need a driver</p>
+                  <h3 class="font-semibold text-gray-900 mb-1">
+                    Book Your Ride
+                  </h3>
+                  <p class="text-gray-600">
+                    Call or text us when you need a driver
+                  </p>
                 </div>
               </div>
               <div class="flex items-start space-x-4">
-                <div class="w-8 h-8 bg-gold-primary rounded-full flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-8 h-8 bg-gold-primary rounded-full flex items-center justify-center flex-shrink-0"
+                >
                   <span class="text-white font-bold text-sm">2</span>
                 </div>
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-1">We Arrive</h3>
-                  <p class="text-gray-600">Professional driver meets you at your location</p>
+                  <p class="text-gray-600">
+                    Professional driver meets you at your location
+                  </p>
                 </div>
               </div>
               <div class="flex items-start space-x-4">
-                <div class="w-8 h-8 bg-gold-primary rounded-full flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-8 h-8 bg-gold-primary rounded-full flex items-center justify-center flex-shrink-0"
+                >
                   <span class="text-white font-bold text-sm">3</span>
                 </div>
                 <div>
-                  <h3 class="font-semibold text-gray-900 mb-1">Safe Transport</h3>
-                  <p class="text-gray-600">We drive you home safely in your vehicle</p>
+                  <h3 class="font-semibold text-gray-900 mb-1">
+                    Safe Transport
+                  </h3>
+                  <p class="text-gray-600">
+                    We drive you home safely in your vehicle
+                  </p>
                 </div>
               </div>
             </div>
-            
-            <a href="/how-it-works" class="btn-primary">
-              Learn More
-            </a>
+
+            <a href="/how-it-works" class="btn-primary"> Learn More </a>
           </div>
         </div>
       </div>
@@ -342,48 +444,68 @@ const heroSlides = [
               Meet Our <span class="text-gold-primary">Professional Team</span>
             </h2>
             <p class="text-lg text-gray-600 mb-6">
-              Our drivers aren't just employees – they're carefully selected professionals 
-              who share our commitment to excellence and safety.
+              Our drivers aren't just employees – they're carefully selected
+              professionals who share our commitment to excellence and safety.
             </p>
             <p class="text-lg text-gray-600 mb-8">
-              Every team member undergoes rigorous background checks, extensive training, 
-              and ongoing education to ensure they meet our high standards.
+              Every team member undergoes rigorous background checks, extensive
+              training, and ongoing education to ensure they meet our high
+              standards.
             </p>
-            
+
             <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
               <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-gold-primary rounded-full flex items-center justify-center">
-                  <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                <div
+                  class="w-12 h-12 bg-gold-primary rounded-full flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
                   </svg>
                 </div>
                 <div>
-                  <h3 class="font-semibold text-gray-900">Interested in Joining Our Team?</h3>
-                  <p class="text-gray-600">We're always looking for qualified drivers</p>
+                  <h3 class="font-semibold text-gray-900">
+                    Interested in Joining Our Team?
+                  </h3>
+                  <p class="text-gray-600">
+                    We're always looking for qualified drivers
+                  </p>
                 </div>
               </div>
             </div>
-            
-            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="/contact" class="btn-primary">
-                Meet the Team
-              </a>
-              <a href="/contact#careers" class="btn-outline flex items-center justify-center">
+
+            <div
+              class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+            >
+              <a href="/contact" class="btn-primary"> Meet the Team </a>
+              <a
+                href="/contact#careers"
+                class="btn-outline flex items-center justify-center"
+              >
                 Become a Driver
               </a>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- Image -->
-      <div class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative">
-        <img 
-          src="/images/team.jpg" 
-          alt="Chasers DD Professional Team" 
+      <div
+        class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative"
+      >
+        <img
+          src="/images/team.jpg"
+          alt="Chasers DD Professional Team"
           class="w-full h-full object-cover opacity-80"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+        >
+        </div>
       </div>
     </div>
   </section>
@@ -392,15 +514,20 @@ const heroSlides = [
   <section class="homepage-section bg-gray-50">
     <div class="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[500px]">
       <!-- Image -->
-      <div class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative">
-        <img 
-          src="/images/faq.jpg" 
-          alt="Customer Questions and Support" 
+      <div
+        class="h-full min-h-[500px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 relative"
+      >
+        <img
+          src="/images/faq.jpg"
+          alt="Customer Questions and Support"
           class="w-full h-full object-cover opacity-80"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+        >
+        </div>
       </div>
-      
+
       <!-- Content -->
       <div class="py-section px-4 sm:px-6 lg:px-8">
         <div class="max-w-xl mx-auto lg:mx-0 lg:pl-8">
@@ -409,28 +536,45 @@ const heroSlides = [
               Frequently Asked <span class="text-gold-primary">Questions</span>
             </h2>
             <p class="text-lg text-gray-600 mb-8">
-              Get answers to the most common questions about our services, 
+              Get answers to the most common questions about our services,
               membership plans, and how we operate.
             </p>
-            
+
             <div class="space-y-4 mb-8">
-              <div class="bg-white p-4 rounded-lg border-l-4 border-gold-primary">
-                <h3 class="font-semibold text-gray-900 mb-2">How quickly can you arrive?</h3>
-                <p class="text-gray-600 text-sm">Typically 15-30 minutes in most areas</p>
+              <div
+                class="bg-white p-4 rounded-lg border-l-4 border-gold-primary"
+              >
+                <h3 class="font-semibold text-gray-900 mb-2">
+                  How quickly can you arrive?
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Typically 15-30 minutes in most areas
+                </p>
               </div>
-              <div class="bg-white p-4 rounded-lg border-l-4 border-gold-primary">
-                <h3 class="font-semibold text-gray-900 mb-2">Are your drivers licensed and insured?</h3>
-                <p class="text-gray-600 text-sm">Yes, all drivers are fully licensed, insured, and background checked</p>
+              <div
+                class="bg-white p-4 rounded-lg border-l-4 border-gold-primary"
+              >
+                <h3 class="font-semibold text-gray-900 mb-2">
+                  Are your drivers licensed and insured?
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Yes, all drivers are fully licensed, insured, and background
+                  checked
+                </p>
               </div>
-              <div class="bg-white p-4 rounded-lg border-l-4 border-gold-primary">
-                <h3 class="font-semibold text-gray-900 mb-2">What areas do you serve?</h3>
-                <p class="text-gray-600 text-sm">We serve the greater Phoenix metropolitan area</p>
+              <div
+                class="bg-white p-4 rounded-lg border-l-4 border-gold-primary"
+              >
+                <h3 class="font-semibold text-gray-900 mb-2">
+                  What areas do you serve?
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  We serve the greater Phoenix metropolitan area
+                </p>
               </div>
             </div>
-            
-            <a href="/faq" class="btn-primary">
-              View All FAQs
-            </a>
+
+            <a href="/faq" class="btn-primary"> View All FAQs </a>
           </div>
         </div>
       </div>
@@ -442,12 +586,17 @@ const heroSlides = [
     <div class="container-center">
       <div class="text-center animate-on-scroll">
         <h2 class="heading-section text-white mb-6">
-          Ready to Experience <span class="text-gold-gradient">Luxury Transportation</span>?
+          Ready to Experience <span class="text-gold-gradient"
+            >Luxury Transportation</span
+          >?
         </h2>
         <p class="text-xl text-dark-200 mb-8 max-w-2xl mx-auto">
-          Join thousands of satisfied clients who trust Chasers DD for their most important occasions.
+          Join thousands of satisfied clients who trust Chasers DD for their
+          most important occasions.
         </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+        >
           <a href="/membership" class="btn-primary text-lg px-10 py-4">
             View Membership Plans
           </a>
@@ -463,25 +612,28 @@ const heroSlides = [
   <footer class="bg-white py-16 px-2 sm:px-3 lg:px-4">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-8">
-        
         <!-- Left Section - Newsletter & Links -->
         <div class="lg:col-span-1">
           <div class="mb-8">
             <h3 class="text-xl font-bold text-gray-900 mb-4 font-serif">
               Subscribe to receive updates about our services & experiences
             </h3>
-            
+
             <!-- Newsletter Form - Formspree -->
-            <form action="https://formspree.io/f/moqrplda" method="POST" class="mb-6">
+            <form
+              action="https://formspree.io/f/moqrplda"
+              method="POST"
+              class="mb-6"
+            >
               <div class="flex flex-col sm:flex-row gap-3">
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   name="email"
-                  placeholder="Your email address" 
+                  placeholder="Your email address"
                   required
                   class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-[#c69214] focus:ring-1 focus:ring-[#c69214] focus:outline-none transition-colors"
                 />
-                <button 
+                <button
                   type="submit"
                   class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-6 py-3 rounded-lg font-bold hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 whitespace-nowrap"
                 >
@@ -490,46 +642,84 @@ const heroSlides = [
               </div>
             </form>
           </div>
-          
+
           <!-- Footer Links -->
           <div class="flex flex-wrap gap-6">
-            <a href="/contact" class="text-gray-600 hover:text-[#c69214] transition-colors duration-200 relative group">
+            <a
+              href="/contact"
+              class="text-gray-600 hover:text-[#c69214] transition-colors duration-200 relative group"
+            >
               <span>Contact</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"></div>
+              <div
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"
+              >
+              </div>
             </a>
-            <a href="/about" class="text-gray-600 hover:text-[#c69214] transition-colors duration-200 relative group">
+            <a
+              href="/about"
+              class="text-gray-600 hover:text-[#c69214] transition-colors duration-200 relative group"
+            >
               <span>About Us</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"></div>
+              <div
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"
+              >
+              </div>
             </a>
-            <a href="/faq" class="text-gray-600 hover:text-[#c69214] transition-colors duration-200 relative group">
+            <a
+              href="/faq"
+              class="text-gray-600 hover:text-[#c69214] transition-colors duration-200 relative group"
+            >
               <span>FAQ</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"></div>
+              <div
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"
+              >
+              </div>
             </a>
-            <a href="/privacy-policy" class="text-gray-600 hover:text-[#c69214] transition-colors duration-200 relative group">
+            <a
+              href="/privacy-policy"
+              class="text-gray-600 hover:text-[#c69214] transition-colors duration-200 relative group"
+            >
               <span>Privacy Policy</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"></div>
+              <div
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"
+              >
+              </div>
             </a>
           </div>
         </div>
 
         <!-- Middle Section - Contact Info -->
         <div class="lg:col-span-1">
-          <h3 class="text-xl font-bold text-gray-900 mb-6 font-serif">Contact Information</h3>
-          
+          <h3 class="text-xl font-bold text-gray-900 mb-6 font-serif">
+            Contact Information
+          </h3>
+
           <div class="space-y-6">
             <div>
               <h4 class="text-gray-600 text-sm mb-2">Call or Text</h4>
-              <a href="tel:+14806953659" class="text-gray-900 text-lg font-medium hover:text-[#c69214] transition-colors duration-200 relative group">
+              <a
+                href="tel:+14806953659"
+                class="text-gray-900 text-lg font-medium hover:text-[#c69214] transition-colors duration-200 relative group"
+              >
                 <span>(480) 695-3659</span>
-                <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"></div>
+                <div
+                  class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"
+                >
+                </div>
               </a>
             </div>
-            
+
             <div>
               <h4 class="text-gray-600 text-sm mb-2">Email</h4>
-              <a href="mailto:memberships@chasersdd.com" class="text-gray-900 text-lg font-medium hover:text-[#c69214] transition-colors duration-200 relative group">
+              <a
+                href="mailto:memberships@chasersdd.com"
+                class="text-gray-900 text-lg font-medium hover:text-[#c69214] transition-colors duration-200 relative group"
+              >
                 <span>memberships@chasersdd.com</span>
-                <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"></div>
+                <div
+                  class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c69214] transition-all duration-200 group-hover:w-full"
+                >
+                </div>
               </a>
             </div>
           </div>
@@ -538,9 +728,19 @@ const heroSlides = [
           <div class="mt-8">
             <h4 class="text-gray-600 text-sm mb-4">Follow Us</h4>
             <div class="flex space-x-4">
-              <a href="https://www.instagram.com/chasersdesignateddrivers/" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#c69214] transition-all duration-300 group">
-                <svg class="w-5 h-5 text-gray-600 group-hover:text-black" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              <a
+                href="https://www.instagram.com/chasersdesignateddrivers/"
+                target="_blank"
+                class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#c69214] transition-all duration-300 group"
+              >
+                <svg
+                  class="w-5 h-5 text-gray-600 group-hover:text-black"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  ></path>
                 </svg>
               </a>
             </div>
@@ -548,19 +748,19 @@ const heroSlides = [
         </div>
 
         <!-- Right Section - Logo -->
-        <div class="lg:col-span-1 flex items-start justify-center lg:justify-end">
+        <div
+          class="lg:col-span-1 flex items-start justify-center lg:justify-end"
+        >
           <div class="text-center lg:text-right">
-            <div class="text-3xl font-bold text-[#c69214] mb-2 font-serif">
-              Chasers DD
-            </div>
-            <p class="text-gray-600 text-sm">
-              Luxury Designated Driver Service
-            </p>
+            <img
+              src="/images/Chasers Logo Distinct D Black.png"
+              alt="Chasers Designated Drivers"
+              class="h-16 w-auto mx-auto lg:mx-0 mb-2"
+            />
           </div>
         </div>
-        
       </div>
-      
+
       <!-- Footer Bottom -->
       <div class="border-t border-gray-200 pt-6">
         <div class="text-center text-gray-600 text-sm">
@@ -571,7 +771,6 @@ const heroSlides = [
   </footer>
 </BaseLayout>
 
-
 <style>
   /* Mobile responsive styles for homepage sections */
   @media (max-width: 1023px) {
@@ -580,19 +779,23 @@ const heroSlides = [
       order: 1 !important;
       margin-bottom: 2rem;
     }
-    
+
     .homepage-section .order-1,
     .homepage-section .order-2 {
       order: 2 !important;
     }
-    
+
     /* Lighten mobile images for better visibility */
     .homepage-section img {
       opacity: 0.7 !important;
     }
-    
+
     .homepage-section .absolute.inset-0 {
-      background: linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0.2)) !important;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.2)
+      ) !important;
     }
   }
 </style>

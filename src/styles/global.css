@@ -128,7 +128,8 @@
   }
   
   .nav-main {
-    @apply bg-off-white/95 backdrop-blur-luxury sticky top-0 z-50 border-b border-off-white shadow-sm;
+    @apply bg-off-white/95 backdrop-blur-luxury sticky z-40 border-b border-off-white shadow-sm;
+    top: 37px;
   }
   
   .nav-link {
