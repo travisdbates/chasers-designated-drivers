@@ -221,6 +221,17 @@ const serviceAddOns = [
                 ))}
               </ul>
 
+              {plan.id === 'individual' && (
+                <div class="mb-4">
+                  <a 
+                    href="/individual-premier" 
+                    class="block w-full text-center py-3 px-6 rounded-lg font-semibold bg-transparent border-2 border-[#c69214] text-[#c69214] hover:bg-[#c69214] hover:text-black transition-all duration-300"
+                  >
+                    Learn More About Premier
+                  </a>
+                </div>
+              )}
+
               <div class="relative block w-full text-center py-4 px-6 rounded-xl font-bold cursor-not-allowed bg-gray-400 text-gray-600 opacity-75 group">
                 {plan.ctaText.includes('Plan') ? (
                   <>
