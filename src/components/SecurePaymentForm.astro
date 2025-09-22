@@ -388,10 +388,10 @@ const ENVIRONMENT = import.meta.env.PUBLIC_ACCEPTBLUE_ENVIRONMENT || "sandbox";
         you'll receive confirmation via email and SMS.
       </p>
       <button
-        onclick="document.getElementById('success-modal').classList.add('hidden')"
+        onclick="redirectToHome()"
         class="bg-gold-primary text-white px-6 py-2 rounded-lg hover:bg-gold-light transition-colors"
       >
-        Close
+        Continue to Home
       </button>
     </div>
   </div>
@@ -740,6 +740,9 @@ const ENVIRONMENT = import.meta.env.PUBLIC_ACCEPTBLUE_ENVIRONMENT || "sandbox";
       if (result.success) {
         processingModal.classList.add("hidden");
         successModal.classList.remove("hidden");
+
+        // Disable the form to prevent double submission
+        disableForm();
       } else {
         console.error("Payment processing failed:", result);
         if (result.debug) {
@@ -778,6 +781,53 @@ const ENVIRONMENT = import.meta.env.PUBLIC_ACCEPTBLUE_ENVIRONMENT || "sandbox";
     // Scroll error message into view
     errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+
+  function disableForm() {
+    // Disable all form inputs and buttons
+    const form = document.getElementById('secure-payment-form');
+    if (form) {
+      const inputs = form.querySelectorAll('input, select, button');
+      inputs.forEach(input => {
+        input.disabled = true;
+      });
+
+      // Add visual indication that form is disabled
+      form.style.opacity = '0.6';
+      form.style.pointerEvents = 'none';
+    }
+
+    // Show success message on the form
+    const formContainer = document.querySelector('.secure-payment-container');
+    if (formContainer) {
+      const successBanner = document.createElement('div');
+      successBanner.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4';
+      successBanner.innerHTML = `
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          <span><strong>Payment Successful!</strong> Your membership is being processed.</span>
+        </div>
+      `;
+      formContainer.insertBefore(successBanner, formContainer.firstChild);
+    }
+  }
+
+  function redirectToHome() {
+    // Close the modal first
+    const successModal = document.getElementById('success-modal');
+    if (successModal) {
+      successModal.classList.add('hidden');
+    }
+
+    // Redirect to home page after a brief delay
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 500);
+  }
+
+  // Make redirectToHome available globally for the onclick handler
+  window.redirectToHome = redirectToHome;
 </script>
 
 <style>
