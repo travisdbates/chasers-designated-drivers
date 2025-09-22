@@ -9,7 +9,9 @@ const allPlans = Object.fromEntries(
   getPlansByCategory('joint').map(plan => [plan.id, plan])
 );
 
-const selectedPlan = allPlans['joint'];
+// Get plan from URL parameter, default to 'joint'
+const planParam = Astro.url.searchParams.get('plan') || 'joint';
+const selectedPlan = allPlans[planParam] || allPlans['joint'];
 ---
 
 <BaseLayout 

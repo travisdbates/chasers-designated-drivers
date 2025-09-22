@@ -29,6 +29,18 @@ const { plan } = Astro.props;
           <h3 class="text-xl font-semibold text-gray-900 mb-2" data-plan-name>{plan.name}</h3>
           <p class="text-gray-600 mb-3" data-plan-description>{plan.description}</p>
           <div class="space-y-1">
+            {/* Show "Everything in X Plan, plus:" for Premier plans */}
+            {(plan.id === 'individual' || plan.id === 'joint-premier' || plan.id === 'business-premier') &&
+             plan.features.some(feature => feature.startsWith('Everything in')) && (
+              <div class="flex items-center text-sm text-blue-600 font-medium mb-2">
+                <svg class="w-4 h-4 text-blue-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                {plan.features.find(feature => feature.startsWith('Everything in'))}
+              </div>
+            )}
+
+            {/* Show actual features (excluding the "Everything in" text) */}
             {plan.features.filter(feature => !feature.startsWith('Everything in')).slice(0, 3).map(feature => (
               <div class="flex items-center text-sm text-gray-600">
                 <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
