@@ -1,0 +1,74 @@
+---
+export interface Props {
+  plan: {
+    id: string;
+    name: string;
+    description: string;
+    price: string;
+    priceSubtext: string;
+    features: string[];
+    popular: boolean;
+  };
+}
+
+const { plan } = Astro.props;
+---
+
+<div class="max-w-4xl mx-auto mb-8">
+  <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-bold text-gray-900">Order Summary</h2>
+      <span class="bg-gold-primary text-white px-3 py-1 rounded-full text-sm font-semibold" data-plan-popular>
+        {plan.popular ? 'Most Popular' : 'Selected Plan'}
+      </span>
+    </div>
+    
+    <div class="border-b border-gray-200 pb-4 mb-4">
+      <div class="flex justify-between items-start">
+        <div class="flex-1">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2" data-plan-name>{plan.name}</h3>
+          <p class="text-gray-600 mb-3" data-plan-description>{plan.description}</p>
+          <div class="space-y-1">
+            {plan.features.slice(0, 3).map(feature => (
+              <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                {feature}
+              </div>
+            ))}
+            {plan.features.length > 3 && (
+              <div class="text-sm text-gray-500 ml-6">
+                +{plan.features.length - 3} more features
+              </div>
+            )}
+          </div>
+        </div>
+        <div class="text-right ml-6">
+          <div class="text-3xl font-bold text-gray-900" data-plan-price>{plan.price}</div>
+          <div class="text-sm text-gray-600" data-plan-subtext>{plan.priceSubtext}</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="flex justify-between items-center">
+      <div class="text-lg font-semibold text-gray-900">
+        Today's Charge:
+      </div>
+      <div class="text-2xl font-bold text-gold-primary" data-plan-price>
+        {plan.price}
+      </div>
+    </div>
+    <div class="text-sm text-gray-600 text-right mt-1">
+      Next billing: {(() => {
+        const nextMonth = new Date();
+        nextMonth.setMonth(nextMonth.getMonth() + 1);
+        return nextMonth.toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        });
+      })()}
+    </div>
+  </div>
+</div>

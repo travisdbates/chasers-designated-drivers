@@ -1,12 +1,21 @@
 import type { APIRoute } from 'astro';
-import { Twilio } from 'twilio';
+import twilioPackage from 'twilio';
+const { Twilio } = twilioPackage;
 import { getCurrentNotificationSettings, isNotificationEnabled } from './manage-notification-settings.js';
+import { config } from 'dotenv';
+
+// Load environment variables
+config();
+
+// Enable server-side rendering for this API endpoint
+export const prerender = false;
 
 
 // Twilio configuration
 const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
 const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER;
+const TWILIO_MESSAGING_SERVICE_SID = process.env.TWILIO_MESSAGING_SERVICE_SID;
 
 // Initialize Twilio
 const twilio = (TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN) 
@@ -26,6 +35,12 @@ interface SMSNotificationData {
     planName: string;
     planId: string;
   };
+  plan?: {
+    name: string;
+    price: string;
+    smsMessage: string;
+    tripFee: number;
+  };
   marketingConsent?: boolean;
 }
 
@@ -34,22 +49,22 @@ export const POST: APIRoute = async ({ request }) => {
     // Check if SMS notifications are enabled
     if (!isNotificationEnabled('sms')) {
       return new Response(
-        JSON.stringify({ 
-          success: true, 
+        JSON.stringify({
+          success: true,
           message: 'SMS notifications are disabled',
-          skipped: true 
+          skipped: true
         }),
         { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Check if Twilio is configured
-    if (!twilio || !TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_PHONE_NUMBER) {
+    // Check if Twilio is configured (need either phone number or messaging service)
+    if (!twilio || !TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || (!TWILIO_PHONE_NUMBER && !TWILIO_MESSAGING_SERVICE_SID)) {
       console.error('Twilio credentials not fully configured');
       return new Response(
-        JSON.stringify({ 
-          success: false, 
-          error: 'SMS service not configured' 
+        JSON.stringify({
+          success: false,
+          error: 'SMS service not configured'
         }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
@@ -136,17 +151,46 @@ export const POST: APIRoute = async ({ request }) => {
         );
     }
 
-    // Send SMS via Twilio
-    const message = await twilio.messages.create({
+    // Send SMS via Twilio (prefer messaging service if available)
+    const messageOptions: any = {
       body: messageContent,
-      from: TWILIO_PHONE_NUMBER,
       to: phoneNumber
-    });
+    };
+
+    if (TWILIO_MESSAGING_SERVICE_SID) {
+      messageOptions.messagingServiceSid = TWILIO_MESSAGING_SERVICE_SID;
+    } else if (TWILIO_PHONE_NUMBER) {
+      messageOptions.from = TWILIO_PHONE_NUMBER;
+    }
+
+    const message = await twilio.messages.create(messageOptions);
+
+    // Log Twilio response in blue for easy identification
+    console.log('\x1b[34m📱 TWILIO SMS RESPONSE:\x1b[0m');
+    console.log('\x1b[34m' + JSON.stringify({
+      messageSid: message.sid,
+      status: message.status,
+      direction: message.direction,
+      from: message.from,
+      to: message.to,
+      body: message.body,
+      dateCreated: message.dateCreated,
+      dateSent: message.dateSent,
+      dateUpdated: message.dateUpdated,
+      errorCode: message.errorCode,
+      errorMessage: message.errorMessage,
+      uri: message.uri,
+      accountSid: message.accountSid,
+      messagingServiceSid: message.messagingServiceSid,
+      price: message.price,
+      priceUnit: message.priceUnit
+    }, null, 2) + '\x1b[0m');
 
     console.log('SMS sent successfully:', {
       messageSid: message.sid,
       recipient: phoneNumber,
-      type: notificationData.type
+      type: notificationData.type,
+      status: message.status
     });
 
     return new Response(
@@ -159,11 +203,27 @@ export const POST: APIRoute = async ({ request }) => {
     );
 
   } catch (error) {
-    console.error('SMS notification error:', error);
+    // Enhanced error logging with colors
+    console.error('\x1b[31m🚨 SMS NOTIFICATION ERROR:\x1b[0m');
+    console.error('\x1b[31m' + JSON.stringify({
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+      status: error.status,
+      moreInfo: error.moreInfo,
+      details: error.details
+    }, null, 2) + '\x1b[0m');
+
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'Failed to send SMS notification'
+        error: 'Failed to send SMS notification',
+        debug: {
+          errorName: error.name,
+          errorMessage: error.message,
+          errorCode: error.code
+        }
       }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
@@ -192,14 +252,23 @@ function formatPhoneNumber(phone: string): string | null {
 
 // SMS template functions
 function generateTransactionConfirmationSMS(data: SMSNotificationData): string {
-  const { customer, transaction } = data;
-  
-  return `Hi ${customer.firstName}! Your Chasers DD ${transaction?.planName} membership payment ($${(transaction?.amount || 0).toFixed(2)}) has been confirmed. Transaction ID: ${transaction?.id}. Call (480) 695-3659 for rides 3PM-3AM daily. Welcome to the family!`;
+  const { customer, transaction, plan } = data;
+
+  const planName = plan?.name || transaction?.planName || 'membership';
+  const amount = (transaction?.amount || 0).toFixed(2);
+
+  return `Hi ${customer.firstName}! Your Chasers DD ${planName} payment ($${amount}) has been confirmed. Transaction ID: ${transaction?.id}. Call (480) 695-3659 for rides 3PM-3AM daily. Welcome to the family!`;
 }
 
 function generateWelcomeSMS(data: SMSNotificationData): string {
-  const { customer } = data;
-  
+  const { customer, plan } = data;
+
+  // Use centralized plan-specific SMS message if available
+  if (plan?.smsMessage) {
+    return plan.smsMessage;
+  }
+
+  // Fallback to generic message
   return `Welcome to Chasers DD, ${customer.firstName}! Your membership is active. We drive you home in YOUR car 3PM-3AM daily. Call (480) 695-3659 when you need a safe ride. Thanks for choosing us!`;
 }
 

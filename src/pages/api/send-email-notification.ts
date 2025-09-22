@@ -2,6 +2,9 @@ import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 import { getCurrentNotificationSettings, isNotificationEnabled } from './manage-notification-settings.js';
 
+// Enable server-side rendering for this API endpoint
+export const prerender = false;
+
 
 // Resend configuration
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
@@ -136,13 +139,16 @@ export const POST: APIRoute = async ({ request }) => {
         );
     }
 
-    // Send email via Resend
+    // Send email via Resend (using test email for sandbox)
+    const testEmail = 'chaserresend@gmail.com';
     const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
-      to: [notificationData.customer.email],
+      to: [testEmail],
       subject: subject,
       html: emailContent,
     });
+
+    console.log(`Email redirected from ${notificationData.customer.email} to ${testEmail} for testing`);
 
     if (error) {
       console.error('Resend email error:', error);
@@ -230,10 +236,8 @@ function generateTransactionConfirmationEmail(data: EmailNotificationData): stri
               <li>Professional, discreet service</li>
             </ul>
             
-            <p>To request a ride, call us at <strong>(480) 695-3659</strong> or use our member portal.</p>
-            
-            <a href="https://chasersdd.com/dashboard" class="btn">Access Member Dashboard</a>
-            
+            <p>To request a ride, call us at <strong>(480) 695-3659</strong>.</p>
+
             <p>If you have any questions, please don't hesitate to contact us at rocky@chasersdd.com or (480) 695-3659.</p>
           </div>
           <div class="footer">
@@ -285,13 +289,11 @@ function generateWelcomeEmail(data: EmailNotificationData): string {
             
             <h3>Service Hours:</h3>
             <p><strong>3PM - 3AM Daily</strong><br>
-            (Closed Easter, Christmas, and Thanksgiving)</p>
+            Holiday Hours (Christmas, Easter, Thanksgiving): 5PM - 12AM</p>
             
             <h3>Coverage Area:</h3>
             <p>Greater Phoenix Area - we know the roads and the best routes to get you home safely.</p>
-            
-            <a href="https://chasersdd.com/dashboard" class="btn">Access Your Dashboard</a>
-            
+
             <p>Questions? Contact us anytime at rocky@chasersdd.com or (480) 695-3659.</p>
             
             <p>Thank you for choosing Chasers DD. Drive safe!</p>
@@ -351,9 +353,7 @@ function generateMarketingEmail(data: EmailNotificationData): string {
               <li>Updates on service enhancements</li>
               <li>Safety tips and local traffic updates</li>
             </ul>
-            
-            <a href="https://chasersdd.com/member-benefits" class="btn">Explore Member Benefits</a>
-            
+
             <p>Remember, we're available <strong>3PM - 3AM daily</strong> at <strong>(480) 695-3659</strong>.</p>
             
             <p>Thank you for helping us keep Phoenix roads safe!</p>

@@ -285,7 +285,7 @@ function generateWelcomeEmail(data: EmailNotificationData): string {
             
             <h3>Service Hours:</h3>
             <p><strong>3PM - 3AM Daily</strong><br>
-            (Closed Easter, Christmas, and Thanksgiving)</p>
+            Holiday Hours (Christmas, Easter, Thanksgiving): 5PM - 12AM</p>
             
             <h3>Coverage Area:</h3>
             <p>Greater Phoenix Area - we know the roads and the best routes to get you home safely.</p>

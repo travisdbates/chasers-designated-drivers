@@ -1,142 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
+import { getAllPlans } from '../config/plans.ts';
 
-const membershipPlans = [
-  {
-    id: 'standard-individual',
-    name: 'Standard Individual',
-    description: 'Safe, on-demand transportation home',
-    price: '$59.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
-      'Covers the member only',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      'Pay by cash or charge to account',
-      '3-month minimum commitment'
-    ],
-    popular: false,
-    ctaText: 'Join Standard Plan',
-    ctaUrl: '/checkout/individual'
-  },
-  {
-    id: 'individual',
-    name: 'Individual Premier',
-    description: 'Added flexibility and perks for frequent riders',
-    price: '$89.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Everything in Standard Plan, plus:',
-      'Ability to request driver for friend/client (must be present)',
-      'Unlimited ride requests',
-      'Covers you alone',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      'Pay by cash or charge to account'
-    ],
-    popular: true,
-    ctaText: 'Join Premier Plan',
-    ctaUrl: '/checkout/individual'
-  },
-  {
-    id: 'joint',
-    name: 'Joint Plan',
-    description: 'Reliable transportation for two people',
-    price: '$89.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
-      'Covers member and one additional person',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      'Pay by cash or charge to account',
-      '3-month minimum commitment'
-    ],
-    popular: false,
-    ctaText: 'Join Joint Plan',
-    ctaUrl: '/checkout/joint'
-  },
-  {
-    id: 'joint-premier',
-    name: 'Joint Premier',
-    description: 'Enhanced flexibility and premium access for couples',
-    price: '$149.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Everything in Joint Plan, plus:',
-      'Ability to request driver for friend/client (one registered member must be present)',
-      'Unlimited ride requests',
-      'Covers member and one additional person',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      'Pay by cash or charge to account'
-    ],
-    popular: false,
-    ctaText: 'Join Joint Premier',
-    ctaUrl: '/checkout/joint'
-  },
-  {
-    id: 'family',
-    name: 'Friends & Family',
-    description: 'Perfect for up to 4 individuals in households or groups',
-    price: '$249.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
-      'Covers up to 4 approved adult drivers',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      'Pay by cash or charge to account',
-      'Only approved drivers may use the plan'
-    ],
-    popular: false,
-    ctaText: 'Join Family Plan',
-    ctaUrl: '/checkout/family'
-  },
-  {
-    id: 'business',
-    name: 'Business Plan',
-    description: 'Safe transportation for business staff and team members',
-    price: '$599.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Covers up to 10 approved individuals',
-      'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
-      'Car Retrieval services (get vehicle from A to B)',
-      'Chauffeur in your vehicles service',
-      '3PM - 3AM availability, 7 days a week',
-      'Pay by cash, card, or charge to company account'
-    ],
-    popular: false,
-    ctaText: 'Join Business Plan',
-    ctaUrl: '/checkout/business'
-  },
-  {
-    id: 'business-premier',
-    name: 'Business Premier',
-    description: 'Flexibility to serve employees, clients and out-of-town guests',
-    price: '$699.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Everything in Business Plan, plus:',
-      'Covers up to 10 approved individuals + unlimited client requests',
-      'Ability to request rides for clients and guests',
-      'No need for clients to be on approved list',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      'Pay by cash, card, or charge to company account'
-    ],
-    popular: false,
-    ctaText: 'Join Business Premier',
-    ctaUrl: '/checkout/business'
-  }
-];
+const membershipPlans = getAllPlans();
 
 const serviceAddOns = [
   {
@@ -226,7 +93,7 @@ const serviceAddOns = [
                 ))}
               </ul>
 
-              <a 
+              <a
                 href={plan.ctaUrl}
                 class={`block w-full text-center py-4 px-6 rounded-xl font-bold transition-all duration-300 ${
                   plan.popular

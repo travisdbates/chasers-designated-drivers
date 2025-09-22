@@ -113,25 +113,23 @@ export async function sendEmailWithRetry(
   notificationData: any,
   config: Partial<RetryConfig> = {}
 ): Promise<NotificationResult> {
+  // Import the direct service function
+  const { sendEmailNotificationDirect } = await import('./notification-services.js');
+
   return withRetry(
     async () => {
-      const response = await fetch('/api/send-email-notification', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(notificationData)
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
+      const result = await sendEmailNotificationDirect(notificationData);
+
+      if (!result.success && !result.skipped) {
         throw createNotificationError(
-          `Email notification failed: ${errorData.error || response.statusText}`,
+          `Email notification failed: ${result.error}`,
           'EMAIL_SEND_FAILED',
-          response.status,
-          response.status < 500 // 4xx errors are usually not retryable
+          500,
+          true // Always retryable for direct calls
         );
       }
-      
-      return await response.json();
+
+      return result;
     },
     config,
     'Email Notification'
@@ -145,25 +143,23 @@ export async function sendSMSWithRetry(
   notificationData: any,
   config: Partial<RetryConfig> = {}
 ): Promise<NotificationResult> {
+  // Import the direct service function
+  const { sendSMSNotificationDirect } = await import('./notification-services.js');
+
   return withRetry(
     async () => {
-      const response = await fetch('/api/send-sms-notification', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(notificationData)
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
+      const result = await sendSMSNotificationDirect(notificationData);
+
+      if (!result.success && !result.skipped) {
         throw createNotificationError(
-          `SMS notification failed: ${errorData.error || response.statusText}`,
+          `SMS notification failed: ${result.error}`,
           'SMS_SEND_FAILED',
-          response.status,
-          response.status < 500 // 4xx errors are usually not retryable
+          500,
+          true // Always retryable for direct calls
         );
       }
-      
-      return await response.json();
+
+      return result;
     },
     config,
     'SMS Notification'

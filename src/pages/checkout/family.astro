@@ -1,25 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
-import MembershipCheckout from '../../components/MembershipCheckout.astro';
+import PlanSummary from '../../components/PlanSummary.astro';
+import SecurePaymentForm from '../../components/SecurePaymentForm.astro';
+import { getPlanById } from '../../config/plans.ts';
 
-const selectedPlan = {
-  id: 'family',
-  name: 'Friends & Family',
-  description: 'Perfect for up to 4 individuals in households or groups',
-  price: '$249.99',
-  priceSubtext: '/month + $40 trip fee per ride',
-  features: [
-    'Unlimited ride requests',
-    '$40 trip fee per ride (plus gratuity)',
-    'Covers up to 4 approved adult drivers',
-    '3PM - 3AM availability, 7 days a week',
-    'Service available outside normal hours (by appointment)',
-    'Pay by cash or charge to account',
-    'Only approved drivers may use the plan'
-  ],
-  popular: false
-};
+const selectedPlan = getPlanById('family');
 ---
 
 <BaseLayout 
@@ -42,11 +28,17 @@ const selectedPlan = {
         </p>
       </div>
 
-      <!-- Checkout Component -->
-      <MembershipCheckout 
-        plan={selectedPlan} 
-        onBack="goBackToMembership"
-      />
+      <!-- Plan Summary Section -->
+      <PlanSummary plan={selectedPlan} />
+
+      <!-- Secure Payment Form -->
+      <div class="max-w-4xl mx-auto">
+        <SecurePaymentForm 
+          planId={selectedPlan.id}
+          plan={selectedPlan} 
+          onBack="goBackToMembership"
+        />
+      </div>
     </div>
   </main>
 </BaseLayout>

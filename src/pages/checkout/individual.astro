@@ -1,26 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
-import MembershipCheckout from '../../components/MembershipCheckout.astro';
+import PlanSummary from '../../components/PlanSummary.astro';
 import SecurePaymentForm from '../../components/SecurePaymentForm.astro';
+import { MEMBERSHIP_PLANS, getPlansByCategory } from '../../config/plans.ts';
 
-const selectedPlan = {
-  id: 'individual',
-  name: 'Individual Premier',
-  description: 'Added flexibility and perks for frequent riders',
-  price: '$89.99',
-  priceSubtext: '/month + $40 trip fee per ride',
-  features: [
-    'Everything in Standard Plan, plus:',
-    'Ability to request driver for friend/client (must be present)',
-    'Unlimited ride requests',
-    'Covers you alone',
-    '3PM - 3AM availability, 7 days a week',
-    'Service available outside normal hours (by appointment)',
-    'Pay by cash or charge to account'
-  ],
-  popular: true
-};
+const allPlans = Object.fromEntries(
+  getPlansByCategory('individual').map(plan => [plan.id, plan])
+);
+
+const selectedPlan = allPlans['individual'];
 ---
 
 <BaseLayout 
@@ -43,7 +32,10 @@ const selectedPlan = {
         </p>
       </div>
 
-      <!-- New Secure Checkout Component -->
+      <!-- Plan Summary Section -->
+      <PlanSummary plan={selectedPlan} />
+
+      <!-- Secure Payment Form -->
       <div class="max-w-4xl mx-auto">
         <SecurePaymentForm 
           planId={selectedPlan.id}
@@ -55,9 +47,47 @@ const selectedPlan = {
   </main>
 </BaseLayout>
 
-<script>
+<script define:vars={{ allPlans }}>
   // Custom back handler for this page
   window.goBackToMembership = () => {
     window.location.href = '/membership';
   };
+
+  // Handle dynamic plan selection based on URL parameter
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const planParam = urlParams.get('plan') || 'individual';
+
+    console.log('Client-side plan parameter:', planParam);
+
+    if (allPlans[planParam]) {
+      const selectedPlan = allPlans[planParam];
+      console.log('Updating to plan:', selectedPlan.name, selectedPlan.price);
+
+      // Update the plan name
+      const nameElements = document.querySelectorAll('[data-plan-name]');
+      nameElements.forEach(el => el.textContent = selectedPlan.name);
+
+      // Update the plan description
+      const descElements = document.querySelectorAll('[data-plan-description]');
+      descElements.forEach(el => el.textContent = selectedPlan.description);
+
+      // Update the plan price
+      const priceElements = document.querySelectorAll('[data-plan-price]');
+      priceElements.forEach(el => el.textContent = selectedPlan.price);
+
+      // Update the plan subtext
+      const subtextElements = document.querySelectorAll('[data-plan-subtext]');
+      subtextElements.forEach(el => el.textContent = selectedPlan.priceSubtext);
+
+      // Update the popular badge
+      const popularElements = document.querySelectorAll('[data-plan-popular]');
+      popularElements.forEach(el => {
+        el.textContent = selectedPlan.popular ? 'Most Popular' : 'Selected Plan';
+      });
+
+      // Update page title
+      document.title = `Checkout - ${selectedPlan.name} | Chasers DD`;
+    }
+  });
 </script>

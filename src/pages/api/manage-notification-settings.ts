@@ -1,4 +1,8 @@
 import type { APIRoute } from 'astro';
+import { config } from 'dotenv';
+
+// Load environment variables from .env file
+config();
 
 
 // Notification settings management
