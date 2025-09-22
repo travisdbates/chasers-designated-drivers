@@ -188,6 +188,7 @@ export const POST: APIRoute = async ({ request }) => {
             headers: {
               Authorization: `Basic ${credentials}`,
               Accept: "application/json",
+              "User-Agent": "chasers_dd",
             },
           }
         );
@@ -351,6 +352,7 @@ export const POST: APIRoute = async ({ request }) => {
         "Content-Type": "application/json",
         Authorization: `Basic ${credentials}`,
         Accept: "application/json",
+        "User-Agent": "chasers_dd",
       },
       body: JSON.stringify(transactionRequest),
     });
@@ -549,6 +551,7 @@ async function createCustomerFromTransaction(
           "Content-Type": "application/json",
           Authorization: `Basic ${credentials}`,
           Accept: "application/json",
+        "User-Agent": "chasers_dd",
         },
         body: JSON.stringify(customerRequest),
       }
@@ -630,6 +633,7 @@ async function createStandaloneCustomer(customerData: any) {
       "Content-Type": "application/json",
       Authorization: `Basic ${credentials}`,
       Accept: "application/json",
+        "User-Agent": "chasers_dd",
     },
     body: JSON.stringify(customerRequest),
   });
@@ -700,6 +704,7 @@ async function createPaymentMethod(customerId: number, paymentData: any) {
       "Content-Type": "application/json",
       Authorization: `Basic ${credentials}`,
       Accept: "application/json",
+        "User-Agent": "chasers_dd",
     },
     body: JSON.stringify(paymentMethodRequest),
   });
@@ -787,6 +792,7 @@ async function createRecurringSchedule(
         headers: {
           Authorization: `Basic ${credentials}`,
           Accept: "application/json",
+        "User-Agent": "chasers_dd",
         },
       }
     );
@@ -851,6 +857,7 @@ async function createRecurringSchedule(
           "Content-Type": "application/json",
           Authorization: `Basic ${credentials}`,
           Accept: "application/json",
+        "User-Agent": "chasers_dd",
         },
         body: JSON.stringify(scheduleRequest),
       }
