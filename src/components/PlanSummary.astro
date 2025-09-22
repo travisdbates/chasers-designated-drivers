@@ -29,7 +29,7 @@ const { plan } = Astro.props;
           <h3 class="text-xl font-semibold text-gray-900 mb-2" data-plan-name>{plan.name}</h3>
           <p class="text-gray-600 mb-3" data-plan-description>{plan.description}</p>
           <div class="space-y-1">
-            {plan.features.slice(0, 3).map(feature => (
+            {plan.features.filter(feature => !feature.startsWith('Everything in')).slice(0, 3).map(feature => (
               <div class="flex items-center text-sm text-gray-600">
                 <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
@@ -37,9 +37,9 @@ const { plan } = Astro.props;
                 {feature}
               </div>
             ))}
-            {plan.features.length > 3 && (
+            {plan.features.filter(feature => !feature.startsWith('Everything in')).length > 3 && (
               <div class="text-sm text-gray-500 ml-6">
-                +{plan.features.length - 3} more features
+                +{plan.features.filter(feature => !feature.startsWith('Everything in')).length - 3} more features
               </div>
             )}
           </div>
