@@ -172,31 +172,51 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
           document.body.style.fontFamily = "'LouizeDisplay', 'Louize Display', 'Overpass', 'Inter', sans-serif";
           document.body.style.fontWeight = "300";
           
-          // Apply Overpass to headings
-          const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .heading-display, .heading-hero, .heading-section, .heading-sub');
-          headings.forEach(heading => {
+          // Apply IvyMode to main section headings (large h2 elements)
+          const mainHeadings = document.querySelectorAll('h2.text-3xl, h2.text-4xl, .heading-section');
+          mainHeadings.forEach(heading => {
+            heading.style.fontFamily = "'IvyMode', 'Overpass', 'Inter', 'Arial', sans-serif";
+            heading.style.fontWeight = "600";
+          });
+          
+          // Apply Overpass to other headings (excluding hero and main section headings)
+          const otherHeadings = document.querySelectorAll('h3, h4, h5, h6, .heading-display, .heading-sub');
+          otherHeadings.forEach(heading => {
             heading.style.fontFamily = "'Overpass', 'Inter', 'Arial', sans-serif";
           });
           
-          // Apply Overpass to buttons and navigation
-          const uiElements = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-ghost, .nav-link, button, .btn');
-          uiElements.forEach(element => {
+          // Apply IvyMode to hero heading
+          const heroHeadings = document.querySelectorAll('.heading-hero, .hero-content h1');
+          heroHeadings.forEach(heading => {
+            heading.style.fontFamily = "'IvyMode', 'Overpass', 'Inter', 'Arial', sans-serif";
+            heading.style.fontWeight = "600";
+          });
+          
+          // Apply IvyMode to navigation (excluding nav-link which gets IvyMode)
+          const navElements = document.querySelectorAll('.nav-link');
+          navElements.forEach(element => {
+            element.style.fontFamily = "'IvyMode', 'Overpass', 'Inter', 'Arial', sans-serif";
+            element.style.fontWeight = "600";
+          });
+          
+          // Apply Overpass to buttons only
+          const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-ghost, button, .btn');
+          buttons.forEach(element => {
             element.style.fontFamily = "'Overpass', 'Inter', 'Arial', sans-serif";
           });
         }, 1000); // Wait 1 second for fonts to load
       });
     </script>
     
-    <!-- Google Analytics (add your GA4 tracking ID) -->
-    <!-- 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MZ78878YB"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'GA_TRACKING_ID');
+
+      gtag('config', 'G-7MZ78878YB');
     </script>
-    -->
     
     <!-- Tidio Chat Widget -->
     <script src="//code.tidio.co/YOUR_PUBLIC_KEY.js" async></script>

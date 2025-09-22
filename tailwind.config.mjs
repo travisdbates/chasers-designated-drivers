@@ -60,6 +60,8 @@ export default {
 				secondary: ['LouizeDisplay', 'Louize Display', 'Overpass', 'Inter', 'sans-serif'],
 				// Accent: Overpass for buttons, CTAs, navigation
 				accent: ['Overpass', 'Inter', 'Arial', 'sans-serif'],
+				// IvyMode: Custom font family
+				'ivy-mode': ['IvyMode', 'Overpass', 'Inter', 'Arial', 'sans-serif'],
 			},
 			fontSize: {
 				// Custom typography scale

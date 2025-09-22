@@ -1,0 +1,433 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+
+const plan = {
+  name: 'Individual Premier',
+  description: 'Added flexibility and perks for frequent riders',
+  price: '$89.99',
+  priceSubtext: '/month + $40 trip fee per ride',
+  savings: 'Save $30/month vs Standard Individual + Premier benefits',
+  features: [
+    'Everything in Standard Individual Plan',
+    'Ability to request driver for friend/client (you must be present)',
+    'Unlimited ride requests',
+    'Covers you alone',
+    '3PM - 3AM availability, 7 days a week',
+    'Service available outside normal hours (by appointment)',
+    'Priority booking during peak times',
+    'Premium customer support',
+    'No minimum commitment required'
+  ]
+};
+
+const standardFeatures = [
+  'Unlimited ride requests',
+  '$40 trip fee per ride (plus gratuity)',
+  'Covers the member only',
+  '3PM - 3AM availability, 7 days a week',
+  'Service available outside normal hours (by appointment)',
+  '3-month minimum commitment'
+];
+
+const premierExtraServices = [
+  {
+    name: 'Car Concierge Services',
+    description: 'Car retrieval, fuel fill-ups, car washes, maintenance appointments',
+    benefit: 'Available at member rates',
+    icon: '🚗'
+  },
+  {
+    name: 'Chauffeur in Your Car',
+    description: 'Professional driver operates your own vehicle',
+    benefit: '$40/hr (vs $60/hr for non-members)',
+    icon: '🤵'
+  },
+  {
+    name: 'Luxury Transportation',
+    description: 'SUV, Sprinter Van, airport transfers and concierge services',
+    benefit: 'Member discounts on luxury fleet',
+    icon: '✈️'
+  },
+  {
+    name: 'Priority Booking',
+    description: 'Skip the wait during peak hours and busy nights',
+    benefit: 'Guaranteed faster response times',
+    icon: '⚡'
+  }
+];
+
+const useCases = [
+  {
+    title: 'Business Professionals',
+    description: 'Need to arrange safe transportation for clients and colleagues',
+    icon: '💼'
+  },
+  {
+    title: 'Social Hosts',
+    description: 'Frequently host events and need reliable rides for guests',
+    icon: '🥂'
+  },
+  {
+    title: 'Frequent Riders',
+    description: 'Use the service multiple times per month',
+    icon: '🚗'
+  },
+  {
+    title: 'Safety Conscious',
+    description: 'Want premium service and priority access',
+    icon: '🛡️'
+  }
+];
+---
+
+<BaseLayout 
+  title="Individual Premier Plan - Chasers DD Luxury Service"
+  description="Individual Premier Plan: Added flexibility and perks for frequent riders. $89.99/month + $40 trip fee. Request rides for friends/clients, priority booking, and premium benefits."
+  keywords="individual premier plan, luxury designated driver, premium membership, business transportation, client rides, priority booking"
+>
+  <Navigation />
+  
+  <main class="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 px-2 sm:px-3 lg:px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center bg-gold-primary/20 border border-gold-primary/30 rounded-full px-4 py-2 mb-6">
+            <span class="text-gold-primary font-semibold text-sm">MOST POPULAR PLAN</span>
+          </div>
+          <h1 class="heading-hero text-white mb-6">
+            Individual <span class="text-gold-primary">Premier</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+            {plan.description}
+          </p>
+          <div class="bg-gradient-to-r from-gold-primary/20 to-gold-light/20 border border-gold-primary/30 rounded-xl p-6 max-w-2xl mx-auto">
+            <div class="text-3xl font-ivy-mode font-semibold text-gold-primary mb-2">{plan.price}</div>
+            <p class="text-lg text-white mb-2">{plan.priceSubtext}</p>
+            <p class="text-gold-primary font-medium">{plan.savings}</p>
+          </div>
+        </div>
+
+        <!-- Quick Action -->
+        <div class="text-center">
+          <a 
+            href="tel:+14806953659" 
+            class="inline-flex items-center bg-gold-primary hover:bg-gold-light text-black font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-gold text-lg"
+          >
+            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+            </svg>
+            Call (480) 695-3659 to Join Today
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's Included Section -->
+    <section class="py-16 px-2 sm:px-3 lg:px-4 bg-dark-800">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="heading-section text-white mb-4">
+            What's <span class="text-gold-primary">Included</span>
+          </h2>
+          <p class="text-body text-gray-300 max-w-3xl mx-auto">
+            Everything you need for safe, reliable transportation with added Premier benefits
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Core Features -->
+          <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl p-8 border border-gray-700">
+            <h3 class="text-2xl font-ivy-mode font-semibold text-white mb-6">Core Features</h3>
+            <ul class="space-y-4">
+              {plan.features.map((feature) => (
+                <li class="flex items-start text-gray-400">
+                  <svg class="w-6 h-6 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-body-small leading-relaxed text-gray-400">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Premier Exclusive Benefits -->
+          <div class="bg-gradient-to-b from-gold-primary/10 to-gold-dark/10 rounded-xl p-8 border border-gold-primary/30">
+            <div class="flex items-center mb-6">
+              <div class="w-3 h-3 bg-gold-primary rounded-full mr-3"></div>
+              <h3 class="text-2xl font-ivy-mode font-semibold text-white">Premier Exclusive</h3>
+            </div>
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div>
+                  <div class="text-gold-primary font-semibold text-body-small">Request rides for friends/clients</div>
+                  <div class="text-gray-400 text-sm mt-1">You must be present, perfect for business or hosting</div>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                </svg>
+                <div>
+                  <div class="text-gold-primary font-semibold text-body-small">Priority booking</div>
+                  <div class="text-gray-400 text-sm mt-1">Skip the wait during peak hours and busy nights</div>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                <div>
+                  <div class="text-gold-primary font-semibold text-body-small">Premium customer support</div>
+                  <div class="text-gray-400 text-sm mt-1">Dedicated support line with faster response times</div>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div>
+                  <div class="text-gold-primary font-semibold text-body-small">No minimum commitment</div>
+                  <div class="text-gray-400 text-sm mt-1">Cancel anytime, unlike Standard plan's 3-month minimum</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Services Section -->
+    <section class="py-16 px-2 sm:px-3 lg:px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="heading-section text-white mb-4">
+            Premium <span class="text-gold-primary">Services</span>
+          </h2>
+          <p class="text-body text-gray-300 max-w-3xl mx-auto">
+            Exclusive access to additional services at member rates
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {premierExtraServices.map((service) => (
+            <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700 hover:border-gold-primary/50 transition-all duration-300 hover:scale-105">
+              <div class="text-4xl mb-4 text-center">{service.icon}</div>
+              <h3 class="text-lg font-ivy-mode font-semibold text-white mb-2 text-center">{service.name}</h3>
+              <p class="text-gray-400 text-sm mb-3 text-center">{service.description}</p>
+              <div class="text-gold-primary text-sm font-semibold text-center">{service.benefit}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfect For Section -->
+    <section class="py-16 px-2 sm:px-3 lg:px-4 bg-dark-800">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="heading-section text-white mb-4">
+            Perfect <span class="text-gold-primary">For</span>
+          </h2>
+          <p class="text-body text-gray-300 max-w-3xl mx-auto">
+            Individual Premier is ideal for professionals and frequent users who need flexibility
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {useCases.map((useCase) => (
+            <div class="text-center">
+              <div class="bg-gradient-to-b from-gold-primary/20 to-gold-dark/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 border border-gold-primary/30">
+                <div class="text-3xl">{useCase.icon}</div>
+              </div>
+              <h3 class="text-lg font-ivy-mode font-semibold text-white mb-2">{useCase.title}</h3>
+              <p class="text-gray-400 text-sm">{useCase.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="py-16 px-2 sm:px-3 lg:px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="heading-section text-white mb-4">
+            Premier vs <span class="text-gold-primary">Standard</span>
+          </h2>
+          <p class="text-body text-gray-300">
+            See why upgrading to Premier gives you more value and flexibility
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl border border-gray-700 overflow-hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-2">
+            <!-- Standard Plan -->
+            <div class="p-8 border-r border-gray-700">
+              <div class="text-center mb-6">
+                <h3 class="text-xl font-ivy-mode font-semibold text-white mb-2">Standard Individual</h3>
+                <div class="text-2xl font-semibold text-gray-300">$59.99/month</div>
+                <div class="text-sm text-gray-500">+ $40 trip fee per ride</div>
+              </div>
+              <ul class="space-y-3">
+                {standardFeatures.map((feature) => (
+                  <li class="flex items-start text-gray-400">
+                    <svg class="w-5 h-5 text-gray-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Premier Plan -->
+            <div class="p-8 bg-gradient-to-b from-gold-primary/5 to-gold-dark/5">
+              <div class="text-center mb-6">
+                <div class="inline-block bg-gold-primary text-black text-xs font-bold px-2 py-1 rounded-full mb-2">RECOMMENDED</div>
+                <h3 class="text-xl font-ivy-mode font-semibold text-white mb-2">Individual Premier</h3>
+                <div class="text-2xl font-semibold text-gold-primary">$89.99/month</div>
+                <div class="text-sm text-gold-primary">+ $40 trip fee per ride</div>
+              </div>
+              <ul class="space-y-3">
+                <li class="flex items-start text-gold-primary">
+                  <svg class="w-5 h-5 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm font-semibold">Everything in Standard Plan, PLUS:</span>
+                </li>
+                <li class="flex items-start text-gray-300">
+                  <svg class="w-5 h-5 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm">Request rides for friends/clients</span>
+                </li>
+                <li class="flex items-start text-gray-300">
+                  <svg class="w-5 h-5 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm">Priority booking during peak times</span>
+                </li>
+                <li class="flex items-start text-gray-300">
+                  <svg class="w-5 h-5 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm">Premium customer support</span>
+                </li>
+                <li class="flex items-start text-gray-300">
+                  <svg class="w-5 h-5 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm">No minimum commitment</span>
+                </li>
+                <li class="flex items-start text-gray-300">
+                  <svg class="w-5 h-5 text-gold-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm">Member rates on additional services</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 px-2 sm:px-3 lg:px-4 bg-dark-800">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="heading-section text-white mb-4">
+            Frequently Asked <span class="text-gold-primary">Questions</span>
+          </h2>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+            <h3 class="text-lg font-ivy-mode font-semibold text-white mb-3">
+              Can I request rides for friends or clients?
+            </h3>
+            <p class="text-gray-300 text-body-small">
+              Yes! With Individual Premier, you can request rides for friends, family, or clients. You must be present during the ride, making it perfect for business entertainment or when hosting events.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+            <h3 class="text-lg font-ivy-mode font-semibold text-white mb-3">
+              What does priority booking mean?
+            </h3>
+            <p class="text-gray-300 text-body-small">
+              Priority booking means you get faster response times and preference over Standard plan members during peak hours, holidays, and busy nights when demand is high.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+            <h3 class="text-lg font-ivy-mode font-semibold text-white mb-3">
+              Are there any additional fees?
+            </h3>
+            <p class="text-gray-300 text-body-small">
+              The only fees are your monthly membership ($89.99) and the $40 trip fee per ride (plus gratuity). Additional services like car concierge or luxury transportation have separate rates but are discounted for Premier members.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+            <h3 class="text-lg font-ivy-mode font-semibold text-white mb-3">
+              Can I switch from Standard to Premier anytime?
+            </h3>
+            <p class="text-gray-300 text-body-small">
+              Yes! You can upgrade from Standard Individual to Premier at any time. The upgrade takes effect immediately and you'll be prorated for the difference.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-2 sm:px-3 lg:px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="heading-section text-white mb-6">
+          Ready to Join <span class="text-gold-primary">Individual Premier</span>?
+        </h2>
+        <p class="text-body text-gray-300 mb-8 max-w-2xl mx-auto">
+          Experience the flexibility and premium service that comes with our most popular individual plan.
+        </p>
+        
+        <div class="bg-gradient-to-r from-gold-primary/20 to-gold-light/20 border border-gold-primary/30 rounded-xl p-6 mb-8">
+          <div class="text-2xl font-ivy-mode font-semibold text-gold-primary mb-2">Special Offer</div>
+          <p class="text-white">Call today and mention this page for a complimentary first ride consultation!</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="tel:+14806953659" 
+            class="bg-gold-primary hover:bg-gold-light text-black font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-gold text-lg"
+          >
+            Call (480) 695-3659
+          </a>
+          <a 
+            href="mailto:memberships@chasersdd.com" 
+            class="bg-transparent hover:bg-gold-primary text-gold-primary hover:text-black border-2 border-gold-primary font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out"
+          >
+            Email Us
+          </a>
+          <a 
+            href="/how-it-works" 
+            class="bg-transparent hover:bg-cream-100 text-gray-300 hover:text-gray-900 font-medium py-4 px-8 rounded-lg transition-all duration-300 ease-in-out"
+          >
+            How It Works
+          </a>
+        </div>
+
+        <div class="mt-8 text-center">
+          <p class="text-gray-400 text-sm">
+            Service Hours: 3PM - 3AM Daily | Greater Phoenix Area
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
