@@ -5,14 +5,10 @@ import { getPlanDetailsForNotification } from "../../config/plans.ts";
 export const prerender = false;
 
 // MiCamp/AcceptBlue API configuration
-const ACCEPTBLUE_API_KEY =
-  import.meta.env.ACCEPTBLUE_API_KEY || process.env.ACCEPTBLUE_API_KEY;
-const ACCEPTBLUE_PIN =
-  import.meta.env.ACCEPTBLUE_PIN || process.env.ACCEPTBLUE_PIN;
-const ACCEPTBLUE_ENVIRONMENT =
-  import.meta.env.ACCEPTBLUE_ENVIRONMENT ||
-  process.env.ACCEPTBLUE_ENVIRONMENT ||
-  "sandbox";
+// Use process.env directly in Netlify Functions
+const ACCEPTBLUE_API_KEY = process.env.ACCEPTBLUE_API_KEY;
+const ACCEPTBLUE_PIN = process.env.ACCEPTBLUE_PIN;
+const ACCEPTBLUE_ENVIRONMENT = process.env.ACCEPTBLUE_ENVIRONMENT || "sandbox";
 const MICAMP_BASE_URL =
   ACCEPTBLUE_ENVIRONMENT === "production"
     ? "https://api.micampblue.com/api/v2"
@@ -25,6 +21,14 @@ export const POST: APIRoute = async ({ request }) => {
     console.log("📡 URL Path:", request.url);
     console.log("📡 Request Method:", request.method);
     console.log("📡 Processing payment request...");
+
+    // Debug: Check if credentials are loaded
+    console.log("🔑 API Credentials Check:", {
+      hasApiKey: !!ACCEPTBLUE_API_KEY,
+      hasPin: !!ACCEPTBLUE_PIN,
+      environment: ACCEPTBLUE_ENVIRONMENT,
+      baseUrl: MICAMP_BASE_URL
+    });
 
     // Log all headers for debugging
     console.log("📋 Request Headers:");
@@ -638,13 +642,24 @@ async function createStandaloneCustomer(customerData: any) {
     body: JSON.stringify(customerRequest),
   });
 
-  const result = await response.json();
-
   console.log("Standalone customer creation response status:", response.status);
-  console.log(
-    "Standalone customer creation response:",
-    JSON.stringify(result, null, 2)
-  );
+
+  // Handle non-JSON responses (like "Unauthorized" text)
+  const contentType = response.headers.get("content-type");
+  let result;
+  if (contentType && contentType.includes("application/json")) {
+    result = await response.json();
+    console.log(
+      "Standalone customer creation response:",
+      JSON.stringify(result, null, 2)
+    );
+  } else {
+    const textResponse = await response.text();
+    console.error("Non-JSON response received:", textResponse);
+    throw new Error(
+      `API returned non-JSON response (${response.status}): ${textResponse}`
+    );
+  }
 
   if (!response.ok) {
     throw new Error(
