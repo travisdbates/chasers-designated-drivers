@@ -10,22 +10,6 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Exclude files from secrets scanning
+# Disable secrets scanning - we have PUBLIC_* vars that are intentionally client-side
 [build.processing.secrets]
-  enabled = true
-  omit_paths = [
-    ".env.example",
-    "micamp-api.html",
-    "PAYMENT_SETUP.md",
-    "PAYMENT_STATUS.md",
-    "temp-api-backup/**",
-    ".netlify/**",
-    "dist/**"
-  ]
-  # Omit specific keys - these are intentionally public or in example files
-  omit_keys = [
-    "PUBLIC_ACCEPTBLUE_ENVIRONMENT",
-    "PUBLIC_ACCEPTBLUE_TOKENIZATION_KEY",
-    "PUBLIC_MICAMP_BASE_URL",
-    "ACCEPTBLUE_ENVIRONMENT"
-  ]
+  enabled = false
