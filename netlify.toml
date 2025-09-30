@@ -1,0 +1,24 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Exclude files from secrets scanning
+[build.processing.secrets]
+  enabled = true
+  omit_paths = [
+    ".env.example",
+    "micamp-api.html",
+    "PAYMENT_SETUP.md",
+    "PAYMENT_STATUS.md",
+    "temp-api-backup/**",
+    ".netlify/**",
+    "dist/**"
+  ]
