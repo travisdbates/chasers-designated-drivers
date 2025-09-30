@@ -22,3 +22,10 @@
     ".netlify/**",
     "dist/**"
   ]
+  # Omit specific keys - these are intentionally public or in example files
+  omit_keys = [
+    "PUBLIC_ACCEPTBLUE_ENVIRONMENT",
+    "PUBLIC_ACCEPTBLUE_TOKENIZATION_KEY",
+    "PUBLIC_MICAMP_BASE_URL",
+    "ACCEPTBLUE_ENVIRONMENT"
+  ]
