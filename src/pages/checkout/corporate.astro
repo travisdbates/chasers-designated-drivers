@@ -1,24 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
-import MembershipCheckout from '../../components/MembershipCheckout.astro';
+import PlanSummary from '../../components/PlanSummary.astro';
+import SecurePaymentForm from '../../components/SecurePaymentForm.astro';
+import { getPlanById } from '../../config/plans.ts';
 
-const selectedPlan = {
-  id: 'corporate',
-  name: 'Corporate Premiere',
-  description: 'Professional business transportation',
-  price: '$399',
-  priceSubtext: '/month - Multi-employee coverage',
-  features: [
-    'Multi-employee coverage',
-    'Executive-level discrete service',
-    'Business event coordination',
-    'Reduces company liability',
-    'Professional representation',
-    'Arizona local expertise'
-  ],
-  popular: false
-};
+const selectedPlan = getPlanById('corporate');
 ---
 
 <BaseLayout 
@@ -41,11 +28,17 @@ const selectedPlan = {
         </p>
       </div>
 
-      <!-- Checkout Component -->
-      <MembershipCheckout 
-        plan={selectedPlan} 
-        onBack="goBackToMembership"
-      />
+      <!-- Plan Summary Section -->
+      <PlanSummary plan={selectedPlan} />
+
+      <!-- Secure Payment Form -->
+      <div class="max-w-4xl mx-auto">
+        <SecurePaymentForm 
+          planId={selectedPlan.id}
+          plan={selectedPlan} 
+          onBack="goBackToMembership"
+        />
+      </div>
     </div>
   </main>
 </BaseLayout>

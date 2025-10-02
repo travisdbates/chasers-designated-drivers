@@ -32,3 +32,6 @@ dev-server.log
 
 # Keep poster images and documentation
 !public/images/
+
+# Local Netlify folder
+.netlify
