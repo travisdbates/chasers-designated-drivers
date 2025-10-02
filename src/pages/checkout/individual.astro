@@ -9,7 +9,10 @@ const allPlans = Object.fromEntries(
   getPlansByCategory('individual').map(plan => [plan.id, plan])
 );
 
-const selectedPlan = allPlans['individual'];
+// Get plan from URL parameter, default to 'individual' if not specified
+const url = new URL(Astro.request.url);
+const planParam = url.searchParams.get('plan') || 'individual';
+const selectedPlan = allPlans[planParam] || allPlans['individual'];
 ---
 
 <BaseLayout 
