@@ -1,0 +1,30 @@
+---
+interface Props {
+  text: string;
+  backgroundColor?: string;
+  href?: string;
+  onClick?: string;
+}
+
+const { text, backgroundColor = '#2d2d2d', href, onClick } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  class="relative inline-block group/btn cursor-pointer no-underline"
+  href={href}
+  onclick={onClick}
+>
+  <div class="relative pl-[26px]">
+    <!-- Gold circle behind -->
+    <div class="absolute top-0 bottom-0 left-0 w-[52px] h-[52px] my-auto border-[1.5px] border-gold-primary rounded-full opacity-80"></div>
+
+    <!-- Button text wrapper with background -->
+    <div class="relative transition-transform duration-300 ease-out group-hover/btn:translate-x-3" style={`transform-style: preserve-3d; background-color: ${backgroundColor};`}>
+      <div class="flex items-center gap-2 pr-4 pt-2 pb-1">
+        <span class="text-gold-primary tracking-wide" style="font-family: 'Overpass', sans-serif; font-weight: 600; font-size: 18px; line-height: 1;">{text}</span>
+        <img src="https://cdn.prod.website-files.com/61cb4f69f16cb0779fb07a03/62f51ff59abfb3b242732610_Arrow%20Gold.svg" alt="Arrow" class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-2" />
+      </div>
+    </div>
+  </div>
+</Tag>
