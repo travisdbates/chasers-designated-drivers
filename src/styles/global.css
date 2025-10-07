@@ -284,19 +284,6 @@
   .section-header {
     @apply text-center mb-16;
   }
-
-  /* Homepage sections with 75px padding */
-  .homepage-section > div > div {
-    padding-left: 4.6875rem !important; /* 75px */
-    padding-right: 4.6875rem !important; /* 75px */
-  }
-
-  @media (max-width: 768px) {
-    .homepage-section > div > div {
-      padding-left: 1rem !important;
-      padding-right: 1rem !important;
-    }
-  }
 }
 
 /* Custom utility classes */
