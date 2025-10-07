@@ -31,63 +31,74 @@
 
   body {
     background-color: #fdfbf4; /* Custom off-white background */
-    @apply font-secondary antialiased;
+    @apply font-primary antialiased;
     color: #2d2d2d; /* WorldClass dark text color */
     overflow-x: hidden;
-    /* Use thinner Louize Display for body */
-    font-family:
-      "LouizeDisplay", "Louize Display", "Overpass", "Inter", sans-serif;
-    font-weight: 300; /* Thinner weight */
+    /* Use Overpass for body text to match Worldclass */
+    font-family: "Overpass", "Inter", "Arial", sans-serif;
+    font-weight: 400; /* Normal weight */
+    font-size: 1rem; /* 16px base */
+    line-height: 1.6;
     /* WorldClass font smoothing */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Heading styles - Overpass with appropriate weights */
+  /* Heading styles - Matching Worldclass with Ivymode for headings and lighter weights */
   .heading-display {
-    @apply font-primary font-bold text-display leading-tight tracking-tight;
+    @apply font-ivy-mode text-display leading-tight;
+    font-weight: 400; /* Worldclass uses normal weight, not bold */
   }
 
   .heading-hero {
-    @apply font-ivy-mode font-semibold text-hero leading-none tracking-tight;
+    @apply font-ivy-mode text-hero leading-none;
+    font-weight: 400; /* Worldclass h1 uses font-weight 400 */
   }
-  
+
   /* Force IvyMode on hero heading specifically */
   .hero-content .heading-hero,
   .hero-content h1,
   .hero-content h1.heading-hero {
     font-family: "IvyMode", "Overpass", "Inter", "Arial", sans-serif !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;
   }
-  
+
   /* Override any inline styles on hero heading */
   h1[style*="font-family"],
   .hero-content h1[style],
   h1.heading-hero[style] {
     font-family: "IvyMode", "Overpass", "Inter", "Arial", sans-serif !important;
+    font-weight: 400 !important;
   }
-  
+
   /* Most specific override for the exact element */
   .hero-content .animate-slide-up.heading-hero {
     font-family: "IvyMode" !important;
+    font-weight: 400 !important;
   }
 
   .heading-section {
-    @apply font-ivy-mode font-semibold text-heading leading-tight;
+    @apply font-ivy-mode text-heading;
+    font-weight: 400; /* Worldclass h2 uses font-weight 400 */
+    line-height: 1.25;
   }
 
   .heading-sub {
-    @apply font-primary font-medium text-subheading leading-tight;
+    @apply font-primary text-subheading;
+    font-weight: 400; /* Lighter weight */
+    line-height: 1.4;
   }
 
-  /* Body text styles - Updated for WorldClass consistency */
+  /* Body text styles - Updated to use Overpass for WorldClass consistency */
   .text-body {
-    @apply font-secondary text-xl leading-relaxed;
+    @apply font-primary leading-relaxed;
+    font-size: 1.125rem; /* 18px - Worldclass h3/body size */
     color: #2d2d2d;
   }
 
   .text-body-small {
-    @apply font-secondary text-lg leading-relaxed;
+    @apply font-primary leading-relaxed;
+    font-size: 1rem; /* 16px - Worldclass body size */
     color: #2d2d2d;
   }
 
@@ -113,25 +124,30 @@
 
 /* Custom component styles */
 @layer components {
-  /* Button styles - Using Overpass font */
+  /* Button styles - Matching Worldclass with squared edges */
   .btn-primary {
-    @apply bg-gold-primary hover:bg-gold-light text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-gold uppercase tracking-wide font-accent;
+    @apply bg-gold-primary hover:bg-gold-light text-white font-semibold py-4 px-8 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-gold uppercase tracking-wide font-accent;
+    border-radius: 0; /* Worldclass squared buttons */
   }
 
   .btn-secondary {
-    @apply bg-transparent hover:bg-gold-primary text-gold-primary hover:text-white border-2 border-gold-primary font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out font-accent;
+    @apply bg-transparent hover:bg-gold-primary text-gold-primary hover:text-white border-2 border-gold-primary font-semibold py-4 px-8 transition-all duration-300 ease-in-out font-accent;
+    border-radius: 0; /* Worldclass squared buttons */
   }
 
   .btn-ghost {
-    @apply bg-transparent hover:bg-cream-100 text-gray-700 font-medium py-3 px-6 rounded-lg transition-all duration-300 ease-in-out font-accent;
+    @apply bg-transparent hover:bg-cream-100 text-gray-700 font-medium py-3 px-6 transition-all duration-300 ease-in-out font-accent;
+    border-radius: 0; /* Worldclass squared buttons */
   }
 
   .btn-outline {
-    @apply bg-transparent hover:bg-gold-primary text-gold-primary hover:text-white border-2 border-gold-primary font-semibold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out font-accent text-center;
+    @apply bg-transparent hover:bg-gold-primary text-gold-primary hover:text-white border-2 border-gold-primary font-semibold py-3 px-6 transition-all duration-300 ease-in-out font-accent text-center;
+    border-radius: 0; /* Worldclass squared buttons */
   }
 
   .btn-disabled {
-    @apply bg-gray-400 text-gray-600 border-2 border-gray-400 font-semibold py-4 px-8 rounded-lg cursor-not-allowed opacity-75 font-accent relative;
+    @apply bg-gray-400 text-gray-600 border-2 border-gray-400 font-semibold py-4 px-8 cursor-not-allowed opacity-75 font-accent relative;
+    border-radius: 0; /* Worldclass squared buttons */
   }
 
   .btn-disabled:hover .tooltip {
@@ -171,14 +187,35 @@
   }
 
   .nav-link {
-    @apply text-gray-600 hover:text-gold-primary transition-colors duration-200 relative font-ivy-mode font-semibold text-lg;
+    @apply hover:text-gold-primary transition-colors duration-200 relative;
+    color: #212322 !important; /* Worldclass nav color */
+    font-family: "IvyMode", "Overpass", "Inter", "Arial", sans-serif;
+    font-size: 22px; /* Worldclass nav size */
+    font-weight: 600; /* Worldclass nav uses semibold */
+    letter-spacing: 1px;
+    text-transform: none;
   }
 
-  /* Force IvyMode font on navigation links */
+  /* Reduce nav font size on medium screens to prevent squishing */
+  @media (max-width: 1536px) {
+    .nav-link {
+      font-size: 18px !important;
+      letter-spacing: 0.75px !important;
+    }
+  }
+
+  @media (max-width: 1280px) {
+    .nav-link {
+      font-size: 16px !important;
+      letter-spacing: 0.5px !important;
+    }
+  }
+
+  /* Force IvyMode font on navigation links to match Worldclass */
   .nav-link,
   .nav-link * {
     font-family: "IvyMode", "Overpass", "Inter", "Arial", sans-serif !important;
-    font-weight: 600 !important;
+    font-weight: 600 !important; /* Worldclass nav uses semibold */
   }
 
   .nav-link::after {
@@ -205,7 +242,7 @@
 
   .hero-content {
     @apply absolute inset-0 flex items-center justify-center text-center z-10;
-    font-family: "IvyMode", "LouizeDisplay", "Overpass", "Inter", sans-serif;
+    font-family: "IvyMode", "Overpass", "Inter", sans-serif;
     font-weight: 400;
   }
 
@@ -224,15 +261,41 @@
 
   /* Section styles */
   .section-padding {
-    @apply py-section px-2 sm:px-3 lg:px-4;
+    @apply py-section;
+    /* Removed horizontal padding - let container-center handle it */
   }
 
   .container-center {
-    @apply max-w-screen-2xl mx-auto px-2 sm:px-3 lg:px-4;
+    max-width: 1536px; /* max-w-screen-2xl */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 4.6875rem !important; /* 75px */
+    padding-right: 4.6875rem !important; /* 75px */
+  }
+
+  /* Reduce padding on smaller screens */
+  @media (max-width: 768px) {
+    .container-center {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
   }
 
   .section-header {
     @apply text-center mb-16;
+  }
+
+  /* Homepage sections with 75px padding */
+  .homepage-section > div > div {
+    padding-left: 4.6875rem !important; /* 75px */
+    padding-right: 4.6875rem !important; /* 75px */
+  }
+
+  @media (max-width: 768px) {
+    .homepage-section > div > div {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
   }
 }
 

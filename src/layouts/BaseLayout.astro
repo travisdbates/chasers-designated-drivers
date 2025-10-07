@@ -43,10 +43,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImage} />
     
-    <!-- Louize Display Fonts -->
-    <script src="https://c.webfontfree.com/c.js?f=LouizeDisplay" type="text/javascript"></script>
-    
-    <!-- Overpass for UI elements -->
+    <!-- Overpass for body text and UI elements (matching Worldclass) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -58,14 +55,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
     <style>
       /* Critical CSS for above-the-fold content */
       html {
-        font-family: 'LouizeDisplay', 'Louize Display', 'Playfair Display', Georgia, serif;
+        font-family: 'Overpass', 'Inter', 'Arial', sans-serif;
       }
-      
+
       body {
         margin: 0;
         background: #fdfbf4;
         color: #2d2d2d;
         overflow-x: hidden;
+        font-family: 'Overpass', 'Inter', 'Arial', sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.6;
       }
       
       /* Loading state styles */
@@ -167,39 +168,58 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
         const animatedElements = document.querySelectorAll('.animate-on-scroll');
         animatedElements.forEach(el => observer.observe(el));
         
-        // Ensure Louize Display fonts are applied after loading
+        // Apply font styles after loading (matching Worldclass)
         setTimeout(() => {
-          document.body.style.fontFamily = "'LouizeDisplay', 'Louize Display', 'Overpass', 'Inter', sans-serif";
-          document.body.style.fontWeight = "300";
-          
-          // Apply IvyMode to main section headings (large h2 elements)
-          const mainHeadings = document.querySelectorAll('h2.text-3xl, h2.text-4xl, .heading-section');
+          document.body.style.fontFamily = "'Overpass', 'Inter', 'Arial', sans-serif";
+          document.body.style.fontWeight = "400";
+
+          // Apply IvyMode to main section headings (large h2 elements) with font-weight 400
+          const mainHeadings = document.querySelectorAll('h2.text-3xl, h2.text-4xl, h2.text-5xl, .heading-section');
           mainHeadings.forEach(heading => {
             heading.style.fontFamily = "'IvyMode', 'Overpass', 'Inter', 'Arial', sans-serif";
-            heading.style.fontWeight = "600";
+            heading.style.fontWeight = "400"; // Worldclass uses normal weight
           });
-          
-          // Apply Overpass to other headings (excluding hero and main section headings)
+
+          // Apply Overpass to other headings with font-weight 400
           const otherHeadings = document.querySelectorAll('h3, h4, h5, h6, .heading-display, .heading-sub');
           otherHeadings.forEach(heading => {
             heading.style.fontFamily = "'Overpass', 'Inter', 'Arial', sans-serif";
+            heading.style.fontWeight = "400";
           });
-          
-          // Apply IvyMode to hero heading
+
+          // Apply IvyMode to hero heading with font-weight 400
           const heroHeadings = document.querySelectorAll('.heading-hero, .hero-content h1');
           heroHeadings.forEach(heading => {
             heading.style.fontFamily = "'IvyMode', 'Overpass', 'Inter', 'Arial', sans-serif";
-            heading.style.fontWeight = "600";
+            heading.style.fontWeight = "400"; // Worldclass h1 uses normal weight
           });
-          
-          // Apply IvyMode to navigation (excluding nav-link which gets IvyMode)
+
+          // Apply IvyMode to navigation (matching Worldclass nav)
           const navElements = document.querySelectorAll('.nav-link');
           navElements.forEach(element => {
             element.style.fontFamily = "'IvyMode', 'Overpass', 'Inter', 'Arial', sans-serif";
-            element.style.fontWeight = "600";
+            element.style.fontWeight = "600"; // Worldclass nav uses semibold
+            element.style.color = "#212322"; // Worldclass nav color
+
+            // Apply responsive font sizes
+            const updateNavFontSize = () => {
+              if (window.innerWidth <= 1280) {
+                element.style.fontSize = "16px";
+                element.style.letterSpacing = "0.5px";
+              } else if (window.innerWidth <= 1536) {
+                element.style.fontSize = "18px";
+                element.style.letterSpacing = "0.75px";
+              } else {
+                element.style.fontSize = "22px";
+                element.style.letterSpacing = "1px";
+              }
+            };
+
+            updateNavFontSize();
+            window.addEventListener('resize', updateNavFontSize);
           });
-          
-          // Apply Overpass to buttons only
+
+          // Apply Overpass to buttons
           const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-ghost, button, .btn');
           buttons.forEach(element => {
             element.style.fontFamily = "'Overpass', 'Inter', 'Arial', sans-serif";
