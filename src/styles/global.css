@@ -269,13 +269,22 @@
     max-width: 1536px; /* max-w-screen-2xl */
     margin-left: auto;
     margin-right: auto;
-    padding-left: 4.6875rem !important; /* 75px */
-    padding-right: 4.6875rem !important; /* 75px */
+    padding-left: 2.8125rem !important; /* 45px - default Worldclass */
+    padding-right: 2.8125rem !important; /* 45px - default Worldclass */
+  }
+
+  /* Larger padding for content sections only */
+  section .container-center,
+  .homepage-section .container-center {
+    padding-left: 4.6875rem !important; /* 75px for content sections */
+    padding-right: 4.6875rem !important; /* 75px for content sections */
   }
 
   /* Reduce padding on smaller screens */
   @media (max-width: 768px) {
-    .container-center {
+    .container-center,
+    section .container-center,
+    .homepage-section .container-center {
       padding-left: 1rem !important;
       padding-right: 1rem !important;
     }
