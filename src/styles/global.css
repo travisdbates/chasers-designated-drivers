@@ -273,6 +273,16 @@
     padding-right: 2.8125rem !important; /* 45px - default Worldclass */
   }
 
+  /* Navigation: full width container like Worldclass */
+  .container-nav {
+    max-width: none;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 2.8125rem !important; /* 45px - Worldclass nav padding */
+    padding-right: 2.8125rem !important; /* 45px - Worldclass nav padding */
+  }
+
   /* Larger padding for content sections only */
   section .container-center,
   .homepage-section .container-center {
@@ -283,6 +293,7 @@
   /* Reduce padding on smaller screens */
   @media (max-width: 768px) {
     .container-center,
+    .container-nav,
     section .container-center,
     .homepage-section .container-center {
       padding-left: 1rem !important;

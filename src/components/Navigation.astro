@@ -2,9 +2,27 @@
 // Navigation component with dual header structure
 ---
 
+<style>
+  .container-nav {
+    max-width: none !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 2.8125rem !important; /* 45px - Worldclass nav padding */
+    padding-right: 2.8125rem !important;
+  }
+
+  @media (max-width: 768px) {
+    .container-nav {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+  }
+</style>
+
 <!-- Contact Info Bar -->
 <div class="nav-contact bg-cream-50 sticky top-0 z-50">
-  <div class="container-center">
+  <div class="container-nav">
     <!-- Desktop Layout -->
     <div class="hidden md:flex justify-between items-center text-sm text-gray-600">
       <!-- Contact Information -->
@@ -67,7 +85,7 @@
 
 <!-- Main Navigation -->
 <nav class="nav-main">
-  <div class="container-center">
+  <div class="container-nav">
     <div class="flex items-center justify-between py-2">
       <!-- Logo -->
       <div class="flex items-center">
