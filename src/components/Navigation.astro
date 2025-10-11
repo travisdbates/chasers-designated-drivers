@@ -33,18 +33,37 @@
     font-size: 18px !important;
     font-weight: 400 !important;
     color: white !important;
-    margin-top: 3px;
+  }
+
+  .nav-contact svg {
+    margin-right: 8px !important;
+  }
+
+  .nav-contact a {
+    margin-right: 24px !important;
+  }
+
+  .nav-contact .flex.items-center:last-child {
+    margin-left: auto;
+  }
+
+  .nav-contact .flex.items-center:last-child > * {
+    margin-left: 16px !important;
   }
 
   .nav-contact a:hover {
     color: #d4af37 !important; /* gold on hover */
   }
 
-  /* Main nav height */
+  /* Main nav height and position below contact bar */
   .nav-main {
     height: 82px;
     display: flex;
     align-items: center;
+    position: sticky;
+    top: 56px; /* Position below 56px contact bar */
+    z-index: 40;
+    background-color: #fdfbf4; /* Match page background */
   }
 </style>
 
