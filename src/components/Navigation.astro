@@ -18,10 +18,38 @@
       padding-right: 1rem !important;
     }
   }
+
+  /* Contact bar styling */
+  .nav-contact {
+    background-color: #212322 !important;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    border: none !important;
+  }
+
+  .nav-contact * {
+    font-family: Overpass, sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    color: white !important;
+    margin-top: 3px;
+  }
+
+  .nav-contact a:hover {
+    color: #d4af37 !important; /* gold on hover */
+  }
+
+  /* Main nav height */
+  .nav-main {
+    height: 82px;
+    display: flex;
+    align-items: center;
+  }
 </style>
 
 <!-- Contact Info Bar -->
-<div class="nav-contact bg-cream-50 sticky top-0 z-50">
+<div class="nav-contact sticky top-0 z-50">
   <div class="container-nav">
     <!-- Desktop Layout -->
     <div class="hidden md:flex justify-between items-center text-sm text-gray-600">
@@ -86,7 +114,7 @@
 <!-- Main Navigation -->
 <nav class="nav-main">
   <div class="container-nav">
-    <div class="flex items-center justify-between py-2">
+    <div class="flex items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center">
         <a href="/" class="flex items-center">
