@@ -187,11 +187,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
             heading.style.fontWeight = "400";
           });
 
-          // Apply IvyMode to hero heading with font-weight 400
-          const heroHeadings = document.querySelectorAll('.heading-hero, .hero-content h1');
+          // Apply Louize Display to hero heading and subtitle with font-weight 400
+          const heroHeadings = document.querySelectorAll('.heading-hero, .hero-content h1, .hero-content p');
           heroHeadings.forEach(heading => {
-            heading.style.fontFamily = "'IvyMode', 'Overpass', 'Inter', 'Arial', sans-serif";
-            heading.style.fontWeight = "400"; // Worldclass h1 uses normal weight
+            heading.style.fontFamily = "'Louize Display', 'Overpass', 'Inter', 'Arial', sans-serif";
+            heading.style.fontWeight = "400"; // Normal weight
           });
 
           // Apply IvyMode to navigation (matching Worldclass nav)
