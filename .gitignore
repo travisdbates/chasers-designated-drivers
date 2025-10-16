@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# netlify
+.netlify/
+
 # dependencies
 node_modules/
 
@@ -12,6 +15,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+*.min.css
+*.min.html
 
 # environment variables
 .env

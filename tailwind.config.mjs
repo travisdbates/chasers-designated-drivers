@@ -54,21 +54,21 @@ export default {
 				'off-white': '#fdfbf4',
 			},
 			fontFamily: {
-				// Primary: Overpass for headers
+				// Primary: Overpass for body text and UI elements (matches Worldclass)
 				primary: ['Overpass', 'Inter', 'Arial', 'sans-serif'],
-				// Secondary: Louize Display for body text
-				secondary: ['LouizeDisplay', 'Louize Display', 'Overpass', 'Inter', 'sans-serif'],
+				// Secondary: Overpass for body text (no longer using LouizeDisplay)
+				secondary: ['Overpass', 'Inter', 'Arial', 'sans-serif'],
 				// Accent: Overpass for buttons, CTAs, navigation
 				accent: ['Overpass', 'Inter', 'Arial', 'sans-serif'],
-				// IvyMode: Custom font family
+				// IvyMode: Custom serif font for headings (matches Worldclass's Ivymode)
 				'ivy-mode': ['IvyMode', 'Overpass', 'Inter', 'Arial', 'sans-serif'],
 			},
 			fontSize: {
-				// Custom typography scale
-				'hero': ['4rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-				'display': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
-				'heading': ['2.25rem', { lineHeight: '1.3' }],
-				'subheading': ['1.5rem', { lineHeight: '1.4' }],
+				// Custom typography scale matching Worldclass
+				'hero': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }], // 72px - Worldclass h1
+				'display': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }], // 48px - Worldclass .h2
+				'heading': ['2rem', { lineHeight: '1.25' }], // 32px - Worldclass h2
+				'subheading': ['1.125rem', { lineHeight: '1.4' }], // 18px - Worldclass h3
 			},
 			spacing: {
 				'hero': '40vh',
