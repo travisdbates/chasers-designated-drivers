@@ -23,9 +23,14 @@
   .nav-contact {
     background-color: #212322 !important;
     height: 56px;
-    display: flex;
     align-items: center;
     border: none !important;
+  }
+
+  @media (min-width: 1024px) {
+    .nav-contact {
+      display: flex;
+    }
   }
 
   .nav-contact * {
@@ -70,6 +75,14 @@
     background-color: #fdfbf4; /* Match page background */
   }
 
+  @media (max-width: 1024px) {
+    .nav-main {
+      top: 0; /* No contact bar on mobile and tablet */
+      background-color: #212322; /* Dark background on mobile */
+      border-bottom: none; /* Remove bottom border on mobile */
+    }
+  }
+
   /* Navigation link hover styles */
   .nav-main .nav-link {
     transition: color 0.3s ease !important;
@@ -87,13 +100,52 @@
   .nav-main .nav-link svg line:first-child {
     transition: transform 0.6s ease !important;
   }
+
+  /* Mobile menu animation */
+  #mobile-menu {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease-out;
+    transform-origin: top;
+  }
+
+  #mobile-menu.menu-open {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  /* Mobile hamburger button - white on mobile */
+  @media (max-width: 1024px) {
+    #mobile-menu-button {
+      color: white !important;
+    }
+  }
+
+  /* Hamburger menu animation */
+  .hamburger-line {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: 6px 12px;
+  }
+
+  .hamburger-open .hamburger-line-1 {
+    transform: rotate(45deg);
+  }
+
+  .hamburger-open .hamburger-line-2 {
+    opacity: 0;
+  }
+
+  .hamburger-open .hamburger-line-3 {
+    transform: rotate(-45deg);
+  }
 </style>
 
 <!-- Contact Info Bar -->
-<div class="nav-contact sticky top-0 z-50">
+<div class="nav-contact sticky top-0 z-50 hidden lg:block">
   <div class="container-nav">
     <!-- Desktop Layout -->
-    <div class="hidden md:flex justify-between items-center text-sm text-gray-600">
+    <div class="flex justify-between items-center text-sm text-gray-600">
       <!-- Contact Information -->
       <div class="flex items-center space-x-6">
         <a href="tel:+14806953659" class="flex items-center space-x-2 hover:text-gold-primary transition-colors">
@@ -158,43 +210,27 @@
         </a>
       </div>
     </div>
-    
-    <!-- Mobile Layout - Side by Side -->
-    <div class="md:hidden flex justify-between items-center py-2 text-xs text-gray-600">
-      <!-- Phone Number -->
-      <a href="tel:+14806953659" class="flex items-center space-x-2 hover:text-gold-primary transition-colors">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 512 512">
-          <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/>
-        </svg>
-        <span>(480) 695-3659</span>
-      </a>
-      
-      <!-- Instagram Link -->
-      <a href="https://www.instagram.com/chasersdesignateddrivers/" 
-         target="_blank" 
-         rel="noopener noreferrer" 
-         class="hover:text-gold-primary transition-colors" 
-         aria-label="Follow us on Instagram">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/>
-        </svg>
-      </a>
-    </div>
   </div>
 </div>
 
 <!-- Main Navigation -->
-<nav class="nav-main">
+<nav class="nav-main relative">
   <div class="container-nav">
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center">
         <a href="/" class="flex items-center">
-          <!-- Logo -->
+          <!-- Desktop Logo - Black -->
           <img
             src="/images/Chasers Logo Distinct D Black.png"
             alt="Chasers Designated Drivers"
-            class="h-12 w-auto block hover:opacity-90 transition-opacity duration-300 mr-6"
+            class="h-12 w-auto hidden lg:block hover:opacity-90 transition-opacity duration-300 mr-6"
+          />
+          <!-- Mobile Logo - White -->
+          <img
+            src="/images/Chasers DD White.png"
+            alt="Chasers Designated Drivers"
+            class="h-12 w-auto lg:hidden hover:opacity-90 transition-opacity duration-300 mr-6"
           />
         </a>
       </div>
@@ -239,9 +275,22 @@
             </span>
           </a>
         </div>
-        
+
         <a href="/how-it-works" class="nav-link">How We Work</a>
-        <a href="/contact" class="nav-link">Our Team</a>
+
+        <!-- OUR TEAM with dropdown -->
+        <div class="group">
+          <a href="/contact" class="nav-link flex items-center" data-dropdown="team">
+            Our Team
+            <span class="ml-2 relative inline-block w-4 h-4">
+              <svg class="absolute inset-0 w-4 h-4" viewBox="0 0 20 20">
+                <line x1="10" y1="3" x2="10" y2="17" stroke="#c69214" stroke-width="3" stroke-linecap="round" style="transition: transform 0.4s ease; transform-origin: center;" class="origin-center group-hover:rotate-90"/>
+                <line x1="3" y1="10" x2="17" y2="10" stroke="#c69214" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
         <a href="/faq" class="nav-link">FAQ</a>
       </div>
       
@@ -254,14 +303,16 @@
       
       <!-- Mobile Menu Button -->
       <div class="lg:hidden">
-        <button 
-          type="button" 
+        <button
+          type="button"
           class="text-gray-700 hover:text-gold-primary transition-colors p-2"
           aria-label="Open mobile menu"
           id="mobile-menu-button"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <line x1="4" y1="6" x2="20" y2="6" stroke-linecap="round" class="hamburger-line hamburger-line-1" />
+            <line x1="4" y1="12" x2="20" y2="12" stroke-linecap="round" class="hamburger-line hamburger-line-2" />
+            <line x1="4" y1="18" x2="20" y2="18" stroke-linecap="round" class="hamburger-line hamburger-line-3" />
           </svg>
         </button>
       </div>
@@ -269,17 +320,18 @@
   </div>
   
   <!-- Mobile Navigation Menu -->
-  <div class="lg:hidden hidden bg-off-white border-t border-off-white" id="mobile-menu">
-    <div class="container-center py-4">
-      <div class="flex flex-col space-y-4">
+  <div class="lg:hidden bg-off-white border-t border-gray-300 w-full shadow-lg" id="mobile-menu" style="position: absolute; top: 100%; left: 0; right: 0;">
+    <div class="py-6 px-4 overflow-y-auto" style="max-height: calc(100vh - 82px);">
+      <div class="flex flex-col space-y-4 max-w-md mx-auto">
         <a href="/membership" class="nav-link text-center py-2">Our Plans</a>
         <a href="/about" class="nav-link text-center py-2">Our Story</a>
         <a href="/chauffeur" class="nav-link text-center py-2">Services</a>
         <a href="/how-it-works" class="nav-link text-center py-2">How We Work</a>
         <a href="/contact" class="nav-link text-center py-2">Our Team</a>
+        <a href="/driver-signup" class="nav-link text-center py-2">Become a Driver</a>
         <a href="/faq" class="nav-link text-center py-2">FAQ</a>
-        
-        <div class="pt-4 border-t border-off-white">
+
+        <div class="pt-4 border-t border-gray-300">
           <a href="/membership" class="btn-primary w-full text-center block">
             Join Now
           </a>
@@ -354,8 +406,8 @@
         <!-- Luxury Transportation -->
         <a href="/luxury-transportation" class="group/item block bg-off-white hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary">
           <div class="w-full h-20 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
-            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.5 7c.276 0 .5.224.5.5v.511c0 .793-.926.989-1.616.989l-1.086-2h2.202zm-1.441 3.506c.639 1.186.946 2.252.946 3.666 0 1.37-.397 2.533-1.005 3.981v1.847c0 .552-.448 1-1 1h-1.5c-.552 0-1-.448-1-1v-1h-13v1c0 .552-.448 1-1 1h-1.5c-.552 0-1-.448-1-1v-1.847c-.608-1.448-1.005-2.611-1.005-3.981 0-1.414.307-2.48.946-3.666.829-1.537 1.851-3.453 2.93-5.252.297-.496.763-.748 1.279-.748h16.912c.516 0 .982.252 1.279.748 1.079 1.799 2.101 3.715 2.93 5.252z"/>
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 640 512">
+              <path d="M171.3 96H224v96H111.3l30.4-75.9C146.5 104 158.2 96 171.3 96zM272 192V96h81.2c9.7 0 18.9 4.4 25 12l67.2 84H272zm256.2 1L428.2 68c-18.2-22.8-45.8-36-75-36H171.3c-39.3 0-74.6 23.9-89.1 60.3L40.6 196.4C16.8 205.8 0 228.9 0 256V368c0 17.7 14.3 32 32 32H65.3c7.6 45.4 47.1 80 94.7 80s87.1-34.6 94.7-80H385.3c7.6 45.4 47.1 80 94.7 80s87.1-34.6 94.7-80H608c17.7 0 32-14.3 32-32V320c0-65.2-48.8-119-111.8-127zM434.7 368a48 48 0 1 1 90.5 32 48 48 0 1 1 -90.5-32zM160 336a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
             </svg>
           </div>
           <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center text-sm">Luxury Transportation</h3>
@@ -377,8 +429,7 @@
         <a href="/gift-membership" class="group/item block bg-off-white hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border hover:border-gold-primary">
           <div class="w-full h-20 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2l.324 1.002 3.676 11.344L12 18L8 14.346l3.676-11.344L12 2z"/>
-              <path d="M20.31 10.31l-1.17.88L12 6L4.86 11.19l-1.17-.88 8.31-6.31 8.31 6.31z"/>
+              <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/>
             </svg>
           </div>
           <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center text-sm">Gift Membership</h3>
@@ -402,7 +453,7 @@
           <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">Company</h3>
           <p class="text-sm text-gray-600 mt-2 text-center">Our mission & values</p>
         </a>
-        
+
         <!-- History -->
         <a href="/about#history" class="group/item block bg-off-white hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border border-off-white hover:border-gold-primary flex-1 max-w-xs">
           <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
@@ -412,6 +463,35 @@
           </div>
           <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">History</h3>
           <p class="text-sm text-gray-600 mt-2 text-center">Our journey</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUR TEAM Dropdown -->
+  <div id="dropdown-team" class="absolute top-full left-0 w-full bg-off-white/95 backdrop-blur-luxury shadow-2xl border-t border-off-white opacity-0 invisible -translate-y-8 transition-all duration-300 z-40">
+    <div class="container-center py-8">
+      <div class="flex justify-center space-x-4 md:space-x-8">
+        <!-- About -->
+        <a href="/contact" class="group/item block bg-off-white hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border border-off-white hover:border-gold-primary flex-1 max-w-xs">
+          <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">About</h3>
+          <p class="text-sm text-gray-600 mt-2 text-center">Meet our team</p>
+        </a>
+
+        <!-- Become a Driver -->
+        <a href="/driver-signup" class="group/item block bg-off-white hover:bg-gold-primary/10 rounded-lg p-4 md:p-6 transition-all duration-200 border border-off-white hover:border-gold-primary flex-1 max-w-xs">
+          <div class="w-full h-24 bg-gradient-to-br from-gold-primary to-gold-light rounded-lg mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 group-hover/item:text-gold-primary text-center">Become a Driver</h3>
+          <p class="text-sm text-gray-600 mt-2 text-center">Join our team</p>
         </a>
       </div>
     </div>
@@ -442,23 +522,23 @@
     `;
     
     function toggleMenu() {
-      const isHidden = mobileMenu.classList.contains('hidden');
-      
-      if (isHidden) {
-        mobileMenu.classList.remove('hidden');
-        mobileMenuButton.setAttribute('aria-expanded', 'true');
-        mobileMenuButton.innerHTML = closeIcon;
-      } else {
-        mobileMenu.classList.add('hidden');
+      const isOpen = mobileMenu.classList.contains('menu-open');
+
+      if (isOpen) {
+        mobileMenu.classList.remove('menu-open');
+        mobileMenuButton.classList.remove('hamburger-open');
         mobileMenuButton.setAttribute('aria-expanded', 'false');
-        mobileMenuButton.innerHTML = hamburgerIcon;
+      } else {
+        mobileMenu.classList.add('menu-open');
+        mobileMenuButton.classList.add('hamburger-open');
+        mobileMenuButton.setAttribute('aria-expanded', 'true');
       }
     }
-    
+
     function closeMenu() {
-      mobileMenu.classList.add('hidden');
+      mobileMenu.classList.remove('menu-open');
+      mobileMenuButton.classList.remove('hamburger-open');
       mobileMenuButton.setAttribute('aria-expanded', 'false');
-      mobileMenuButton.innerHTML = hamburgerIcon;
     }
     
     // Toggle menu on button click
@@ -477,7 +557,7 @@
     // Close menu when clicking outside
     document.addEventListener('click', function(e) {
       if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
-        if (!mobileMenu.classList.contains('hidden')) {
+        if (mobileMenu.classList.contains('menu-open')) {
           closeMenu();
         }
       }
