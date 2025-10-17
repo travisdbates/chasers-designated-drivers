@@ -50,6 +50,7 @@ import Navigation from '../components/Navigation.astro';
             method="POST"
             action="/driver-signup?success=true"
             data-netlify="true"
+            data-netlify-recaptcha="true"
             netlify-honeypot="bot-field"
             class="space-y-6"
           >
@@ -349,6 +350,11 @@ import Navigation from '../components/Navigation.astro';
                 class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all resize-none"
                 placeholder="Tell us a bit about yourself and why you'd be a great fit..."
               ></textarea>
+            </div>
+
+            <!-- reCAPTCHA -->
+            <div class="flex justify-center">
+              <div data-netlify-recaptcha="true"></div>
             </div>
 
             <!-- Submit Button -->
