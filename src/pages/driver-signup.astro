@@ -44,9 +44,11 @@ import Navigation from '../components/Navigation.astro';
             data-netlify-recaptcha="true"
             netlify-honeypot="bot-field"
             class="space-y-6"
+            id="driver-application-form"
           >
             <!-- Hidden fields for Netlify -->
             <input type="hidden" name="form-name" value="driver-signup" />
+            <input type="hidden" name="subject" id="submission-subject" value="Driver Application" />
             <p class="hidden">
               <label>
                 Don't fill this out if you're human: <input name="bot-field" />
@@ -399,3 +401,16 @@ import Navigation from '../components/Navigation.astro';
   </main>
 </BaseLayout>
 
+<script>
+  // Set submission subject with applicant name
+  const form = document.getElementById('driver-application-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      const fullName = document.getElementById('fullName')?.value || 'New Applicant';
+      const subjectField = document.getElementById('submission-subject');
+      if (subjectField) {
+        subjectField.value = `Driver Application - ${fullName}`;
+      }
+    });
+  }
+</script>
