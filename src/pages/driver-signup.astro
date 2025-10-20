@@ -1,0 +1,401 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+---
+
+<BaseLayout
+  title="Become a Driver - Chasers DD"
+  description="Join our team of professional drivers. Apply now to become a Chasers DD designated driver."
+  keywords="driver jobs, designated driver careers, professional driver, Arizona jobs"
+>
+  <Navigation />
+
+  <main class="min-h-screen bg-gradient-to-b from-black via-[#212322] to-black">
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 px-2 sm:px-3 lg:px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+          <span style="font-family: 'Louize Display', serif;">Become a</span>
+          <span class="text-[#c69214] ml-3">Chasers Driver</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6">
+          Join Arizona's premier designated driver service. We're looking for professional, reliable drivers who share our commitment to excellence.
+        </p>
+      </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section class="py-8 px-2 sm:px-3 lg:px-4 pb-24">
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-gradient-to-br from-[#212322]/50 to-[#212322]/50 rounded-2xl p-8 lg:p-12 border border-gray-700">
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-6" style="font-family: 'Louize Display', serif;">
+            Driver Application
+          </h2>
+
+          <p class="text-gray-300 mb-8">
+            Fill out the form below to apply. We'll review your application and get back to you within 2-3 business days.
+          </p>
+
+          <!-- Netlify Form -->
+          <form
+            name="driver-signup"
+            method="POST"
+            data-netlify="true"
+            data-netlify-recaptcha="true"
+            netlify-honeypot="bot-field"
+            class="space-y-6"
+            id="driver-application-form"
+          >
+            <!-- Hidden fields for Netlify -->
+            <input type="hidden" name="form-name" value="driver-signup" />
+            <p class="hidden">
+              <label>
+                Don't fill this out if you're human: <input name="bot-field" />
+              </label>
+            </p>
+
+            <!-- Full Name -->
+            <div>
+              <label for="fullName" class="block text-sm font-medium text-gray-300 mb-2">
+                Full Name <span class="text-[#c69214]">*</span>
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-300 mb-2">
+                Email Address <span class="text-[#c69214]">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all"
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <!-- Cell Phone -->
+            <div>
+              <label for="cellPhone" class="block text-sm font-medium text-gray-300 mb-2">
+                Cell Phone <span class="text-[#c69214]">*</span>
+              </label>
+              <input
+                type="tel"
+                id="cellPhone"
+                name="cellPhone"
+                required
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all"
+                placeholder="(480) 555-1234"
+              />
+            </div>
+
+            <!-- Home Address -->
+            <div class="space-y-4">
+              <label class="block text-sm font-medium text-gray-300 mb-2">
+                Home Address <span class="text-[#c69214]">*</span>
+              </label>
+
+              <!-- Street Address 1 -->
+              <div>
+                <input
+                  type="text"
+                  id="streetAddress1"
+                  name="streetAddress1"
+                  required
+                  class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all"
+                  placeholder="Street Address"
+                />
+              </div>
+
+              <!-- Street Address 2 -->
+              <div>
+                <input
+                  type="text"
+                  id="streetAddress2"
+                  name="streetAddress2"
+                  class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all"
+                  placeholder="Apt, Suite, Unit (optional)"
+                />
+              </div>
+
+              <!-- City, State, Zip -->
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="col-span-2 md:col-span-1">
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    required
+                    class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all"
+                    placeholder="City"
+                  />
+                </div>
+                <div>
+                  <select
+                    id="state"
+                    name="state"
+                    required
+                    class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all"
+                  >
+                    <option value="">State</option>
+                    <option value="AZ">AZ</option>
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AR">AR</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DE">DE</option>
+                    <option value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="IA">IA</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="ME">ME</option>
+                    <option value="MD">MD</option>
+                    <option value="MA">MA</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MS">MS</option>
+                    <option value="MO">MO</option>
+                    <option value="MT">MT</option>
+                    <option value="NE">NE</option>
+                    <option value="NV">NV</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NY">NY</option>
+                    <option value="NC">NC</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WV">WV</option>
+                    <option value="WI">WI</option>
+                    <option value="WY">WY</option>
+                  </select>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    id="zipCode"
+                    name="zipCode"
+                    required
+                    pattern="[0-9]{5}"
+                    maxlength="5"
+                    class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all"
+                    placeholder="Zip Code"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Valid Driver's License -->
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-3">
+                Do you have a valid driver's license? <span class="text-[#c69214]">*</span>
+              </label>
+              <div class="flex gap-6">
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="hasLicense"
+                    value="yes"
+                    required
+                    class="w-4 h-4 text-[#c69214] bg-gray-800 border-gray-700 focus:ring-[#c69214] focus:ring-2"
+                  />
+                  <span class="ml-2 text-gray-300">Yes</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="hasLicense"
+                    value="no"
+                    required
+                    class="w-4 h-4 text-[#c69214] bg-gray-800 border-gray-700 focus:ring-[#c69214] focus:ring-2"
+                  />
+                  <span class="ml-2 text-gray-300">No</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Available Start Date -->
+            <div>
+              <label for="startDate" class="block text-sm font-medium text-gray-300 mb-2">
+                When are you available to start? <span class="text-[#c69214]">*</span>
+              </label>
+              <input
+                type="date"
+                id="startDate"
+                name="startDate"
+                required
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all"
+              />
+            </div>
+
+            <!-- Days Available -->
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-3">
+                What days are you available to drive? <span class="text-[#c69214]">*</span>
+              </label>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="daysAvailable"
+                    value="Monday"
+                    class="w-4 h-4 text-[#c69214] bg-gray-800 border-gray-700 rounded focus:ring-[#c69214] focus:ring-2"
+                  />
+                  <span class="ml-2 text-gray-300">Monday</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="daysAvailable"
+                    value="Tuesday"
+                    class="w-4 h-4 text-[#c69214] bg-gray-800 border-gray-700 rounded focus:ring-[#c69214] focus:ring-2"
+                  />
+                  <span class="ml-2 text-gray-300">Tuesday</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="daysAvailable"
+                    value="Wednesday"
+                    class="w-4 h-4 text-[#c69214] bg-gray-800 border-gray-700 rounded focus:ring-[#c69214] focus:ring-2"
+                  />
+                  <span class="ml-2 text-gray-300">Wednesday</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="daysAvailable"
+                    value="Thursday"
+                    class="w-4 h-4 text-[#c69214] bg-gray-800 border-gray-700 rounded focus:ring-[#c69214] focus:ring-2"
+                  />
+                  <span class="ml-2 text-gray-300">Thursday</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="daysAvailable"
+                    value="Friday"
+                    class="w-4 h-4 text-[#c69214] bg-gray-800 border-gray-700 rounded focus:ring-[#c69214] focus:ring-2"
+                  />
+                  <span class="ml-2 text-gray-300">Friday</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="daysAvailable"
+                    value="Saturday"
+                    class="w-4 h-4 text-[#c69214] bg-gray-800 border-gray-700 rounded focus:ring-[#c69214] focus:ring-2"
+                  />
+                  <span class="ml-2 text-gray-300">Saturday</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="daysAvailable"
+                    value="Sunday"
+                    class="w-4 h-4 text-[#c69214] bg-gray-800 border-gray-700 rounded focus:ring-[#c69214] focus:ring-2"
+                  />
+                  <span class="ml-2 text-gray-300">Sunday</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div>
+              <label for="additionalInfo" class="block text-sm font-medium text-gray-300 mb-2">
+                Why do you want to become a Chasers DD driver? (Optional)
+              </label>
+              <textarea
+                id="additionalInfo"
+                name="additionalInfo"
+                rows="4"
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#c69214] focus:ring-2 focus:ring-[#c69214]/20 focus:outline-none transition-all resize-none"
+                placeholder="Tell us a bit about yourself and why you'd be a great fit..."
+              ></textarea>
+            </div>
+
+            <!-- reCAPTCHA -->
+            <div class="flex justify-center">
+              <div data-netlify-recaptcha="true"></div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-4">
+              <button
+                type="submit"
+                class="w-full bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-8 py-4 rounded-lg font-bold text-lg hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 transform hover:scale-105"
+              >
+                Submit Application
+              </button>
+            </div>
+
+            <p class="text-sm text-gray-400 text-center">
+              By submitting this form, you agree to be contacted regarding your driver application.
+            </p>
+          </form>
+
+          <!-- Benefits Section -->
+          <div class="mt-12 pt-12 border-t border-gray-700">
+            <h3 class="text-xl font-bold text-white mb-4">Why Drive with Chasers DD?</h3>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="flex items-start space-x-3">
+                <svg class="w-5 h-5 text-[#c69214] mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-300">Flexible Schedule</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <svg class="w-5 h-5 text-[#c69214] mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-300">Competitive Pay</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <svg class="w-5 h-5 text-[#c69214] mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-300">Professional Training</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <svg class="w-5 h-5 text-[#c69214] mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-300">Great Team Culture</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
