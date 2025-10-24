@@ -1,5 +1,9 @@
 import type { APIRoute } from "astro";
 import { getPlanDetailsForNotification } from "../../config/plans.ts";
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
 
 // Enable server-side rendering for this API endpoint
 export const prerender = false;
@@ -400,7 +404,8 @@ export const POST: APIRoute = async ({ request }) => {
             customerId,
             { id: methodToUse, card_ref: paymentMethodId },
             amount,
-            paymentData
+            paymentData,
+            result
           );
           console.log(
             "✅ STEP 4 COMPLETE: Recurring schedule created successfully!"
@@ -786,7 +791,8 @@ async function createRecurringSchedule(
   customerId: number,
   paymentMethodInfo: any,
   amount: number,
-  paymentData: any
+  paymentData: any,
+  transactionResult: any
 ) {
   const credentials = Buffer.from(
     `${ACCEPTBLUE_API_KEY}:${ACCEPTBLUE_PIN}`
@@ -845,18 +851,43 @@ async function createRecurringSchedule(
     console.log("✅ Found payment method ID:", paymentMethodId);
 
     // Step 4b: Create recurring schedule with proper payment_method_id (integer)
+    // Calculate next billing date: 1 month from the original transaction date
+    console.log("🔍 DEBUG: Transaction result fields:", {
+      hasCreatedAt: !!transactionResult.created_at,
+      createdAt: transactionResult.created_at,
+      hasCreatedDate: !!transactionResult.created_date,
+      createdDate: transactionResult.created_date,
+      hasTimestamp: !!transactionResult.timestamp,
+      timestamp: transactionResult.timestamp,
+      allFields: Object.keys(transactionResult)
+    });
+
+    // Get transaction date from nested transaction object if available
+    const transactionDate = transactionResult.transaction?.created_at
+      ? new Date(transactionResult.transaction.created_at)
+      : (transactionResult.created_at
+          ? new Date(transactionResult.created_at)
+          : new Date()); // Fallback to current date if transaction date not available
+
+    const nextBillingDate = new Date(transactionDate);
+    nextBillingDate.setMonth(nextBillingDate.getMonth() + 1);
+    const startDate = nextBillingDate.toISOString().split("T")[0]; // YYYY-MM-DD format
+
+    console.log("📅 Recurring billing date calculation:", {
+      originalTransactionDate: transactionDate.toISOString(),
+      nextBillingDate: nextBillingDate.toISOString(),
+      startDate: startDate,
+      usingFallback: !transactionResult.created_at
+    });
+
     const scheduleRequest = {
       title: `${paymentData.plan?.name || "Membership"} Subscription`, // Required field
-      amount: amount,
+      amount: amount, // MiCamp Blue v2 expects amount in USD, not cents
       frequency: "monthly", // Monthly billing for membership
       payment_method_id: paymentMethodId, // Use integer payment method ID
       description: `${paymentData.plan?.name || "Membership"} - Monthly Recurring`,
-      // Set start date to 1 month from today for next billing cycle
-      start_date: (() => {
-        const nextMonth = new Date();
-        nextMonth.setMonth(nextMonth.getMonth() + 1);
-        return nextMonth.toISOString().split("T")[0]; // YYYY-MM-DD format
-      })()
+      start_date: startDate, // Set to 1 month from original transaction date
+      next_run_date: startDate // Try this field as well in case start_date is ignored
     };
 
     console.log(
