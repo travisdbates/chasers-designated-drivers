@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
-import PlanSummary from '../../components/PlanSummary.astro';
-import SecurePaymentForm from '../../components/SecurePaymentForm.astro';
+import MembershipCheckout from '../../components/MembershipCheckout.astro';
 import { getPlanById } from '../../config/plans.ts';
 
 const selectedPlan = getPlanById('corporate');
@@ -28,17 +27,11 @@ const selectedPlan = getPlanById('corporate');
         </p>
       </div>
 
-      <!-- Plan Summary Section -->
-      <PlanSummary plan={selectedPlan} />
-
-      <!-- Secure Payment Form -->
-      <div class="max-w-4xl mx-auto">
-        <SecurePaymentForm 
-          planId={selectedPlan.id}
-          plan={selectedPlan} 
-          onBack="goBackToMembership"
-        />
-      </div>
+      <!-- Checkout Component -->
+      <MembershipCheckout
+        plan={selectedPlan}
+        onBack="goBackToMembership"
+      />
     </div>
   </main>
 </BaseLayout>

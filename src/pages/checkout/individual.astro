@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
-import PlanSummary from '../../components/PlanSummary.astro';
-import SecurePaymentForm from '../../components/SecurePaymentForm.astro';
+import MembershipCheckout from '../../components/MembershipCheckout.astro';
 import { MEMBERSHIP_PLANS, getPlansByCategory } from '../../config/plans.ts';
 
 const allPlans = Object.fromEntries(
@@ -35,17 +34,11 @@ const selectedPlan = allPlans[planParam] || allPlans['individual'];
         </p>
       </div>
 
-      <!-- Plan Summary Section -->
-      <PlanSummary plan={selectedPlan} />
-
-      <!-- Secure Payment Form -->
-      <div class="max-w-4xl mx-auto">
-        <SecurePaymentForm 
-          planId={selectedPlan.id}
-          plan={selectedPlan} 
-          onBack="goBackToMembership"
-        />
-      </div>
+      <!-- Checkout Component -->
+      <MembershipCheckout
+        plan={selectedPlan}
+        onBack="goBackToMembership"
+      />
     </div>
   </main>
 </BaseLayout>

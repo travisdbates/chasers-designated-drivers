@@ -263,16 +263,13 @@ export async function sendEmailNotificationDirect(data: EmailNotificationData): 
         };
     }
 
-    // Send email via Resend (using test email for sandbox)
-    const testEmail = 'chaserresend@gmail.com';
+    // Send email via Resend
     const { data: emailData, error } = await resend.emails.send({
       from: FROM_EMAIL,
-      to: [testEmail],
+      to: [data.customer.email],
       subject: subject,
       html: emailContent,
     });
-
-    console.log(`Email redirected from ${data.customer.email} to ${testEmail} for testing`);
 
     if (error) {
       console.error('Resend email error:', error);
