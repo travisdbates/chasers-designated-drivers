@@ -69,49 +69,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
         line-height: 1.6;
       }
       
-      /* Loading state styles */
-      .loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease-out;
-      }
-      
-      .loading-spinner {
-        width: 50px;
-        height: 50px;
-        border: 3px solid #2d2d2d;
-        border-top: 3px solid #c69214;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      
-      /* Hide loading overlay when page is loaded */
-      .loaded .loading-overlay {
-        opacity: 0;
-        pointer-events: none;
-      }
     </style>
   </head>
   
   <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loading-overlay">
-      <div class="loading-spinner"></div>
-    </div>
-    
     <!-- Main Content -->
     <main>
       <slot />
@@ -119,16 +80,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
     
     <!-- Scripts -->
     <script>
-      // Remove loading overlay when page is fully loaded
-      window.addEventListener('load', () => {
-        document.body.classList.add('loaded');
-        setTimeout(() => {
-          const overlay = document.getElementById('loading-overlay');
-          if (overlay) {
-            overlay.remove();
-          }
-        }, 500);
-      });
       
       // Smooth scrolling for anchor links
       document.addEventListener('DOMContentLoaded', () => {
