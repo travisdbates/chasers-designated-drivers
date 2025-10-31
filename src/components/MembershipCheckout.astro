@@ -162,8 +162,8 @@ const total = numericPrice + setupFee;
           <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
         </svg>
       </div>
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">Thank You for Your Interest!</h3>
-      <p class="text-gray-600 mb-4">Please call <strong>(480) 695-3659</strong> to complete your membership enrollment. Online payment processing will be available soon!</p>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">Payment Successful!</h3>
+      <p class="text-gray-600 mb-4">Thank you for joining Chasers DD! Your membership is now active and you'll receive confirmation via email and SMS.</p>
       <button 
         onclick="document.getElementById('success-modal').classList.add('hidden')"
         class="bg-gold-primary text-white px-6 py-2 rounded-lg hover:bg-gold-light transition-colors"
@@ -212,15 +212,26 @@ const total = numericPrice + setupFee;
         plan: plan
       };
       
-      // Temporary: Payment processing will be available soon
-      console.log('Payment form submitted:', paymentData);
+      // Process payment through AcceptBlue API
+      console.log('Processing payment:', paymentData);
       
-      // Simulate processing delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Hide processing modal and show success
-      processingModal.classList.add('hidden');
-      successModal.classList.remove('hidden');
+      const response = await fetch('/api/process-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(paymentData)
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Hide processing modal and show success
+        processingModal.classList.add('hidden');
+        successModal.classList.remove('hidden');
+      } else {
+        throw new Error(result.error || 'Payment failed');
+      }
       
     } catch (error) {
       processingModal.classList.add('hidden');

@@ -2,15 +2,13 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
-import node from '@astrojs/node';
+import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://chasersdd.com',
-  output: 'static', // Static generation for hosting
-  // adapter: node({
-  //   mode: 'standalone'
-  // }),
+  output: 'server', // Server-side rendering for API routes
+  adapter: netlify(),
   integrations: [react(), tailwind()],
   server: {
     host: true,

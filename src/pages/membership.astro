@@ -1,137 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
+import { getAllPlans } from '../config/plans.ts';
 
-const membershipPlans = [
-  {
-    id: 'standard-individual',
-    name: 'Standard Individual',
-    description: 'Safe, on-demand transportation home',
-    price: '$59.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
-      'Covers the member only',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      '3-month minimum commitment'
-    ],
-    popular: false,
-    ctaText: 'Join Standard Plan',
-    ctaUrl: '/checkout/individual'
-  },
-  {
-    id: 'individual',
-    name: 'Individual Premier',
-    description: 'Added flexibility and perks for frequent riders',
-    price: '$89.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Everything in Standard Plan, plus:',
-      'Ability to request driver for friend/client (must be present)',
-      'Unlimited ride requests',
-      'Covers you alone',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-    ],
-    popular: true,
-    ctaText: 'Join Premier Plan',
-    ctaUrl: '/checkout/individual'
-  },
-  {
-    id: 'joint',
-    name: 'Joint Plan',
-    description: 'Reliable transportation for two people',
-    price: '$89.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
-      'Covers member and one additional person',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      '3-month minimum commitment'
-    ],
-    popular: false,
-    ctaText: 'Join Joint Plan',
-    ctaUrl: '/checkout/joint'
-  },
-  {
-    id: 'joint-premier',
-    name: 'Joint Premier',
-    description: 'Enhanced flexibility and premium access for couples',
-    price: '$149.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Everything in Joint Plan, plus:',
-      'Ability to request driver for friend/client (one registered member must be present)',
-      'Unlimited ride requests',
-      'Covers member and one additional person',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-    ],
-    popular: false,
-    ctaText: 'Join Joint Premier',
-    ctaUrl: '/checkout/joint'
-  },
-  {
-    id: 'family',
-    name: 'Friends & Family',
-    description: 'Perfect for up to 4 individuals in households or groups',
-    price: '$249.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
-      'Covers up to 4 approved adult drivers',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      'Only approved drivers may use the plan'
-    ],
-    popular: false,
-    ctaText: 'Join Family Plan',
-    ctaUrl: '/checkout/family'
-  },
-  {
-    id: 'business',
-    name: 'Business Plan',
-    description: 'Safe transportation for business staff and team members',
-    price: '$599.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Covers up to 10 approved individuals',
-      'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
-      'Car Retrieval services (get vehicle from A to B)',
-      'Chauffeur in your vehicles service',
-      '3PM - 3AM availability, 7 days a week',
-      'Pay by cash, card, or charge to company account'
-    ],
-    popular: false,
-    ctaText: 'Join Business Plan',
-    ctaUrl: '/checkout/business'
-  },
-  {
-    id: 'business-premier',
-    name: 'Business Premier',
-    description: 'Flexibility to serve employees, clients and out-of-town guests',
-    price: '$699.99',
-    priceSubtext: '/month + $40 trip fee per ride',
-    features: [
-      'Everything in Business Plan, plus:',
-      'Covers up to 10 approved individuals + unlimited client requests',
-      'Ability to request rides for clients and guests',
-      'No need for clients to be on approved list',
-      '3PM - 3AM availability, 7 days a week',
-      'Service available outside normal hours (by appointment)',
-      'Pay by cash, card, or charge to company account'
-    ],
-    popular: false,
-    ctaText: 'Join Business Premier',
-    ctaUrl: '/checkout/business'
-  }
-];
+const membershipPlans = getAllPlans();
 
 const serviceAddOns = [
   {
@@ -278,7 +150,7 @@ const serviceAddOns = [
               </div>
 
               <ul class="space-y-3 lg:space-y-4 mb-6 lg:mb-8 flex-grow">
-                {plan.features.map((feature) => (
+                {plan.features.filter(feature => !feature.startsWith('Everything in')).map((feature) => (
                   <li class="flex items-start text-gray-300">
                     <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -290,8 +162,8 @@ const serviceAddOns = [
 
               {plan.id === 'individual' && (
                 <div class="mb-4">
-                  <a 
-                    href="/individual-premier" 
+                  <a
+                    href="/individual-premier"
                     class="block w-full text-center py-3 px-6 rounded-lg font-semibold bg-transparent border-2 border-[#c69214] text-[#c69214] hover:bg-[#c69214] hover:text-black transition-all duration-300"
                   >
                     Learn More About Premier
@@ -299,7 +171,14 @@ const serviceAddOns = [
                 </div>
               )}
 
-              <div class="relative block w-full text-center py-4 px-6 rounded-xl font-bold cursor-not-allowed bg-gray-400 text-gray-600 opacity-75 group">
+              <a
+                href={plan.ctaUrl}
+                class={`block w-full text-center py-4 px-6 rounded-xl font-bold transition-all duration-300 ${
+                  plan.popular
+                    ? 'bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black hover:from-[#b8841c] hover:to-[#a67619] transform hover:scale-105'
+                    : 'bg-gradient-to-r from-gray-700 to-gray-800 text-white hover:from-[#c69214] hover:to-[#b8841c] hover:text-black'
+                }`}
+              >
                 {plan.ctaText.includes('Plan') ? (
                   <>
                     <span class="block">{plan.ctaText.replace(' Plan', '')}</span>
@@ -308,10 +187,7 @@ const serviceAddOns = [
                 ) : (
                   <span class="block">{plan.ctaText}</span>
                 )}
-                <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap z-10">
-                  Please call (480) 695-3659 to sign up
-                </div>
-              </div>
+              </a>
             </div>
           ))}
         </div>
