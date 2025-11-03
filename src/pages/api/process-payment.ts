@@ -460,10 +460,15 @@ export const POST: APIRoute = async ({ request }) => {
         "===============================================================\n"
       );
 
+      // Get transaction ID from multiple possible locations
+      const transactionId = result.id || result.transaction_id || result.reference_number || 'N/A';
+      console.log("📧 Sending notifications with transaction ID:", transactionId);
+
       // Send notifications (don't block payment response if notifications fail)
       Promise.all([
-        sendEmailNotifications(paymentData, result.id, amount),
-        sendSMSNotifications(paymentData, result.id, amount),
+        sendEmailNotifications(paymentData, transactionId, amount),
+        sendSMSNotifications(paymentData, transactionId, amount),
+        sendAdminSignupNotification(paymentData, transactionId, amount),
       ]).catch((error) => {
         console.error("Notification sending failed (non-blocking):", error);
       });
@@ -471,7 +476,7 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(
         JSON.stringify({
           success: true,
-          transactionId: result.id,
+          transactionId: transactionId,
           customerId: customerId,
           message: "Payment processed successfully",
           customer: {
@@ -1145,5 +1150,64 @@ async function sendSMSNotifications(
   } catch (error) {
     console.error("SMS notification error:", error);
     // Don't throw - payment was successful even if notifications failed
+  }
+}
+
+// Helper function to send admin signup notification
+async function sendAdminSignupNotification(
+  paymentData: any,
+  transactionId: string,
+  amount: number
+) {
+  try {
+    console.log("🔔 Preparing admin signup notification...");
+    console.log("📋 Transaction ID received:", transactionId);
+    console.log("💰 Amount:", amount);
+
+    const { sendAdminSignupNotification } = await import(
+      "./notification-services.js"
+    );
+
+    // Get centralized plan details
+    const planDetails = getPlanDetailsForNotification(paymentData.planId);
+
+    const adminNotificationData = {
+      signupType: "member" as const,
+      customer: {
+        firstName: paymentData.customer.firstName,
+        lastName: paymentData.customer.lastName,
+        email: paymentData.customer.email,
+        phone: paymentData.customer.phone,
+      },
+      transaction: {
+        id: transactionId,
+        amount: amount,
+        planName: planDetails?.name || paymentData.plan?.name,
+        planId: paymentData.planId,
+      },
+      billingAddress: {
+        street: paymentData.customer.address,
+        city: paymentData.customer.city,
+        state: paymentData.customer.state,
+        zip: paymentData.customer.zipCode,
+      },
+      marketingConsent: paymentData.marketing?.emailConsent || paymentData.marketing?.smsConsent,
+      timestamp: new Date(),
+    };
+
+    console.log("📧 Admin notification data prepared:", JSON.stringify(adminNotificationData, null, 2));
+
+    const result = await sendAdminSignupNotification(adminNotificationData);
+
+    if (result.success) {
+      console.log("Admin signup notification sent successfully");
+    } else if (result.skipped) {
+      console.log("Admin signup notification skipped:", result.message);
+    } else {
+      console.error("Admin signup notification failed:", result.error);
+    }
+  } catch (error) {
+    console.error("Admin signup notification error:", error);
+    // Don't throw - payment was successful even if admin notification failed
   }
 }
