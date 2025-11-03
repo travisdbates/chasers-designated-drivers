@@ -98,9 +98,56 @@ const ACCEPTBLUE_ENVIRONMENT =
           <label for="state" class="form-label">State</label>
           <select id="state" name="state" required class="form-input w-full">
             <option value="">Select State</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
             <option value="AZ" selected>Arizona</option>
+            <option value="AR">Arkansas</option>
             <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
             <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
           </select>
         </div>
         <div>
@@ -137,7 +184,7 @@ const ACCEPTBLUE_ENVIRONMENT =
               type="text"
               id="fallback-card-number"
               name="cardNumber"
-              placeholder="4111111111111111"
+              placeholder="1234 5678 9012 3456"
               maxlength="19"
               class="form-input w-full"
               autocomplete="cc-number"
@@ -237,29 +284,10 @@ const ACCEPTBLUE_ENVIRONMENT =
         </label>
       </div>
 
-      <!-- SMS Marketing Consent -->
-      <div class="flex items-start mb-4">
-        <input
-          type="checkbox"
-          id="smsMarketingConsent"
-          name="smsMarketingConsent"
-          class="h-4 w-4 text-gold-primary focus:ring-gold-primary border-gray-300 rounded mt-1"
-        />
-        <label for="smsMarketingConsent" class="ml-2 text-sm text-gray-700">
-          <strong>SMS Marketing:</strong> I consent to receive promotional text messages,
-          ride reminders, special offers, and service notifications from Chasers
-          DD at the phone number provided. I understand that message and data rates
-          may apply and I can opt out at any time by replying STOP.
-          <a href="/sms-terms" class="text-gold-primary hover:underline"
-            >SMS Terms & Conditions</a
-          >
-        </label>
-      </div>
-
       <p class="text-xs text-gray-500 mb-4">
-        <strong>Note:</strong> These marketing preferences are optional. You will
-        still receive transactional emails and SMS messages (like payment confirmations
-        and service updates) regardless of these settings, as they are necessary
+        <strong>Note:</strong> This marketing preference is optional. You will
+        still receive transactional emails (like payment confirmations
+        and service updates) regardless of this setting, as they are necessary
         for our service.
       </p>
     </div>
@@ -479,6 +507,73 @@ const ACCEPTBLUE_ENVIRONMENT =
     const submitButton = document.getElementById("submit-payment");
     const submitText = document.getElementById("submit-text");
     const loadingText = document.getElementById("loading-text");
+
+    // Get payment field elements
+    const cardNumberInput = document.getElementById("fallback-card-number");
+    const expiryInput = document.getElementById("fallback-expiry");
+
+    // Format card number with spaces (groups of 4)
+    function formatCardNumber(value) {
+      // Remove all non-digit characters
+      const digits = value.replace(/\D/g, "");
+      // Add space after every 4 digits
+      const formatted = digits.match(/.{1,4}/g)?.join(" ") || digits;
+      return formatted.substring(0, 19); // Max 16 digits + 3 spaces = 19 chars
+    }
+
+    // Format expiration date with slash (MM/YY)
+    function formatExpiry(value) {
+      // Remove all non-digit characters
+      const digits = value.replace(/\D/g, "");
+
+      if (digits.length === 0) return "";
+      if (digits.length <= 2) return digits;
+
+      // Add slash after MM
+      return digits.substring(0, 2) + "/" + digits.substring(2, 4);
+    }
+
+    // Add formatting to card number field
+    if (cardNumberInput) {
+      cardNumberInput.addEventListener("input", (e) => {
+        const cursorPosition = e.target.selectionStart;
+        const oldValue = e.target.value;
+        const oldLength = oldValue.length;
+
+        e.target.value = formatCardNumber(e.target.value);
+
+        const newLength = e.target.value.length;
+        const diff = newLength - oldLength;
+
+        // Adjust cursor position if we added a space
+        if (diff > 0 && cursorPosition === oldLength) {
+          e.target.setSelectionRange(cursorPosition + diff, cursorPosition + diff);
+        } else {
+          e.target.setSelectionRange(cursorPosition, cursorPosition);
+        }
+      });
+    }
+
+    // Add formatting to expiry field
+    if (expiryInput) {
+      expiryInput.addEventListener("input", (e) => {
+        const cursorPosition = e.target.selectionStart;
+        const oldValue = e.target.value;
+        const oldLength = oldValue.length;
+
+        e.target.value = formatExpiry(e.target.value);
+
+        const newLength = e.target.value.length;
+        const diff = newLength - oldLength;
+
+        // Adjust cursor position if we added a slash
+        if (diff > 0 && cursorPosition === oldLength) {
+          e.target.setSelectionRange(cursorPosition + diff, cursorPosition + diff);
+        } else {
+          e.target.setSelectionRange(cursorPosition, cursorPosition);
+        }
+      });
+    }
 
     // Enable submit button when all required fields are filled
     const requiredFields = form.querySelectorAll(
