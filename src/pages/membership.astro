@@ -1,41 +1,44 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
-import { getAllPlans } from '../config/plans.ts';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
+import { getAllPlans } from "../config/plans.ts";
 
 const membershipPlans = getAllPlans();
 
 const serviceAddOns = [
   {
-    name: 'Car Concierge Services',
-    description: 'Car retrieval, fuel fill-ups, washes, maintenance appointments',
-    icon: '🚗'
+    name: "Car Concierge Services",
+    description:
+      "Car retrieval, fuel fill-ups, washes, maintenance appointments",
+    icon: "🚗",
   },
   {
-    name: 'Chauffeur in Your Car',
-    description: 'Professional driver in your own vehicle ($40/hr members, $60/hr non-members)',
-    icon: '🤵'
+    name: "Chauffeur in Your Car",
+    description:
+      "Professional driver in your own vehicle ($40/hr members, $60/hr non-members)",
+    icon: "🤵",
   },
   {
-    name: 'Luxury Transportation',
-    description: 'SUV, Sprinter Van, airport transfers and concierge services',
-    icon: '✈️'
+    name: "Luxury Transportation",
+    description: "SUV, Sprinter Van, airport transfers and concierge services",
+    icon: "✈️",
   },
   {
-    name: 'Gift Memberships',
-    description: 'Give the gift of safe transportation to someone you care about',
-    icon: '🎁'
-  }
+    name: "Gift Memberships",
+    description:
+      "Give the gift of safe transportation to someone you care about",
+    icon: "🎁",
+  },
 ];
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Membership Plans - Chasers DD Luxury Service"
-  description="Choose from our premium membership tiers: Individual, Joint, Friends & Family, or Corporate. Professional designated driver service with luxury vehicles and 24/7 availability."
+  description="Choose from our premium membership tiers: Individual, Joint, Friends & Family, or Corporate. Professional designated driver service with luxury vehicles and high availability."
   keywords="membership plans, luxury transportation, designated driver membership, premium service tiers, corporate transportation"
 >
   <Navigation />
-  
+
   <main class="min-h-screen bg-gradient-to-b from-black via-[#212322] to-black">
     <!-- Hero Section -->
     <section class="pt-32 pb-16 px-2 sm:px-3 lg:px-4">
@@ -44,13 +47,21 @@ const serviceAddOns = [
           <span class="font-serif">Premiere</span>
           <span class="text-[#c69214] ml-3">Membership</span>
         </h1>
-        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6">
-          We drive you home in your own vehicle. Often cheaper than taxi service 
-          with the convenience and affordability that makes it almost a necessity.
+        <p
+          class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6"
+        >
+          We get you AND your vehicle home.
         </p>
-        <div class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-6 max-w-2xl mx-auto">
-          <p class="text-lg text-[#c69214] font-semibold mb-2">Service Hours: 3PM - 3AM Daily</p>
-          <p class="text-gray-300">Greater Phoenix Area | Call (480) 695-3659 | memberships@chasersdd.com</p>
+        <div
+          class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-6 max-w-2xl mx-auto"
+        >
+          <p class="text-lg text-[#c69214] font-semibold mb-2">
+            Service Hours: 3PM - 3AM Daily
+          </p>
+          <p class="text-gray-300">
+            Greater Phoenix Area | Call (480) 695-3659 |
+            memberships@chasersdd.com
+          </p>
         </div>
       </div>
     </section>
@@ -58,62 +69,137 @@ const serviceAddOns = [
     <!-- Plan Information Section -->
     <section class="py-8 px-2 sm:px-3 lg:px-4">
       <div class="max-w-5xl mx-auto">
-        <div class="bg-gradient-to-br from-[#212322]/50 to-[#212322]/50 rounded-2xl p-8 border border-gray-700">
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-center" style="font-family: 'Louize Display', serif;">
+        <div
+          class="bg-gradient-to-br from-[#212322]/50 to-[#212322]/50 rounded-2xl p-8 border border-gray-700"
+        >
+          <h2
+            class="text-3xl md:text-4xl font-bold text-white mb-6 text-center"
+            style="font-family: 'Louize Display', serif;"
+          >
             Membership Plans
           </h2>
 
           <p class="text-lg text-gray-300 mb-8 leading-relaxed text-center">
-            At Chasers Designated Drivers, each of our plans is designed to provide you with our most professional and experienced drivers. No matter which membership you choose, you will enjoy peace of mind knowing we get you AND your vehicle home safely.
+            At Chasers Designated Drivers, each of our plans is designed to
+            provide you with our most professional and experienced drivers. No
+            matter which membership you choose, you will enjoy peace of mind
+            knowing we get you AND your vehicle home safely.
           </p>
 
           <div class="grid md:grid-cols-2 gap-8 mb-8">
             <!-- Standard Benefits -->
             <div class="bg-gray-800/30 rounded-xl p-6 border border-gray-700">
-              <h3 class="text-xl font-bold text-[#c69214] mb-4">Standard Benefits of All Plans</h3>
+              <h3 class="text-xl font-bold text-[#c69214] mb-4">
+                Standard Benefits of All Plans
+              </h3>
               <ul class="space-y-3 text-gray-300">
                 <li class="flex items-start">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
                   </svg>
-                  <span><strong>Unlimited Requests:</strong> Members may request rides multiple times per day and as often as needed throughout the month.</span>
+                  <span
+                    ><strong>Unlimited Requests:</strong> Members may request rides
+                    multiple times per day and as often as needed throughout the
+                    month.</span
+                  >
                 </li>
                 <li class="flex items-start">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
                   </svg>
-                  <span><strong>Trip Fee:</strong> Each ride has a $40 trip fee plus gratuity, charged per use.</span>
+                  <span
+                    ><strong>Trip Fee:</strong> Each ride has a $40 trip fee plus
+                    gratuity, charged per use.</span
+                  >
                 </li>
                 <li class="flex items-start">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
                   </svg>
-                  <span><strong>Driver Service:</strong> A ChasersDD driver arrives, drives you safely home in your own vehicle, and ensures your car is parked where you want it.</span>
+                  <span
+                    ><strong>Driver Service:</strong> A ChasersDD driver arrives,
+                    drives you safely home in your own vehicle, and ensures your
+                    car is parked where you want it.</span
+                  >
                 </li>
                 <li class="flex items-start">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
                   </svg>
-                  <span><strong>Flexible Payment:</strong> Pay in cash, or charge directly to your membership account.</span>
+                  <span
+                    ><strong>Flexible Payment:</strong> Pay in cash, or charge directly
+                    to your membership account.</span
+                  >
                 </li>
               </ul>
             </div>
 
             <!-- Additional Fees -->
             <div class="bg-gray-800/30 rounded-xl p-6 border border-gray-700">
-              <h3 class="text-xl font-bold text-[#c69214] mb-4">Additional Fees (applies to all plans)</h3>
+              <h3 class="text-xl font-bold text-[#c69214] mb-4">
+                Additional Fees (applies to all plans)
+              </h3>
               <ul class="space-y-3 text-gray-300">
                 <li class="flex items-start">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                      clip-rule="evenodd"></path>
                   </svg>
-                  <span><strong>Extended Wait Time:</strong> After a 30-minute grace period, $20 is charged per additional 30 minutes. If no communication occurs after 1 hour, a $40 wait charge applies.</span>
+                  <span
+                    ><strong>Extended Wait Time:</strong> After a 30-minute grace
+                    period, $20 is charged per additional 30 minutes. If no communication
+                    occurs after 1 hour, a $40 wait charge applies.</span
+                  >
                 </li>
                 <li class="flex items-start">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                      clip-rule="evenodd"></path>
                   </svg>
-                  <span><strong>Additional Stops or Drop-Offs:</strong> $20 per extra stop/drop, regardless of distance.</span>
+                  <span
+                    ><strong>Additional Stops or Drop-Offs:</strong> $20 per extra
+                    stop/drop, regardless of distance.</span
+                  >
                 </li>
               </ul>
             </div>
@@ -126,70 +212,93 @@ const serviceAddOns = [
     <section class="py-16 px-2 sm:px-3 lg:px-4">
       <div class="max-w-7xl mx-auto">
         <div class="flex flex-wrap justify-center gap-6 lg:gap-8">
-          {membershipPlans.map((plan) => (
-            <div id={plan.id} class={`relative bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-6 lg:p-8 border transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col w-full max-w-sm ${
-              plan.popular 
-                ? 'border-[#c69214] shadow-lg shadow-[#c69214]/20' 
-                : 'border-gray-700 hover:border-[#c69214]/50'
-            }`}>
-              {plan.popular && (
-                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap">
-                    MOST POPULAR
-                  </span>
-                </div>
-              )}
-              
-              <div class="text-center mb-6 lg:mb-8">
-                <h3 class="text-xl lg:text-2xl font-bold text-white mb-2 font-serif">{plan.name}</h3>
-                <p class="text-gray-400 text-sm mb-4">{plan.description}</p>
-                <div class="text-2xl font-bold text-[#c69214] mb-2">{plan.price}</div>
-                {plan.priceSubtext && (
-                  <p class="text-sm text-gray-500 mb-4">{plan.priceSubtext}</p>
-                )}
-              </div>
-
-              <ul class="space-y-3 lg:space-y-4 mb-6 lg:mb-8 flex-grow">
-                {plan.features.filter(feature => !feature.startsWith('Everything in')).map((feature) => (
-                  <li class="flex items-start text-gray-300">
-                    <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="text-sm leading-relaxed">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {plan.id === 'individual' && (
-                <div class="mb-4">
-                  <a
-                    href="/individual-premier"
-                    class="block w-full text-center py-3 px-6 rounded-lg font-semibold bg-transparent border-2 border-[#c69214] text-[#c69214] hover:bg-[#c69214] hover:text-black transition-all duration-300"
-                  >
-                    Learn More About Premier
-                  </a>
-                </div>
-              )}
-
-              <a
-                href={plan.ctaUrl}
-                class={`block w-full text-center py-4 px-6 rounded-xl font-bold transition-all duration-300 ${
+          {
+            membershipPlans.map((plan) => (
+              <div
+                id={plan.id}
+                class={`relative bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-6 lg:p-8 border transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col w-full max-w-sm ${
                   plan.popular
-                    ? 'bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black hover:from-[#b8841c] hover:to-[#a67619] transform hover:scale-105'
-                    : 'bg-gradient-to-r from-gray-700 to-gray-800 text-white hover:from-[#c69214] hover:to-[#b8841c] hover:text-black'
+                    ? "border-[#c69214] shadow-lg shadow-[#c69214]/20"
+                    : "border-gray-700 hover:border-[#c69214]/50"
                 }`}
               >
-                {plan.ctaText.includes('Plan') ? (
-                  <>
-                    <span class="block">{plan.ctaText.replace(' Plan', '')}</span>
-                    <span class="block">Plan</span>
-                  </>
-                ) : (
-                  <span class="block">{plan.ctaText}</span>
+                {plan.popular && (
+                  <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap">
+                      MOST POPULAR
+                    </span>
+                  </div>
                 )}
-              </a>
-            </div>
-          ))}
+
+                <div class="text-center mb-6 lg:mb-8">
+                  <h3 class="text-xl lg:text-2xl font-bold text-white mb-2 font-serif">
+                    {plan.name}
+                  </h3>
+                  <p class="text-gray-400 text-sm mb-4">{plan.description}</p>
+                  <div class="text-2xl font-bold text-[#c69214] mb-2">
+                    {plan.price}
+                  </div>
+                  {plan.priceSubtext && (
+                    <p class="text-sm text-gray-500 mb-4">
+                      {plan.priceSubtext}
+                    </p>
+                  )}
+                </div>
+
+                <ul class="space-y-3 lg:space-y-4 mb-6 lg:mb-8 flex-grow">
+                  {plan.features
+                    .filter((feature) => !feature.startsWith("Everything in"))
+                    .map((feature) => (
+                      <li class="flex items-start text-gray-300">
+                        <svg
+                          class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                        <span class="text-sm leading-relaxed">{feature}</span>
+                      </li>
+                    ))}
+                </ul>
+
+                {plan.id === "individual" && (
+                  <div class="mb-4">
+                    <a
+                      href="/individual-premier"
+                      class="block w-full text-center py-3 px-6 rounded-lg font-semibold bg-transparent border-2 border-[#c69214] text-[#c69214] hover:bg-[#c69214] hover:text-black transition-all duration-300"
+                    >
+                      Learn More About Premier
+                    </a>
+                  </div>
+                )}
+
+                <a
+                  href={plan.ctaUrl}
+                  class={`block w-full text-center py-4 px-6 rounded-xl font-bold transition-all duration-300 ${
+                    plan.popular
+                      ? "bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black hover:from-[#b8841c] hover:to-[#a67619] transform hover:scale-105"
+                      : "bg-gradient-to-r from-gray-700 to-gray-800 text-white hover:from-[#c69214] hover:to-[#b8841c] hover:text-black"
+                  }`}
+                >
+                  {plan.ctaText.includes("Plan") ? (
+                    <>
+                      <span class="block">
+                        {plan.ctaText.replace(" Plan", "")}
+                      </span>
+                      <span class="block">Plan</span>
+                    </>
+                  ) : (
+                    <span class="block">{plan.ctaText}</span>
+                  )}
+                </a>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -207,13 +316,15 @@ const serviceAddOns = [
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {serviceAddOns.map((addon) => (
-            <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-6 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 hover:scale-105 text-center">
-              <div class="text-4xl mb-4">{addon.icon}</div>
-              <h3 class="text-lg font-bold text-white mb-2">{addon.name}</h3>
-              <p class="text-gray-400 text-sm">{addon.description}</p>
-            </div>
-          ))}
+          {
+            serviceAddOns.map((addon) => (
+              <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-6 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 hover:scale-105 text-center">
+                <div class="text-4xl mb-4">{addon.icon}</div>
+                <h3 class="text-lg font-bold text-white mb-2">{addon.name}</h3>
+                <p class="text-gray-400 text-sm">{addon.description}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -225,17 +336,18 @@ const serviceAddOns = [
           Ready to Experience <span class="text-[#c69214]">Luxury?</span>
         </h2>
         <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          Join the owner-operated service that really cares. Professional, discrete, and often cheaper than traditional alternatives.
+          Join the owner-operated service that really cares. Professional,
+          discrete, and often cheaper than traditional alternatives.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a 
-            href="/contact" 
+          <a
+            href="/contact"
             class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-8 py-4 rounded-xl font-bold hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 transform hover:scale-105"
           >
             Contact Us Today
           </a>
-          <a 
-            href="/how-it-works" 
+          <a
+            href="/how-it-works"
             class="bg-gradient-to-r from-gray-700 to-gray-800 text-white px-8 py-4 rounded-xl font-bold hover:from-[#c69214] hover:to-[#b8841c] hover:text-black transition-all duration-300"
           >
             Learn How It Works

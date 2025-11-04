@@ -1,61 +1,65 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
 
 const teamValues = [
   {
-    icon: '🛡️',
-    title: 'Safety First',
-    description: 'Every driver is thoroughly vetted, licensed, and insured. Your safety is our top priority.'
+    icon: "🛡️",
+    title: "Safety First",
+    description:
+      "Every driver is thoroughly vetted, licensed, and insured. Your safety is our top priority.",
   },
   {
-    icon: '✨',
-    title: 'Luxury Experience',
-    description: 'From premium vehicles to white-glove service, we deliver excellence in every detail.'
+    icon: "✨",
+    title: "Luxury Experience",
+    description:
+      "From premium vehicles to white-glove service, we deliver excellence in every detail.",
   },
   {
-    icon: '🤝',
-    title: 'Trust & Reliability',
-    description: 'Built on trust, powered by reliability. We\'re here when you need us, every time.'
+    icon: "🤝",
+    title: "Trust & Reliability",
+    description:
+      "Built on trust, powered by reliability. We're here when you need us, every time.",
   },
   {
-    icon: '🎯',
-    title: 'Professional Excellence',
-    description: 'Our team maintains the highest standards of professionalism and service quality.'
-  }
+    icon: "🎯",
+    title: "Professional Excellence",
+    description:
+      "Our team maintains the highest standards of professionalism and service quality.",
+  },
 ];
 
 const companyStats = [
   {
-    number: '5+',
-    label: 'Years of Service',
-    description: 'Established excellence in luxury transportation'
+    number: "5+",
+    label: "Years of Service",
+    description: "Established excellence in luxury transportation",
   },
   {
-    number: '1000+',
-    label: 'Safe Rides',
-    description: 'Completed with perfect safety record'
+    number: "1000+",
+    label: "Safe Rides",
+    description: "Completed with perfect safety record",
   },
   {
-    number: '24/7',
-    label: 'Availability',
-    description: 'Round-the-clock premium service'
+    number: "High",
+    label: "Availability",
+    description: "Premium service when you need it",
   },
   {
-    number: '100%',
-    label: 'Licensed Drivers',
-    description: 'Fully certified and insured professionals'
-  }
+    number: "100%",
+    label: "Licensed Drivers",
+    description: "Fully certified and insured professionals",
+  },
 ];
 ---
 
-<BaseLayout 
+<BaseLayout
   title="About Us - Chasers DD Professional Team"
   description="Learn about Chasers DD's mission to provide luxury designated driver services. Professional team, safety-first approach, and commitment to excellence in Arizona."
   keywords="about us, luxury transportation team, professional drivers, designated driver company, Arizona transportation service"
 >
   <Navigation />
-  
+
   <main class="min-h-screen bg-gradient-to-b from-black via-[#212322] to-black">
     <!-- Hero Section -->
     <section class="pt-32 pb-16 px-2 sm:px-3 lg:px-4">
@@ -64,9 +68,12 @@ const companyStats = [
           <span class="font-serif">About</span>
           <span class="text-[#c69214] ml-3">Chasers DD</span>
         </h1>
-        <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-          Founded on the principles of safety, luxury, and reliability, Chasers DD sets the standard 
-          for premium designated driver services in Arizona.
+        <p
+          class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
+        >
+          Founded on the principles of safety, luxury, and reliability, Chasers
+          DD sets the standard for premium designated driver services in
+          Arizona.
         </p>
       </div>
     </section>
@@ -76,40 +83,55 @@ const companyStats = [
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-serif">
+            <h2
+              class="text-3xl md:text-4xl font-bold text-white mb-6 font-serif"
+            >
               Our <span class="text-[#c69214]">Story</span>
             </h2>
             <div class="space-y-6 text-gray-300 leading-relaxed">
               <p class="text-lg">
-                Chasers DD was born from a simple yet powerful vision: to provide Arizona with a 
-                premium designated driver service that combines luxury, safety, and professionalism 
-                in ways never experienced before.
+                Chasers DD was born from a simple yet powerful vision: to
+                provide Arizona with a premium designated driver service that
+                combines luxury, safety, and professionalism in ways never
+                experienced before.
               </p>
               <p>
-                We recognized that discerning clients deserve more than just a ride – they deserve 
-                an experience. From our meticulously maintained luxury vehicle fleet to our 
-                rigorously trained professional drivers, every aspect of our service reflects 
-                our commitment to excellence.
+                We recognized that discerning clients deserve more than just a
+                ride – they deserve an experience. From our meticulously
+                maintained luxury vehicle fleet to our rigorously trained
+                professional drivers, every aspect of our service reflects our
+                commitment to excellence.
               </p>
               <p>
-                Today, we proudly serve individuals, couples, families, and corporations who 
-                value their safety, time, and peace of mind. Our members trust us with their most 
-                important occasions, and we honor that trust with unwavering dedication to 
-                professional service.
+                Today, we proudly serve individuals, couples, families, and
+                corporations who value their safety, time, and peace of mind.
+                Our members trust us with their most important occasions, and we
+                honor that trust with unwavering dedication to professional
+                service.
               </p>
             </div>
           </div>
-          
-          <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-8 border border-gray-700">
-            <h3 class="text-2xl font-bold text-white mb-6 font-serif">Company Statistics</h3>
+
+          <div
+            class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-8 border border-gray-700"
+          >
+            <h3 class="text-2xl font-bold text-white mb-6 font-serif">
+              Company Statistics
+            </h3>
             <div class="grid grid-cols-2 gap-6">
-              {companyStats.map((stat) => (
-                <div class="text-center">
-                  <div class="text-3xl font-bold text-[#c69214] mb-2">{stat.number}</div>
-                  <div class="text-white font-semibold mb-1">{stat.label}</div>
-                  <div class="text-gray-400 text-sm">{stat.description}</div>
-                </div>
-              ))}
+              {
+                companyStats.map((stat) => (
+                  <div class="text-center">
+                    <div class="text-3xl font-bold text-[#c69214] mb-2">
+                      {stat.number}
+                    </div>
+                    <div class="text-white font-semibold mb-1">
+                      {stat.label}
+                    </div>
+                    <div class="text-gray-400 text-sm">{stat.description}</div>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -129,13 +151,15 @@ const companyStats = [
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {teamValues.map((value) => (
-            <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-8 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 hover:scale-105 text-center">
-              <div class="text-4xl mb-4">{value.icon}</div>
-              <h3 class="text-xl font-bold text-white mb-4">{value.title}</h3>
-              <p class="text-gray-300 leading-relaxed">{value.description}</p>
-            </div>
-          ))}
+          {
+            teamValues.map((value) => (
+              <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-8 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 hover:scale-105 text-center">
+                <div class="text-4xl mb-4">{value.icon}</div>
+                <h3 class="text-xl font-bold text-white mb-4">{value.title}</h3>
+                <p class="text-gray-300 leading-relaxed">{value.description}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -143,14 +167,19 @@ const companyStats = [
     <!-- Mission Statement -->
     <section class="py-16 px-2 sm:px-3 lg:px-4">
       <div class="max-w-4xl mx-auto text-center">
-        <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-12 border border-gray-700">
+        <div
+          class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-12 border border-gray-700"
+        >
           <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 font-serif">
             Our <span class="text-[#c69214]">Mission</span>
           </h2>
-          <blockquote class="text-xl md:text-2xl text-gray-300 leading-relaxed italic">
-            "To provide Arizona's most discerning clients with unparalleled luxury transportation 
-            services, ensuring every journey is safe, comfortable, and memorable. We are committed 
-            to setting the highest standards in professional driver services while building lasting 
+          <blockquote
+            class="text-xl md:text-2xl text-gray-300 leading-relaxed italic"
+          >
+            "To provide Arizona's most discerning clients with unparalleled
+            luxury transportation services, ensuring every journey is safe,
+            comfortable, and memorable. We are committed to setting the highest
+            standards in professional driver services while building lasting
             relationships based on trust, reliability, and excellence."
           </blockquote>
         </div>
@@ -162,104 +191,191 @@ const companyStats = [
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-serif">
+            <h2
+              class="text-3xl md:text-4xl font-bold text-white mb-6 font-serif"
+            >
               Join Our <span class="text-[#c69214]">Team</span>
             </h2>
             <div class="space-y-6 text-gray-300 leading-relaxed">
               <p class="text-lg">
-                Are you a professional driver who values excellence and takes pride in providing 
-                exceptional service? We're always looking for qualified drivers to join our 
-                elite team.
+                Are you a professional driver who values excellence and takes
+                pride in providing exceptional service? We're always looking for
+                qualified drivers to join our elite team.
               </p>
               <p>
-                Our drivers enjoy competitive compensation, flexible scheduling, and the satisfaction 
-                of working with Arizona's premier luxury transportation service. We provide ongoing 
-                training, professional development, and a supportive work environment.
+                Our drivers enjoy competitive compensation, flexible scheduling,
+                and the satisfaction of working with Arizona's premier luxury
+                transportation service. We provide ongoing training,
+                professional development, and a supportive work environment.
               </p>
             </div>
-            
+
             <div class="mt-8">
-              <h3 class="text-xl font-bold text-white mb-4">Driver Requirements:</h3>
+              <h3 class="text-xl font-bold text-white mb-4">
+                Driver Requirements:
+              </h3>
               <ul class="space-y-3">
                 <li class="flex items-start text-gray-300">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
                   </svg>
-                  <span>Valid Arizona driver's license (5+ years experience)</span>
+                  <span
+                    >Valid Arizona driver's license (5+ years experience)</span
+                  >
                 </li>
                 <li class="flex items-start text-gray-300">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   <span>Clean driving record and background check</span>
                 </li>
                 <li class="flex items-start text-gray-300">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
                   </svg>
-                  <span>Professional appearance and customer service skills</span>
+                  <span
+                    >Professional appearance and customer service skills</span
+                  >
                 </li>
                 <li class="flex items-start text-gray-300">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   <span>Availability for evening and weekend hours</span>
                 </li>
                 <li class="flex items-start text-gray-300">
-                  <svg class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  <svg
+                    class="w-5 h-5 text-[#c69214] mr-3 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   <span>Commitment to excellence and safety</span>
                 </li>
               </ul>
             </div>
           </div>
-          
-          <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-8 border border-gray-700">
-            <h3 class="text-2xl font-bold text-white mb-6 font-serif">Driver Benefits</h3>
-            
+
+          <div
+            class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-8 border border-gray-700"
+          >
+            <h3 class="text-2xl font-bold text-white mb-6 font-serif">
+              Driver Benefits
+            </h3>
+
             <div class="space-y-6">
               <div class="flex items-start">
-                <div class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+                <div
+                  class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                >
+                  <svg
+                    class="w-6 h-6 text-black"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"
+                    ></path>
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
+                      clip-rule="evenodd"></path>
                   </svg>
                 </div>
                 <div>
-                  <h4 class="text-lg font-semibold text-white mb-1">Competitive Pay</h4>
-                  <p class="text-gray-300 text-sm">Minimum $40 per ride with performance bonuses</p>
+                  <h4 class="text-lg font-semibold text-white mb-1">
+                    Competitive Pay
+                  </h4>
+                  <p class="text-gray-300 text-sm">
+                    Minimum $40 per ride with performance bonuses
+                  </p>
                 </div>
               </div>
 
               <div class="flex items-start">
-                <div class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                <div
+                  class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                >
+                  <svg
+                    class="w-6 h-6 text-black"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                      clip-rule="evenodd"></path>
                   </svg>
                 </div>
                 <div>
-                  <h4 class="text-lg font-semibold text-white mb-1">Flexible Schedule</h4>
-                  <p class="text-gray-300 text-sm">Choose your hours within our 3PM-3AM service window</p>
+                  <h4 class="text-lg font-semibold text-white mb-1">
+                    Flexible Schedule
+                  </h4>
+                  <p class="text-gray-300 text-sm">
+                    Choose your hours within our 3PM-3AM service window
+                  </p>
                 </div>
               </div>
 
               <div class="flex items-start">
-                <div class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <div
+                  class="bg-gradient-to-r from-[#c69214] to-[#b8841c] w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                >
+                  <svg
+                    class="w-6 h-6 text-black"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
                   </svg>
                 </div>
                 <div>
-                  <h4 class="text-lg font-semibold text-white mb-1">Professional Growth</h4>
-                  <p class="text-gray-300 text-sm">Ongoing training and advancement opportunities</p>
+                  <h4 class="text-lg font-semibold text-white mb-1">
+                    Professional Growth
+                  </h4>
+                  <p class="text-gray-300 text-sm">
+                    Ongoing training and advancement opportunities
+                  </p>
                 </div>
               </div>
             </div>
 
             <div class="mt-8">
-              <a 
-                href="/contact" 
+              <a
+                href="/contact"
                 class="block w-full bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black py-4 px-6 rounded-xl font-bold hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 text-center transform hover:scale-105"
               >
                 Apply to Join Our Team
@@ -277,18 +393,18 @@ const companyStats = [
           Experience the <span class="text-[#c69214]">Difference</span>
         </h2>
         <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          Ready to experience Arizona's premier luxury designated driver service? 
-          Join our exclusive membership today.
+          Ready to experience Arizona's premier luxury designated driver
+          service? Join our exclusive membership today.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a 
-            href="/membership" 
+          <a
+            href="/membership"
             class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-8 py-4 rounded-xl font-bold hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 transform hover:scale-105"
           >
             View Memberships
           </a>
-          <a 
-            href="/contact" 
+          <a
+            href="/contact"
             class="bg-gradient-to-r from-gray-700 to-gray-800 text-white px-8 py-4 rounded-xl font-bold hover:from-[#c69214] hover:to-[#b8841c] hover:text-black transition-all duration-300"
           >
             Contact Us
