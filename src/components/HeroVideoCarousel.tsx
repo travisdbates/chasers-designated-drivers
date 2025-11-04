@@ -260,30 +260,49 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
       {/* Hero Content */}
       <div className="hero-content animate-fade-in">
         <div className="container-center px-4">
-          <div className="mx-auto text-center" style={{ maxWidth: '850px' }}>
+          <div className="mx-auto text-center" style={{ maxWidth: "850px" }}>
             {/* Main Headline - Always show "Luxury Designated Drivers" */}
-            <h1 className="text-white text-shadow-luxury animate-slide-up" style={{ fontSize: '54px', fontWeight: 400, margin: 0, lineHeight: 1.2, fontFamily: '"Louize Display", Overpass, Inter, Arial, sans-serif' }}>
-              Luxury Designated Drivers
+            <h1
+              className="text-white text-shadow-luxury animate-slide-up"
+              style={{
+                fontSize: "54px",
+                fontWeight: 400,
+                margin: 0,
+                lineHeight: 1.2,
+                fontFamily:
+                  '"Louize Display", Overpass, Inter, Arial, sans-serif',
+              }}
+            >
+              Discover a new way to be driven.
             </h1>
 
             {/* Subtitle - Always show the main subtitle */}
-            <p className="text-dark-200 animate-slide-up" style={{ fontSize: '32px', lineHeight: 1.3, fontFamily: '"Louize Display", Overpass, Inter, Arial, sans-serif', fontWeight: 400, margin: 0 }}>
-              Experience premium transportation with our professional chauffeur
-              service. Arrive in style, leave worry-free.
+            <p
+              className="text-dark-200 animate-slide-up"
+              style={{
+                fontSize: "32px",
+                lineHeight: 1.3,
+                fontFamily:
+                  '"Louize Display", Overpass, Inter, Arial, sans-serif',
+                fontWeight: 400,
+                margin: 0,
+              }}
+            >
+              Experience a lifestyle service that has you and your time in mind.
+              Arrive in style, leave worry-free in your own vehicle.
             </p>
 
             {/* CTA Buttons - Always show the same buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-slide-up" style={{ marginTop: '16px' }}>
-              <a href="/membership" className="btn-primary px-8 py-4" style={{ fontSize: '20px' }}>
-                View Membership Plans
-              </a>
-
+            <div
+              className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-slide-up"
+              style={{ marginTop: "16px" }}
+            >
               <a
-                href="/how-it-works"
-                className="btn-secondary px-8 py-4"
-                style={{ fontSize: '20px' }}
+                href="/membership"
+                className="btn-primary px-8 py-4"
+                style={{ fontSize: "20px" }}
               >
-                How It Works
+                View Our Plans
               </a>
             </div>
           </div>
@@ -295,7 +314,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
         <div className="absolute inset-0 bg-dark-primary flex items-center justify-center z-10">
           <div className="text-center">
             <div className="loading-spinner mx-auto mb-4"></div>
-            <p className="text-dark-400">Loading luxury experience...</p>
+            <p className="text-dark-400">Loading...</p>
           </div>
         </div>
       )}
