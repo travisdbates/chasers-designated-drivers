@@ -1,0 +1,83 @@
+---
+// Chatbase AI chatbot widget with identity verification
+const chatbotId = import.meta.env.PUBLIC_CHATBASE_CHATBOT_ID;
+---
+
+{chatbotId && chatbotId !== 'your_chatbot_id_here' && (
+  <>
+    <!-- Chatbase Official Embed Script -->
+    <script is:inline>
+      (function(){
+        if(!window.chatbase||window.chatbase("getState")!=="initialized"){
+          window.chatbase=(...arguments)=>{
+            if(!window.chatbase.q){window.chatbase.q=[]}
+            window.chatbase.q.push(arguments)
+          };
+          window.chatbase=new Proxy(window.chatbase,{
+            get(target,prop){
+              if(prop==="q"){return target.q}
+              return(...args)=>target(prop,...args)
+            }
+          })
+        }
+        const onLoad=function(){
+          const script=document.createElement("script");
+          script.src="https://www.chatbase.co/embed.min.js";
+          script.id="o00LmtwvHY4RX1lY4Payb";
+          script.domain="www.chatbase.co";
+          document.body.appendChild(script)
+        };
+        if(document.readyState==="complete"){
+          onLoad()
+        }else{
+          window.addEventListener("load",onLoad)
+        }
+      })();
+    </script>
+
+    <!-- Identity Verification Functions -->
+    <script is:inline>
+      // Function to identify user with JWT token
+      async function identifyChatbaseUser(userData) {
+        try {
+          // Request JWT token from backend
+          const response = await fetch('/api/chatbase-token', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+          });
+
+          const result = await response.json();
+
+          if (result.success && result.token) {
+            // Identify user with the token
+            if (window.chatbase) {
+              window.chatbase("identify", {
+                token: result.token,
+                name: userData.name
+              });
+              console.log('Chatbase user identified successfully');
+            }
+          } else {
+            console.error('Failed to get Chatbase token:', result.error);
+          }
+        } catch (error) {
+          console.error('Error identifying Chatbase user:', error);
+        }
+      }
+
+      // Make the function globally available
+      window.identifyChatbaseUser = identifyChatbaseUser;
+
+      // Function to reset user (logout)
+      window.resetChatbaseUser = function() {
+        if (window.chatbase) {
+          window.chatbase("resetUser");
+          console.log('Chatbase user reset');
+        }
+      };
+    </script>
+  </>
+)}

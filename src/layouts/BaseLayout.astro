@@ -1,4 +1,6 @@
 ---
+import ChatbaseWidget from '../components/ChatbaseWidget.astro';
+
 export interface Props {
   title: string;
   description?: string;
@@ -6,8 +8,8 @@ export interface Props {
   ogImage?: string;
 }
 
-const { 
-  title, 
+const {
+  title,
   description = "Luxury designated driver service - Professional, reliable transportation for your special occasions.",
   keywords = "designated driver, luxury transportation, professional driver, safe ride, Arizona",
   ogImage = "/og-image.jpg"
@@ -235,6 +237,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost
         }
       });
     </script>
+
+    <!-- Chatbase AI Chatbot Widget -->
+    <ChatbaseWidget />
   </body>
 </html>
 
