@@ -185,7 +185,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
       <div className="hero-video-container bg-dark-primary flex items-center justify-center">
         <div className="text-center">
           <h1 className="heading-hero text-white mb-6">
-            Luxury Transportation
+            Premier Transportation
           </h1>
           <p className="text-xl text-dark-300 mb-8">
             Professional designated driver service
@@ -261,9 +261,9 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
       <div className="hero-content animate-fade-in">
         <div className="container-center px-4">
           <div className="mx-auto text-center" style={{ maxWidth: "850px" }}>
-            {/* Main Headline - Always show "Luxury Designated Drivers" */}
+            {/* Main Headline - Always show "Premier Designated Drivers" */}
             <h1
-              className="text-white text-shadow-luxury animate-slide-up"
+              className="text-white text-shadow-premier animate-slide-up"
               style={{
                 fontSize: "54px",
                 fontWeight: 400,
@@ -289,7 +289,11 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
               }}
             >
               Experience a lifestyle service that has you and your time in mind.
-              Arrive in style, leave worry-free in your own vehicle.
+              Arrive in style, leave worry-free in your own vehicle. We get you{" "}
+              <strong>
+                <em>and</em>
+              </strong>
+              &nbsp; your vehicle home safely.
             </p>
 
             {/* CTA Buttons - Always show the same buttons */}

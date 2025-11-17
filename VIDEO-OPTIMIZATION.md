@@ -40,11 +40,11 @@ After optimization, update `src/pages/index.astro`:
 ```typescript
 const heroSlides = [
   {
-    id: 'luxury-interior',
-    src: '/videos/optimized/luxury-interior-hq.mp4',        // Desktop
-    srcMobile: '/videos/optimized/luxury-interior-lq.mp4',  // Mobile
-    poster: '...', 
-    title: 'Luxury Designated Drivers',
+    id: 'premier-interior',
+    src: '/videos/optimized/premier-interior-hq.mp4',        // Desktop
+    srcMobile: '/videos/optimized/premier-interior-lq.mp4',  // Mobile
+    poster: '...',
+    title: 'Premier Designated Drivers',
     // ...
   },
   // ... other slides

@@ -166,12 +166,12 @@
   }
 
   /* Card styles */
-  .card-luxury {
+  .card-premier {
     @apply bg-off-white border border-off-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gold-primary/50;
   }
 
   .card-pricing {
-    @apply card-luxury relative overflow-hidden;
+    @apply card-premier relative overflow-hidden;
   }
 
   .card-pricing.featured {
@@ -189,7 +189,7 @@
   }
 
   .nav-main {
-    @apply bg-off-white/95 backdrop-blur-luxury sticky z-40 border-b border-off-white shadow-sm;
+    @apply bg-off-white/95 backdrop-blur-premier sticky z-40 border-b border-off-white shadow-sm;
     top: 37px;
   }
 
@@ -310,11 +310,11 @@
 
 /* Custom utility classes */
 @layer utilities {
-  .text-shadow-luxury {
+  .text-shadow-premier {
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
   }
 
-  .backdrop-blur-luxury {
+  .backdrop-blur-premier {
     backdrop-filter: blur(10px);
   }
 

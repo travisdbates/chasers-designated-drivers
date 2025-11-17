@@ -1,10 +1,10 @@
 # 🎨 Chasers DD Design System
 
 ## Overview
-Luxury designated driver service inspired by WorldClass.com's sophisticated aesthetic. Dark, elegant design with gold accents and premium typography.
+Premier designated driver service inspired by WorldClass.com's sophisticated aesthetic. Dark, elegant design with gold accents and premium typography.
 
 ## Brand Positioning
-- **Luxury transportation service**
+- **Premier transportation service**
 - **Professional, trustworthy**
 - **Sophisticated nightlife companion**
 - **Premium experience focus**
@@ -20,7 +20,7 @@ Luxury designated driver service inspired by WorldClass.com's sophisticated aest
 --gold-dark: #a67c0f      /* Darker gold for pressed states */
 ```
 
-### Dark Luxury Theme
+### Dark Premier Theme
 ```css
 --black-primary: #000000   /* Pure black backgrounds */
 --gray-900: #0f0f0f       /* Deep charcoal */
@@ -94,7 +94,7 @@ Luxury designated driver service inspired by WorldClass.com's sophisticated aest
 - **Overlay**: Dark gradient (0.4 opacity)
 
 ### Video Content Themes
-1. **Luxury Vehicles**: Interior/exterior shots, premium details
+1. **Premier Vehicles**: Interior/exterior shots, premium details
 2. **Professional Drivers**: Suited drivers, professional demeanor
 3. **Upscale Venues**: High-end restaurants, bars, events
 4. **Client Experience**: Satisfied customers, premium service moments
@@ -103,7 +103,7 @@ Luxury designated driver service inspired by WorldClass.com's sophisticated aest
 - **Dark, moody lighting**
 - **High contrast**
 - **Professional quality**
-- **Luxury automotive focus**
+- **Premier automotive focus**
 - **Urban nightlife settings**
 
 ---
@@ -200,7 +200,7 @@ Luxury designated driver service inspired by WorldClass.com's sophisticated aest
 
 ### Cards
 ```css
-.card-luxury {
+.card-premier {
   background: var(--gray-800);
   border: 1px solid var(--gray-700);
   border-radius: 1rem;
@@ -209,7 +209,7 @@ Luxury designated driver service inspired by WorldClass.com's sophisticated aest
   transition: all 0.3s ease;
 }
 
-.card-luxury:hover {
+.card-premier:hover {
   transform: translateY(-5px);
   box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.7);
   border-color: var(--gold-primary);
@@ -270,7 +270,7 @@ Luxury designated driver service inspired by WorldClass.com's sophisticated aest
   .text-gold { color: var(--gold-primary); }
   .bg-gold { background-color: var(--gold-primary); }
   .border-gold { border-color: var(--gold-primary); }
-  .luxury-shadow { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+  .premier-shadow { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
   .hero-gradient { background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(198,146,20,0.1)); }
 }
 ```

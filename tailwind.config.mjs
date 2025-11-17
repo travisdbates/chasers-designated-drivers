@@ -36,7 +36,7 @@ export default {
 					800: '#6d635a',
 					900: '#4a4340',
 				},
-				// Dark Luxury Theme - Updated with WorldClass dark text
+				// Dark Premier Theme - Updated with WorldClass dark text
 				dark: {
 					primary: '#000000',
 					text: '#2d2d2d', // WorldClass dark text color
@@ -75,12 +75,12 @@ export default {
 				'section': '6rem',
 			},
 			boxShadow: {
-				'luxury': '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-				'luxury-hover': '0 35px 60px -12px rgba(0, 0, 0, 0.7)',
+				'premier': '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+				'premier-hover': '0 35px 60px -12px rgba(0, 0, 0, 0.7)',
 				'gold': '0 10px 25px rgba(198, 146, 20, 0.3)',
 			},
 			backdropBlur: {
-				'luxury': '10px',
+				'premier': '10px',
 			},
 			animation: {
 				'fade-in': 'fadeIn 0.5s ease-in-out',

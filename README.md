@@ -1,12 +1,12 @@
-# 🏆 Chasers Designated Drivers - Luxury Website
+# 🏆 Chasers Designated Drivers - Premier Website
 
-A premium designated driver website built with Astro, React, and Tailwind CSS, featuring luxury video backgrounds and sophisticated design.
+A premium designated driver website built with Astro, React, and Tailwind CSS, featuring premier video backgrounds and sophisticated design.
 
 ## 🌟 Features
 
-- **Video Hero Carousel**: Auto-rotating luxury vehicle videos
+- **Video Hero Carousel**: Auto-rotating premier vehicle videos
 - **Responsive Design**: Mobile-optimized with touch-friendly interface
-- **Luxury Aesthetic**: Gold accent colors (#c69214) inspired by WorldClass.com
+- **Premier Aesthetic**: Gold accent colors (#c69214) inspired by WorldClass.com
 - **Performance Optimized**: Multiple video quality levels for different devices
 - **Professional Navigation**: Dual-header with contact information
 - **SEO Ready**: Optimized meta tags and semantic structure
@@ -14,7 +14,7 @@ A premium designated driver website built with Astro, React, and Tailwind CSS, f
 ## 🚀 Tech Stack
 
 - **Framework**: [Astro](https://astro.build/) with React integration
-- **Styling**: Tailwind CSS with custom luxury design system
+- **Styling**: Tailwind CSS with custom premier design system
 - **Components**: React components with TypeScript
 - **Videos**: FFmpeg-optimized for web delivery
 - **Deployment**: Ready for Vercel/Netlify

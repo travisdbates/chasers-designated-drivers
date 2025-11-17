@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 
-const luxuryServices = [
+const premierServices = [
   {
     title: 'Commercial Airport Pickups & Drop-Offs',
     description: 'Curbside transportation to and from Sky Harbor, Mesa-Gateway, and all major Phoenix-area airports.',
@@ -73,9 +73,9 @@ const chauffeurBenefits = [
 ---
 
 <BaseLayout 
-  title="Luxury Transportation - SUV, Sprinter Van & Airport Services - Chasers DD"
+  title="Premier Transportation - SUV, Sprinter Van & Airport Services - Chasers DD"
   description="Private, reliable, elevated travel. Black SUV and Sprinter Van service with concierge-level attention for airport transfers, corporate travel, and special events."
-  keywords="luxury transportation, airport transfers, SUV service, sprinter van, corporate travel, concierge service"
+  keywords="premier transportation, airport transfers, SUV service, sprinter van, corporate travel, concierge service"
 >
   <Navigation />
   
@@ -84,7 +84,7 @@ const chauffeurBenefits = [
     <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto text-center">
         <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-          <span class="font-serif">Luxury</span>
+          <span class="font-serif">Premier</span>
           <span class="text-[#c69214] ml-3">Transportation</span>
         </h1>
         <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6">
@@ -108,12 +108,12 @@ const chauffeurBenefits = [
             Services <span class="text-[#c69214]">Include</span>
           </h2>
           <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-            We deliver non-shared, on-time transportation in luxury vehicles—professionally driven, personally managed.
+            We deliver non-shared, on-time transportation in premier vehicles—professionally driven, personally managed.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {luxuryServices.map((service) => (
+          {premierServices.map((service) => (
             <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-6 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 hover:scale-105">
               <div class="text-4xl mb-4">{service.icon}</div>
               <h3 class="text-xl font-bold text-white mb-3 font-serif">{service.title}</h3>
@@ -223,7 +223,7 @@ const chauffeurBenefits = [
     <section class="py-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-serif">
-          Ready for <span class="text-[#c69214]">Luxury</span>?
+          Ready for <span class="text-[#c69214]">Premier</span> Service?
         </h2>
         <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
           We deliver comfort, convenience, and confidence on every ride and in every detail.
