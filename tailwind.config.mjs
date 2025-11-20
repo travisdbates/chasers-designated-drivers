@@ -2,6 +2,13 @@
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
+		screens: {
+			'sm': '640px',
+			'md': '768px',
+			'lg': '1080px',  // Changed from default 1024px to 1080px for mobile menu breakpoint
+			'xl': '1280px',
+			'2xl': '1536px',
+		},
 		extend: {
 			colors: {
 				// Primary Gold Palette - Updated to match WorldClass
