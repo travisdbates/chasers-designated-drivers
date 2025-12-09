@@ -273,7 +273,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
                   '"Louize Display", Overpass, Inter, Arial, sans-serif',
               }}
             >
-              Discover a new way to be driven.
+              Our why, is NO DUI!
             </h1>
 
             {/* Subtitle - Always show the main subtitle */}
