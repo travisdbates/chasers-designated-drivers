@@ -13,16 +13,39 @@ interface VideoSlide {
   };
 }
 
+interface Phrase {
+  title: string;
+  subtitle1: string;
+  subtitle2?: string;
+}
+
 interface HeroVideoCarouselProps {
   slides: VideoSlide[];
   autoplayInterval?: number; // Fallback if video duration cannot be determined
 }
+
+// Array of phrases that rotate with video changes
+const phrases: Phrase[] = [
+  {
+    title: "Our Why, is No DUI!",
+    subtitle1:
+      "Experience our services that have you, your time and protection in mind. Arrive in your own vehicle, remain in your own vehicle and return home in your own vehicle.",
+    subtitle2: "We get you and your vehicle home safely.",
+  },
+  {
+    title: "Our Members Matter. Service You Can Trust.",
+    subtitle1:
+      "Our members come first always. Every ride is handled by amazing drivers, premier pricing, and a commitment to getting you—and your vehicle—home safely.",
+  },
+];
 
 const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
   slides,
   autoplayInterval = 7000,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadingTimeout, setLoadingTimeout] = useState(false);
@@ -64,17 +87,30 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
   useEffect(() => {
     if (isPlaying && slides.length > 1) {
       // Use actual video duration if available, otherwise fallback to autoplayInterval
+      // Videos play at 0.66x speed, so multiply duration by 1.333 (1 / 0.75)
       const currentVideoDuration = videoDurations[currentSlide];
-      const interval = currentVideoDuration
-        ? currentVideoDuration * 1000
-        : autoplayInterval;
+      const adjustedDuration = currentVideoDuration
+        ? currentVideoDuration / 0.66
+        : null;
+      // Subtract fade-out time (500ms) from the interval
+      const interval = adjustedDuration
+        ? adjustedDuration * 1000 - 500
+        : autoplayInterval - 500;
 
       console.log(
-        `Setting interval for slide ${currentSlide}: ${interval}ms (${currentVideoDuration ? currentVideoDuration + "s actual duration" : autoplayInterval / 1000 + "s fallback"})`
+        `Setting interval for slide ${currentSlide}: ${interval}ms (${currentVideoDuration ? currentVideoDuration + "s actual duration at 0.66x speed" : autoplayInterval / 1000 + "s fallback"})`
       );
 
       intervalRef.current = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
+        // Start fade-out
+        setIsTransitioning(true);
+
+        // After fade-out completes, change slide/phrase and reset transition
+        setTimeout(() => {
+          setCurrentSlide((prev) => (prev + 1) % slides.length);
+          setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+          setIsTransitioning(false);
+        }, 500);
       }, interval);
     }
 
@@ -116,6 +152,8 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
         isMobile
       );
       currentVideo.currentTime = 0;
+      // Set playback speed to 0.66x (slower)
+      currentVideo.playbackRate = 0.66;
 
       // Always attempt autoplay (browsers will handle restrictions)
       if (currentVideo.readyState >= 3) {
@@ -258,27 +296,33 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
       <div className="hero-overlay" />
 
       {/* Hero Content */}
-      <div className="hero-content animate-fade-in">
+      <div className="hero-content">
         <div className="container-center px-4">
           <div className="mx-auto text-center" style={{ maxWidth: "850px" }}>
-            {/* Main Headline - Always show "Premier Designated Drivers" */}
+            {/* Main Headline - Fades with video changes */}
             <h1
-              className="text-white text-shadow-premier animate-slide-up"
+              key={`title-${currentPhraseIndex}`}
+              className="text-white text-shadow-premier"
               style={{
                 fontSize: "54px",
                 fontWeight: 400,
-                margin: 0,
+                marginBottom: 20,
                 lineHeight: 1.2,
                 fontFamily:
                   '"Louize Display", Overpass, Inter, Arial, sans-serif',
+                fontVariant: "small-caps",
+                animation: isTransitioning
+                  ? "fadeOut 500ms ease-in-out forwards"
+                  : "fadeIn 1000ms ease-in-out",
               }}
             >
-              Our why, is NO DUI!
+              {phrases[currentPhraseIndex].title}
             </h1>
 
-            {/* Subtitle - Always show the main subtitle */}
+            {/* Subtitle - Fades with video changes */}
             <p
-              className="text-dark-200 animate-slide-up"
+              key={`subtitle1-${currentPhraseIndex}`}
+              className="text-dark-200"
               style={{
                 fontSize: "32px",
                 lineHeight: 1.3,
@@ -286,19 +330,49 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
                   '"Louize Display", Overpass, Inter, Arial, sans-serif',
                 fontWeight: 400,
                 margin: 0,
+                animation: isTransitioning
+                  ? "fadeOut 500ms ease-in-out forwards"
+                  : "fadeIn 1000ms ease-in-out",
               }}
             >
-              Experience a lifestyle service that has you and your time in mind.
-              Arrive in style, leave worry-free in your own vehicle. We get you{" "}
-              <strong>
-                <em>and</em>
-              </strong>
-              &nbsp; your vehicle home safely.
+              {phrases[currentPhraseIndex].subtitle1}
             </p>
+
+            {/* Optional second subtitle */}
+            {phrases[currentPhraseIndex].subtitle2 && (
+              <p
+                key={`subtitle2-${currentPhraseIndex}`}
+                className="text-dark-200"
+                style={{
+                  fontSize: "28px",
+                  lineHeight: 1.3,
+                  fontFamily:
+                    '"Louize Display", Overpass, Inter, Arial, sans-serif',
+                  fontWeight: 400,
+                  marginTop: 10,
+                  animation: isTransitioning
+                    ? "fadeOut 500ms ease-in-out forwards"
+                    : "fadeIn 1000ms ease-in-out",
+                }}
+              >
+                {phrases[currentPhraseIndex].subtitle2
+                  .split("and")
+                  .map((part, i, arr) =>
+                    i === arr.length - 1 ? (
+                      part
+                    ) : (
+                      <React.Fragment key={i}>
+                        {part}
+                        <strong>and</strong>
+                      </React.Fragment>
+                    )
+                  )}
+              </p>
+            )}
 
             {/* CTA Buttons - Always show the same buttons */}
             <div
-              className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-slide-up"
+              className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
               style={{ marginTop: "16px" }}
             >
               <a
@@ -312,6 +386,26 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Keyframe animation for fade effect */}
+      <style>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes fadeOut {
+          from {
+            opacity: 1;
+          }
+          to {
+            opacity: 0;
+          }
+        }
+      `}</style>
 
       {/* Loading State */}
       {!isLoaded && !loadingTimeout && (
