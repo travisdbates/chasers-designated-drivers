@@ -24,8 +24,8 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     id: 'standard-individual',
     name: 'Standard Individual',
     description: 'Safe, on-demand transportation home',
-    price: '$59.99',
-    priceNumeric: 59.99,
+    price: '$69.99',
+    priceNumeric: 69.99,
     priceSubtext: '/month + $40 trip fee per ride',
     features: [
       'Unlimited ride requests',
@@ -41,7 +41,7 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     ctaText: 'Join Standard Plan',
     ctaUrl: '/checkout/individual?plan=standard-individual',
     emailSubject: 'Welcome to Chasers DD - Standard Individual Plan',
-    smsMessage: 'Welcome to Chasers DD! Your Standard Individual plan ($59.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
+    smsMessage: 'Welcome to Chasers DD! Your Standard Individual plan ($69.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
     billingCycle: 'monthly',
     tripFee: 40,
     minimumCommitment: '3-month minimum commitment'
@@ -51,8 +51,8 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     id: 'individual',
     name: 'Individual Premier',
     description: 'Added flexibility and perks for frequent riders',
-    price: '$89.99',
-    priceNumeric: 89.99,
+    price: '$119.99',
+    priceNumeric: 119.99,
     priceSubtext: '/month + $40 trip fee per ride',
     features: [
       'Everything in Standard Plan, plus:',
@@ -68,7 +68,7 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     ctaText: 'Join Premier Plan',
     ctaUrl: '/checkout/individual?plan=individual',
     emailSubject: 'Welcome to Chasers DD - Individual Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Premier! Your Individual Premier plan ($89.99/month) is active. Enhanced flexibility included. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Premier! Your Individual Premier plan ($119.99/month) is active. Enhanced flexibility included. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 40
   },
@@ -104,8 +104,8 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     id: 'joint-premier',
     name: 'Joint Premier',
     description: 'Enhanced flexibility and premium access for couples',
-    price: '$149.99',
-    priceNumeric: 149.99,
+    price: '$189.99',
+    priceNumeric: 189.99,
     priceSubtext: '/month + $40 trip fee per ride',
     features: [
       'Everything in Joint Plan, plus:',
@@ -121,7 +121,7 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     ctaText: 'Join Joint Premier',
     ctaUrl: '/checkout/joint?plan=joint-premier',
     emailSubject: 'Welcome to Chasers DD - Joint Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Premier! Your Joint Premier plan ($149.99/month) covers 2 people with enhanced flexibility. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Premier! Your Joint Premier plan ($189.99/month) covers 2 people with enhanced flexibility. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 40
   },
@@ -182,8 +182,8 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     id: 'business-premier',
     name: 'Business Premier',
     description: 'Flexibility to serve employees, clients and out-of-town guests',
-    price: '$699.99',
-    priceNumeric: 699.99,
+    price: '$749.99',
+    priceNumeric: 749.99,
     priceSubtext: '/month + $40 trip fee per ride',
     features: [
       'Everything in Business Plan, plus:',
@@ -199,17 +199,17 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     ctaText: 'Join Business Premier',
     ctaUrl: '/checkout/business?plan=business-premier',
     emailSubject: 'Welcome to Chasers DD - Business Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Business Premier! Your plan ($699.99/month) covers employees + unlimited client requests. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Business Premier! Your plan ($749.99/month) covers employees + unlimited client requests. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 40
   },
 
   'corporate': {
     id: 'corporate',
-    name: 'Corporate Premiere',
+    name: 'Corporate Premier',
     description: 'Professional business transportation',
-    price: '$399',
-    priceNumeric: 399.00,
+    price: '$999.99',
+    priceNumeric: 999.99,
     priceSubtext: '/month - Multi-employee coverage',
     features: [
       'Multi-employee coverage',
@@ -223,8 +223,8 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     category: 'corporate',
     ctaText: 'Join Corporate Plan',
     ctaUrl: '/checkout/corporate',
-    emailSubject: 'Welcome to Chasers DD - Corporate Premiere Plan',
-    smsMessage: 'Welcome to Chasers DD Corporate! Your Corporate Premiere plan ($399/month) provides executive-level service. Call (480) 695-3659.',
+    emailSubject: 'Welcome to Chasers DD - Corporate Premier Plan',
+    smsMessage: 'Welcome to Chasers DD Corporate! Your Corporate Premier plan ($999.99/month) provides executive-level service. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 0 // Corporate may have different pricing structure
   }
