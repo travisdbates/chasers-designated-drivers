@@ -29,6 +29,36 @@ interface QRScanMetric {
   country: string | null;
   region: string | null;
   city: string | null;
+  latitude: number | null;
+  longitude: number | null;
+}
+
+interface IpApiResponse {
+  city?: string;
+  region?: string;
+  country_name?: string;
+  country_code?: string;
+  latitude?: number;
+  longitude?: number;
+  error?: boolean;
+}
+
+/**
+ * Lookup geolocation from IP address using ipapi.co (free tier: 1000 req/day)
+ */
+async function lookupGeoFromIp(ip: string): Promise<IpApiResponse | null> {
+  try {
+    const response = await fetch(`https://ipapi.co/${ip}/json/`, {
+      headers: { "User-Agent": "netlify-qr-tracker" },
+    });
+    if (!response.ok) return null;
+    const data = await response.json() as IpApiResponse;
+    if (data.error) return null;
+    return data;
+  } catch (err) {
+    console.error("IP geolocation lookup failed:", err);
+    return null;
+  }
 }
 
 /**
@@ -116,6 +146,30 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
   // Extract headers for metrics
   const headers = event.headers || {};
 
+  // Get IP address
+  const ipAddress = headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
+                    headers["x-nf-client-connection-ip"] ||
+                    headers["client-ip"] || null;
+
+  // Get geo data from Netlify headers first
+  let country = headers["x-country"] || headers["x-nf-country-code"] || null;
+  let region = headers["x-region"] || headers["x-nf-region-code"] || null;
+  let city = headers["x-city"] || headers["x-nf-city"] || null;
+  let latitude: number | null = null;
+  let longitude: number | null = null;
+
+  // If city/region missing, fall back to IP geolocation lookup
+  if ((!city || !region) && ipAddress) {
+    const geoData = await lookupGeoFromIp(ipAddress);
+    if (geoData) {
+      city = city || geoData.city || null;
+      region = region || geoData.region || null;
+      country = country || geoData.country_code || null;
+      latitude = geoData.latitude || null;
+      longitude = geoData.longitude || null;
+    }
+  }
+
   // Build the metric object
   const metric: QRScanMetric = {
     timestamp: new Date(),
@@ -123,14 +177,14 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
     campaignId,
     destinationUrl: decodedUrl,
     userAgent: headers["user-agent"] || null,
-    ipAddress: headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
-               headers["x-nf-client-connection-ip"] ||
-               headers["client-ip"] || null,
+    ipAddress,
     referer: headers["referer"] || headers["referrer"] || null,
     acceptLanguage: headers["accept-language"] || null,
-    country: headers["x-country"] || headers["x-nf-country-code"] || null,
-    region: headers["x-region"] || headers["x-nf-region-code"] || null,
-    city: headers["x-city"] || headers["x-nf-city"] || null,
+    country,
+    region,
+    city,
+    latitude,
+    longitude,
   };
 
   // Save to Firestore
