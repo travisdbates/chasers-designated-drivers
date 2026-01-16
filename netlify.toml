@@ -16,3 +16,10 @@
 # Disable secrets scanning - we have PUBLIC_* vars that are intentionally client-side
 [build.processing.secrets]
   enabled = false
+
+# QR code tracking redirect - use /qr?url=... for cleaner QR codes
+[[redirects]]
+  from = "/qr"
+  to = "/.netlify/functions/qr-track"
+  status = 200
+  force = true
