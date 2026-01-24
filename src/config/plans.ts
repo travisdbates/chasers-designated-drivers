@@ -104,8 +104,8 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     id: 'joint-premier',
     name: 'Joint Premier',
     description: 'Enhanced flexibility and premium access for couples',
-    price: '$189.99',
-    priceNumeric: 189.99,
+    price: '$149.99',
+    priceNumeric: 149.99,
     priceSubtext: '/month + $40 trip fee per ride',
     features: [
       'Everything in Joint Plan, plus:',
