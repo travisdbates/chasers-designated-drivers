@@ -142,7 +142,7 @@
 </style>
 
 <!-- Contact Info Bar -->
-<div class="nav-contact sticky top-0 z-50 hidden lg:block">
+<div class="nav-contact sticky top-0 z-50 hidden lg:block" transition:name="contact-bar" transition:persist>
   <div class="container-nav">
     <!-- Desktop Layout -->
     <div class="flex justify-between items-center text-sm text-gray-600">
@@ -214,7 +214,7 @@
 </div>
 
 <!-- Main Navigation -->
-<nav class="nav-main relative">
+<nav class="nav-main relative" transition:name="main-nav" transition:persist>
   <div class="container-nav">
     <div class="flex items-center justify-between">
       <!-- Logo -->
@@ -225,12 +225,16 @@
             src="/images/Chasers_logo_on_white_no_background.png"
             alt="Chasers Designated Drivers"
             class="h-12 w-auto hidden lg:block hover:opacity-90 transition-opacity duration-300 mr-6"
+            transition:name="logo-desktop"
+            transition:persist
           />
           <!-- Mobile Logo - White for Dark Background -->
           <img
             src="/images/Chasers_logo_on_white01_for_dark_bg.png"
             alt="Chasers Designated Drivers"
             class="h-12 w-auto lg:hidden hover:opacity-90 transition-opacity duration-300 mr-6"
+            transition:name="logo-mobile"
+            transition:persist
           />
         </a>
       </div>
@@ -404,7 +408,7 @@
 
         <!-- Premier Transportation -->
         <a href="/luxury-transportation" class="group/item block rounded-lg transition-all duration-300 w-56 h-56 relative overflow-hidden hover:scale-105">
-          <div class="w-full h-full bg-cover bg-center relative" style="background-image: url('/images/sprinter.jpg');">
+          <div class="w-full h-full bg-cover bg-center relative" style="background-image: url('/images/suv.jpg');">
             <div class="absolute inset-0 bg-black/70 transition-all duration-300 group-hover/item:bg-black/50"></div>
             <div class="absolute inset-0 flex items-center justify-center">
               <h3 class="font-black text-white text-xl uppercase tracking-wide text-center px-2">Premier Transportation</h3>

@@ -1,84 +1,92 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
 
 const premierServices = [
   {
-    title: 'Commercial Airport Pickups & Drop-Offs',
-    description: 'Curbside transportation to and from Sky Harbor, Mesa-Gateway, and all major Phoenix-area airports.',
-    icon: '✈️'
+    title: "Airport Pickups & Drop-Offs",
+    description:
+      "Curbside transportation to and from Sky Harbor, Mesa-Gateway, and all major Phoenix-area airports.",
+    icon: "✈️",
   },
   {
-    title: 'Private Airport Transfers',
-    description: 'Door-to-tarmac service at private hangars and FBOs. We coordinate directly with flight crews or staff.',
-    icon: '🛩️'
+    title: "Private Airport Transfers",
+    description:
+      "Door-to-tarmac service at private hangars and FBOs. We coordinate directly with flight crews or staff.",
+    icon: "🛩️",
   },
   {
-    title: 'Executive Sprinter Van Service',
-    description: 'Spacious, private travel for groups of up to 12. Perfect for team events, weddings, or high-end gatherings.',
-    icon: '🚐'
+    title: "Executive SUV Service",
+    description:
+      "Spacious, private travel for large groups. Perfect for team events, weddings, or high-end gatherings.",
+    icon: "🚐",
   },
   {
-    title: 'Hotel, Resort & Event Transfers',
-    description: 'Seamless transportation to and from your accommodations, event venues, or corporate gatherings.',
-    icon: '🏨'
+    title: "Hotel, Resort & Event Transfers",
+    description:
+      "Seamless transportation to and from your accommodations, event venues, or corporate gatherings.",
+    icon: "🏨",
   },
   {
-    title: 'Corporate Travel',
-    description: 'Private, polished, and professional transportation for executives, clients, and business teams.',
-    icon: '💼'
+    title: "Corporate Travel",
+    description:
+      "Private, polished, and professional transportation for executives, clients, and business teams.",
+    icon: "💼",
   },
   {
-    title: 'Concierge Vehicle Service',
-    description: 'Need your vehicle fueled, washed, or serviced? We handle car pickups, dealership appointments, and vehicle errands.',
-    icon: '🚗'
-  }
+    title: "Concierge Vehicle Service",
+    description:
+      "Need your vehicle fueled, washed, or serviced? We handle car pickups, dealership appointments, and vehicle errands.",
+    icon: "🚗",
+  },
 ];
 
 const whyChooseUs = [
-  'Black SUVs and Executive Sprinter Vans',
-  'Concierge-level support for you and your vehicle',
-  'Licensed, insured, and background-checked professional drivers',
-  'Real-time flight tracking & proactive scheduling',
-  'Service available 7 days a week, including holidays and after-hours',
-  'Flat-rate pricing — no surge fees, no surprises'
+  "Executive Black SUV Fleet",
+  "Concierge-level support for you and your vehicle",
+  "Licensed, insured, and background-checked professional drivers",
+  "Real-time flight tracking & proactive scheduling",
+  "Service available 7 days a week, including holidays and after-hours",
+  "Flat-rate pricing — no surge fees, no surprises",
 ];
 
 const chauffeurBenefits = [
   {
-    benefit: 'Professional Drivers',
-    description: 'Background-checked, courteous, and trained for safe, reliable service'
+    benefit: "Professional Drivers",
+    description:
+      "Background-checked, courteous, and trained for safe, reliable service",
   },
   {
-    benefit: 'Your Car, Your Comfort',
-    description: 'Enjoy the familiarity and cleanliness of your own vehicle'
+    benefit: "Your Car, Your Comfort",
+    description: "Enjoy the familiarity and cleanliness of your own vehicle",
   },
   {
-    benefit: 'No Vehicle Left Behind',
-    description: 'Your car gets home with no need to retrieve it later'
+    benefit: "No Vehicle Left Behind",
+    description: "Your car gets home with no need to retrieve it later",
   },
   {
-    benefit: 'Safe & Responsible',
-    description: 'Avoid DUI risks, parking tickets, and unsafe situations'
+    benefit: "Safe & Responsible",
+    description: "Avoid DUI risks, parking tickets, and unsafe situations",
   },
   {
-    benefit: 'Available 7 Days/Week',
-    description: 'Operating from 3 PM to 3 AM, with extended hours by appointment'
+    benefit: "Available 7 Days/Week",
+    description:
+      "Operating from 3 PM to 3 AM, with extended hours by appointment",
   },
   {
-    benefit: 'Better Pricing',
-    description: 'Lower cost than SUV/SEDAN services'
-  }
+    benefit: "Better Pricing",
+    description: "Lower cost than SUV/SEDAN services",
+  },
 ];
 ---
 
-<BaseLayout 
-  title="Premier Transportation - SUV, Sprinter Van & Airport Services - Chasers DD"
-  description="Private, reliable, elevated travel. Black SUV and Sprinter Van service with concierge-level attention for airport transfers, corporate travel, and special events."
-  keywords="premier transportation, airport transfers, SUV service, sprinter van, corporate travel, concierge service"
+<BaseLayout
+  title="Premier Transportation - SUV & Airport Services - Chasers DD"
+  description="Private, reliable, elevated travel. Black SUV service with concierge-level attention for airport transfers, corporate travel, and special events."
+  keywords="premier transportation, airport transfers, SUV service, corporate travel, concierge service"
 >
   <Navigation />
-  
+
   <main class="min-h-screen bg-gradient-to-b from-black via-[#212322] to-black">
     <!-- Hero Section -->
     <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
@@ -87,15 +95,24 @@ const chauffeurBenefits = [
           <span class="font-serif">Premier</span>
           <span class="text-[#c69214] ml-3">Transportation</span>
         </h1>
-        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6">
+        <p
+          class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6"
+        >
           Private. Reliable. Elevated Travel.
         </p>
         <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
           ChasersDD isn't just a service — it's a lifestyle.
         </p>
-        <div class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-6 max-w-3xl mx-auto">
-          <p class="text-lg text-[#c69214] font-semibold mb-2">First-Class Ground & Concierge Transportation Services</p>
-          <p class="text-gray-300">Whether you're flying private, traveling for business, or hosting out-of-town guests</p>
+        <div
+          class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-6 max-w-3xl mx-auto"
+        >
+          <p class="text-lg text-[#c69214] font-semibold mb-2">
+            First-Class Ground & Concierge Transportation Services
+          </p>
+          <p class="text-gray-300">
+            Whether you're flying private, traveling for business, or hosting
+            out-of-town guests
+          </p>
         </div>
       </div>
     </section>
@@ -108,18 +125,25 @@ const chauffeurBenefits = [
             Services <span class="text-[#c69214]">Include</span>
           </h2>
           <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-            We deliver non-shared, on-time transportation in premier vehicles—professionally driven, personally managed.
+            We deliver non-shared, on-time transportation in premier
+            vehicles—professionally driven, personally managed.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {premierServices.map((service) => (
-            <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-6 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 hover:scale-105">
-              <div class="text-4xl mb-4">{service.icon}</div>
-              <h3 class="text-xl font-bold text-white mb-3 font-serif">{service.title}</h3>
-              <p class="text-gray-300 leading-relaxed">{service.description}</p>
-            </div>
-          ))}
+          {
+            premierServices.map((service) => (
+              <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-6 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 hover:scale-105">
+                <div class="text-4xl mb-4">{service.icon}</div>
+                <h3 class="text-xl font-bold text-white mb-3 font-serif">
+                  {service.title}
+                </h3>
+                <p class="text-gray-300 leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -132,38 +156,63 @@ const chauffeurBenefits = [
             Chauffeur in Your <span class="text-[#c69214]">Car Service</span>
           </h2>
           <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Our "Chauffeur in your car service" refers to a professional driver provided by ChasersDD—a Scottsdale-based service specialized in safely transporting clients along with their vehicles.
+            Our "Chauffeur in your car service" refers to a professional driver
+            provided by ChasersDD—a Scottsdale-based service specialized in
+            safely transporting clients along with their vehicles.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {chauffeurBenefits.map((item) => (
-            <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-6 border border-gray-700">
-              <h3 class="text-lg font-bold text-[#c69214] mb-2">{item.benefit}</h3>
-              <p class="text-gray-300 text-sm">{item.description}</p>
-            </div>
-          ))}
+          {
+            chauffeurBenefits.map((item) => (
+              <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-6 border border-gray-700">
+                <h3 class="text-lg font-bold text-[#c69214] mb-2">
+                  {item.benefit}
+                </h3>
+                <p class="text-gray-300 text-sm">{item.description}</p>
+              </div>
+            ))
+          }
         </div>
 
-        <div class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-8 text-center">
+        <div
+          class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-8 text-center"
+        >
           <h3 class="text-2xl font-bold text-white mb-4">How It Works</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
             <div>
-              <div class="text-[#c69214] font-bold text-lg mb-2">1. Schedule</div>
-              <p class="text-gray-300 text-sm">Call and set up your account, schedule your driver. Give us as much lead time as possible.</p>
+              <div class="text-[#c69214] font-bold text-lg mb-2">
+                1. Schedule
+              </div>
+              <p class="text-gray-300 text-sm">
+                Call and set up your account, schedule your driver. Give us as
+                much lead time as possible.
+              </p>
             </div>
             <div>
-              <div class="text-[#c69214] font-bold text-lg mb-2">2. Meet Your Driver</div>
-              <p class="text-gray-300 text-sm">A professional chauffeur meets you at your requested starting location and drives you in your own vehicle.</p>
+              <div class="text-[#c69214] font-bold text-lg mb-2">
+                2. Meet Your Driver
+              </div>
+              <p class="text-gray-300 text-sm">
+                A professional chauffeur meets you at your requested starting
+                location and drives you in your own vehicle.
+              </p>
             </div>
             <div>
-              <div class="text-[#c69214] font-bold text-lg mb-2">3. Relax & Enjoy</div>
-              <p class="text-gray-300 text-sm">You ride as a passenger alone or with guests—relaxed, safe, and in control of your own schedule.</p>
+              <div class="text-[#c69214] font-bold text-lg mb-2">
+                3. Relax & Enjoy
+              </div>
+              <p class="text-gray-300 text-sm">
+                You ride as a passenger alone or with guests—relaxed, safe, and
+                in control of your own schedule.
+              </p>
             </div>
           </div>
           <div class="mt-8">
             <p class="text-[#c69214] font-semibold text-lg mb-2">Pricing</p>
-            <p class="text-white">$40/hour for members • $60/hour for non-members</p>
+            <p class="text-white">
+              $40/hour for members • $60/hour for non-members
+            </p>
             <p class="text-gray-400 text-sm">(gratuity appreciated)</p>
           </div>
         </div>
@@ -180,14 +229,24 @@ const chauffeurBenefits = [
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {whyChooseUs.map((feature) => (
-            <div class="flex items-center bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg p-4">
-              <svg class="w-5 h-5 text-[#c69214] mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-white">{feature}</span>
-            </div>
-          ))}
+          {
+            whyChooseUs.map((feature) => (
+              <div class="flex items-center bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg p-4">
+                <svg
+                  class="w-5 h-5 text-[#c69214] mr-3 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-white">{feature}</span>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -199,18 +258,27 @@ const chauffeurBenefits = [
           Booking & <span class="text-[#c69214]">Availability</span>
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-6 border border-gray-700">
+          <div
+            class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-6 border border-gray-700"
+          >
             <h3 class="text-xl font-bold text-[#c69214] mb-4">Requirements</h3>
             <ul class="text-left text-gray-300 space-y-2">
               <li>• Advance booking required (24-hour notice recommended)</li>
-              <li>• Concierge and Sprinter Van services may require additional lead time</li>
+              <li>
+                • Concierge and SUV services may require additional lead time
+              </li>
               <li>• Service is based on driver availability</li>
             </ul>
           </div>
-          <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-6 border border-gray-700">
+          <div
+            class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-6 border border-gray-700"
+          >
             <h3 class="text-xl font-bold text-[#c69214] mb-4">Pricing</h3>
             <ul class="text-left text-gray-300 space-y-2">
-              <li>• Custom quotes based on distance, vehicle type, and service complexity</li>
+              <li>
+                • Custom quotes based on distance, vehicle type, and service
+                complexity
+              </li>
               <li>• Corporate account and membership discounts available</li>
               <li>• Flat-rate pricing — no surge fees, no surprises</li>
             </ul>
@@ -226,17 +294,18 @@ const chauffeurBenefits = [
           Ready for <span class="text-[#c69214]">Premier</span> Service?
         </h2>
         <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          We deliver comfort, convenience, and confidence on every ride and in every detail.
+          We deliver comfort, convenience, and confidence on every ride and in
+          every detail.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <a 
-            href="tel:+14806953659" 
+          <a
+            href="tel:+14806953659"
             class="bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-8 py-4 rounded-xl font-bold hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 transform hover:scale-105"
           >
             Call (480) 695-3659
           </a>
-          <a 
-            href="mailto:drivers@chasersdd.com" 
+          <a
+            href="mailto:drivers@chasersdd.com"
             class="bg-gradient-to-r from-gray-700 to-gray-800 text-white px-8 py-4 rounded-xl font-bold hover:from-[#c69214] hover:to-[#b8841c] hover:text-black transition-all duration-300"
           >
             Email for Quote
@@ -244,7 +313,10 @@ const chauffeurBenefits = [
         </div>
         <div class="text-center">
           <p class="text-gray-400">
-            Email: <a href="mailto:drivers@chasersdd.com" class="text-[#c69214] hover:underline">drivers@chasersdd.com</a>
+            Email: <a
+              href="mailto:drivers@chasersdd.com"
+              class="text-[#c69214] hover:underline">drivers@chasersdd.com</a
+            >
           </p>
         </div>
       </div>
