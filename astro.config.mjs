@@ -8,7 +8,9 @@ import netlify from '@astrojs/netlify';
 export default defineConfig({
   site: 'https://chasersdd.com',
   output: 'server', // Server-side rendering for API routes
-  adapter: netlify(),
+  adapter: netlify({
+    edgeMiddleware: false // Disable Edge Functions for local development
+  }),
   integrations: [react(), tailwind()],
   server: {
     host: true,

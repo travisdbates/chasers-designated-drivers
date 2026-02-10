@@ -24,8 +24,8 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     id: 'standard-individual',
     name: 'Standard Individual',
     description: 'Safe, on-demand transportation home',
-    price: '$69.99',
-    priceNumeric: 69.99,
+    price: '$59.99',
+    priceNumeric: 59.99,
     priceSubtext: '/month + $40 trip fee per ride',
     features: [
       'Unlimited ride requests',
@@ -41,7 +41,7 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     ctaText: 'Join Standard Plan',
     ctaUrl: '/checkout/individual?plan=standard-individual',
     emailSubject: 'Welcome to Chasers DD - Standard Individual Plan',
-    smsMessage: 'Welcome to Chasers DD! Your Standard Individual plan ($69.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
+    smsMessage: 'Welcome to Chasers DD! Your Standard Individual plan ($59.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
     billingCycle: 'monthly',
     tripFee: 40,
     minimumCommitment: '3-month minimum commitment'
@@ -51,8 +51,8 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     id: 'individual',
     name: 'Individual Premier',
     description: 'Added flexibility and perks for frequent riders',
-    price: '$119.99',
-    priceNumeric: 119.99,
+    price: '$99.99',
+    priceNumeric: 99.99,
     priceSubtext: '/month + $40 trip fee per ride',
     features: [
       'Everything in Standard Plan, plus:',
@@ -68,7 +68,7 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     ctaText: 'Join Premier Plan',
     ctaUrl: '/checkout/individual?plan=individual',
     emailSubject: 'Welcome to Chasers DD - Individual Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Premier! Your Individual Premier plan ($119.99/month) is active. Enhanced flexibility included. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Premier! Your Individual Premier plan ($99.99/month) is active. Enhanced flexibility included. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 40
   },
