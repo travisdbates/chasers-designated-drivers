@@ -204,9 +204,10 @@
                 planSection.innerHTML = `
                     <h3 class="text-lg font-semibold mb-3">
                         ${planName}
-                        <span class="text-gray-600 font-normal ml-2">
+                        <span id="${planId}-current-price" class="text-gray-600 font-normal ml-2" data-original-price="${planData.priceNumeric}">
                             - Current Price: $${planData.priceNumeric.toFixed(2)}
                         </span>
+                        <span id="${planId}-change-indicator" class="font-normal ml-2 hidden"></span>
                     </h3>
                     <div class="max-w-sm">
                         <label class="block text-sm font-medium text-gray-700 mb-1">
@@ -217,8 +218,11 @@
                             step="0.01"
                             min="0"
                             name="${planId}-price"
+                            id="${planId}-price-input"
                             value="${planData.priceNumeric}"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            data-plan-id="${planId}"
+                            data-original-price="${planData.priceNumeric}"
+                            class="price-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
                     </div>
@@ -244,6 +248,58 @@
 
             container.innerHTML = '';
             container.appendChild(form);
+
+            // Add event listeners for price change indicators
+            setupPriceChangeIndicators();
+        }
+
+        // Setup price change indicators
+        function setupPriceChangeIndicators() {
+            const priceInputs = document.querySelectorAll('.price-input');
+
+            priceInputs.forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const planId = e.target.dataset.planId;
+                    const originalPrice = parseFloat(e.target.dataset.originalPrice);
+                    const newPrice = parseFloat(e.target.value);
+
+                    updatePriceChangeDisplay(planId, originalPrice, newPrice);
+                });
+            });
+        }
+
+        // Update price change display
+        function updatePriceChangeDisplay(planId, originalPrice, newPrice) {
+            const currentPriceEl = document.getElementById(`${planId}-current-price`);
+            const changeIndicatorEl = document.getElementById(`${planId}-change-indicator`);
+
+            if (!currentPriceEl || !changeIndicatorEl) return;
+
+            // If price is unchanged or invalid, reset display
+            if (!newPrice || newPrice === originalPrice || isNaN(newPrice)) {
+                currentPriceEl.className = 'text-gray-600 font-normal ml-2';
+                currentPriceEl.style.textDecoration = 'none';
+                changeIndicatorEl.classList.add('hidden');
+                return;
+            }
+
+            // Calculate changes
+            const dollarChange = newPrice - originalPrice;
+            const percentChange = ((dollarChange / originalPrice) * 100).toFixed(1);
+
+            // Determine color (green for increase, red for decrease)
+            const isIncrease = dollarChange > 0;
+            const color = isIncrease ? 'text-green-600' : 'text-red-600';
+            const sign = isIncrease ? '+' : '';
+
+            // Update current price display (strikethrough + color)
+            currentPriceEl.className = `${color} font-normal ml-2`;
+            currentPriceEl.style.textDecoration = 'line-through';
+
+            // Update change indicator
+            changeIndicatorEl.className = `${color} font-medium ml-2`;
+            changeIndicatorEl.textContent = `${sign}$${Math.abs(dollarChange).toFixed(2)} (${sign}${percentChange}%)`;
+            changeIndicatorEl.classList.remove('hidden');
         }
 
         // Handle pricing update
