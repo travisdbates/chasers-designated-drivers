@@ -1,34 +1,26 @@
 {
   "standard-individual": {
-    "priceNumeric": 59.99,
-    "tripFee": 40
+    "priceNumeric": 59.99
   },
   "individual": {
-    "priceNumeric": 99.99,
-    "tripFee": 40
+    "priceNumeric": 99.99
   },
   "joint": {
-    "priceNumeric": 89.99,
-    "tripFee": 40
+    "priceNumeric": 89.99
   },
   "joint-premier": {
-    "priceNumeric": 149.99,
-    "tripFee": 40
+    "priceNumeric": 149.99
   },
   "family": {
-    "priceNumeric": 249.99,
-    "tripFee": 40
+    "priceNumeric": 249.99
   },
   "business": {
-    "priceNumeric": 599.99,
-    "tripFee": 40
+    "priceNumeric": 599.99
   },
   "business-premier": {
-    "priceNumeric": 749.99,
-    "tripFee": 40
+    "priceNumeric": 749.99
   },
   "corporate": {
-    "priceNumeric": 999.99,
-    "tripFee": 0
+    "priceNumeric": 999.99
   }
 }
