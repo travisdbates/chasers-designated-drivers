@@ -1,0 +1,311 @@
+---
+// This is the admin panel page that will check authentication
+// and show either login form or pricing editor
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Chasers DD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8">
+        <!-- Login Form (shown initially) -->
+        <div id="login-form" class="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
+            <h1 class="text-2xl font-bold mb-6 text-center">Admin Login</h1>
+            <form id="login" class="space-y-4">
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                        Password
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Enter admin password"
+                    />
+                </div>
+                <div id="login-error" class="text-red-600 text-sm hidden"></div>
+                <button
+                    type="submit"
+                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+                >
+                    Login
+                </button>
+            </form>
+        </div>
+
+        <!-- Admin Panel (shown after login) -->
+        <div id="admin-panel" class="hidden">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h1 class="text-3xl font-bold">Pricing Management</h1>
+                        <button
+                            id="logout-btn"
+                            class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors"
+                        >
+                            Logout
+                        </button>
+                    </div>
+
+                    <div id="pricing-form-container">
+                        <p class="text-gray-500">Loading pricing data...</p>
+                    </div>
+
+                    <div id="save-status" class="mt-4 hidden"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSha = null;
+        let pricingData = null;
+
+        // Check if already authenticated
+        async function checkAuth() {
+            try {
+                const response = await fetch('/api/admin/get-pricing');
+                if (response.ok) {
+                    // Already authenticated
+                    await loadAdminPanel();
+                }
+            } catch (error) {
+                // Not authenticated, show login form
+            }
+        }
+
+        // Handle login
+        document.getElementById('login')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const password = formData.get('password');
+            const errorEl = document.getElementById('login-error');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
+            // Disable submit button during request
+            if (submitBtn) submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    await loadAdminPanel();
+                } else {
+                    if (errorEl) {
+                        errorEl.textContent = data.error || 'Login failed';
+                        errorEl.classList.remove('hidden');
+                    }
+
+                    // If rate limited, disable form for the retry duration
+                    if (response.status === 429 && data.retryAfter) {
+                        const retrySeconds = data.retryAfter;
+                        let countdown = retrySeconds;
+
+                        const interval = setInterval(() => {
+                            countdown--;
+                            if (submitBtn) {
+                                submitBtn.textContent = `Locked (${Math.ceil(countdown / 60)}m ${countdown % 60}s)`;
+                            }
+                            if (countdown <= 0) {
+                                clearInterval(interval);
+                                if (submitBtn) {
+                                    submitBtn.textContent = 'Login';
+                                    submitBtn.disabled = false;
+                                }
+                            }
+                        }, 1000);
+                        return; // Don't re-enable button
+                    }
+                }
+            } catch (error) {
+                if (errorEl) {
+                    errorEl.textContent = 'An error occurred';
+                    errorEl.classList.remove('hidden');
+                }
+            } finally {
+                // Re-enable submit button
+                if (submitBtn && !submitBtn.textContent.includes('Locked')) {
+                    submitBtn.disabled = false;
+                }
+            }
+        });
+
+        // Handle logout
+        document.getElementById('logout-btn')?.addEventListener('click', async () => {
+            try {
+                await fetch('/api/admin/logout', { method: 'POST' });
+                location.reload();
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        });
+
+        // Load admin panel
+        async function loadAdminPanel() {
+            try {
+                const response = await fetch('/api/admin/get-pricing');
+                if (!response.ok) {
+                    throw new Error('Failed to load pricing');
+                }
+
+                const data = await response.json();
+                pricingData = data.pricing;
+                currentSha = data.sha;
+
+                // Show admin panel, hide login
+                document.getElementById('login-form')?.classList.add('hidden');
+                document.getElementById('admin-panel')?.classList.remove('hidden');
+
+                // Render pricing form
+                renderPricingForm(pricingData);
+            } catch (error) {
+                console.error('Error loading admin panel:', error);
+            }
+        }
+
+        // Render pricing form
+        function renderPricingForm(pricing) {
+            const container = document.getElementById('pricing-form-container');
+            if (!container) return;
+
+            const planNames = {
+                'standard-individual': 'Standard Individual',
+                'individual': 'Individual Premier',
+                'joint': 'Joint Plan',
+                'joint-premier': 'Joint Premier',
+                'family': 'Friends & Family',
+                'business': 'Business Plan',
+                'business-premier': 'Business Premier',
+                'corporate': 'Corporate Premier'
+            };
+
+            const form = document.createElement('form');
+            form.id = 'pricing-form';
+            form.className = 'space-y-6';
+
+            for (const [planId, planData] of Object.entries(pricing)) {
+                const planName = planNames[planId] || planId;
+
+                const planSection = document.createElement('div');
+                planSection.className = 'border-b border-gray-200 pb-4';
+                planSection.innerHTML = `
+                    <h3 class="text-lg font-semibold mb-3">${planName}</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Monthly Price ($)
+                            </label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                name="${planId}-price"
+                                value="${planData.priceNumeric}"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Trip Fee ($)
+                            </label>
+                            <input
+                                type="number"
+                                step="1"
+                                name="${planId}-tripFee"
+                                value="${planData.tripFee}"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                    </div>
+                `;
+                form.appendChild(planSection);
+            }
+
+            // Add submit button
+            const submitDiv = document.createElement('div');
+            submitDiv.className = 'pt-4';
+            submitDiv.innerHTML = `
+                <button
+                    type="submit"
+                    class="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 transition-colors font-semibold"
+                >
+                    Save Pricing & Commit to GitHub
+                </button>
+            `;
+            form.appendChild(submitDiv);
+
+            // Handle form submission
+            form.addEventListener('submit', handlePricingUpdate);
+
+            container.innerHTML = '';
+            container.appendChild(form);
+        }
+
+        // Handle pricing update
+        async function handlePricingUpdate(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            // Build updated pricing object
+            const updatedPricing = {};
+            for (const planId in pricingData) {
+                updatedPricing[planId] = {
+                    priceNumeric: parseFloat(formData.get(`${planId}-price`)),
+                    tripFee: parseInt(formData.get(`${planId}-tripFee`))
+                };
+            }
+
+            const statusEl = document.getElementById('save-status');
+            if (statusEl) {
+                statusEl.textContent = 'Saving and committing to GitHub...';
+                statusEl.className = 'mt-4 p-4 bg-blue-100 text-blue-800 rounded';
+                statusEl.classList.remove('hidden');
+            }
+
+            try {
+                const response = await fetch('/api/admin/update-pricing', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        pricing: updatedPricing,
+                        sha: currentSha
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (statusEl) {
+                        statusEl.textContent = 'Pricing updated successfully! Changes committed to GitHub. The site will rebuild in 1-2 minutes.';
+                        statusEl.className = 'mt-4 p-4 bg-green-100 text-green-800 rounded';
+                    }
+                    // Reload pricing data to get new SHA
+                    setTimeout(() => loadAdminPanel(), 2000);
+                } else {
+                    throw new Error(data.error || 'Update failed');
+                }
+            } catch (error) {
+                if (statusEl) {
+                    statusEl.textContent = `Error: ${error.message}`;
+                    statusEl.className = 'mt-4 p-4 bg-red-100 text-red-800 rounded';
+                }
+            }
+        }
+
+        // Check auth on page load
+        checkAuth();
+    </script>
+</body>
+</html>

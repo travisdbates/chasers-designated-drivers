@@ -19,7 +19,21 @@ export interface Plan {
   minimumCommitment?: string;
 }
 
-export const MEMBERSHIP_PLANS: Record<string, Plan> = {
+interface PricingOverride {
+  priceNumeric: number;
+  tripFee: number;
+}
+
+// Load pricing overrides from JSON file
+let pricingOverrides: Record<string, PricingOverride> = {};
+try {
+  const overridesData = await import('../../pricing-overrides.json');
+  pricingOverrides = overridesData.default;
+} catch (e) {
+  console.warn('No pricing overrides found, using default prices');
+}
+
+const BASE_PLANS: Record<string, Plan> = {
   'standard-individual': {
     id: 'standard-individual',
     name: 'Standard Individual',
@@ -229,6 +243,26 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = {
     tripFee: 0 // Corporate may have different pricing structure
   }
 };
+
+// Apply pricing overrides and export final plans
+export const MEMBERSHIP_PLANS: Record<string, Plan> = Object.entries(BASE_PLANS).reduce((acc, [key, plan]) => {
+  const override = pricingOverrides[key];
+  if (override) {
+    acc[key] = {
+      ...plan,
+      priceNumeric: override.priceNumeric,
+      price: `$${override.priceNumeric.toFixed(2)}`,
+      tripFee: override.tripFee,
+      priceSubtext: override.tripFee > 0
+        ? `/month + $${override.tripFee} trip fee per ride`
+        : plan.priceSubtext,
+      smsMessage: plan.smsMessage.replace(/\$[\d.]+\/month/g, `$${override.priceNumeric.toFixed(2)}/month`)
+    };
+  } else {
+    acc[key] = plan;
+  }
+  return acc;
+}, {} as Record<string, Plan>);
 
 // Helper functions for easy access
 export const getPlanById = (planId: string): Plan | undefined => {
