@@ -202,10 +202,15 @@
                 const planSection = document.createElement('div');
                 planSection.className = 'border-b border-gray-200 pb-4';
                 planSection.innerHTML = `
-                    <h3 class="text-lg font-semibold mb-3">${planName}</h3>
+                    <h3 class="text-lg font-semibold mb-3">
+                        ${planName}
+                        <span class="text-gray-600 font-normal ml-2">
+                            - Current Price: $${planData.priceNumeric.toFixed(2)}
+                        </span>
+                    </h3>
                     <div class="max-w-sm">
                         <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Monthly Subscription Price ($)
+                            New Monthly Subscription Price ($)
                         </label>
                         <input
                             type="number"
