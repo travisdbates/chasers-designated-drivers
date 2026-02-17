@@ -203,31 +203,19 @@
                 planSection.className = 'border-b border-gray-200 pb-4';
                 planSection.innerHTML = `
                     <h3 class="text-lg font-semibold mb-3">${planName}</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Monthly Price ($)
-                            </label>
-                            <input
-                                type="number"
-                                step="0.01"
-                                name="${planId}-price"
-                                value="${planData.priceNumeric}"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Trip Fee ($)
-                            </label>
-                            <input
-                                type="number"
-                                step="1"
-                                name="${planId}-tripFee"
-                                value="${planData.tripFee}"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            />
-                        </div>
+                    <div class="max-w-sm">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Monthly Subscription Price ($)
+                        </label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            name="${planId}-price"
+                            value="${planData.priceNumeric}"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
                     </div>
                 `;
                 form.appendChild(planSection);
@@ -262,8 +250,7 @@
             const updatedPricing = {};
             for (const planId in pricingData) {
                 updatedPricing[planId] = {
-                    priceNumeric: parseFloat(formData.get(`${planId}-price`)),
-                    tripFee: parseInt(formData.get(`${planId}-tripFee`))
+                    priceNumeric: parseFloat(formData.get(`${planId}-price`))
                 };
             }
 

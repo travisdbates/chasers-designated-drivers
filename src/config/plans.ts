@@ -21,7 +21,7 @@ export interface Plan {
 
 interface PricingOverride {
   priceNumeric: number;
-  tripFee: number;
+  tripFee?: number; // Optional - trip fees rarely change
 }
 
 // Load pricing overrides from JSON file
@@ -248,16 +248,22 @@ const BASE_PLANS: Record<string, Plan> = {
 export const MEMBERSHIP_PLANS: Record<string, Plan> = Object.entries(BASE_PLANS).reduce((acc, [key, plan]) => {
   const override = pricingOverrides[key];
   if (override) {
-    acc[key] = {
+    const updatedPlan = {
       ...plan,
       priceNumeric: override.priceNumeric,
       price: `$${override.priceNumeric.toFixed(2)}`,
-      tripFee: override.tripFee,
-      priceSubtext: override.tripFee > 0
-        ? `/month + $${override.tripFee} trip fee per ride`
-        : plan.priceSubtext,
       smsMessage: plan.smsMessage.replace(/\$[\d.]+\/month/g, `$${override.priceNumeric.toFixed(2)}/month`)
     };
+
+    // Only override trip fee if provided in overrides
+    if (override.tripFee !== undefined) {
+      updatedPlan.tripFee = override.tripFee;
+      updatedPlan.priceSubtext = override.tripFee > 0
+        ? `/month + $${override.tripFee} trip fee per ride`
+        : plan.priceSubtext;
+    }
+
+    acc[key] = updatedPlan;
   } else {
     acc[key] = plan;
   }
