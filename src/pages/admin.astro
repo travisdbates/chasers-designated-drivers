@@ -465,12 +465,12 @@
                         const sign = isIncrease ? '+' : '';
 
                         return `
-                            <div class="text-sm">
+                            <div class="text-sm flex items-center gap-2">
                                 <span class="font-medium">${planName}:</span>
-                                <span class="text-gray-500 line-through">$${change.previousPrice.toFixed(2)}</span>
-                                <span class="mx-1">→</span>
-                                <span class="font-medium">$${change.newPrice.toFixed(2)}</span>
-                                <span class="${color} ml-2">
+                                <span class="${color} line-through">$${change.previousPrice.toFixed(2)}</span>
+                                <span class="text-gray-400">→</span>
+                                <span class="font-semibold">$${change.newPrice.toFixed(2)}</span>
+                                <span class="${color} font-medium">
                                     ${sign}$${Math.abs(change.dollarChange).toFixed(2)}
                                     (${sign}${change.percentChange}%)
                                 </span>
