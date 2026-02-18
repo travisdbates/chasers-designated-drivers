@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
-    const { pricing, sha } = await request.json();
+    const { pricing, sha, changeNote } = await request.json();
 
     if (!pricing || !sha) {
       return new Response(
@@ -23,6 +23,12 @@ export const POST: APIRoute = async ({ request }) => {
           headers: { 'Content-Type': 'application/json' }
         }
       );
+    }
+
+    // Build commit message
+    let commitMessage = 'Update pricing via admin panel';
+    if (changeNote && changeNote.trim()) {
+      commitMessage += `: ${changeNote.trim()}`;
     }
 
     // Convert pricing object to formatted JSON string
@@ -43,7 +49,7 @@ export const POST: APIRoute = async ({ request }) => {
           'X-GitHub-Api-Version': '2022-11-28'
         },
         body: JSON.stringify({
-          message: 'Update pricing via admin panel',
+          message: commitMessage,
           content: encodedContent,
           sha: sha, // Required to prevent conflicts
           branch: GITHUB_BRANCH

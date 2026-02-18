@@ -295,10 +295,26 @@
                 form.appendChild(planSection);
             }
 
-            // Add submit button
+            // Add change note and submit button
             const submitDiv = document.createElement('div');
-            submitDiv.className = 'pt-4';
+            submitDiv.className = 'pt-6 border-t border-gray-200';
             submitDiv.innerHTML = `
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Change Note (Optional)
+                    </label>
+                    <input
+                        type="text"
+                        name="change-note"
+                        id="change-note"
+                        placeholder="e.g., Holiday promotion, Q1 price increase, Competitor match..."
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        maxlength="100"
+                    />
+                    <p class="text-xs text-gray-500 mt-1">
+                        This note will appear in the git commit message and pricing history
+                    </p>
+                </div>
                 <button
                     type="submit"
                     class="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 transition-colors font-semibold"
@@ -380,6 +396,9 @@
                 };
             }
 
+            // Get optional change note
+            const changeNote = formData.get('change-note') || '';
+
             const statusEl = document.getElementById('save-status');
             if (statusEl) {
                 statusEl.textContent = 'Saving and committing to GitHub...';
@@ -393,7 +412,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         pricing: updatedPricing,
-                        sha: currentSha
+                        sha: currentSha,
+                        changeNote: changeNote
                     })
                 });
 
