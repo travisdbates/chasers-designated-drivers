@@ -6,21 +6,21 @@
     "priceNumeric": 99.99
   },
   "joint": {
-    "priceNumeric": 89.99
+    "priceNumeric": 79.99
   },
   "joint-premier": {
     "priceNumeric": 149.99
   },
   "family": {
-    "priceNumeric": 249.99
+    "priceNumeric": 199.99
   },
   "business": {
-    "priceNumeric": 599.99
+    "priceNumeric": 499.99
   },
   "business-premier": {
-    "priceNumeric": 749.99
+    "priceNumeric": 699.99
   },
   "corporate": {
-    "priceNumeric": 999.99
+    "priceNumeric": 899.99
   }
 }
