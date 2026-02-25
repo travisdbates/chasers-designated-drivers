@@ -5,6 +5,19 @@ import { getAllPlans } from "../config/plans.ts";
 
 const membershipPlans = getAllPlans();
 
+// Features that exist only in the premier version of each standard plan.
+// These are shown on the standard card as a locked/strikethrough row with a tooltip.
+const premierOnlyFeature: Record<string, { text: string; tooltip: string }> = {
+  'standard-individual': {
+    text: 'Request rides for guests & clients',
+    tooltip: 'Available in Individual Premier — as long as you\'re present, you can request a ride for a friend, date, or client.'
+  },
+  'joint': {
+    text: 'Request rides for guests & clients',
+    tooltip: 'Available in Joint Premier — as long as a registered member is present, you can request rides for guests or clients.'
+  }
+};
+
 const serviceAddOns = [
   {
     name: "Car Concierge Services",
@@ -266,6 +279,31 @@ const serviceAddOns = [
                           <span class="text-sm leading-relaxed">{feature}</span>
                         </li>
                       ))}
+
+                    {/* Locked premier-only feature on standard plans */}
+                    {premierOnlyFeature[plan.id] && (
+                      <li class="group/tip relative flex items-start text-gray-500 cursor-default select-none">
+                        <svg
+                          class="w-5 h-5 text-gray-600 mr-3 mt-0.5 flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                        <span class="text-sm leading-relaxed line-through">
+                          {premierOnlyFeature[plan.id].text}
+                        </span>
+                        {/* Tooltip */}
+                        <div class="pointer-events-none absolute bottom-full left-0 mb-2 w-64 rounded-lg border border-[#c69214]/40 bg-gray-900 p-3 text-xs text-gray-200 opacity-0 transition-all duration-200 group-hover/tip:opacity-100 z-10">
+                          <p class="text-[#c69214] font-semibold mb-1">Premier plan only</p>
+                          <p>{premierOnlyFeature[plan.id].tooltip}</p>
+                        </div>
+                      </li>
+                    )}
                   </ul>
 
                   {plan.id === "individual" && (
@@ -361,6 +399,31 @@ const serviceAddOns = [
                           <span class="text-sm leading-relaxed">{feature}</span>
                         </li>
                       ))}
+
+                    {/* Locked premier-only feature on standard plans */}
+                    {premierOnlyFeature[plan.id] && (
+                      <li class="group/tip relative flex items-start text-gray-500 cursor-default select-none">
+                        <svg
+                          class="w-5 h-5 text-gray-600 mr-3 mt-0.5 flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                        <span class="text-sm leading-relaxed line-through">
+                          {premierOnlyFeature[plan.id].text}
+                        </span>
+                        {/* Tooltip */}
+                        <div class="pointer-events-none absolute bottom-full left-0 mb-2 w-64 rounded-lg border border-[#c69214]/40 bg-gray-900 p-3 text-xs text-gray-200 opacity-0 transition-all duration-200 group-hover/tip:opacity-100 z-10">
+                          <p class="text-[#c69214] font-semibold mb-1">Premier plan only</p>
+                          <p>{premierOnlyFeature[plan.id].tooltip}</p>
+                        </div>
+                      </li>
+                    )}
                   </ul>
 
                   <a

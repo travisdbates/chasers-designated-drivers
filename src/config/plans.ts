@@ -69,13 +69,14 @@ const BASE_PLANS: Record<string, Plan> = {
     priceNumeric: 99.99,
     priceSubtext: '/month + $40 trip fee per ride',
     features: [
-      'Everything in Standard Plan, plus:',
-      'Ability to request driver for friend/client (must be present)',
+      'Request rides for guests & clients (must be present)',
       'Unlimited ride requests',
-      'Covers you alone',
+      '$40 trip fee per ride (plus gratuity)',
+      'Covers the member only',
       '3PM - 3AM availability, 7 days a week',
       'Service available outside normal hours (by appointment)',
-      'Pay by cash or charge to account'
+      'Pay by cash or charge to account',
+      'No minimum commitment'
     ],
     popular: true,
     category: 'individual',
@@ -122,13 +123,14 @@ const BASE_PLANS: Record<string, Plan> = {
     priceNumeric: 149.99,
     priceSubtext: '/month + $40 trip fee per ride',
     features: [
-      'Everything in Joint Plan, plus:',
-      'Ability to request driver for friend/client (one registered member must be present)',
+      'Request rides for guests & clients (one member must be present)',
       'Unlimited ride requests',
+      '$40 trip fee per ride (plus gratuity)',
       'Covers member and one additional person',
       '3PM - 3AM availability, 7 days a week',
       'Service available outside normal hours (by appointment)',
-      'Pay by cash or charge to account'
+      'Pay by cash or charge to account',
+      'No minimum commitment'
     ],
     popular: false,
     category: 'joint',
