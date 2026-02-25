@@ -45,7 +45,7 @@ const BASE_PLANS: Record<string, Plan> = {
       'Unlimited ride requests',
       '$40 trip fee per ride (plus gratuity)',
       'Covers the member only',
-      '3PM - 3AM availability, 7 days a week',
+
       'Service available outside normal hours (by appointment)',
       'Pay by cash or charge to account',
       '3-month minimum commitment'
@@ -73,7 +73,7 @@ const BASE_PLANS: Record<string, Plan> = {
       'Unlimited ride requests',
       '$40 trip fee per ride (plus gratuity)',
       'Covers the member only',
-      '3PM - 3AM availability, 7 days a week',
+
       'Service available outside normal hours (by appointment)',
       'Pay by cash or charge to account',
       '3-month minimum commitment'
@@ -99,7 +99,7 @@ const BASE_PLANS: Record<string, Plan> = {
       'Unlimited ride requests',
       '$40 trip fee per ride (plus gratuity)',
       'Covers member and one additional person',
-      '3PM - 3AM availability, 7 days a week',
+
       'Service available outside normal hours (by appointment)',
       'Pay by cash or charge to account',
       '3-month minimum commitment'
@@ -127,7 +127,7 @@ const BASE_PLANS: Record<string, Plan> = {
       'Unlimited ride requests',
       '$40 trip fee per ride (plus gratuity)',
       'Covers member and one additional person',
-      '3PM - 3AM availability, 7 days a week',
+
       'Service available outside normal hours (by appointment)',
       'Pay by cash or charge to account',
       '3-month minimum commitment'
@@ -153,7 +153,7 @@ const BASE_PLANS: Record<string, Plan> = {
       'Unlimited ride requests',
       '$40 trip fee per ride (plus gratuity)',
       'Covers up to 4 approved adult drivers',
-      '3PM - 3AM availability, 7 days a week',
+
       'Service available outside normal hours (by appointment)',
       'Pay by cash or charge to account',
       'Only approved drivers may use the plan'
@@ -181,7 +181,7 @@ const BASE_PLANS: Record<string, Plan> = {
       '$40 trip fee per ride (plus gratuity)',
       'Car Retrieval services (get vehicle from A to B)',
       'Chauffeur in your vehicles service',
-      '3PM - 3AM availability, 7 days a week',
+
       'Pay by cash, card, or charge to company account'
     ],
     popular: false,
@@ -206,7 +206,7 @@ const BASE_PLANS: Record<string, Plan> = {
       'Covers up to 10 approved individuals + unlimited client requests',
       'Ability to request rides for clients and guests',
       'No need for clients to be on approved list',
-      '3PM - 3AM availability, 7 days a week',
+
       'Service available outside normal hours (by appointment)',
       'Pay by cash, card, or charge to company account'
     ],
