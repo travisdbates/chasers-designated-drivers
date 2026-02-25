@@ -76,7 +76,7 @@ const BASE_PLANS: Record<string, Plan> = {
       '3PM - 3AM availability, 7 days a week',
       'Service available outside normal hours (by appointment)',
       'Pay by cash or charge to account',
-      'No minimum commitment'
+      '3-month minimum commitment'
     ],
     popular: true,
     category: 'individual',
@@ -130,7 +130,7 @@ const BASE_PLANS: Record<string, Plan> = {
       '3PM - 3AM availability, 7 days a week',
       'Service available outside normal hours (by appointment)',
       'Pay by cash or charge to account',
-      'No minimum commitment'
+      '3-month minimum commitment'
     ],
     popular: false,
     category: 'joint',
