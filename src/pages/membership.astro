@@ -667,9 +667,9 @@ const serviceAddOns = [
 
       <!-- Tabs -->
       <div class="flex border-b border-gray-700">
-        <button data-tab="individual" class="flex-1 py-3 px-4 text-sm font-semibold text-[#c69214] border-b-2 border-[#c69214] transition-colors">Individual</button>
-        <button data-tab="joint" class="flex-1 py-3 px-4 text-sm font-semibold text-gray-400 hover:text-white border-b-2 border-transparent transition-colors">Joint</button>
-        <button data-tab="business" class="flex-1 py-3 px-4 text-sm font-semibold text-gray-400 hover:text-white border-b-2 border-transparent transition-colors">Business</button>
+        <button data-tab="individual" class="flex-1 py-3 px-4 text-sm font-semibold border-b-2 transition-colors compare-tab-active">Individual</button>
+        <button data-tab="joint" class="flex-1 py-3 px-4 text-sm font-semibold border-b-2 transition-colors compare-tab-inactive">Joint</button>
+        <button data-tab="business" class="flex-1 py-3 px-4 text-sm font-semibold border-b-2 transition-colors compare-tab-inactive">Business</button>
       </div>
 
       <!-- Individual Tab Panel -->
@@ -898,33 +898,47 @@ const serviceAddOns = [
     </div>
   </div>
 
-  <script>
-    const modal = document.getElementById('compare-modal') as HTMLElement;
-    const openBtn = document.getElementById('open-compare') as HTMLElement;
-    const closeBtn = document.getElementById('close-compare') as HTMLElement;
+  <style>
+    .compare-tab-active {
+      color: #c69214;
+      border-bottom-color: #c69214;
+    }
+    .compare-tab-inactive {
+      color: #9ca3af;
+      border-bottom-color: transparent;
+    }
+  </style>
 
-    openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
-    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.add('hidden');
-    });
+  <script is:inline>
+    (function () {
+      var modal = document.getElementById('compare-modal');
+      var openBtn = document.getElementById('open-compare');
+      var closeBtn = document.getElementById('close-compare');
 
-    document.querySelectorAll<HTMLElement>('[data-tab]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const tab = btn.getAttribute('data-tab');
-
-        document.querySelectorAll<HTMLElement>('[data-tab]').forEach(b => {
-          b.classList.remove('text-[#c69214]', 'border-[#c69214]');
-          b.classList.add('text-gray-400', 'border-transparent');
-        });
-        btn.classList.add('text-[#c69214]', 'border-[#c69214]');
-        btn.classList.remove('text-gray-400', 'border-transparent');
-
-        document.querySelectorAll<HTMLElement>('[data-panel]').forEach(panel => {
-          panel.classList.add('hidden');
-        });
-        document.querySelector<HTMLElement>(`[data-panel="${tab}"]`)?.classList.remove('hidden');
+      openBtn.addEventListener('click', function () { modal.classList.remove('hidden'); });
+      closeBtn.addEventListener('click', function () { modal.classList.add('hidden'); });
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) modal.classList.add('hidden');
       });
-    });
+
+      document.querySelectorAll('[data-tab]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var tab = btn.getAttribute('data-tab');
+
+          document.querySelectorAll('[data-tab]').forEach(function (b) {
+            b.classList.remove('compare-tab-active');
+            b.classList.add('compare-tab-inactive');
+          });
+          btn.classList.add('compare-tab-active');
+          btn.classList.remove('compare-tab-inactive');
+
+          document.querySelectorAll('[data-panel]').forEach(function (panel) {
+            panel.classList.add('hidden');
+          });
+          var active = document.querySelector('[data-panel="' + tab + '"]');
+          if (active) active.classList.remove('hidden');
+        });
+      });
+    })();
   </script>
 </BaseLayout>
