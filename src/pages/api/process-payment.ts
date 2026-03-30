@@ -71,6 +71,33 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify(paymentData, null, 2)
     );
 
+    // Validate ToS acceptance
+    if (!paymentData.tosAcceptance?.accepted) {
+      console.error("❌ ToS not accepted");
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "You must agree to the Member User Agreement to continue",
+        }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    console.log("✅ ToS Acceptance recorded:", {
+      accepted: paymentData.tosAcceptance.accepted,
+      timestamp: paymentData.tosAcceptance.timestamp,
+      agreementVersion: paymentData.tosAcceptance.agreementVersion,
+      agreementUrl: paymentData.tosAcceptance.agreementUrl,
+      customerEmail: paymentData.customer?.email,
+    });
+
+    console.log("📣 Marketing Consent recorded:", {
+      emailConsent: paymentData.marketing?.emailConsent ?? false,
+      smsConsent: paymentData.marketing?.smsConsent ?? false,
+      consentTimestamp: paymentData.marketing?.consentTimestamp,
+      customerEmail: paymentData.customer?.email,
+    });
+
     // Validate required fields - accept either token or direct card data
     if (!paymentData.payment?.token && !paymentData.cardNumber) {
       return new Response(
@@ -1191,7 +1218,9 @@ async function sendAdminSignupNotification(
         state: paymentData.customer.state,
         zip: paymentData.customer.zipCode,
       },
-      marketingConsent: paymentData.marketing?.emailConsent || paymentData.marketing?.smsConsent,
+      emailMarketingConsent: paymentData.marketing?.emailConsent ?? false,
+      smsMarketingConsent: paymentData.marketing?.smsConsent ?? false,
+      marketingConsentTimestamp: paymentData.marketing?.consentTimestamp,
       timestamp: new Date(),
     };
 

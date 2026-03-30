@@ -292,26 +292,29 @@ const ACCEPTBLUE_ENVIRONMENT =
       </p>
     </div>
 
-    <!-- Terms and Conditions -->
-    <div class="border-t border-off-white pt-6">
+    <!-- Member Agreement & Terms -->
+    <div class="border-t border-off-white pt-6 space-y-3">
       <div class="flex items-start">
         <input
           type="checkbox"
           id="acceptTerms"
           name="acceptTerms"
           required
-          class="h-4 w-4 text-gold-primary focus:ring-gold-primary border-gray-300 rounded mt-1"
+          class="h-4 w-4 text-gold-primary focus:ring-gold-primary border-gray-300 rounded mt-1 flex-shrink-0"
         />
         <label for="acceptTerms" class="ml-2 text-sm text-gray-700">
-          I agree to the <a
+          I have read, understand, and agree to the <a
             href="/terms"
-            class="text-gold-primary hover:underline">Terms of Service</a
-          >
-          and <a href="/privacy" class="text-gold-primary hover:underline"
+            target="_blank"
+            class="text-gold-primary hover:underline font-semibold">Chasers DD Member User Agreement</a
+          >, including the liability waiver, release of claims, and indemnification provisions. I also agree to the <a href="/privacy-policy" target="_blank" class="text-gold-primary hover:underline"
             >Privacy Policy</a
-          >. I authorize monthly recurring charges for this membership.
+          >. I authorize monthly recurring charges for this membership and acknowledge that cancellation requires 30 days' notice. <span class="font-semibold text-gray-900">This agreement is binding.</span>
         </label>
       </div>
+      <p class="text-xs text-gray-500 ml-6">
+        By checking this box, you are electronically signing the Chasers DD Member User Agreement. Your IP address, timestamp, and agreement version will be recorded.
+      </p>
     </div>
 
     <!-- Hidden field for plan ID -->

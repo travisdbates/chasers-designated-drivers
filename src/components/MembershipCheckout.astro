@@ -207,7 +207,14 @@ const total = numericPrice + setupFee;
         cvv: formData.get('cvv'),
         marketing: {
           emailConsent: formData.get('emailMarketingConsent') === 'on',
-          smsConsent: formData.get('smsMarketingConsent') === 'on'
+          smsConsent: formData.get('smsMarketingConsent') === 'on',
+          consentTimestamp: new Date().toISOString()
+        },
+        tosAcceptance: {
+          accepted: formData.get('acceptTerms') === 'on',
+          timestamp: new Date().toISOString(),
+          agreementVersion: 'member-user-agreement-2025-03',
+          agreementUrl: window.location.origin + '/terms'
         },
         plan: plan
       };
