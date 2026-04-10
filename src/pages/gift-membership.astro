@@ -2,30 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 
-const giftPlans = [
+const giftTerms = [
   {
-    id: 'standard-individual',
-    name: 'Standard Individual',
-    price: '$59.99',
-    description: 'Safe, on-demand transportation home'
+    duration: '3 Months',
+    icon: '🎁',
+    description: 'A great introduction — give them a full season of safe rides home.'
   },
   {
-    id: 'individual',
-    name: 'Individual Premier',
-    price: '$89.99', 
-    description: 'Added flexibility and perks for frequent riders'
+    duration: '6 Months',
+    icon: '⭐',
+    description: 'Half a year of peace of mind for you and your recipient.'
   },
   {
-    id: 'joint',
-    name: 'Joint Plan',
-    price: '$89.99',
-    description: 'Reliable transportation for two people'
-  },
-  {
-    id: 'joint-premier',
-    name: 'Joint Premier',
-    price: '$149.99',
-    description: 'Enhanced flexibility for couples'
+    duration: '1 Year',
+    icon: '👑',
+    description: 'The ultimate gift — a full year of reliable, safe transportation.'
   }
 ];
 
@@ -123,27 +114,37 @@ const perfectFor = [
       </div>
     </section>
 
-    <!-- Available Plans Section -->
+    <!-- Gift Term Options Section -->
     <section class="py-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">
-            Available <span class="text-[#c69214]">Plans</span>
+            Choose a <span class="text-[#c69214]">Gift Term</span>
           </h2>
-          <p class="text-xl text-gray-300">Choose the perfect membership plan to gift</p>
+          <p class="text-xl text-gray-300">Select how long you'd like to gift — then call us to set it up</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {giftPlans.map((plan) => (
-            <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-6 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300">
-              <div class="text-center mb-4">
-                <h3 class="text-xl font-bold text-white mb-2">{plan.name}</h3>
-                <div class="text-2xl font-bold text-[#c69214] mb-2">{plan.price}</div>
-                <p class="text-gray-400 text-sm mb-4">{plan.description}</p>
-                <p class="text-gray-500 text-xs">3-month gift: {plan.price.replace('$', '$') === '$59.99' ? '$179.97' : plan.price.replace('$', '$') === '$89.99' ? '$269.97' : plan.price.replace('$', '$') === '$149.99' ? '$449.97' : '$749.97'}</p>
-              </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {giftTerms.map((term) => (
+            <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-8 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 text-center">
+              <div class="text-5xl mb-4">{term.icon}</div>
+              <h3 class="text-2xl font-bold text-[#c69214] mb-3">{term.duration}</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">{term.description}</p>
             </div>
           ))}
+        </div>
+
+        <div class="text-center">
+          <div class="bg-gradient-to-r from-[#c69214]/20 to-[#b8841c]/20 border border-[#c69214]/30 rounded-xl p-8 max-w-2xl mx-auto">
+            <p class="text-[#c69214] font-bold text-xl mb-2">Call to secure your gift now</p>
+            <p class="text-gray-300 text-sm">Our team will walk you through the plan options and get everything set up for your recipient.</p>
+            <a
+              href="tel:+14806953659"
+              class="inline-block mt-6 bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black px-8 py-4 rounded-xl font-bold hover:from-[#b8841c] hover:to-[#a67619] transition-all duration-300 transform hover:scale-105"
+            >
+              Call (480) 695-3659
+            </a>
+          </div>
         </div>
       </div>
     </section>
