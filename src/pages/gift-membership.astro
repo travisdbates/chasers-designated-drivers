@@ -5,17 +5,17 @@ import Navigation from '../components/Navigation.astro';
 const giftTerms = [
   {
     duration: '3 Months',
-    icon: '🎁',
+    number: '3',
     description: 'A great introduction — give them a full season of safe rides home.'
   },
   {
     duration: '6 Months',
-    icon: '⭐',
+    number: '6',
     description: 'Half a year of peace of mind for you and your recipient.'
   },
   {
-    duration: '1 Year',
-    icon: '👑',
+    duration: '12 Months',
+    number: '12',
     description: 'The ultimate gift — a full year of reliable, safe transportation.'
   }
 ];
@@ -132,10 +132,20 @@ const perfectFor = [
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {giftTerms.map((term) => (
-            <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-xl p-8 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 text-center">
-              <div class="text-5xl mb-4">{term.icon}</div>
-              <h3 class="text-2xl font-bold text-[#c69214] mb-3">{term.duration}</h3>
-              <p class="text-gray-300 text-sm leading-relaxed">{term.description}</p>
+            <div class="relative rounded-xl border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 overflow-hidden bg-[#212322]" style="min-height: 200px;">
+              <!-- Large background number -->
+              <div
+                class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 select-none pointer-events-none leading-none font-black text-white/[0.06]"
+                style="font-size: 14rem;"
+                aria-hidden="true"
+              >
+                {term.number}
+              </div>
+              <!-- Card content -->
+              <div class="relative z-10 p-8">
+                <h3 class="text-2xl font-bold text-[#c69214] mb-3">{term.duration}</h3>
+                <p class="text-gray-300 text-sm leading-relaxed max-w-[75%]">{term.description}</p>
+              </div>
             </div>
           ))}
         </div>
