@@ -326,16 +326,74 @@
   <!-- Mobile Navigation Menu -->
   <div class="lg:hidden bg-off-white border-t border-gray-300 w-full shadow-lg" id="mobile-menu" style="position: absolute; top: 100%; left: 0; right: 0;">
     <div class="py-6 px-4 overflow-y-auto" style="max-height: calc(100vh - 82px);">
-      <div class="flex flex-col space-y-4 max-w-md mx-auto">
-        <a href="/membership" class="nav-link text-center py-2">Our Plans</a>
-        <a href="/about" class="nav-link text-center py-2">Our Story</a>
-        <a href="/car-concierge" class="nav-link text-center py-2">Services</a>
-        <a href="/how-it-works" class="nav-link text-center py-2">How We Work</a>
-        <a href="/contact" class="nav-link text-center py-2">Our Team</a>
-        <a href="/driver-signup" class="nav-link text-center py-2">Become a Driver</a>
-        <a href="/faq" class="nav-link text-center py-2">FAQ</a>
+      <div class="flex flex-col max-w-md mx-auto divide-y divide-gray-200">
 
-        <div class="pt-4 border-t border-gray-300">
+        <!-- Our Plans -->
+        <div class="mobile-accordion">
+          <button class="mobile-accordion-trigger w-full flex items-center justify-between py-3 nav-link font-medium" aria-expanded="false">
+            <span>Our Plans</span>
+            <svg class="mobile-chevron w-4 h-4 text-[#c69214] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-accordion-panel hidden pb-3 pl-4 flex flex-col space-y-1">
+            <a href="/membership#individual" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">Individual</a>
+            <a href="/membership#joint" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">Joint</a>
+            <a href="/membership#family" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">Family</a>
+            <a href="/membership#business" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">Business</a>
+          </div>
+        </div>
+
+        <!-- Our Story -->
+        <div class="mobile-accordion">
+          <button class="mobile-accordion-trigger w-full flex items-center justify-between py-3 nav-link font-medium" aria-expanded="false">
+            <span>Our Story</span>
+            <svg class="mobile-chevron w-4 h-4 text-[#c69214] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-accordion-panel hidden pb-3 pl-4 flex flex-col space-y-1">
+            <a href="/about#company" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">Company</a>
+            <a href="/about#history" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">History</a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="mobile-accordion">
+          <button class="mobile-accordion-trigger w-full flex items-center justify-between py-3 nav-link font-medium" aria-expanded="false">
+            <span>Services</span>
+            <svg class="mobile-chevron w-4 h-4 text-[#c69214] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-accordion-panel hidden pb-3 pl-4 flex flex-col space-y-1">
+            <a href="/luxury-transportation" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">Premier Transportation</a>
+            <a href="/car-concierge" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">Car Concierge</a>
+            <a href="/gift-membership" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">Gift Membership</a>
+          </div>
+        </div>
+
+        <!-- How We Work (no sub-items) -->
+        <a href="/how-it-works" class="block py-3 nav-link font-medium">How We Work</a>
+
+        <!-- Our Team -->
+        <div class="mobile-accordion">
+          <button class="mobile-accordion-trigger w-full flex items-center justify-between py-3 nav-link font-medium" aria-expanded="false">
+            <span>Our Team</span>
+            <svg class="mobile-chevron w-4 h-4 text-[#c69214] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-accordion-panel hidden pb-3 pl-4 flex flex-col space-y-1">
+            <a href="/contact" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">About Us</a>
+            <a href="/driver-signup" class="block py-2 text-sm text-gray-700 hover:text-[#c69214] transition-colors">Become a Driver</a>
+          </div>
+        </div>
+
+        <!-- FAQ (no sub-items) -->
+        <a href="/faq" class="block py-3 nav-link font-medium">FAQ</a>
+
+        <div class="pt-4">
           <a href="/membership" class="btn-primary w-full text-center block">
             Join Now
           </a>
@@ -534,6 +592,31 @@
       toggleMenu();
     });
     
+    // Accordion toggles for sub-menus
+    const accordionTriggers = mobileMenu.querySelectorAll('.mobile-accordion-trigger');
+    accordionTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const panel = this.nextElementSibling;
+        const chevron = this.querySelector('.mobile-chevron');
+        const isOpen = !panel.classList.contains('hidden');
+
+        // Close all other panels
+        accordionTriggers.forEach(t => {
+          if (t !== this) {
+            t.nextElementSibling.classList.add('hidden');
+            t.querySelector('.mobile-chevron').classList.remove('rotate-180');
+            t.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Toggle this panel
+        panel.classList.toggle('hidden', isOpen);
+        chevron.classList.toggle('rotate-180', !isOpen);
+        this.setAttribute('aria-expanded', String(!isOpen));
+      });
+    });
+
     // Close menu when clicking on links
     const mobileLinks = mobileMenu.querySelectorAll('a');
     mobileLinks.forEach(link => {
