@@ -23,15 +23,15 @@ const giftTerms = [
 const perfectFor = [
   {
     title: 'Friends or family celebrating a birthday or milestone',
-    icon: '🎂'
+    image: '/images/gift-birthday.jpg'
   },
   {
     title: 'Young adults or college students',
-    icon: '🎓'
+    image: '/images/gift-grads.jpg'
   },
   {
     title: 'Business associates and valued clients',
-    icon: '💼'
+    image: '/images/gift-business.jpg'
   }
 ];
 ---
@@ -71,9 +71,15 @@ const perfectFor = [
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           {perfectFor.map((item) => (
-            <div class="bg-gradient-to-b from-[#212322] to-[#212322] rounded-2xl p-8 border border-gray-700 hover:border-[#c69214]/50 transition-all duration-300 text-center">
-              <div class="text-5xl mb-4">{item.icon}</div>
-              <h3 class="text-lg font-bold text-white leading-relaxed">{item.title}</h3>
+            <div class="relative rounded-2xl overflow-hidden h-64 group">
+              <div
+                class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                style={`background-image: url('${item.image}'); filter: grayscale(100%);`}
+              ></div>
+              <div class="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-300"></div>
+              <div class="relative h-full flex items-end p-6">
+                <h3 class="text-lg font-bold text-white leading-relaxed">{item.title}</h3>
+              </div>
             </div>
           ))}
         </div>
