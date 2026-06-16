@@ -1,12 +1,12 @@
 {
   "standard-individual": {
-    "priceNumeric": 49.99
+    "priceNumeric": 39.99
   },
   "individual": {
     "priceNumeric": 99.99
   },
   "joint": {
-    "priceNumeric": 89.99
+    "priceNumeric": 79.99
   },
   "joint-premier": {
     "priceNumeric": 149.99
