@@ -27,13 +27,12 @@ interface HeroVideoCarouselProps {
 // Array of phrases that rotate with video changes
 const phrases: Phrase[] = [
   {
-    title: "Our Why, is No DUI!",
+    title: "We get you AND your vehicle home safely.",
     subtitle1:
       "Experience our services that have you, your time and protection in mind. Arrive in your own vehicle, remain in your own vehicle and return home in your own vehicle.",
-    subtitle2: "We get you and your vehicle home safely.",
   },
   {
-    title: "Our Members Matter. Service You Can Trust.",
+    title: "Our Members Matter, Our Why Is No DUI.",
     subtitle1:
       "Our members come first always. Every ride is handled by amazing drivers, premier pricing, and a commitment to getting you—and your vehicle—home safely.",
   },
