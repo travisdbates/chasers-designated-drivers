@@ -32,7 +32,7 @@ const phrases: Phrase[] = [
       "Experience our services that have you, your time and protection in mind. Arrive in your own vehicle, remain in your own vehicle and return home in your own vehicle.",
   },
   {
-    title: "Our Members Matter, Our Why Is No DUI.",
+    title: "Our WHY, is NO DUI!",
     subtitle1:
       "Our members come first always. Every ride is handled by amazing drivers, premier pricing, and a commitment to getting you—and your vehicle—home safely.",
   },
