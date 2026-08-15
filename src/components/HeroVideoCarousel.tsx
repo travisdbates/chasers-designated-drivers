@@ -17,6 +17,15 @@ interface Phrase {
   title: string;
   subtitle1: string;
   subtitle2?: string;
+  // Multiplies how long this phrase stays on screen. Defaults to 1.
+  durationMultiplier?: number;
+  // Overrides the default call-to-action button
+  cta?: {
+    text: string;
+    href: string;
+  };
+  // Renders a "Call or Text" link alongside the button
+  showPhoneCta?: boolean;
 }
 
 interface HeroVideoCarouselProps {
@@ -24,8 +33,24 @@ interface HeroVideoCarouselProps {
   autoplayInterval?: number; // Fallback if video duration cannot be determined
 }
 
-// Array of phrases that rotate with video changes
+const DEFAULT_CTA = { text: "View Our Plans", href: "/membership" };
+const PHONE_NUMBER = "(480) 695-3659";
+const PHONE_HREF = "tel:+14806953659";
+
+// Array of phrases that rotate with video changes.
+// The first entry leads on page load and carries the full service pitch, so it
+// stays on screen twice as long as the others.
 const phrases: Phrase[] = [
+  {
+    title: "Never risk a DUI again, or leave your vehicle behind",
+    subtitle1:
+      "Chasers sends vetted safe and friendly drivers to you at your location and drive you AND your vehicle home or to next destination.",
+    subtitle2:
+      "Open seven days a week, 3pm to 3am. Membership from $59.99 per month. Rides $40 plus gratuity each use.",
+    durationMultiplier: 2,
+    cta: { text: "View Plan", href: "/membership" },
+    showPhoneCta: true,
+  },
   {
     title: "We get you AND your vehicle home safely.",
     subtitle1:
@@ -91,13 +116,17 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
       const adjustedDuration = currentVideoDuration
         ? currentVideoDuration / 0.66
         : null;
+      // Some phrases carry more copy and hold the screen longer
+      const durationMultiplier =
+        phrases[currentPhraseIndex].durationMultiplier ?? 1;
+      const baseDuration = adjustedDuration
+        ? adjustedDuration * 1000
+        : autoplayInterval;
       // Subtract fade-out time (500ms) from the interval
-      const interval = adjustedDuration
-        ? adjustedDuration * 1000 - 500
-        : autoplayInterval - 500;
+      const interval = baseDuration * durationMultiplier - 500;
 
       console.log(
-        `Setting interval for slide ${currentSlide}: ${interval}ms (${currentVideoDuration ? currentVideoDuration + "s actual duration at 0.66x speed" : autoplayInterval / 1000 + "s fallback"})`
+        `Setting interval for slide ${currentSlide}: ${interval}ms (${currentVideoDuration ? currentVideoDuration + "s actual duration at 0.66x speed" : autoplayInterval / 1000 + "s fallback"}${durationMultiplier !== 1 ? `, ${durationMultiplier}x for phrase ${currentPhraseIndex}` : ""})`
       );
 
       intervalRef.current = setInterval(() => {
@@ -123,6 +152,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
     slides.length,
     autoplayInterval,
     currentSlide,
+    currentPhraseIndex,
     videoDurations,
   ]);
 
@@ -303,7 +333,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
               key={`title-${currentPhraseIndex}`}
               className="text-white text-shadow-premier"
               style={{
-                fontSize: "54px",
+                fontSize: "clamp(32px, 7vw, 54px)",
                 fontWeight: 400,
                 marginBottom: 20,
                 lineHeight: 1.2,
@@ -323,7 +353,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
               key={`subtitle1-${currentPhraseIndex}`}
               className="text-dark-200"
               style={{
-                fontSize: "32px",
+                fontSize: "clamp(20px, 4.2vw, 32px)",
                 lineHeight: 1.3,
                 fontFamily:
                   '"Louize Display", Overpass, Inter, Arial, sans-serif',
@@ -343,7 +373,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
                 key={`subtitle2-${currentPhraseIndex}`}
                 className="text-dark-200"
                 style={{
-                  fontSize: "28px",
+                  fontSize: "clamp(18px, 3.6vw, 28px)",
                   lineHeight: 1.3,
                   fontFamily:
                     '"Louize Display", Overpass, Inter, Arial, sans-serif',
@@ -354,33 +384,38 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
                     : "fadeIn 1000ms ease-in-out",
                 }}
               >
-                {phrases[currentPhraseIndex].subtitle2
-                  .split("and")
-                  .map((part, i, arr) =>
-                    i === arr.length - 1 ? (
-                      part
-                    ) : (
-                      <React.Fragment key={i}>
-                        {part}
-                        <strong>and</strong>
-                      </React.Fragment>
-                    )
-                  )}
+                {phrases[currentPhraseIndex].subtitle2}
               </p>
             )}
 
-            {/* CTA Buttons - Always show the same buttons */}
+            {/* CTA Buttons - Fade with the phrase they belong to */}
             <div
+              key={`cta-${currentPhraseIndex}`}
               className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
-              style={{ marginTop: "16px" }}
+              style={{
+                marginTop: "16px",
+                animation: isTransitioning
+                  ? "fadeOut 500ms ease-in-out forwards"
+                  : "fadeIn 1000ms ease-in-out",
+              }}
             >
               <a
-                href="/membership"
+                href={(phrases[currentPhraseIndex].cta ?? DEFAULT_CTA).href}
                 className="btn-primary px-8 py-4"
-                style={{ fontSize: "20px" }}
+                style={{ fontSize: "clamp(16px, 2vw, 20px)" }}
               >
-                View Our Plans
+                {(phrases[currentPhraseIndex].cta ?? DEFAULT_CTA).text}
               </a>
+
+              {phrases[currentPhraseIndex].showPhoneCta && (
+                <a
+                  href={PHONE_HREF}
+                  className="btn-secondary px-8 py-4"
+                  style={{ fontSize: "clamp(16px, 2vw, 20px)" }}
+                >
+                  Call or Text {PHONE_NUMBER}
+                </a>
+              )}
             </div>
           </div>
         </div>
