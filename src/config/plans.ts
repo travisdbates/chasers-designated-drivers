@@ -4,6 +4,7 @@ export interface Plan {
   description: string;
   price: string;
   priceNumeric: number; // For calculations and payment processing
+  pricePeriod?: string; // Billing period shown next to the price, e.g. "$59.99/Month"
   priceSubtext: string;
   features: string[];
   popular: boolean;
@@ -36,11 +37,11 @@ try {
 const BASE_PLANS: Record<string, Plan> = {
   'standard-individual': {
     id: 'standard-individual',
-    name: 'Standard Individual',
+    name: 'Individual Plan',
     description: 'Safe, on-demand transportation home',
     price: '$59.99',
     priceNumeric: 59.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Unlimited ride requests',
       '$40 trip fee per ride (plus gratuity)',
@@ -52,10 +53,10 @@ const BASE_PLANS: Record<string, Plan> = {
     ],
     popular: false,
     category: 'individual',
-    ctaText: 'Join Standard Plan',
+    ctaText: 'Join Individual Plan',
     ctaUrl: '/checkout/individual?plan=standard-individual',
-    emailSubject: 'Welcome to Chasers DD - Standard Individual Plan',
-    smsMessage: 'Welcome to Chasers DD! Your Standard Individual plan ($59.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
+    emailSubject: 'Welcome to Chasers DD - Individual Plan',
+    smsMessage: 'Welcome to Chasers DD! Your Individual Plan ($59.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
     billingCycle: 'monthly',
     tripFee: 40,
     minimumCommitment: '3-month minimum commitment'
@@ -67,7 +68,7 @@ const BASE_PLANS: Record<string, Plan> = {
     description: 'Added flexibility and perks for frequent riders',
     price: '$99.99',
     priceNumeric: 99.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Request rides for guests & clients (must be present)',
       'Priority booking during peak hours',
@@ -95,7 +96,7 @@ const BASE_PLANS: Record<string, Plan> = {
     description: 'Reliable transportation for two people',
     price: '$89.99',
     priceNumeric: 89.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Unlimited ride requests',
       '$40 trip fee per ride (plus gratuity)',
@@ -122,7 +123,7 @@ const BASE_PLANS: Record<string, Plan> = {
     description: 'Enhanced flexibility and premium access for couples',
     price: '$149.99',
     priceNumeric: 149.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Request rides for guests & clients (one member must be present)',
       'Priority booking during peak hours',
@@ -150,7 +151,7 @@ const BASE_PLANS: Record<string, Plan> = {
     description: 'Perfect for up to 4 individuals in households or groups',
     price: '$249.99',
     priceNumeric: 249.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Unlimited ride requests',
       '$40 trip fee per ride (plus gratuity)',
@@ -176,7 +177,7 @@ const BASE_PLANS: Record<string, Plan> = {
     description: 'Safe transportation for business staff and team members',
     price: '$599.99',
     priceNumeric: 599.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Covers up to 10 approved individuals',
       'Unlimited ride requests',
@@ -202,7 +203,7 @@ const BASE_PLANS: Record<string, Plan> = {
     description: 'Flexibility to serve employees, clients and out-of-town guests',
     price: '$749.99',
     priceNumeric: 749.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Everything in Business Plan, plus:',
       'Covers up to 10 approved individuals + unlimited client requests',
@@ -228,7 +229,7 @@ const BASE_PLANS: Record<string, Plan> = {
     description: 'Professional business transportation',
     price: '$999.99',
     priceNumeric: 999.99,
-    priceSubtext: '/month - Multi-employee coverage',
+    priceSubtext: 'Multi-employee coverage',
     features: [
       'Multi-employee coverage',
       'Executive-level discrete service',
@@ -251,6 +252,8 @@ const BASE_PLANS: Record<string, Plan> = {
 // Apply pricing overrides and export final plans
 export const MEMBERSHIP_PLANS: Record<string, Plan> = Object.entries(BASE_PLANS).reduce((acc, [key, plan]) => {
   const override = pricingOverrides[key];
+  let finalPlan = plan;
+
   if (override) {
     const updatedPlan = {
       ...plan,
@@ -263,14 +266,18 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = Object.entries(BASE_PLANS)
     if (override.tripFee !== undefined) {
       updatedPlan.tripFee = override.tripFee;
       updatedPlan.priceSubtext = override.tripFee > 0
-        ? `/month + $${override.tripFee} trip fee per ride`
+        ? `+ $${override.tripFee} ride fee plus gratuity each use`
         : plan.priceSubtext;
     }
 
-    acc[key] = updatedPlan;
-  } else {
-    acc[key] = plan;
+    finalPlan = updatedPlan;
   }
+
+  // Billing period rendered alongside the price, e.g. "$59.99/Month"
+  acc[key] = {
+    ...finalPlan,
+    pricePeriod: finalPlan.billingCycle === 'annual' ? '/Year' : '/Month'
+  };
   return acc;
 }, {} as Record<string, Plan>);
 

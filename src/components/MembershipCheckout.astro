@@ -6,6 +6,7 @@ export interface MembershipPlan {
   name: string;
   description: string;
   price: string;
+  pricePeriod?: string;
   priceSubtext: string;
   features: string[];
   popular?: boolean;
@@ -53,7 +54,7 @@ const total = numericPrice + setupFee;
         </div>
 
         <div class="mb-6">
-          <div class="text-3xl font-bold text-gold-primary">{plan.price}</div>
+          <div class="text-3xl font-bold text-gold-primary">{plan.price}<span class="text-2xl">{plan.pricePeriod}</span></div>
           <p class="text-sm text-gray-500">{plan.priceSubtext}</p>
         </div>
 
