@@ -6,10 +6,6 @@ import { getPlanById } from '../config/plans.ts';
 // Pricing comes from the shared config so overrides apply here too
 const premierPlan = getPlanById('individual')!;
 const standardPlan = getPlanById('standard-individual')!;
-const upgradeDelta =
-  Math.round((premierPlan.priceNumeric - standardPlan.priceNumeric) * 100) / 100;
-const upgradeCost =
-  upgradeDelta % 1 === 0 ? String(upgradeDelta) : upgradeDelta.toFixed(2);
 
 const plan = {
   name: premierPlan.name,
@@ -17,7 +13,9 @@ const plan = {
   price: premierPlan.price,
   pricePeriod: premierPlan.pricePeriod,
   priceSubtext: premierPlan.priceSubtext,
-  savings: `Just $${upgradeCost}/month more than the ${standardPlan.name}`,
+  // What Premier saves against the standard plan plus paying for the add-ons
+  // it includes. Not the gap between the two plan prices — keep it literal.
+  savings: 'Save $30/month vs Individual Plan + Premier benefits',
   features: [
     `Everything in the ${standardPlan.name}`,
     'Ability to request driver for friend/client (you must be present)',
