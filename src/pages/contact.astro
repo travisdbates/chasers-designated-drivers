@@ -1,6 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
+
+import { getPlanById } from "../config/plans.ts";
+
+// Membership options in the enquiry dropdown, priced from the shared config
+const membershipOptions = [
+  "standard-individual",
+  "individual",
+  "joint",
+  "joint-premier",
+  "family",
+  "business",
+  "business-premier",
+]
+  .map((id) => getPlanById(id))
+  .filter((plan) => plan !== undefined);
 ---
 
 <BaseLayout
@@ -210,21 +225,13 @@ import Navigation from "../components/Navigation.astro";
                 class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-[#c69214] focus:ring-1 focus:ring-[#c69214] focus:outline-none transition-colors"
               >
                 <option value="">Select service type</option>
-                <option value="standard-individual"
-                  >Individual Plan ($59.99/month)</option
-                >
-                <option value="individual"
-                  >Individual Premier ($89.99/month)</option
-                >
-                <option value="joint">Joint Plan ($89.99/month)</option>
-                <option value="joint-premier"
-                  >Joint Premier ($149.99/month)</option
-                >
-                <option value="family">Friends & Family ($249.99/month)</option>
-                <option value="business">Business Plan ($599.99/month)</option>
-                <option value="business-premier"
-                  >Business Premier ($699.99/month)</option
-                >
+                {
+                  membershipOptions.map((plan) => (
+                    <option value={plan.id}>
+                      {plan.name} ({plan.price}/month)
+                    </option>
+                  ))
+                }
                 <option value="chauffeur">Chauffeur Services</option>
                 <option value="premier-transport">Premier Transportation</option>
                 <option value="car-concierge">Car Concierge Services</option>

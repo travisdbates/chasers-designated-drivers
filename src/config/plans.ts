@@ -140,7 +140,7 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Joint Premier',
     ctaUrl: '/checkout/joint?plan=joint-premier',
     emailSubject: 'Welcome to Chasers DD - Joint Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Premier! Your Joint Premier plan ($189.99/month) covers 2 people with enhanced flexibility. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Premier! Your Joint Premier plan ($149.99/month) covers 2 people with enhanced flexibility. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 40
   },
@@ -149,8 +149,8 @@ const BASE_PLANS: Record<string, Plan> = {
     id: 'family',
     name: 'Friends & Family',
     description: 'Perfect for up to 4 individuals in households or groups',
-    price: '$249.99',
-    priceNumeric: 249.99,
+    price: '$199.99',
+    priceNumeric: 199.99,
     priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Unlimited ride requests',
@@ -166,7 +166,7 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Family Plan',
     ctaUrl: '/checkout/family',
     emailSubject: 'Welcome to Chasers DD - Friends & Family Plan',
-    smsMessage: 'Welcome to Chasers DD! Your Friends & Family plan ($249.99/month) covers up to 4 people. Call (480) 695-3659 for rides 3PM-3AM daily.',
+    smsMessage: 'Welcome to Chasers DD! Your Friends & Family plan ($199.99/month) covers up to 4 people. Call (480) 695-3659 for rides 3PM-3AM daily.',
     billingCycle: 'monthly',
     tripFee: 40
   },
@@ -175,8 +175,8 @@ const BASE_PLANS: Record<string, Plan> = {
     id: 'business',
     name: 'Business Plan',
     description: 'Safe transportation for business staff and team members',
-    price: '$599.99',
-    priceNumeric: 599.99,
+    price: '$499.99',
+    priceNumeric: 499.99,
     priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Covers up to 10 approved individuals',
@@ -192,7 +192,7 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Business Plan',
     ctaUrl: '/checkout/business?plan=business',
     emailSubject: 'Welcome to Chasers DD - Business Plan',
-    smsMessage: 'Welcome to Chasers DD Business! Your Business plan ($599.99/month) covers up to 10 employees. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Business! Your Business plan ($499.99/month) covers up to 10 employees. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 40
   },
@@ -201,8 +201,8 @@ const BASE_PLANS: Record<string, Plan> = {
     id: 'business-premier',
     name: 'Business Premier',
     description: 'Flexibility to serve employees, clients and out-of-town guests',
-    price: '$749.99',
-    priceNumeric: 749.99,
+    price: '$699.99',
+    priceNumeric: 699.99,
     priceSubtext: '+ $40 ride fee plus gratuity each use',
     features: [
       'Everything in Business Plan, plus:',
@@ -218,7 +218,7 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Business Premier',
     ctaUrl: '/checkout/business?plan=business-premier',
     emailSubject: 'Welcome to Chasers DD - Business Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Business Premier! Your plan ($749.99/month) covers employees + unlimited client requests. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Business Premier! Your plan ($699.99/month) covers employees + unlimited client requests. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 40
   },
@@ -227,8 +227,8 @@ const BASE_PLANS: Record<string, Plan> = {
     id: 'corporate',
     name: 'Corporate Premier',
     description: 'Professional business transportation',
-    price: '$999.99',
-    priceNumeric: 999.99,
+    price: '$899.99',
+    priceNumeric: 899.99,
     priceSubtext: 'Multi-employee coverage',
     features: [
       'Multi-employee coverage',
@@ -243,7 +243,7 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Corporate Plan',
     ctaUrl: '/checkout/corporate',
     emailSubject: 'Welcome to Chasers DD - Corporate Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Corporate! Your Corporate Premier plan ($999.99/month) provides executive-level service. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Corporate! Your Corporate Premier plan ($899.99/month) provides executive-level service. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 0 // Corporate may have different pricing structure
   }
