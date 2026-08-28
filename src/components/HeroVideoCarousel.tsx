@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 
 interface VideoSlide {
   id: string;
@@ -31,22 +31,25 @@ interface Phrase {
 interface HeroVideoCarouselProps {
   slides: VideoSlide[];
   autoplayInterval?: number; // Fallback if video duration cannot be determined
+  // Pricing is passed in from the page, which reads the shared plan config on
+  // the server, so this client component never bundles it.
+  membershipFrom: string; // Cheapest monthly plan, e.g. "$49.99"
+  rideFee: string; // Per-ride fee for that plan, e.g. "$40"
 }
 
 const DEFAULT_CTA = { text: "View Our Plans", href: "/membership" };
 const PHONE_NUMBER = "(480) 695-3659";
 const PHONE_HREF = "tel:+14806953659";
 
-// Array of phrases that rotate with video changes.
+// Phrases that rotate with video changes.
 // The first entry leads on page load and carries the full service pitch, so it
 // stays on screen twice as long as the others.
-const phrases: Phrase[] = [
+const buildPhrases = (membershipFrom: string, rideFee: string): Phrase[] => [
   {
     title: "Never risk a DUI again, or leave your vehicle behind",
     subtitle1:
       "Chasers sends vetted safe and friendly drivers to you at your location and drive you AND your vehicle home or to next destination.",
-    subtitle2:
-      "Open seven days a week, 3pm to 3am. Membership from $59.99 per month. Rides $40 plus gratuity each use.",
+    subtitle2: `Open seven days a week, 3pm to 3am. Membership from ${membershipFrom} per month. Rides ${rideFee} plus gratuity each use.`,
     durationMultiplier: 2,
     cta: { text: "View Plan", href: "/membership" },
     showPhoneCta: true,
@@ -66,7 +69,13 @@ const phrases: Phrase[] = [
 const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
   slides,
   autoplayInterval = 7000,
+  membershipFrom,
+  rideFee,
 }) => {
+  const phrases = useMemo(
+    () => buildPhrases(membershipFrom, rideFee),
+    [membershipFrom, rideFee]
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -153,6 +162,7 @@ const HeroVideoCarousel: React.FC<HeroVideoCarouselProps> = ({
     autoplayInterval,
     currentSlide,
     currentPhraseIndex,
+    phrases,
     videoDurations,
   ]);
 

@@ -3,6 +3,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
 import HeroVideoCarousel from "../components/HeroVideoCarousel.tsx";
 import AnimatedButton from "../components/AnimatedButton.astro";
+import { getAllPlans } from "../config/plans.ts";
+
+// The hero quotes an entry price, so take the cheapest monthly plan from the
+// shared config rather than restating a figure here.
+const entryPlan = getAllPlans()
+  .filter((plan) => plan.billingCycle === "monthly")
+  .reduce((cheapest, plan) =>
+    plan.priceNumeric < cheapest.priceNumeric ? plan : cheapest
+  );
 
 // Hero video slides data
 const heroSlides = [
@@ -60,7 +69,12 @@ const heroSlides = [
   <Navigation />
 
   <!-- Hero Video Carousel -->
-  <HeroVideoCarousel slides={heroSlides} client:load />
+  <HeroVideoCarousel
+    slides={heroSlides}
+    membershipFrom={entryPlan.price}
+    rideFee={`$${entryPlan.tripFee}`}
+    client:load
+  />
 
   <!-- Services Overview Section -->
   <section class="section-padding" style="background-color: #2d2d2d;">
