@@ -1,9 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
-import { getAllPlans } from "../config/plans.ts";
+import { getAllPlans, getPlanById } from "../config/plans.ts";
 
 const membershipPlans = getAllPlans();
+
+// Comparison tables read pricing from the same config as the plan cards,
+// so overrides in pricing-overrides.json apply everywhere.
+const planName = (id: string) => getPlanById(id)?.name ?? "";
+const planPrice = (id: string) => getPlanById(id)?.price ?? "";
+const planPeriod = (id: string) => getPlanById(id)?.pricePeriod ?? "";
 
 // Features that exist only in the premier version of each standard plan.
 // These are shown on the standard card as a locked/strikethrough row with a tooltip.
@@ -98,10 +104,10 @@ const serviceAddOns = [
           </p>
 
           <div class="grid md:grid-cols-2 gap-8 mb-8">
-            <!-- Standard Benefits -->
+            <!-- Benefits of all plans -->
             <div class="bg-gray-800/30 rounded-xl p-6 border border-gray-700">
               <h3 class="text-xl font-bold text-[#c69214] mb-4">
-                Standard Benefits of All Plans
+                Benefits of all Plans
               </h3>
               <ul class="space-y-3 text-gray-300">
                 <li class="flex items-start">
@@ -264,7 +270,7 @@ const serviceAddOns = [
                     </h3>
                     <p class="text-gray-400 text-sm mb-4">{plan.description}</p>
                     <div class="text-2xl font-bold text-[#c69214] mb-2">
-                      {plan.price}
+                      {plan.price}<span class="text-xl">{plan.pricePeriod}</span>
                     </div>
                     {plan.priceSubtext && (
                       <p class="text-sm text-gray-500 mb-4">
@@ -384,7 +390,7 @@ const serviceAddOns = [
                     </h3>
                     <p class="text-gray-400 text-sm mb-4">{plan.description}</p>
                     <div class="text-2xl font-bold text-[#c69214] mb-2">
-                      {plan.price}
+                      {plan.price}<span class="text-xl">{plan.pricePeriod}</span>
                     </div>
                     {plan.priceSubtext && (
                       <p class="text-sm text-gray-500 mb-4">
@@ -493,7 +499,7 @@ const serviceAddOns = [
                     </h3>
                     <p class="text-gray-400 text-sm mb-4">{plan.description}</p>
                     <div class="text-2xl font-bold text-[#c69214] mb-2">
-                      {plan.price}
+                      {plan.price}<span class="text-xl">{plan.pricePeriod}</span>
                     </div>
                     {plan.priceSubtext && (
                       <p class="text-sm text-gray-500 mb-4">
@@ -589,7 +595,7 @@ const serviceAddOns = [
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">
-            Premium <span class="text-[#c69214]">Add-ons</span>
+            Premier <span class="text-[#c69214]">Add-ons</span>
           </h2>
           <p class="text-xl text-gray-300 max-w-2xl mx-auto">
             Additional services available to all members
@@ -680,14 +686,12 @@ const serviceAddOns = [
             <div class="grid grid-cols-3 gap-3 mb-4">
               <div></div>
               <div class="text-center p-3 bg-gray-800/40 rounded-lg">
-                <div class="text-white font-bold text-sm">Standard Individual</div>
-                <div class="text-[#c69214] text-xl font-bold mt-1">$59.99</div>
-                <div class="text-gray-500 text-xs">/month</div>
+                <div class="text-white font-bold text-sm">{planName('standard-individual')}</div>
+                <div class="text-[#c69214] text-xl font-bold mt-1">{planPrice('standard-individual')}<span class="text-base">{planPeriod('standard-individual')}</span></div>
               </div>
               <div class="text-center p-3 bg-[#c69214]/10 rounded-lg border border-[#c69214]/30">
-                <div class="text-white font-bold text-sm">Individual Premier</div>
-                <div class="text-[#c69214] text-xl font-bold mt-1">$99.99</div>
-                <div class="text-gray-500 text-xs">/month</div>
+                <div class="text-white font-bold text-sm">{planName('individual')}</div>
+                <div class="text-[#c69214] text-xl font-bold mt-1">{planPrice('individual')}<span class="text-base">{planPeriod('individual')}</span></div>
                 <span class="inline-block mt-1 bg-gradient-to-r from-[#c69214] to-[#b8841c] text-black text-xs font-bold px-2 py-0.5 rounded-full">POPULAR</span>
               </div>
             </div>
@@ -734,7 +738,7 @@ const serviceAddOns = [
               <div></div>
               <div>
                 <a href="/checkout/individual?plan=standard-individual" class="block w-full text-center py-2.5 px-3 rounded-lg border border-gray-600 text-gray-300 text-sm font-semibold hover:border-[#c69214] hover:text-[#c69214] transition-all duration-200">
-                  Join Standard
+                  Join Individual
                 </a>
               </div>
               <div>
@@ -755,14 +759,12 @@ const serviceAddOns = [
             <div class="grid grid-cols-3 gap-3 mb-4">
               <div></div>
               <div class="text-center p-3 bg-gray-800/40 rounded-lg">
-                <div class="text-white font-bold text-sm">Joint Plan</div>
-                <div class="text-[#c69214] text-xl font-bold mt-1">$89.99</div>
-                <div class="text-gray-500 text-xs">/month</div>
+                <div class="text-white font-bold text-sm">{planName('joint')}</div>
+                <div class="text-[#c69214] text-xl font-bold mt-1">{planPrice('joint')}<span class="text-base">{planPeriod('joint')}</span></div>
               </div>
               <div class="text-center p-3 bg-[#c69214]/10 rounded-lg border border-[#c69214]/30">
-                <div class="text-white font-bold text-sm">Joint Premier</div>
-                <div class="text-[#c69214] text-xl font-bold mt-1">$149.99</div>
-                <div class="text-gray-500 text-xs">/month</div>
+                <div class="text-white font-bold text-sm">{planName('joint-premier')}</div>
+                <div class="text-[#c69214] text-xl font-bold mt-1">{planPrice('joint-premier')}<span class="text-base">{planPeriod('joint-premier')}</span></div>
               </div>
             </div>
             <!-- Feature rows -->
@@ -829,14 +831,12 @@ const serviceAddOns = [
             <div class="grid grid-cols-3 gap-3 mb-4">
               <div></div>
               <div class="text-center p-3 bg-gray-800/40 rounded-lg">
-                <div class="text-white font-bold text-sm">Business Plan</div>
-                <div class="text-[#c69214] text-xl font-bold mt-1">$599.99</div>
-                <div class="text-gray-500 text-xs">/month</div>
+                <div class="text-white font-bold text-sm">{planName('business')}</div>
+                <div class="text-[#c69214] text-xl font-bold mt-1">{planPrice('business')}<span class="text-base">{planPeriod('business')}</span></div>
               </div>
               <div class="text-center p-3 bg-[#c69214]/10 rounded-lg border border-[#c69214]/30">
-                <div class="text-white font-bold text-sm">Business Premier</div>
-                <div class="text-[#c69214] text-xl font-bold mt-1">$749.99</div>
-                <div class="text-gray-500 text-xs">/month</div>
+                <div class="text-white font-bold text-sm">{planName('business-premier')}</div>
+                <div class="text-[#c69214] text-xl font-bold mt-1">{planPrice('business-premier')}<span class="text-base">{planPeriod('business-premier')}</span></div>
               </div>
             </div>
             <!-- Feature rows -->

@@ -4,6 +4,7 @@ export interface Plan {
   description: string;
   price: string;
   priceNumeric: number; // For calculations and payment processing
+  pricePeriod?: string; // Billing period shown next to the price, e.g. "$59.99/Month"
   priceSubtext: string;
   features: string[];
   popular: boolean;
@@ -33,17 +34,22 @@ try {
   console.warn('No pricing overrides found, using default prices');
 }
 
+// Per-ride fee charged by every plan except Corporate. The card's price
+// subtext and the matching feature bullet are both derived from it.
+const TRIP_FEE = 40;
+const RIDE_FEE_TEXT = `$${TRIP_FEE} ride fee plus gratuity each use`;
+
 const BASE_PLANS: Record<string, Plan> = {
   'standard-individual': {
     id: 'standard-individual',
-    name: 'Standard Individual',
+    name: 'Individual Plan',
     description: 'Safe, on-demand transportation home',
-    price: '$59.99',
-    priceNumeric: 59.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    price: '$49.99',
+    priceNumeric: 49.99,
+    priceSubtext: `+ ${RIDE_FEE_TEXT}`,
     features: [
       'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
+      RIDE_FEE_TEXT,
       'Covers the member only',
 
       'Service available outside normal hours (by appointment)',
@@ -52,12 +58,12 @@ const BASE_PLANS: Record<string, Plan> = {
     ],
     popular: false,
     category: 'individual',
-    ctaText: 'Join Standard Plan',
+    ctaText: 'Join Individual Plan',
     ctaUrl: '/checkout/individual?plan=standard-individual',
-    emailSubject: 'Welcome to Chasers DD - Standard Individual Plan',
-    smsMessage: 'Welcome to Chasers DD! Your Standard Individual plan ($59.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
+    emailSubject: 'Welcome to Chasers DD - Individual Plan',
+    smsMessage: 'Welcome to Chasers DD! Your Individual Plan ($49.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
     billingCycle: 'monthly',
-    tripFee: 40,
+    tripFee: TRIP_FEE,
     minimumCommitment: '3-month minimum commitment'
   },
 
@@ -67,14 +73,14 @@ const BASE_PLANS: Record<string, Plan> = {
     description: 'Added flexibility and perks for frequent riders',
     price: '$99.99',
     priceNumeric: 99.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    priceSubtext: `+ ${RIDE_FEE_TEXT}`,
     features: [
       'Request rides for guests & clients (must be present)',
       'Priority booking during peak hours',
       'Premium customer support',
       'Access to Premium Services add-ons',
       'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
+      RIDE_FEE_TEXT,
       'Covers the member only',
       'Pay by cash or charge to account',
       'No minimum commitment'
@@ -86,19 +92,19 @@ const BASE_PLANS: Record<string, Plan> = {
     emailSubject: 'Welcome to Chasers DD - Individual Premier Plan',
     smsMessage: 'Welcome to Chasers DD Premier! Your Individual Premier plan ($99.99/month) is active. Enhanced flexibility included. Call (480) 695-3659.',
     billingCycle: 'monthly',
-    tripFee: 40
+    tripFee: TRIP_FEE
   },
 
   'joint': {
     id: 'joint',
     name: 'Joint Plan',
     description: 'Reliable transportation for two people',
-    price: '$89.99',
-    priceNumeric: 89.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    price: '$69.99',
+    priceNumeric: 69.99,
+    priceSubtext: `+ ${RIDE_FEE_TEXT}`,
     features: [
       'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
+      RIDE_FEE_TEXT,
       'Covers member and one additional person',
 
       'Service available outside normal hours (by appointment)',
@@ -110,9 +116,9 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Joint Plan',
     ctaUrl: '/checkout/joint?plan=joint',
     emailSubject: 'Welcome to Chasers DD - Joint Plan',
-    smsMessage: 'Welcome to Chasers DD! Your Joint plan ($89.99/month) covers 2 people. Call (480) 695-3659 for rides 3PM-3AM daily.',
+    smsMessage: 'Welcome to Chasers DD! Your Joint plan ($69.99/month) covers 2 people. Call (480) 695-3659 for rides 3PM-3AM daily.',
     billingCycle: 'monthly',
-    tripFee: 40,
+    tripFee: TRIP_FEE,
     minimumCommitment: '3-month minimum commitment'
   },
 
@@ -122,14 +128,14 @@ const BASE_PLANS: Record<string, Plan> = {
     description: 'Enhanced flexibility and premium access for couples',
     price: '$149.99',
     priceNumeric: 149.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    priceSubtext: `+ ${RIDE_FEE_TEXT}`,
     features: [
       'Request rides for guests & clients (one member must be present)',
       'Priority booking during peak hours',
       'Premium customer support',
       'Access to Premium Services add-ons',
       'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
+      RIDE_FEE_TEXT,
       'Covers member and one additional person',
       'Pay by cash or charge to account',
       'No minimum commitment'
@@ -139,21 +145,21 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Joint Premier',
     ctaUrl: '/checkout/joint?plan=joint-premier',
     emailSubject: 'Welcome to Chasers DD - Joint Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Premier! Your Joint Premier plan ($189.99/month) covers 2 people with enhanced flexibility. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Premier! Your Joint Premier plan ($149.99/month) covers 2 people with enhanced flexibility. Call (480) 695-3659.',
     billingCycle: 'monthly',
-    tripFee: 40
+    tripFee: TRIP_FEE
   },
 
   'family': {
     id: 'family',
     name: 'Friends & Family',
     description: 'Perfect for up to 4 individuals in households or groups',
-    price: '$249.99',
-    priceNumeric: 249.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    price: '$199.99',
+    priceNumeric: 199.99,
+    priceSubtext: `+ ${RIDE_FEE_TEXT}`,
     features: [
       'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
+      RIDE_FEE_TEXT,
       'Covers up to 4 approved adult drivers',
 
       'Service available outside normal hours (by appointment)',
@@ -165,22 +171,22 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Family Plan',
     ctaUrl: '/checkout/family',
     emailSubject: 'Welcome to Chasers DD - Friends & Family Plan',
-    smsMessage: 'Welcome to Chasers DD! Your Friends & Family plan ($249.99/month) covers up to 4 people. Call (480) 695-3659 for rides 3PM-3AM daily.',
+    smsMessage: 'Welcome to Chasers DD! Your Friends & Family plan ($199.99/month) covers up to 4 people. Call (480) 695-3659 for rides 3PM-3AM daily.',
     billingCycle: 'monthly',
-    tripFee: 40
+    tripFee: TRIP_FEE
   },
 
   'business': {
     id: 'business',
     name: 'Business Plan',
     description: 'Safe transportation for business staff and team members',
-    price: '$599.99',
-    priceNumeric: 599.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    price: '$499.99',
+    priceNumeric: 499.99,
+    priceSubtext: `+ ${RIDE_FEE_TEXT}`,
     features: [
       'Covers up to 10 approved individuals',
       'Unlimited ride requests',
-      '$40 trip fee per ride (plus gratuity)',
+      RIDE_FEE_TEXT,
       'Car Retrieval services (get vehicle from A to B)',
       'Chauffeur in your vehicles service',
 
@@ -191,18 +197,18 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Business Plan',
     ctaUrl: '/checkout/business?plan=business',
     emailSubject: 'Welcome to Chasers DD - Business Plan',
-    smsMessage: 'Welcome to Chasers DD Business! Your Business plan ($599.99/month) covers up to 10 employees. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Business! Your Business plan ($499.99/month) covers up to 10 employees. Call (480) 695-3659.',
     billingCycle: 'monthly',
-    tripFee: 40
+    tripFee: TRIP_FEE
   },
 
   'business-premier': {
     id: 'business-premier',
     name: 'Business Premier',
     description: 'Flexibility to serve employees, clients and out-of-town guests',
-    price: '$749.99',
-    priceNumeric: 749.99,
-    priceSubtext: '/month + $40 trip fee per ride',
+    price: '$699.99',
+    priceNumeric: 699.99,
+    priceSubtext: `+ ${RIDE_FEE_TEXT}`,
     features: [
       'Everything in Business Plan, plus:',
       'Covers up to 10 approved individuals + unlimited client requests',
@@ -217,18 +223,18 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Business Premier',
     ctaUrl: '/checkout/business?plan=business-premier',
     emailSubject: 'Welcome to Chasers DD - Business Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Business Premier! Your plan ($749.99/month) covers employees + unlimited client requests. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Business Premier! Your plan ($699.99/month) covers employees + unlimited client requests. Call (480) 695-3659.',
     billingCycle: 'monthly',
-    tripFee: 40
+    tripFee: TRIP_FEE
   },
 
   'corporate': {
     id: 'corporate',
     name: 'Corporate Premier',
     description: 'Professional business transportation',
-    price: '$999.99',
-    priceNumeric: 999.99,
-    priceSubtext: '/month - Multi-employee coverage',
+    price: '$899.99',
+    priceNumeric: 899.99,
+    priceSubtext: 'Multi-employee coverage',
     features: [
       'Multi-employee coverage',
       'Executive-level discrete service',
@@ -242,7 +248,7 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Corporate Plan',
     ctaUrl: '/checkout/corporate',
     emailSubject: 'Welcome to Chasers DD - Corporate Premier Plan',
-    smsMessage: 'Welcome to Chasers DD Corporate! Your Corporate Premier plan ($999.99/month) provides executive-level service. Call (480) 695-3659.',
+    smsMessage: 'Welcome to Chasers DD Corporate! Your Corporate Premier plan ($899.99/month) provides executive-level service. Call (480) 695-3659.',
     billingCycle: 'monthly',
     tripFee: 0 // Corporate may have different pricing structure
   }
@@ -251,6 +257,8 @@ const BASE_PLANS: Record<string, Plan> = {
 // Apply pricing overrides and export final plans
 export const MEMBERSHIP_PLANS: Record<string, Plan> = Object.entries(BASE_PLANS).reduce((acc, [key, plan]) => {
   const override = pricingOverrides[key];
+  let finalPlan = plan;
+
   if (override) {
     const updatedPlan = {
       ...plan,
@@ -263,14 +271,18 @@ export const MEMBERSHIP_PLANS: Record<string, Plan> = Object.entries(BASE_PLANS)
     if (override.tripFee !== undefined) {
       updatedPlan.tripFee = override.tripFee;
       updatedPlan.priceSubtext = override.tripFee > 0
-        ? `/month + $${override.tripFee} trip fee per ride`
+        ? `+ $${override.tripFee} ride fee plus gratuity each use`
         : plan.priceSubtext;
     }
 
-    acc[key] = updatedPlan;
-  } else {
-    acc[key] = plan;
+    finalPlan = updatedPlan;
   }
+
+  // Billing period rendered alongside the price, e.g. "$59.99/Month"
+  acc[key] = {
+    ...finalPlan,
+    pricePeriod: finalPlan.billingCycle === 'annual' ? '/Year' : '/Month'
+  };
   return acc;
 }, {} as Record<string, Plan>);
 

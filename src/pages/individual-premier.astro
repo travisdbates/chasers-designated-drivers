@@ -1,15 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
+import { getPlanById } from '../config/plans.ts';
+
+// Pricing comes from the shared config so overrides apply here too
+const premierPlan = getPlanById('individual')!;
+const standardPlan = getPlanById('standard-individual')!;
 
 const plan = {
-  name: 'Individual Premier',
-  description: 'Added flexibility and perks for frequent riders',
-  price: '$89.99',
-  priceSubtext: '/month + $40 trip fee per ride',
-  savings: 'Save $30/month vs Standard Individual + Premier benefits',
+  name: premierPlan.name,
+  description: premierPlan.description,
+  price: premierPlan.price,
+  pricePeriod: premierPlan.pricePeriod,
+  priceSubtext: premierPlan.priceSubtext,
+  // What Premier saves against the standard plan plus paying for the add-ons
+  // it includes. Not the gap between the two plan prices — keep it literal.
+  savings: 'Save $30/month vs Individual Plan + Premier benefits',
   features: [
-    'Everything in Standard Individual Plan',
+    `Everything in the ${standardPlan.name}`,
     'Ability to request driver for friend/client (you must be present)',
     'Unlimited ride requests',
     'Covers you alone',
@@ -23,7 +31,7 @@ const plan = {
 
 const standardFeatures = [
   'Unlimited ride requests',
-  '$40 trip fee per ride (plus gratuity)',
+  `$${premierPlan.tripFee} ride fee plus gratuity each use`,
   'Covers the member only',
   '3PM - 3AM availability, 7 days a week',
   'Service available outside normal hours (by appointment)',
@@ -77,7 +85,7 @@ const useCases = [
 
 <BaseLayout
   title="Individual Premier Plan - Chasers DD Premier Service"
-  description="Individual Premier Plan: Added flexibility and perks for frequent riders. $89.99/month + $40 trip fee. Request rides for friends/clients, priority booking, and premium benefits."
+  description={`Individual Premier Plan: ${plan.description}. ${plan.price}/month + $${premierPlan.tripFee} trip fee. Request rides for friends/clients, priority booking, and premium benefits.`}
   keywords="individual premier plan, premier designated driver, premium membership, business transportation, client rides, priority booking"
 >
   <Navigation />
@@ -97,7 +105,7 @@ const useCases = [
             {plan.description}
           </p>
           <div class="bg-gradient-to-r from-gold-primary/20 to-gold-light/20 border border-gold-primary/30 rounded-xl p-6 max-w-2xl mx-auto">
-            <div class="text-3xl font-ivy-mode font-semibold text-gold-primary mb-2">{plan.price}</div>
+            <div class="text-3xl font-ivy-mode font-semibold text-gold-primary mb-2">{plan.price}<span class="text-2xl">{plan.pricePeriod}</span></div>
             <p class="text-lg text-white mb-2">{plan.priceSubtext}</p>
             <p class="text-gold-primary font-medium">{plan.savings}</p>
           </div>
@@ -263,9 +271,9 @@ const useCases = [
             <!-- Standard Plan -->
             <div class="p-8 border-r border-gray-700">
               <div class="text-center mb-6">
-                <h3 class="text-xl font-ivy-mode font-semibold text-white mb-2">Standard Individual</h3>
-                <div class="text-2xl font-semibold text-gray-300">$59.99/month</div>
-                <div class="text-sm text-gray-500">+ $40 trip fee per ride</div>
+                <h3 class="text-xl font-ivy-mode font-semibold text-white mb-2">{standardPlan.name}</h3>
+                <div class="text-2xl font-semibold text-gray-300">{standardPlan.price}<span class="text-xl">{standardPlan.pricePeriod}</span></div>
+                <div class="text-sm text-gray-500">{standardPlan.priceSubtext}</div>
               </div>
               <ul class="space-y-3">
                 {standardFeatures.map((feature) => (
@@ -284,8 +292,8 @@ const useCases = [
               <div class="text-center mb-6">
                 <div class="inline-block bg-gold-primary text-black text-xs font-bold px-2 py-1 rounded-full mb-2">RECOMMENDED</div>
                 <h3 class="text-xl font-ivy-mode font-semibold text-white mb-2">Individual Premier</h3>
-                <div class="text-2xl font-semibold text-gold-primary">$89.99/month</div>
-                <div class="text-sm text-gold-primary">+ $40 trip fee per ride</div>
+                <div class="text-2xl font-semibold text-gold-primary">{premierPlan.price}<span class="text-xl">{premierPlan.pricePeriod}</span></div>
+                <div class="text-sm text-gold-primary">{premierPlan.priceSubtext}</div>
               </div>
               <ul class="space-y-3">
                 <li class="flex items-start text-gold-primary">
@@ -373,7 +381,7 @@ const useCases = [
               Can I switch from Standard to Premier anytime?
             </h3>
             <p class="text-gray-300 text-body-small">
-              Yes! You can upgrade from Standard Individual to Premier at any time. The upgrade takes effect immediately and you'll be prorated for the difference.
+              Yes! You can upgrade from the Individual Plan to Premier at any time. The upgrade takes effect immediately and you'll be prorated for the difference.
             </p>
           </div>
         </div>
