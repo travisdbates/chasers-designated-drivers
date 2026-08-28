@@ -44,8 +44,8 @@ const BASE_PLANS: Record<string, Plan> = {
     id: 'standard-individual',
     name: 'Individual Plan',
     description: 'Safe, on-demand transportation home',
-    price: '$59.99',
-    priceNumeric: 59.99,
+    price: '$49.99',
+    priceNumeric: 49.99,
     priceSubtext: `+ ${RIDE_FEE_TEXT}`,
     features: [
       'Unlimited ride requests',
@@ -61,7 +61,7 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Individual Plan',
     ctaUrl: '/checkout/individual?plan=standard-individual',
     emailSubject: 'Welcome to Chasers DD - Individual Plan',
-    smsMessage: 'Welcome to Chasers DD! Your Individual Plan ($59.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
+    smsMessage: 'Welcome to Chasers DD! Your Individual Plan ($49.99/month) is now active. Call (480) 695-3659 for rides 3PM-3AM daily.',
     billingCycle: 'monthly',
     tripFee: TRIP_FEE,
     minimumCommitment: '3-month minimum commitment'
@@ -99,8 +99,8 @@ const BASE_PLANS: Record<string, Plan> = {
     id: 'joint',
     name: 'Joint Plan',
     description: 'Reliable transportation for two people',
-    price: '$89.99',
-    priceNumeric: 89.99,
+    price: '$69.99',
+    priceNumeric: 69.99,
     priceSubtext: `+ ${RIDE_FEE_TEXT}`,
     features: [
       'Unlimited ride requests',
@@ -116,7 +116,7 @@ const BASE_PLANS: Record<string, Plan> = {
     ctaText: 'Join Joint Plan',
     ctaUrl: '/checkout/joint?plan=joint',
     emailSubject: 'Welcome to Chasers DD - Joint Plan',
-    smsMessage: 'Welcome to Chasers DD! Your Joint plan ($89.99/month) covers 2 people. Call (480) 695-3659 for rides 3PM-3AM daily.',
+    smsMessage: 'Welcome to Chasers DD! Your Joint plan ($69.99/month) covers 2 people. Call (480) 695-3659 for rides 3PM-3AM daily.',
     billingCycle: 'monthly',
     tripFee: TRIP_FEE,
     minimumCommitment: '3-month minimum commitment'
