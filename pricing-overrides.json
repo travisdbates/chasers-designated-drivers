@@ -1,18 +1,18 @@
 {
   "standard-individual": {
-    "priceNumeric": 49.99
+    "priceNumeric": 39.99
   },
   "individual": {
-    "priceNumeric": 99.99
+    "priceNumeric": 89.99
   },
   "joint": {
     "priceNumeric": 69.99
   },
   "joint-premier": {
-    "priceNumeric": 149.99
+    "priceNumeric": 129.99
   },
   "family": {
-    "priceNumeric": 199.99
+    "priceNumeric": 169.99
   },
   "business": {
     "priceNumeric": 499.99
