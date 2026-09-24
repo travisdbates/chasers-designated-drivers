@@ -30,8 +30,9 @@ const total = numericPrice + setupFee;
     <!-- Order Summary -->
     <div class="order-summary">
       <!-- Back Button -->
-      <button 
-        onclick={`${onBack}()`}
+      <button
+        type="button"
+        id="checkout-back-button"
         class="flex items-center text-gold-primary hover:text-gold-light transition-colors mb-6 group"
       >
         <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
@@ -155,7 +156,7 @@ const total = numericPrice + setupFee;
 </div>
 
 <!-- Success Modal -->
-<div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center" onclick="if(event.target === this) window.location.href = '/'">
+<div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
   <div class="bg-off-white rounded-xl p-8 max-w-md mx-4">
     <div class="text-center">
       <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -166,7 +167,8 @@ const total = numericPrice + setupFee;
       <h3 class="text-lg font-semibold text-gray-900 mb-2">Payment Successful!</h3>
       <p class="text-gray-600 mb-4">Thank you for joining Chasers DD! Your membership is now active and you'll receive confirmation via email and SMS.</p>
       <button
-        onclick="window.location.href = '/'"
+        type="button"
+        id="success-modal-ok"
         class="bg-gold-primary text-white px-6 py-2 rounded-lg hover:bg-gold-light transition-colors"
       >
         OK
@@ -201,11 +203,14 @@ const total = numericPrice + setupFee;
         billing: {
           sameBillingAddress: formData.get('sameBillingAddress') === 'on'
         },
-        // Include direct card data for processing
-        cardNumber: formData.get('cardNumber'),
-        expiryMonth: formData.get('expiryMonth'),
-        expiryYear: formData.get('expiryYear'),
-        cvv: formData.get('cvv'),
+        // Single-use nonce from the hosted tokenization iframe. Card data never reaches this page.
+        payment: {
+          token: formData.get('paymentToken'),
+          expiryMonth: formData.get('paymentExpiryMonth'),
+          expiryYear: formData.get('paymentExpiryYear'),
+          last4: formData.get('paymentLast4'),
+          cardType: formData.get('paymentCardType')
+        },
         marketing: {
           emailConsent: formData.get('emailMarketingConsent') === 'on',
           smsConsent: formData.get('smsMarketingConsent') === 'on',
@@ -221,8 +226,6 @@ const total = numericPrice + setupFee;
       };
       
       // Process payment through AcceptBlue API
-      console.log('Processing payment:', paymentData);
-      
       const response = await fetch('/api/process-payment', {
         method: 'POST',
         headers: {
@@ -247,10 +250,27 @@ const total = numericPrice + setupFee;
     }
   };
   
-  // Global back handler
-  window[onBack] = () => {
-    window.history.back();
-  };
+  // Global back handler (pages may override it with their own)
+  if (typeof window[onBack] !== 'function') {
+    window[onBack] = () => {
+      window.history.back();
+    };
+  }
+
+  // Inline onclick attributes are blocked by the payment page CSP, so wire handlers here
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('checkout-back-button')?.addEventListener('click', () => {
+      window[onBack]();
+    });
+
+    const successModal = document.getElementById('success-modal');
+    successModal?.addEventListener('click', (event) => {
+      if (event.target === successModal) window.location.href = '/';
+    });
+    document.getElementById('success-modal-ok')?.addEventListener('click', () => {
+      window.location.href = '/';
+    });
+  });
 </script>
 
 <style>

@@ -34,12 +34,6 @@ export const POST: APIRoute = async ({ request }) => {
       baseUrl: MICAMP_BASE_URL
     });
 
-    // Log all headers for debugging
-    console.log("📋 Request Headers:");
-    for (const [name, value] of request.headers) {
-      console.log(`  ${name}: ${value}`);
-    }
-
     // Check if request has content
     const contentType = request.headers.get("content-type");
     console.log("📋 Content-Type:", contentType);
@@ -61,15 +55,23 @@ export const POST: APIRoute = async ({ request }) => {
     console.log("📊 Payment Data Structure:", {
       hasCustomer: !!paymentData.customer,
       hasPlanId: !!paymentData.planId,
-      hasCardNumber: !!paymentData.cardNumber,
       hasToken: !!paymentData.payment?.token,
       customerEmail: paymentData.customer?.email || "NOT PROVIDED",
       planId: paymentData.planId || "NOT PROVIDED",
     });
-    console.log(
-      "📝 Full Received payment data:",
-      JSON.stringify(paymentData, null, 2)
-    );
+
+    // Card data must only ever be entered in the AcceptBlue hosted tokenization iframe.
+    // Refuse anything that looks like raw card data so it can never be processed here.
+    if (containsRawCardData(paymentData)) {
+      console.error("❌ Rejected request containing raw card data fields");
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Card details must be entered in the secure payment form",
+        }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
     // Validate ToS acceptance
     if (!paymentData.tosAcceptance?.accepted) {
@@ -98,16 +100,19 @@ export const POST: APIRoute = async ({ request }) => {
       customerEmail: paymentData.customer?.email,
     });
 
-    // Validate required fields - accept either token or direct card data
-    if (!paymentData.payment?.token && !paymentData.cardNumber) {
+    // Validate the single-use nonce from hosted tokenization
+    const paymentSource = toNonceSource(paymentData.payment?.token);
+    if (!paymentSource) {
       return new Response(
         JSON.stringify({
           success: false,
-          error: "Payment token or card information is required",
+          error: "A valid payment token is required",
         }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
+    const expiryMonth = parseInt(paymentData.payment.expiryMonth, 10);
+    const expiryYear = normalizeExpiryYear(paymentData.payment.expiryYear);
 
     if (!paymentData.customer?.email || !paymentData.planId) {
       return new Response(
@@ -168,10 +173,9 @@ export const POST: APIRoute = async ({ request }) => {
     // ==================== STEP 2: CREATE PAYMENT METHOD ====================
     console.log("\n🚀 STEP 2: CREATE PAYMENT METHOD (SAVE CARD)");
     if (customerId) {
-      console.log("💳 Card data to save:", {
-        cardNumber: "****" + paymentData.cardNumber.slice(-4),
-        expiryMonth: paymentData.expiryMonth,
-        expiryYear: paymentData.expiryYear,
+      console.log("💳 Card to save:", {
+        last4: paymentData.payment.last4,
+        cardType: paymentData.payment.cardType,
         customerId: customerId,
       });
     }
@@ -183,7 +187,11 @@ export const POST: APIRoute = async ({ request }) => {
         throw new Error("Cannot create payment method without customer ID");
       }
 
-      paymentMethodResult = await createPaymentMethod(customerId, paymentData);
+      paymentMethodResult = await createPaymentMethod(customerId, paymentData, {
+        source: paymentSource,
+        expiryMonth,
+        expiryYear,
+      });
       paymentMethodId = paymentMethodResult.id;
       console.log(
         "✅ STEP 2 COMPLETE: Payment method (card) saved successfully!"
@@ -325,11 +333,6 @@ export const POST: APIRoute = async ({ request }) => {
       // The validation pattern is: "(tkn|nonce|ref|pm)-[A-Za-z0-9]+"
       // Since we created a payment method directly, use "pm-" prefix
       transactionRequest.source = `pm-${paymentMethodId}`; // Format as pm-PAYMENTMETHODID for source charges
-      // Remove direct card fields since we're using a source token
-      delete transactionRequest.card;
-      delete transactionRequest.expiry_month;
-      delete transactionRequest.expiry_year;
-      delete transactionRequest.cvv2;
       delete transactionRequest.save_card; // Don't need to save again
       console.log("✅ SETTING UP RECURRING BILLING:");
       console.log(
@@ -350,23 +353,13 @@ export const POST: APIRoute = async ({ request }) => {
         planName: paymentData.plan?.name,
         description: transactionRequest.transaction_details.description,
       });
-    } else if (paymentData.payment?.token) {
-      // Fallback to token
-      transactionRequest.source = paymentData.payment.token;
-      console.warn("⚠️  Using token source (not ideal for recurring)");
     } else {
-      // Fallback to direct card processing (won't be recurring)
-      transactionRequest.card = paymentData.cardNumber.replace(/\s/g, "");
-      transactionRequest.expiry_month = parseInt(paymentData.expiryMonth);
-      transactionRequest.expiry_year = parseInt(paymentData.expiryYear);
-      transactionRequest.cvv2 = paymentData.cvv;
-      // Remove recurring flag if no payment method
-      transactionRequest.transaction_flags.is_recurring = false;
-      console.error(
-        "❌ STEP 3 FALLBACK: Using direct card without recurring billing"
-      );
-      console.error(
-        "⚠️  This transaction will NOT be set up for recurring payments"
+      // Fallback: charge the nonce directly (save_card keeps it for future charges)
+      transactionRequest.source = paymentSource;
+      if (expiryMonth) transactionRequest.expiry_month = expiryMonth;
+      if (expiryYear) transactionRequest.expiry_year = expiryYear;
+      console.warn(
+        "⚠️  STEP 3 FALLBACK: Charging nonce directly without a saved payment method"
       );
     }
 
@@ -378,7 +371,14 @@ export const POST: APIRoute = async ({ request }) => {
 
     console.log(
       "Sending transaction request to AcceptBlue:",
-      JSON.stringify(transactionRequest, null, 2)
+      JSON.stringify(
+        {
+          ...transactionRequest,
+          source: String(transactionRequest.source).replace(/^nonce-.*/, "nonce-***"),
+        },
+        null,
+        2
+      )
     );
 
     const response = await fetch(`${MICAMP_BASE_URL}/transactions/charge`, {
@@ -408,12 +408,6 @@ export const POST: APIRoute = async ({ request }) => {
             result.message ||
             result.response_text ||
             "Payment processing failed",
-          details: result,
-          debug: {
-            sentRequest: transactionRequest,
-            responseStatus: response.status,
-            fullResponse: result,
-          },
         }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
@@ -707,8 +701,47 @@ async function createStandaloneCustomer(customerData: any) {
   return result;
 }
 
-// Helper function to create payment method directly using customer payment methods API
-async function createPaymentMethod(customerId: number, paymentData: any) {
+// Field names that carry raw card data. None of them may appear in a payment request.
+const RAW_CARD_FIELDS = new Set([
+  "cardnumber",
+  "card_number",
+  "card",
+  "pan",
+  "cvv",
+  "cvv2",
+  "cvc",
+  "securitycode",
+]);
+
+function containsRawCardData(value: unknown, depth = 0): boolean {
+  if (!value || typeof value !== "object" || depth > 5) return false;
+  return Object.entries(value as Record<string, unknown>).some(
+    ([key, nested]) =>
+      (RAW_CARD_FIELDS.has(key.toLowerCase()) && nested !== undefined && nested !== null && nested !== "") ||
+      containsRawCardData(nested, depth + 1)
+  );
+}
+
+// Hosted tokenization returns a bare nonce; AcceptBlue expects it as "nonce-<value>"
+function toNonceSource(token: unknown): string | null {
+  if (typeof token !== "string") return null;
+  const value = token.trim().replace(/^nonce-/, "");
+  return /^[A-Za-z0-9]+$/.test(value) ? `nonce-${value}` : null;
+}
+
+// AcceptBlue requires a four-digit expiry year
+function normalizeExpiryYear(year: unknown): number | undefined {
+  const parsed = parseInt(String(year ?? ""), 10);
+  if (!parsed) return undefined;
+  return parsed < 100 ? 2000 + parsed : parsed;
+}
+
+// Helper function to create a saved payment method from the tokenization nonce
+async function createPaymentMethod(
+  customerId: number,
+  paymentData: any,
+  card: { source: string; expiryMonth?: number; expiryYear?: number }
+) {
   if (!customerId) {
     throw new Error("Customer ID is required to create payment method");
   }
@@ -720,13 +753,11 @@ async function createPaymentMethod(customerId: number, paymentData: any) {
   // Create name on card from customer data
   const nameOnCard = `${paymentData.customer.firstName} ${paymentData.customer.lastName}`;
 
-  // Use direct payment method creation API (Option A: Create Credit Card Payment Method)
+  // Create the payment method from the nonce; AcceptBlue holds the card data
   const paymentMethodRequest = {
-    // Card data (required) - exact field names from API documentation
-    card: paymentData.cardNumber.replace(/\s/g, ""), // 14-16 digits only
-    expiry_month: parseInt(paymentData.expiryMonth), // 1-12
-    expiry_year: parseInt(paymentData.expiryYear), // 2020-9999
-    cvv2: paymentData.cvv, // optional CVV
+    source: card.source, // nonce-<token> from hosted tokenization
+    ...(card.expiryMonth && { expiry_month: card.expiryMonth }), // 1-12
+    ...(card.expiryYear && { expiry_year: card.expiryYear }), // 2020-9999
     name: nameOnCard, // optional cardholder name
     // AVS data (optional billing verification)
     avs_address: paymentData.customer.address,
@@ -736,11 +767,7 @@ async function createPaymentMethod(customerId: number, paymentData: any) {
   console.log(
     `🚀 Creating payment method directly for customer ${customerId}:`,
     JSON.stringify(
-      {
-        ...paymentMethodRequest,
-        card: "****" + paymentMethodRequest.card.slice(-4), // Hide full card number in logs
-        cvv2: "***", // Hide CVV in logs
-      },
+      { ...paymentMethodRequest, source: "nonce-***" },
       null,
       2
     )
