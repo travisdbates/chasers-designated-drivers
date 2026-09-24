@@ -43,6 +43,16 @@
         <!-- Admin Panel (shown after login) -->
         <div id="admin-panel" class="hidden">
             <div class="max-w-4xl mx-auto">
+                <!-- Checkout Integrity (PCI DSS 11.6.1 change detection) -->
+                <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-2">Checkout Integrity</h2>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Payment pages are checked hourly for changes to their scripts, HTTP security headers and content.
+                        Approve a change only if it matches a deploy you made.
+                    </p>
+                    <div id="integrity-status" class="text-gray-500">Loading...</div>
+                </div>
+
                 <div class="bg-white rounded-lg shadow-md p-8">
                     <div class="flex justify-between items-center mb-6">
                         <h1 class="text-3xl font-bold">Pricing Management</h1>
@@ -236,8 +246,66 @@
 
                 // Render pricing form
                 renderPricingForm(pricingData);
+                loadIntegrityStatus();
             } catch (error) {
                 console.error('Error loading admin panel:', error);
+            }
+        }
+
+        function escapeHtml(value) {
+            const div = document.createElement('div');
+            div.textContent = String(value ?? '');
+            return div.innerHTML;
+        }
+
+        async function loadIntegrityStatus() {
+            const container = document.getElementById('integrity-status');
+            if (!container) return;
+
+            try {
+                const response = await fetch('/api/admin/checkout-integrity');
+                if (!response.ok) throw new Error('Failed to load status');
+                const { approved, pending } = await response.json();
+
+                const approvedHtml = approved
+                    ? `<p class="text-sm text-gray-700">Last approved: ${escapeHtml(new Date(approved.approvedAt).toLocaleString())} (${escapeHtml(approved.approvedBy)}), ${escapeHtml(approved.pages)} pages monitored.</p>`
+                    : '<p class="text-sm text-gray-700">No baseline yet. It is recorded on the first scheduled check.</p>';
+
+                if (!pending) {
+                    container.innerHTML = `<p class="text-green-700 font-semibold mb-2">No unapproved changes.</p>${approvedHtml}`;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <p class="text-red-700 font-semibold mb-2">Unapproved change detected ${escapeHtml(new Date(pending.detectedAt).toLocaleString())}</p>
+                    ${approvedHtml}
+                    <pre class="bg-gray-100 text-xs p-4 rounded mt-4 overflow-x-auto whitespace-pre-wrap">${escapeHtml(pending.changes.join('\n'))}</pre>
+                    <button id="approve-integrity-btn" class="mt-4 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors">
+                        I made this change: approve as new baseline
+                    </button>
+                    <p id="approve-integrity-error" class="text-red-600 text-sm mt-2 hidden"></p>
+                `;
+
+                document.getElementById('approve-integrity-btn')?.addEventListener('click', async () => {
+                    if (!confirm('Approve this change as authorized? Only do this if it matches a deploy you made.')) return;
+                    const approveResponse = await fetch('/api/admin/checkout-integrity', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ fingerprint: pending.fingerprint })
+                    });
+                    if (approveResponse.ok) {
+                        loadIntegrityStatus();
+                    } else {
+                        const errorEl = document.getElementById('approve-integrity-error');
+                        const data = await approveResponse.json().catch(() => ({}));
+                        if (errorEl) {
+                            errorEl.textContent = data.error || 'Approval failed';
+                            errorEl.classList.remove('hidden');
+                        }
+                    }
+                });
+            } catch (error) {
+                container.innerHTML = '<p class="text-red-600">Could not load checkout integrity status.</p>';
             }
         }
 

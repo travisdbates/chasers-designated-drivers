@@ -1,5 +1,7 @@
 # Payment Processing Implementation Status
 
+> **Note (Sept 2026):** Parts of this document are out of date. Card entry now uses AcceptBlue hosted tokenization in `src/components/PaymentForm.astro`; `SecurePaymentForm.astro` and `/api/tokenize-payment` were removed. See [docs/CHECKOUT_SECURITY.md](docs/CHECKOUT_SECURITY.md) for the current payment flow and security controls.
+
 ## Overview
 This document outlines the current status of the secure payment processing implementation for Chasers DD using AcceptBlue/MiCamp tokenization.
 
