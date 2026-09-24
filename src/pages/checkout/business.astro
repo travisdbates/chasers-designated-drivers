@@ -13,7 +13,8 @@ const planParam = Astro.url.searchParams.get('plan') || 'business';
 const selectedPlan = allPlans[planParam] || allPlans['business'];
 ---
 
-<BaseLayout 
+<BaseLayout
+  paymentPage
   title={`Checkout - ${selectedPlan.name} | Chasers DD`}
   description={`Complete your ${selectedPlan.name} membership signup with secure payment processing.`}
   keywords="checkout, payment, membership signup, secure payment"

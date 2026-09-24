@@ -14,7 +14,8 @@ const planParam = url.searchParams.get('plan') || 'individual';
 const selectedPlan = allPlans[planParam] || allPlans['individual'];
 ---
 
-<BaseLayout 
+<BaseLayout
+  paymentPage
   title={`Checkout - ${selectedPlan.name} | Chasers DD`}
   description={`Complete your ${selectedPlan.name} membership signup with secure payment processing.`}
   keywords="checkout, payment, membership signup, secure payment"

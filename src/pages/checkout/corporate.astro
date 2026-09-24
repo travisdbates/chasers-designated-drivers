@@ -7,7 +7,8 @@ import { getPlanById } from '../../config/plans.ts';
 const selectedPlan = getPlanById('corporate');
 ---
 
-<BaseLayout 
+<BaseLayout
+  paymentPage
   title={`Checkout - ${selectedPlan.name} | Chasers DD`}
   description={`Complete your ${selectedPlan.name} membership signup with secure payment processing.`}
   keywords="checkout, payment, membership signup, secure payment"
