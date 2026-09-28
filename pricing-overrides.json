@@ -1,6 +1,6 @@
 {
   "standard-individual": {
-    "priceNumeric": 39.99
+    "priceNumeric": 49.99
   },
   "individual": {
     "priceNumeric": 89.99
@@ -15,10 +15,10 @@
     "priceNumeric": 169.99
   },
   "business": {
-    "priceNumeric": 499.99
+    "priceNumeric": 399.99
   },
   "business-premier": {
-    "priceNumeric": 699.99
+    "priceNumeric": 599.99
   },
   "corporate": {
     "priceNumeric": 899.99
